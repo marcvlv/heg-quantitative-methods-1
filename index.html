@@ -60,11 +60,40 @@ strong{font-weight:700}
 .m{font-family:var(--mono);font-size:.94em;white-space:nowrap}
 .mb{font-family:var(--mono);font-size:1em;font-weight:600}
 sup,sub{font-size:.72em;line-height:0}
-.frac{display:inline-flex;flex-direction:column;vertical-align:-0.55em;text-align:center;margin:0 .18em;font-family:var(--mono);font-size:.9em}
-.frac .num{padding:0 .3em;border-bottom:1px solid currentColor;line-height:1.35}
-.frac .den{padding:0 .3em;line-height:1.35}
-.rt{font-family:var(--mono)}
-.rt>span{border-top:1px solid currentColor;padding:0 .15em 0 .1em;margin-left:-.08em}
+/* Stacked fraction. The bar sits on the maths axis, the way it does by hand.
+   vertical-align:middle centres the box on baseline + half an x-height, and
+   because the two halves are the same height that centre IS the bar. */
+.frac{
+  display:inline-flex;flex-direction:column;align-items:stretch;
+  vertical-align:middle;margin:0 .2em;text-align:center;white-space:nowrap;
+  font-family:var(--mono);font-size:.94em;line-height:1.2;
+}
+.frac > span{display:block;padding:0 .34em}
+.frac > .num{border-bottom:1px solid currentColor;padding-bottom:.14em}
+.frac > .den{padding-top:.12em}
+.frac .frac{font-size:.9em;margin:0 .1em}
+sup .frac,sub .frac{font-size:1.02em;margin:0 .1em}
+sup .frac > span,sub .frac > span{padding:0 .2em}
+
+/* Square root. The surd is an SVG that stretches to whatever it covers, and
+   the overline is the radicand's own top border, so the two always meet. */
+.rt{
+  position:relative;display:inline-block;padding-left:.68em;
+  margin:0 .06em 0 .1em;font-family:var(--mono);
+}
+.rt > svg{
+  position:absolute;left:0;top:0;height:100%;width:.68em;overflow:visible;
+  fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round;
+}
+.rt > span{display:block;border-top:1px solid currentColor;padding:.17em .3em 0 .14em}
+.rt .frac{font-size:.9em}
+
+/* A bracket that holds a stacked fraction has to grow with it. */
+.pr{
+  display:inline-block;vertical-align:middle;font-family:var(--mono);
+  transform:scaleY(2.05);transform-origin:50% 48%;margin:0 .04em;font-weight:400;
+}
+.pr.t3{transform:scaleY(3)}
 
 /* ---- bilingual terms ---- */
 [data-fr]{
@@ -495,9 +524,9 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <thead><tr><th>Symbol</th><th>Name</th><th>What is in it</th><th>Example of something that is not</th></tr></thead>
 <tbody>
 <tr><td class="m">&#8469;</td><td>Natural numbers</td><td>0, 1, 2, 3, …</td><td class="m">&minus;4</td></tr>
-<tr><td class="m">&#8484;</td><td><span data-fr="Entiers">Integers</span></td><td>… &minus;2, &minus;1, 0, 1, 2 …</td><td class="m">1/2</td></tr>
-<tr><td class="m">&#8474;</td><td>Rationals</td><td>every <span data-fr="fraction">fraction</span> of two <span data-fr="entiers">integers</span></td><td class="m">&radic;2</td></tr>
-<tr><td class="m">&#8477;</td><td>Reals</td><td>every point on the number line</td><td class="m">&radic;&minus;1</td></tr>
+<tr><td class="m">&#8484;</td><td><span data-fr="Entiers">Integers</span></td><td>… &minus;2, &minus;1, 0, 1, 2 …</td><td class="m"><span class="frac"><span class="num">1</span><span class="den">2</span></span></td></tr>
+<tr><td class="m">&#8474;</td><td>Rationals</td><td>every <span data-fr="fraction">fraction</span> of two <span data-fr="entiers">integers</span></td><td class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>2</span></span></td></tr>
+<tr><td class="m">&#8477;</td><td>Reals</td><td>every point on the number line</td><td class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&minus;1</span></span></td></tr>
 </tbody>
 </table>
 </div>
@@ -516,6 +545,8 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <tr><td class="m">&#8734;</td><td>infinity. It is never a number you can compute with; it describes a direction.</td></tr>
 <tr><td class="m">&sum;</td><td>a <span data-fr="somme">sum</span> of many terms. It arrives in the statistics half of the year.</td></tr>
 <tr><td class="m">&forall;</td><td>for all. <span class="m">&forall;x &isin; A</span> means "for every x in the set A".</td></tr>
+<tr><td class="m">&cup;</td><td>union, read "or". <span class="m">A &cup; B</span> is everything that is in A or in B. It is how a <span data-fr="domaine de définition">domain</span> in two pieces is written.</td></tr>
+<tr><td class="m">&cap;</td><td>intersection, read "and". <span class="m">A &cap; B</span> is everything in both. It is the <span data-fr="domaine de définition">domain</span> of a <span data-fr="somme">sum</span> of two <span data-fr="fonctions">functions</span>.</td></tr>
 </tbody>
 </table>
 </div>
@@ -532,7 +563,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <tr><td class="step">2 + 3 &times; 4<sup>2</sup></td><td class="why">the expression</td></tr>
 <tr><td class="step">2 + 3 &times; 16</td><td class="why"><span data-fr="puissances">powers</span> before multiplication</td></tr>
 <tr><td class="step">2 + 48</td><td class="why">multiplication before addition</td></tr>
-<tr class="res"><td class="step">50</td><td class="why">not 320, which is what left-to-right would give</td></tr>
+<tr class="res"><td class="step">50</td><td class="why">not 400, which is what blind left-to-right would give: 2 + 3 = 5, then 5 &times; 4 = 20, then 20<sup>2</sup> = 400</td></tr>
 </tbody></table>
 </div>
 
@@ -580,17 +611,17 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <caption>The four operations on <span data-fr="fractions">fractions</span></caption>
 <thead><tr><th>Operation</th><th>Rule</th><th>Example</th></tr></thead>
 <tbody>
-<tr><td class="lead">Multiply</td><td class="m">(a/b)(c/d) = ac/bd</td><td class="m">(2/3)(5/7) = 10/21</td></tr>
-<tr><td class="lead">Divide</td><td class="m">(a/b) &divide; (c/d) = (a/b)(d/c)</td><td class="m">(2/3) &divide; (5/7) = 14/15</td></tr>
-<tr><td class="lead">Add or subtract</td><td class="m">a/b + c/d = (ad + bc)/bd</td><td class="m">2/3 + 1/4 = 11/12</td></tr>
-<tr><td class="lead">Simplify</td><td>divide top and bottom by a <span data-fr="facteur commun">common factor</span></td><td class="m">12/18 = 2/3</td></tr>
+<tr><td class="lead">Multiply</td><td class="m"><span class="pr">(</span><span class="frac"><span class="num">a</span><span class="den">b</span></span><span class="pr">)</span><span class="pr">(</span><span class="frac"><span class="num">c</span><span class="den">d</span></span><span class="pr">)</span> = <span class="frac"><span class="num">ac</span><span class="den">bd</span></span></td><td class="m"><span class="pr">(</span><span class="frac"><span class="num">2</span><span class="den">3</span></span><span class="pr">)</span><span class="pr">(</span><span class="frac"><span class="num">5</span><span class="den">7</span></span><span class="pr">)</span> = <span class="frac"><span class="num">10</span><span class="den">21</span></span></td></tr>
+<tr><td class="lead">Divide</td><td class="m"><span class="pr">(</span><span class="frac"><span class="num">a</span><span class="den">b</span></span><span class="pr">)</span> &divide; <span class="pr">(</span><span class="frac"><span class="num">c</span><span class="den">d</span></span><span class="pr">)</span> = <span class="pr">(</span><span class="frac"><span class="num">a</span><span class="den">b</span></span><span class="pr">)</span><span class="pr">(</span><span class="frac"><span class="num">d</span><span class="den">c</span></span><span class="pr">)</span></td><td class="m"><span class="pr">(</span><span class="frac"><span class="num">2</span><span class="den">3</span></span><span class="pr">)</span> &divide; <span class="pr">(</span><span class="frac"><span class="num">5</span><span class="den">7</span></span><span class="pr">)</span> = <span class="frac"><span class="num">14</span><span class="den">15</span></span></td></tr>
+<tr><td class="lead">Add or subtract</td><td class="m"><span class="frac"><span class="num">a</span><span class="den">b</span></span> + <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">ad + bc</span><span class="den">bd</span></span></td><td class="m"><span class="frac"><span class="num">2</span><span class="den">3</span></span> + <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="frac"><span class="num">11</span><span class="den">12</span></span></td></tr>
+<tr><td class="lead">Simplify</td><td>divide top and bottom by a <span data-fr="facteur commun">common factor</span></td><td class="m"><span class="frac"><span class="num">12</span><span class="den">18</span></span> = <span class="frac"><span class="num">2</span><span class="den">3</span></span></td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="box method">
 <span class="lab">Dividing by a fraction: why you invert</span>
-<p style="margin:0">Dividing by <span class="m">c/d</span> asks "how many lots of <span class="m">c/d</span> fit in?" Multiplying by <span class="m">d/c</span> <span data-fr="réponses">answers</span> it. You will use this constantly when finding <span data-fr="fonctions réciproques">inverse functions</span>, where a <span data-fr="fraction">fraction</span> ends up divided by a <span data-fr="fraction">fraction</span>.</p>
+<p style="margin:0">Dividing by <span class="m"><span class="frac"><span class="num">c</span><span class="den">d</span></span></span> asks "how many lots of <span class="m"><span class="frac"><span class="num">c</span><span class="den">d</span></span></span> fit in?" Multiplying by <span class="m"><span class="frac"><span class="num">d</span><span class="den">c</span></span></span> <span data-fr="réponses">answers</span> it. You will use this constantly when finding <span data-fr="fonctions réciproques">inverse functions</span>, where a <span data-fr="fraction">fraction</span> ends up divided by a <span data-fr="fraction">fraction</span>.</p>
 </div>
 
 <div class="der">
@@ -606,9 +637,9 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <div class="box warn">
 <span class="lab">Three errors that look harmless</span>
 <ul style="margin:0">
-<li><span class="m">a/(b + c)</span> is <strong>not</strong> <span class="m">a/b + a/c</span>. You may split the <em><span data-fr="numérateur">numerator</span></em> over a common <span data-fr="dénominateur">denominator</span>, never the <span data-fr="dénominateur">denominator</span>.</li>
-<li><span class="m">(a + b)/b</span> is <strong>not</strong> <span class="m">a</span>. Cancelling requires a <em>factor</em> of the whole top and the whole bottom, not a term.</li>
-<li>A minus <span data-fr="signe">sign</span> in front of a <span data-fr="fraction">fraction</span> applies to the whole <span data-fr="numérateur">numerator</span>: <span class="m">&minus;(x &minus; 3)/2 = (&minus;x + 3)/2</span>.</li>
+<li><span class="m"><span class="frac"><span class="num">a</span><span class="den">b + c</span></span></span> is <strong>not</strong> <span class="m"><span class="frac"><span class="num">a</span><span class="den">b</span></span> + <span class="frac"><span class="num">a</span><span class="den">c</span></span></span>. You may split the <em><span data-fr="numérateur">numerator</span></em> over a common <span data-fr="dénominateur">denominator</span>, never the <span data-fr="dénominateur">denominator</span>.</li>
+<li><span class="m"><span class="frac"><span class="num">a + b</span><span class="den">b</span></span></span> is <strong>not</strong> <span class="m">a</span>. Cancelling requires a <em>factor</em> of the whole top and the whole bottom, not a term.</li>
+<li>A minus <span data-fr="signe">sign</span> in front of a <span data-fr="fraction">fraction</span> applies to the whole <span data-fr="numérateur">numerator</span>: <span class="m">&minus;<span class="frac"><span class="num">x &minus; 3</span><span class="den">2</span></span> = <span class="frac"><span class="num">&minus;x + 3</span><span class="den">2</span></span></span>.</li>
 </ul>
 </div>
 
@@ -624,15 +655,15 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <details class="practice">
 <summary><span class="pl">Practice</span> Four fraction manipulations</summary>
 <div class="pr-body">
-<p>1. <span class="m">3/4 &minus; 2/5</span><br>
-2. <span class="m">(2/x) &divide; (4/x<sup>2</sup>)</span><br>
-3. Simplify <span class="m">(x<sup>2</sup> &minus; 9)/(x &minus; 3)</span> and state the excluded value.<br>
-4. Is <span class="m">(x + 4)/x</span> equal to <span class="m">4</span>?</p>
+<p>1. <span class="m"><span class="frac"><span class="num">3</span><span class="den">4</span></span> &minus; <span class="frac"><span class="num">2</span><span class="den">5</span></span></span><br>
+2. <span class="m"><span class="pr">(</span><span class="frac"><span class="num">2</span><span class="den">x</span></span><span class="pr">)</span> &divide; <span class="pr">(</span><span class="frac"><span class="num">4</span><span class="den">x<sup>2</sup></span></span><span class="pr">)</span></span><br>
+3. Simplify <span class="m"><span class="frac"><span class="num">x<sup>2</sup> &minus; 9</span><span class="den">x &minus; 3</span></span></span> and state the excluded value.<br>
+4. Is <span class="m"><span class="frac"><span class="num">x + 4</span><span class="den">x</span></span></span> equal to <span class="m">4</span>?</p>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
-<p>1. <span class="m">15/20 &minus; 8/20 = 7/20</span>.<br>
-2. <span class="m">(2/x)(x<sup>2</sup>/4) = 2x<sup>2</sup>/4x = x/2</span>.<br>
+<p>1. <span class="m"><span class="frac"><span class="num">15</span><span class="den">20</span></span> &minus; <span class="frac"><span class="num">8</span><span class="den">20</span></span> = <span class="frac"><span class="num">7</span><span class="den">20</span></span></span>.<br>
+2. <span class="m"><span class="pr">(</span><span class="frac"><span class="num">2</span><span class="den">x</span></span><span class="pr">)</span><span class="pr">(</span><span class="frac"><span class="num">x<sup>2</sup></span><span class="den">4</span></span><span class="pr">)</span> = <span class="frac"><span class="num">2x<sup>2</sup></span><span class="den">4x</span></span> = <span class="frac"><span class="num">x</span><span class="den">2</span></span></span>.<br>
 3. <span class="m">x<sup>2</sup> &minus; 9 = (x &minus; 3)(x + 3)</span>, so the <span data-fr="fraction">fraction</span> is <span class="m">x + 3</span>, but only for <span class="m">x &ne; 3</span>. The simplified form hides a hole that the original had.<br>
-4. No. Only the <span class="m">x</span> terms would cancel if they were factors, and here they are terms. Correctly, <span class="m">(x + 4)/x = 1 + 4/x</span>.</p>
+4. No. Only the <span class="m">x</span> terms would cancel if they were factors, and here they are terms. Correctly, <span class="m"><span class="frac"><span class="num">x + 4</span><span class="den">x</span></span> = 1 + <span class="frac"><span class="num">4</span><span class="den">x</span></span></span>.</p>
 </div></details>
 </div>
 </details>
@@ -643,37 +674,43 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">Eight rules. Week 2 puts them on a slide and expects them known; the exponential and logarithm work is impossible without them.</p>
 
 <div class="fx">
-x<sup>m</sup> &middot; x<sup>n</sup> = x<sup>m+n</sup> &nbsp;&nbsp; x<sup>m</sup> / x<sup>n</sup> = x<sup>m&minus;n</sup> &nbsp;&nbsp; (x<sup>m</sup>)<sup>n</sup> = x<sup>m&middot;n</sup><br>
-(xy)<sup>m</sup> = x<sup>m</sup>y<sup>m</sup> &nbsp;&nbsp; (x/y)<sup>m</sup> = x<sup>m</sup>/y<sup>m</sup><br>
-x<sup>1</sup> = x &nbsp;&nbsp; x<sup>0</sup> = 1 &nbsp;&nbsp; x<sup>&minus;m</sup> = 1/x<sup>m</sup>
+x<sup>m</sup> &middot; x<sup>n</sup> = x<sup>m+n</sup> &nbsp;&nbsp; <span class="frac"><span class="num">x<sup>m</sup></span><span class="den">x<sup>n</sup></span></span> = x<sup>m&minus;n</sup> &nbsp;&nbsp; (x<sup>m</sup>)<sup>n</sup> = x<sup>m&middot;n</sup><br>
+(xy)<sup>m</sup> = x<sup>m</sup>y<sup>m</sup> &nbsp;&nbsp; <span class="pr">(</span><span class="frac"><span class="num">x</span><span class="den">y</span></span><span class="pr">)</span><sup>m</sup> = <span class="frac"><span class="num">x<sup>m</sup></span><span class="den">y<sup>m</sup></span></span><br>
+x<sup>1</sup> = x &nbsp;&nbsp; x<sup>0</sup> = 1 &nbsp;&nbsp; x<sup>&minus;m</sup> = <span class="frac"><span class="num">1</span><span class="den">x<sup>m</sup></span></span>
+</div>
+
+<div class="box warn">
+<span class="lab">Squaring and un-squaring are not quite inverse</span>
+<p style="margin:0"><span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x<sup>2</sup></span></span> = |x|</span>, not <span class="m">x</span>. Check it: <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>(&minus;4)<sup>2</sup></span></span> = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>16</span></span> = 4</span>, not <span class="m">&minus;4</span>. So when you undo a square with a <span data-fr="racine">root</span> you must know the <span data-fr="signe">sign</span> of what you are recovering. In this course that <span data-fr="signe">sign</span> is normally settled by the context, because a <span data-fr="quantité">quantity</span>, a <span data-fr="prix">price</span> or a distance cannot be negative. Say so in writing when you use it.</p>
 </div>
 
 <div class="box method">
 <span class="lab">Where the rules come from</span>
-<p style="margin:0">All of them follow from counting. <span class="m">x<sup>3</sup> &middot; x<sup>2</sup></span> is <span class="m">(x&middot;x&middot;x)(x&middot;x)</span>, five copies of <span class="m">x</span>, so the <span data-fr="exposants">exponents</span> add. <span class="m">x<sup>0</sup> = 1</span> because <span class="m">x<sup>3</sup>/x<sup>3</sup></span> is both <span class="m">1</span> and <span class="m">x<sup>0</sup></span>. A negative <span data-fr="exposant">exponent</span> is a reciprocal for the same reason. You do not have to memorise eight facts; you have to be able to rebuild them.</p>
+<p style="margin:0">All of them follow from counting. <span class="m">x<sup>3</sup> &middot; x<sup>2</sup></span> is <span class="m">(x&middot;x&middot;x)(x&middot;x)</span>, five copies of <span class="m">x</span>, so the <span data-fr="exposants">exponents</span> add. <span class="m">x<sup>0</sup> = 1</span> because <span class="m"><span class="frac"><span class="num">x<sup>3</sup></span><span class="den">x<sup>3</sup></span></span></span> is both <span class="m">1</span> and <span class="m">x<sup>0</sup></span>. A negative <span data-fr="exposant">exponent</span> is a reciprocal for the same reason. You do not have to memorise eight facts; you have to be able to rebuild them.</p>
+<p style="margin:.7em 0 0"><strong>One condition runs through all of them.</strong> Every <span data-fr="règle">rule</span> that divides, and every negative <span data-fr="exposant">exponent</span>, requires <span class="m">x &ne; 0</span>. In particular <span class="m">0<sup>0</sup></span> and <span class="m">0<sup>&minus;2</sup></span> are not defined, for exactly the reason no <span data-fr="dénominateur">denominator</span> may be zero. The justification above shows it: <span class="m"><span class="frac"><span class="num">x<sup>3</sup></span><span class="den">x<sup>3</sup></span></span></span> is only equal to 1 when <span class="m">x</span> is not 0.</p>
 </div>
 
 <h3><span data-fr="Racines">Roots</span> are fractional <span data-fr="puissances">powers</span></h3>
 <div class="fx">
-<span class="rt">&radic;<span>x</span></span> = x<sup>1/2</sup> &nbsp;&nbsp; <sup>3</sup><span class="rt">&radic;<span>x</span></span> = x<sup>1/3</sup> &nbsp;&nbsp; <sup>n</sup><span class="rt">&radic;<span>x<sup>m</sup></span></span> = x<sup>m/n</sup>
+<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span> = x<sup><span class="frac"><span class="num">1</span><span class="den">2</span></span></sup> &nbsp;&nbsp; <sup>3</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span> = x<sup><span class="frac"><span class="num">1</span><span class="den">3</span></span></sup> &nbsp;&nbsp; <sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x<sup>m</sup></span></span> = x<sup><span class="frac"><span class="num">m</span><span class="den">n</span></span></sup>
 </div>
 
 <div class="prose">
-<p>Writing a <span data-fr="racine">root</span> as a <span data-fr="puissance">power</span> is not a cosmetic choice. It is how you differentiate <span class="m"><span class="rt">&radic;<span>q</span></span></span> in week 5, and it is how you handle the week 2 <span data-fr="devoirs">homework</span> <span data-fr="fonction">function</span> <span class="m">f(m) = (40m &minus; m<sup>2</sup>)/4</span> composed with a <span data-fr="racine carrée">square root</span>. Whenever a <span data-fr="racine">root</span> blocks you, convert it.</p>
+<p>Writing a <span data-fr="racine">root</span> as a <span data-fr="puissance">power</span> is not a cosmetic choice. It is how you differentiate <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q</span></span></span> in week 5, and it is how you handle the week 2 <span data-fr="devoirs">homework</span> <span data-fr="fonction">function</span> <span class="m">f(m) = <span class="frac"><span class="num">40m &minus; m<sup>2</sup></span><span class="den">4</span></span></span> composed with a <span data-fr="racine carrée">square root</span>. Whenever a <span data-fr="racine">root</span> blocks you, convert it.</p>
 </div>
 
 <div class="der">
-<span class="der-cap">Simplify <span class="rt">&radic;<span>x</span></span> &middot; x<sup>3</sup> &divide; <span class="rt">&radic;<span>x<sup>3</sup></span></span></span>
+<span class="der-cap">Simplify <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span> &middot; x<sup>3</sup> &divide; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x<sup>3</sup></span></span></span>
 <table class="dv"><tbody>
-<tr><td class="step">x<sup>1/2</sup> &middot; x<sup>3</sup> &divide; x<sup>3/2</sup></td><td class="why">every <span data-fr="racine">root</span> becomes a <span data-fr="puissance">power</span></td></tr>
-<tr><td class="step">x<sup>1/2 + 3 &minus; 3/2</sup></td><td class="why">multiply means add <span data-fr="exposants">exponents</span>, divide means subtract</td></tr>
-<tr class="res"><td class="step">x<sup>2</sup></td><td class="why">1/2 + 3 &minus; 3/2 = 2</td></tr>
+<tr><td class="step">x<sup><span class="frac"><span class="num">1</span><span class="den">2</span></span></sup> &middot; x<sup>3</sup> &divide; x<sup><span class="frac"><span class="num">3</span><span class="den">2</span></span></sup></td><td class="why">every <span data-fr="racine">root</span> becomes a <span data-fr="puissance">power</span></td></tr>
+<tr><td class="step">x<sup><span class="frac"><span class="num">1</span><span class="den">2</span></span> + 3 &minus; <span class="frac"><span class="num">3</span><span class="den">2</span></span></sup></td><td class="why">multiply means add <span data-fr="exposants">exponents</span>, divide means subtract</td></tr>
+<tr class="res"><td class="step">x<sup>2</sup></td><td class="why"><span class="frac"><span class="num">1</span><span class="den">2</span></span> + 3 &minus; <span class="frac"><span class="num">3</span><span class="den">2</span></span> = 2</td></tr>
 </tbody></table>
 </div>
 
 <div class="box warn">
 <span class="lab">The error that costs the most marks in the whole course</span>
-<p style="margin:0"><span class="m">(a + b)<sup>2</sup></span> is <strong>not</strong> <span class="m">a<sup>2</sup> + b<sup>2</sup></span>. It is <span class="m">a<sup>2</sup> + 2ab + b<sup>2</sup></span>. In the same family: <span class="m"><span class="rt">&radic;<span>a + b</span></span> &ne; <span class="rt">&radic;<span>a</span></span> + <span class="rt">&radic;<span>b</span></span></span>, and <span class="m">ln(a + b) &ne; ln a + ln b</span>. <span data-fr="Puissances">Powers</span>, <span data-fr="racines">roots</span> and <span data-fr="logarithmes">logarithms</span> all distribute over <em>multiplication</em>, never over <em>addition</em>.</p>
+<p style="margin:0"><span class="m">(a + b)<sup>2</sup></span> is <strong>not</strong> <span class="m">a<sup>2</sup> + b<sup>2</sup></span>. It is <span class="m">a<sup>2</sup> + 2ab + b<sup>2</sup></span>. In the same family: <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a + b</span></span> &ne; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> + <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>b</span></span></span>, and <span class="m">ln(a + b) &ne; ln a + ln b</span>. <span data-fr="Puissances">Powers</span>, <span data-fr="racines">roots</span> and <span data-fr="logarithmes">logarithms</span> all distribute over <em>multiplication</em>, never over <em>addition</em>.</p>
 </div>
 
 <div class="box remember">
@@ -690,12 +727,12 @@ x<sup>1</sup> = x &nbsp;&nbsp; x<sup>0</sup> = 1 &nbsp;&nbsp; x<sup>&minus;m</su
 <div class="pr-body">
 <p>1. <span class="m">2<sup>3</sup> &middot; 2<sup>&minus;5</sup></span><br>
 2. <span class="m">(3x<sup>2</sup>)<sup>3</sup></span><br>
-3. Write <span class="m">1/<span class="rt">&radic;<span>x</span></span></span> as a single <span data-fr="puissance">power</span> of x.<br>
+3. Write <span class="m"><span class="frac"><span class="num">1</span><span class="den"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span></span></span></span> as a single <span data-fr="puissance">power</span> of x.<br>
 4. Expand <span class="m">(q + 3)<sup>2</sup></span>.</p>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
-<p>1. <span class="m">2<sup>&minus;2</sup> = 1/4</span>.<br>
+<p>1. <span class="m">2<sup>&minus;2</sup> = <span class="frac"><span class="num">1</span><span class="den">4</span></span></span>.<br>
 2. <span class="m">3<sup>3</sup>x<sup>6</sup> = 27x<sup>6</sup></span>. The 3 is cubed as well; forgetting it is a classic slip.<br>
-3. <span class="m">x<sup>&minus;1/2</sup></span>.<br>
+3. <span class="m">x<sup>&minus;<span class="frac"><span class="num">1</span><span class="den">2</span></span></sup></span>.<br>
 4. <span class="m">q<sup>2</sup> + 6q + 9</span>.</p>
 </div></details>
 </div>
@@ -714,7 +751,7 @@ a(b + c) = ab + ac<br>
 (a + b)(a &minus; b) = a<sup>2</sup> &minus; b<sup>2</sup>
 </div>
 
-<p class="note"><strong class="note-lab">The last one is worth knowing by sight.</strong> The <span data-fr="différence">difference</span> of two squares appears whenever a quadratic has no middle term, and it turns <span class="m">x<sup>2</sup> &minus; 9</span> into <span class="m">(x &minus; 3)(x + 3)</span> instantly.</p>
+<p class="note"><strong class="note-lab">The last one is worth knowing by sight.</strong> When a quadratic has no middle term <em>and</em> a minus between the two squares, it factors instantly: <span class="m">x<sup>2</sup> &minus; 9</span> becomes <span class="m">(x &minus; 3)(x + 3)</span>. The minus is essential. <span class="m">x<sup>2</sup> + 9</span> does not factor over the <span data-fr="nombres réels">real numbers</span> at all.</p>
 
 <h3><span data-fr="Factorisation">Factoring</span></h3>
 <div class="box method">
@@ -770,7 +807,7 @@ a(b + c) = ab + ac<br>
 
 <div class="box rule">
 <span class="lab">The general case</span>
-<p>For <span class="m">a, b &isin; &#8477;</span> with <span class="m">a &ne; 0</span>, the <span data-fr="équation">equation</span> <span class="m">ax + b = 0</span> has exactly one <span data-fr="solution">solution</span>, <span class="m">x = &minus;b/a</span>. The condition <span class="m">a &ne; 0</span> is not decoration: if <span class="m">a = 0</span> the <span data-fr="équation">equation</span> is either impossible or always true, and there is nothing to divide by.</p>
+<p>For <span class="m">a, b &isin; &#8477;</span> with <span class="m">a &ne; 0</span>, the <span data-fr="équation">equation</span> <span class="m">ax + b = 0</span> has exactly one <span data-fr="solution">solution</span>, <span class="m">x = &minus;<span class="frac"><span class="num">b</span><span class="den">a</span></span></span>. The condition <span class="m">a &ne; 0</span> is not decoration: if <span class="m">a = 0</span> the <span data-fr="équation">equation</span> is either impossible or always true, and there is nothing to divide by.</p>
 </div>
 
 <div class="box method">
@@ -810,11 +847,11 @@ a(b + c) = ab + ac<br>
 <div class="pr-body">
 <p>1. <span class="m">7x &minus; 4 = 2x + 11</span><br>
 2. <span class="m">4(x &minus; 3) = 2(x + 5)</span><br>
-3. <span class="m">x/3 + 2 = 5</span></p>
+3. <span class="m"><span class="frac"><span class="num">x</span><span class="den">3</span></span> + 2 = 5</span></p>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
 <p>1. <span class="m">5x = 15</span>, so <span class="m">x = 3</span>.<br>
 2. <span class="m">4x &minus; 12 = 2x + 10</span>, so <span class="m">2x = 22</span> and <span class="m">x = 11</span>.<br>
-3. <span class="m">x/3 = 3</span>, so <span class="m">x = 9</span>.</p>
+3. <span class="m"><span class="frac"><span class="num">x</span><span class="den">3</span></span> = 3</span>, so <span class="m">x = 9</span>.</p>
 </div></details>
 </div>
 </details>
@@ -833,8 +870,8 @@ a(b + c) = ab + ac<br>
 <table class="data">
 <thead><tr><th>Case</th><th>How many solutions</th><th>Formula</th></tr></thead>
 <tbody>
-<tr><td class="m">&Delta; &gt; 0</td><td>two distinct <span data-fr="solutions">solutions</span></td><td class="m">x = (&minus;b &plusmn; <span class="rt">&radic;<span>&Delta;</span></span>) / 2a</td></tr>
-<tr><td class="m">&Delta; = 0</td><td>one <span data-fr="solution">solution</span>, called a double <span data-fr="racine">root</span></td><td class="m">x = &minus;b / 2a</td></tr>
+<tr><td class="m">&Delta; &gt; 0</td><td>two distinct <span data-fr="solutions">solutions</span></td><td class="m">x = <span class="frac"><span class="num">&minus;b &plusmn; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span></td></tr>
+<tr><td class="m">&Delta; = 0</td><td>one <span data-fr="solution">solution</span>, called a double <span data-fr="racine">root</span></td><td class="m">x = &minus;<span class="frac"><span class="num">b</span><span class="den">2a</span></span></td></tr>
 <tr><td class="m">&Delta; &lt; 0</td><td>none in <span class="m">&#8477;</span></td><td>the <span data-fr="parabole">parabola</span> never touches the x-axis</td></tr>
 </tbody>
 </table>
@@ -845,9 +882,9 @@ a(b + c) = ab + ac<br>
 <table class="dv"><tbody>
 <tr><td class="step">a = 3, b = 3, c = &minus;18</td><td class="why">read the <span data-fr="coefficients">coefficients</span>, <span data-fr="signes">signs</span> included</td></tr>
 <tr><td class="step">&Delta; = 3<sup>2</sup> &minus; 4(3)(&minus;18) = 9 + 216 = 225</td><td class="why">two minuses make a plus; &Delta; &gt; 0, so two <span data-fr="solutions">solutions</span></td></tr>
-<tr><td class="step"><span class="rt">&radic;<span>225</span></span> = 15</td><td class="why">a perfect square, which tells you the numbers were chosen to be kind</td></tr>
-<tr><td class="step">x = (&minus;3 &plusmn; 15) / 6</td><td class="why">apply the formula</td></tr>
-<tr class="res"><td class="step">x = 2 &nbsp;or&nbsp; x = &minus;3</td><td class="why">12/6 and &minus;18/6</td></tr>
+<tr><td class="step"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>225</span></span> = 15</td><td class="why">a perfect square, which is a <span data-fr="signe">sign</span> that the exercise was designed to come out exactly</td></tr>
+<tr><td class="step">x = <span class="frac"><span class="num">&minus;3 &plusmn; 15</span><span class="den">6</span></span></td><td class="why">apply the formula</td></tr>
+<tr class="res"><td class="step">x = 2 &nbsp;or&nbsp; x = &minus;3</td><td class="why"><span class="frac"><span class="num">12</span><span class="den">6</span></span> and &minus;<span class="frac"><span class="num">18</span><span class="den">6</span></span></td></tr>
 <tr><td class="step">3(x + 3)(x &minus; 2)</td><td class="why">the <span data-fr="factorisation">factoring</span> route from the previous section gives the same <span data-fr="racines">roots</span> in one line</td></tr>
 </tbody></table>
 </div>
@@ -856,7 +893,7 @@ a(b + c) = ab + ac<br>
 <span class="der-cap">Solve x<sup>2</sup> &minus; 10x + 25 = 0 &nbsp;· the &Delta; = 0 case</span>
 <table class="dv"><tbody>
 <tr><td class="step">&Delta; = (&minus;10)<sup>2</sup> &minus; 4(1)(25) = 100 &minus; 100 = 0</td><td class="why">one <span data-fr="solution">solution</span> only</td></tr>
-<tr class="res"><td class="step">x = 10/2 = 5</td><td class="why">or notice directly that the expression is (x &minus; 5)<sup>2</sup></td></tr>
+<tr class="res"><td class="step">x = <span class="frac"><span class="num">10</span><span class="den">2</span></span> = 5</td><td class="why">or notice directly that the expression is (x &minus; 5)<sup>2</sup></td></tr>
 </tbody></table>
 </div>
 
@@ -887,7 +924,7 @@ a(b + c) = ab + ac<br>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
 <p>1. Factors as <span class="m">(x &minus; 2)(x &minus; 3)</span>, so <span class="m">x = 2</span> or <span class="m">3</span>.<br>
 2. <span class="m">&Delta; = 9 &minus; 40 = &minus;31 &lt; 0</span>, so there is no <span data-fr="solution">solution</span> in <span class="m">&#8477;</span>. Stop there; do not force a <span data-fr="racine carrée">square root</span> of a negative.<br>
-3. Two numbers with product 360000 and <span data-fr="somme">sum</span> 1300: 400 and 900. So <span class="m">(q &minus; 400)(q &minus; 900) = 0</span> and <span class="m">q = 400</span> or <span class="m">900</span>.</p>
+3. Here <span class="m">b = &minus;1300</span> and <span class="m">c = +360 000</span>, so look for two numbers with product <span class="m">+360 000</span> and <span data-fr="somme">sum</span> <strong><span class="m">&minus;1300</span></strong>: they are <span class="m">&minus;400</span> and <span class="m">&minus;900</span>. So <span class="m">(q &minus; 400)(q &minus; 900) = 0</span> and <span class="m">q = 400</span> or <span class="m">900</span>. A shortcut when <span class="m">c</span> is positive and <span class="m">b</span> is negative: both numbers are negative, so find two positives multiplying to <span class="m">c</span> and adding to <span class="m">|b|</span>, then put the minus <span data-fr="signes">signs</span> back.</p>
 </div></details>
 </div>
 </details>
@@ -908,7 +945,7 @@ a(b + c) = ab + ac<br>
 </div>
 
 <div class="der">
-<span class="der-cap">Solve (x + 4)/x = 1/5 &nbsp;· week 1 quiz, question 1</span>
+<span class="der-cap">Solve <span class="frac"><span class="num">x + 4</span><span class="den">x</span></span> = <span class="frac"><span class="num">1</span><span class="den">5</span></span> &nbsp;· week 1 quiz, question 1</span>
 <table class="dv"><tbody>
 <tr><td class="step">x &ne; 0</td><td class="why">the restriction, stated before anything else</td></tr>
 <tr><td class="step">5(x + 4) = x</td><td class="why">cross-multiply</td></tr>
@@ -920,7 +957,7 @@ a(b + c) = ab + ac<br>
 
 <div class="box warn">
 <span class="lab">Why the restriction is not a formality</span>
-<p style="margin:0">Solve <span class="m">x/(x &minus; 2) = 2/(x &minus; 2)</span> and you get <span class="m">x = 2</span>, which is precisely the value the <span data-fr="équation">equation</span> forbids. The correct <span data-fr="réponse">answer</span> is that there is no <span data-fr="solution">solution</span>. An exam question built this way is testing one thing only: whether you wrote the restriction down.</p>
+<p style="margin:0">Solve <span class="m"><span class="frac"><span class="num">x</span><span class="den">x &minus; 2</span></span> = <span class="frac"><span class="num">2</span><span class="den">x &minus; 2</span></span></span> and you get <span class="m">x = 2</span>, which is precisely the value the <span data-fr="équation">equation</span> forbids. The correct <span data-fr="réponse">answer</span> is that there is no <span data-fr="solution">solution</span>. An exam question built this way is testing one thing only: whether you wrote the restriction down.</p>
 </div>
 
 <div class="box remember">
@@ -935,11 +972,11 @@ a(b + c) = ab + ac<br>
 <details class="practice">
 <summary><span class="pl">Practice</span> Fractional equations</summary>
 <div class="pr-body">
-<p>1. <span class="m">3/x = 12</span><br>
-2. <span class="m">(2x &minus; 1)/(x + 3) = 2</span><br>
-3. State the excluded values of <span class="m">f(x) = x/(x<sup>2</sup> &minus; x &minus; 2)</span>.</p>
+<p>1. <span class="m"><span class="frac"><span class="num">3</span><span class="den">x</span></span> = 12</span><br>
+2. <span class="m"><span class="frac"><span class="num">2x &minus; 1</span><span class="den">x + 3</span></span> = 2</span><br>
+3. State the excluded values of <span class="m">f(x) = <span class="frac"><span class="num">x</span><span class="den">x<sup>2</sup> &minus; x &minus; 2</span></span></span>.</p>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
-<p>1. <span class="m">x &ne; 0</span>; <span class="m">3 = 12x</span>, so <span class="m">x = 1/4</span>.<br>
+<p>1. <span class="m">x &ne; 0</span>; <span class="m">3 = 12x</span>, so <span class="m">x = <span class="frac"><span class="num">1</span><span class="den">4</span></span></span>.<br>
 2. <span class="m">x &ne; &minus;3</span>; <span class="m">2x &minus; 1 = 2x + 6</span> gives <span class="m">&minus;1 = 6</span>, which is false, so there is no <span data-fr="solution">solution</span>. The x terms cancelling is the signal.<br>
 3. <span class="m">x<sup>2</sup> &minus; x &minus; 2 = (x &minus; 2)(x + 1)</span>, so the <span data-fr="domaine de définition">domain</span> is <span class="m">&#8477;\{2, &minus;1}</span>. This is the course's own week 1 example.</p>
 </div></details>
@@ -995,6 +1032,17 @@ a(b + c) = ab + ac<br>
 <p><span class="m">2(8) + 2 = 18</span> &#10003; and <span class="m">&minus;8 + 5(2) = 2</span> &#10003;. A <span data-fr="solution">solution</span> that satisfies only one <span data-fr="équation">equation</span> is not a <span data-fr="solution">solution</span>.</p>
 </div>
 
+<div class="box warn">
+<span class="lab">Not every system has one solution</span>
+<p>A system of two <span data-fr="équations du premier degré">linear equations</span> is two lines, so there are three possibilities.</p>
+<ul>
+<li>They <strong>cross once</strong>: one <span data-fr="solution">solution</span>. This is the normal case.</li>
+<li>They are <strong>parallel and distinct</strong>: no <span data-fr="solution">solution</span>. You notice because both <span data-fr="inconnues">unknowns</span> vanish and you are left with something false, such as <span class="m">0 = 7</span>.</li>
+<li>They are the <strong>same line</strong>: infinitely many <span data-fr="solutions">solutions</span>. You notice because both <span data-fr="inconnues">unknowns</span> vanish and you are left with something always true, such as <span class="m">0 = 0</span>.</li>
+</ul>
+<p style="margin-bottom:0">When the <span data-fr="inconnues">unknowns</span> disappear, read what is left before concluding you made a mistake. Week 3 uses this for <span data-fr="équilibre de marché">market equilibrium</span>, where "no <span data-fr="solution">solution</span>" means the two <span data-fr="courbes">curves</span> never meet.</p>
+</div>
+
 <div class="box remember">
 <span class="lab">What to remember</span>
 <ul>
@@ -1024,6 +1072,7 @@ a(b + c) = ab + ac<br>
 <div class="box rule">
 <span class="lab">The sign flip</span>
 <p>An <span data-fr="inéquation">inequality</span> behaves exactly like an <span data-fr="équation">equation</span>, with one exception: <strong>multiplying or dividing both sides by a negative number reverses the direction</strong>. From <span class="m">&minus;2x &gt; 6</span> you get <span class="m">x &lt; &minus;3</span>, not <span class="m">x &gt; &minus;3</span>.</p>
+<p style="margin-bottom:0">There is a second exception, and it is the reason the cross-multiplication of the previous section does not carry over. You may only multiply an <span data-fr="inéquation">inequality</span> by something whose <strong><span data-fr="signe">sign</span> you know</strong>. In <span class="m"><span class="frac"><span class="num">x + 4</span><span class="den">x</span></span> &gt; <span class="frac"><span class="num">1</span><span class="den">5</span></span></span> you cannot multiply by <span class="m">x</span>, because <span class="m">x</span> may be positive or negative and you do not know which way the <span data-fr="signe">sign</span> would turn. Move everything to one side instead and study the <span data-fr="signe">sign</span> of the <span data-fr="fraction">fraction</span> that results. For the same reason you may not square both sides of an <span data-fr="inéquation">inequality</span>.</p>
 </div>
 
 <div class="der">
@@ -1032,7 +1081,7 @@ a(b + c) = ab + ac<br>
 <tr><td class="step">9t &gt; 320 + 3(40 &minus; t)</td><td class="why">hourly pay beats the per-job pay</td></tr>
 <tr><td class="step">9t &gt; 320 + 120 &minus; 3t</td><td class="why">expand the <span data-fr="parenthèse">bracket</span></td></tr>
 <tr><td class="step">12t &gt; 440</td><td class="why">collect; adding 3t to both sides keeps the direction</td></tr>
-<tr class="res"><td class="step">t &gt; 36.67</td><td class="why">divide by +12, so no flip</td></tr>
+<tr class="res"><td class="step">t &gt; <span class="frac"><span class="num">110</span><span class="den">3</span></span> &asymp; 36.7 hours</td><td class="why">divide by +12, so no flip; keep the exact <span data-fr="fraction">fraction</span> and round only when you interpret it, here 36 hours 40 minutes</td></tr>
 </tbody></table>
 </div>
 
@@ -1047,12 +1096,25 @@ a(b + c) = ab + ac<br>
 <p>To evaluate <span class="m">|x &minus; 2|</span> at a value, compute the inside first, then strip the <span data-fr="signe">sign</span>. So <span class="m">|10 &minus; 2| = 8</span>, <span class="m">|3 &minus; 2| = 1</span> and <span class="m">|&minus;3 &minus; 2| = |&minus;5| = 5</span>.</p>
 </div>
 
+<div class="box method">
+<span class="lab">Solving with an absolute value</span>
+<p>Because <span class="m">|A|</span> is a distance from zero, each of the three forms splits into a statement with no bars in it.</p>
+<ol class="steps">
+<li><span class="m">|A| = k</span> with <span class="m">k &ge; 0</span> means <span class="m">A = k</span> <strong>or</strong> <span class="m">A = &minus;k</span>. So <span class="m">|x &minus; 2| = 5</span> gives <span class="m">x = 7</span> or <span class="m">x = &minus;3</span>.</li>
+<li><span class="m">|A| &lt; k</span> means <span class="m">&minus;k &lt; A &lt; k</span>, one single <span data-fr="intervalle">interval</span>. So <span class="m">|x &minus; 2| &lt; 3</span> gives <span class="m">&minus;3 &lt; x &minus; 2 &lt; 3</span>, that is <span class="m">1 &lt; x &lt; 5</span>: everything within distance 3 of 2.</li>
+<li><span class="m">|A| &gt; k</span> means <span class="m">A &gt; k</span> <strong>or</strong> <span class="m">A &lt; &minus;k</span>, two separate <span data-fr="intervalles">intervals</span>. So <span class="m">|x &minus; 2| &gt; 3</span> gives <span class="m">x &gt; 5</span> or <span class="m">x &lt; &minus;1</span>.</li>
+</ol>
+<p style="margin:.6em 0 0">And <span class="m">|A| = k</span> with <span class="m">k &lt; 0</span> has no <span data-fr="solution">solution</span> at all, because a distance is never negative.</p>
+</div>
+
 <div class="box remember">
 <span class="lab">What to remember</span>
 <ul>
 <li>Multiply or divide by a negative, reverse the <span data-fr="inéquation">inequality</span>.</li>
 <li>Adding or subtracting never reverses it.</li>
 <li><span class="m">|x|</span> is a distance: compute the inside, then drop the <span data-fr="signe">sign</span>.</li>
+<li><span class="m">|A| = k</span> splits into two cases, <span class="m">|A| &lt; k</span> gives one <span data-fr="intervalle">interval</span>, <span class="m">|A| &gt; k</span> gives two.</li>
+<li>Never multiply an <span data-fr="inéquation">inequality</span> by something whose <span data-fr="signe">sign</span> you do not know.</li>
 </ul>
 </div>
 
@@ -1082,6 +1144,7 @@ a(b + c) = ab + ac<br>
 <div class="box rule">
 <span class="lab">The straight line</span>
 <p><span class="mb">y = mx + b</span>, where <span class="m">m</span> is the <span data-fr="pente">slope</span> and <span class="m">b</span> is the value of <span class="m">y</span> when <span class="m">x = 0</span>.</p>
+<p style="margin-bottom:0">Some sources, including the course's own table of <span data-fr="fonctions">functions</span>, write the same line as <span class="m">f(x) = ax + b</span>. The letter changes, the meaning does not: the <span data-fr="coefficient">coefficient</span> of <span class="m">x</span> is the <span data-fr="pente">slope</span> either way.</p>
 </div>
 
 <div class="fx">slope m = <span class="frac"><span class="num">change in y</span><span class="den">change in x</span></span> = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span></div>
@@ -1107,7 +1170,7 @@ a(b + c) = ab + ac<br>
 <span class="der-cap">Intercepts of y = 2x + 3 &nbsp;· the week 2 example</span>
 <table class="dv"><tbody>
 <tr><td class="step">x = 0 &rarr; y = 2(0) + 3 = 3</td><td class="why">the <span data-fr="ordonnée à l’origine">y-intercept</span> is the point (0, 3)</td></tr>
-<tr class="res"><td class="step">y = 0 &rarr; 0 = 2x + 3 &rarr; x = &minus;3/2</td><td class="why">the <span data-fr="zéro de la fonction">x-intercept</span> is the point (&minus;3/2, 0)</td></tr>
+<tr class="res"><td class="step">y = 0 &rarr; 0 = 2x + 3 &rarr; x = &minus;<span class="frac"><span class="num">3</span><span class="den">2</span></span></td><td class="why">the <span data-fr="zéro de la fonction">x-intercept</span> is the point (&minus;<span class="frac"><span class="num">3</span><span class="den">2</span></span>, 0)</td></tr>
 </tbody></table>
 </div>
 
@@ -1129,7 +1192,7 @@ a(b + c) = ab + ac<br>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
 <p>1. <span data-fr="Coût fixe">Fixed cost</span> 2500, which is <span class="m">C(0)</span>. Each extra unit <span data-fr="coûts">costs</span> 4, the <span data-fr="pente">slope</span>.<br>
 2. <span class="m">x = 0</span> gives <span class="m">y = &minus;16</span>. <span class="m">y = 0</span> gives <span class="m">4x<sup>2</sup> = 16</span>, <span class="m">x<sup>2</sup> = 4</span>, so <span class="m">x = 2</span> and <span class="m">x = &minus;2</span>. Two <span data-fr="zéros de la fonction">x-intercepts</span>; a <span data-fr="parabole">parabola</span> may have two. This is week 2 <span data-fr="devoirs">homework</span> 2.8b.<br>
-3. <span class="m">m = (13 &minus; 5)/(6 &minus; 2) = 8/4 = 2</span>.</p>
+3. <span class="m">m = <span class="frac"><span class="num">13 &minus; 5</span><span class="den">6 &minus; 2</span></span> = <span class="frac"><span class="num">8</span><span class="den">4</span></span> = 2</span>.</p>
 </div></details>
 </div>
 </details>
@@ -1142,6 +1205,7 @@ a(b + c) = ab + ac<br>
 <div class="box rule">
 <span class="lab">A percentage is a multiplier</span>
 <p><span data-fr="Croissante">Increasing</span> by <span class="m">r</span> percent means multiplying by <span class="m">(1 + r)</span>, with <span class="m">r</span> written as a <span data-fr="décimal">decimal</span>. <span data-fr="Décroissante">Decreasing</span> by <span class="m">r</span> percent means multiplying by <span class="m">(1 &minus; r)</span>. Doing it <span class="m">n</span> times means raising that multiplier to the <span data-fr="puissance">power</span> <span class="m">n</span>.</p>
+<p style="margin-bottom:0">Read backwards, the same <span data-fr="règle">rule</span> finds a rate from two figures: <strong><span data-fr="pourcentage">percentage</span> change = <span class="m"><span class="frac"><span class="num">new &minus; old</span><span class="den">old</span></span></span></strong>, then multiply by 100 to say it as a percent. Sales moving from 200 to 250 is <span class="m"><span class="frac"><span class="num">250 &minus; 200</span><span class="den">200</span></span> = 0.25</span>, a 25% rise. The <span data-fr="dénominateur">denominator</span> is always the <strong>starting</strong> figure, which is why a rise of 25% is undone by a fall of 20%, not of 25%.</p>
 </div>
 
 <div class="fx">
@@ -1194,7 +1258,7 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
 <p>1. <span class="m">4000 &times; 1.03<sup>5</sup> &asymp; 4637.1</span>.<br>
 2. <span class="m">80 &times; 0.85 &times; 1.15 = 78.2</span>. Not 80.<br>
-3. <span class="m">(250 &minus; 200)/200 = 0.25</span>, so 25%. Always divide the change by the <em>starting</em> value.</p>
+3. <span class="m"><span class="frac"><span class="num">250 &minus; 200</span><span class="den">200</span></span> = 0.25</span>, so 25%. Always divide the change by the <em>starting</em> value.</p>
 </div></details>
 </div>
 </details>
@@ -1215,7 +1279,7 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 <thead><tr><th>You need</th><th>Key</th><th>Check it with</th></tr></thead>
 <tbody>
 <tr><td class="lead">A <span data-fr="puissance">power</span></td><td class="m">x<sup>y</sup></td><td class="m">1.02<sup>3</sup> = 1.061208</td></tr>
-<tr><td class="lead">A <span data-fr="racine carrée">square root</span></td><td class="m">&radic;</td><td class="m"><span class="rt">&radic;<span>225</span></span> = 15</td></tr>
+<tr><td class="lead">A <span data-fr="racine carrée">square root</span></td><td class="m">&radic;</td><td class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>225</span></span> = 15</td></tr>
 <tr><td class="lead">Any other <span data-fr="racine">root</span></td><td>as a fractional <span data-fr="puissance">power</span></td><td class="m">8<sup>(1&divide;3)</sup> = 2</td></tr>
 <tr><td class="lead"><span data-fr="Logarithme népérien">Natural logarithm</span></td><td class="m">ln</td><td class="m">ln(12) &asymp; 2.4849</td></tr>
 <tr><td class="lead"><span data-fr="Logarithme">Logarithm</span> <span data-fr="base">base</span> 10</td><td class="m">log</td><td class="m">log(1000) = 3</td></tr>
@@ -1231,7 +1295,7 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 
 <div class="box method">
 <span class="lab">A habit worth building now</span>
-<p style="margin:0">Estimate before you compute. <span class="m">350000 &times; 0.985<sup>3</sup></span> must be slightly under 350 000; if the display says 214, a digit went astray. Every exam question has an order of magnitude you can predict in your head, and that prediction catches key-press errors that no amount of algebra will.</p>
+<p style="margin:0">Estimate before you compute. <span class="m">350000 &times; 0.985<sup>3</sup></span> must be slightly under 350 000; if the display says 214, you have pressed a key wrongly. Every exam question has an order of magnitude you can predict in your head, and that prediction catches key-press errors that no amount of algebra will.</p>
 </div>
 
 <div class="box remember">
@@ -1378,8 +1442,10 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 <tr><td class="step">R(q) = 10q</td><td class="why">selling <span data-fr="prix">price</span> 10 per unit</td></tr>
 <tr><td class="step">P(q) = R(q) &minus; C(q)</td><td class="why"><span data-fr="bénéfice">profit</span> is <span data-fr="recette">revenue</span> minus <span data-fr="coût">cost</span>, always</td></tr>
 <tr><td class="step">60000 = 10q &minus; (6q + 80000)</td><td class="why">set the <span data-fr="bénéfice">profit</span> to the target</td></tr>
-<tr><td class="step">140000 = 4q</td><td class="why">collect</td></tr>
-<tr class="res"><td class="step">q = 35 000 units</td><td class="why">and the decision: this is above current capacity, so either <span data-fr="prix">price</span> or <span data-fr="coûts">costs</span> must move</td></tr>
+<tr><td class="step">60000 = 10q &minus; 6q &minus; 80000</td><td class="why">distribute the minus over the whole <span data-fr="parenthèse">bracket</span></td></tr>
+<tr><td class="step">60000 = 4q &minus; 80000</td><td class="why">collect the q terms</td></tr>
+<tr><td class="step">140000 = 4q</td><td class="why">add 80 000 to both sides</td></tr>
+<tr class="res"><td class="step">q = 35 000 units</td><td class="why">and the decision: "we must sell 35 000 units to make 60 000 of <span data-fr="bénéfice">profit</span>". Whether that is achievable is the business question, and it is the part the maths does not <span data-fr="réponse">answer</span></td></tr>
 </tbody></table>
 </div>
 
@@ -1495,17 +1561,18 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 <p class="sec-kicker">Finding a domain is a search for what is forbidden, not for what is allowed.</p>
 
 <div class="box method">
-<span class="lab">Method: three things can go wrong, and only three</span>
+<span class="lab">Method: four things can go wrong, and only four</span>
 <ol class="steps">
 <li><strong>Division by zero.</strong> Set every <span data-fr="dénominateur">denominator</span> equal to zero and solve; those values are excluded.</li>
 <li><strong>An even <span data-fr="racine">root</span> of a negative.</strong> Whatever is under a <span data-fr="racine carrée">square root</span> must be <span class="m">&ge; 0</span>.</li>
 <li><strong>A <span data-fr="logarithme">logarithm</span> of zero or a negative.</strong> Whatever is inside a <span class="m">log</span> or <span class="m">ln</span> must be <span class="m">&gt; 0</span>.</li>
+<li><strong>A <span data-fr="racine">root</span> underneath a <span data-fr="fraction">fraction</span> bar.</strong> If a <span data-fr="racine carrée">square root</span> sits in a <span data-fr="dénominateur">denominator</span>, what is inside must be <strong>strictly</strong> greater than 0, because the <span data-fr="racine">root</span> has to be non-zero as well as real. In <span class="m"><span class="frac"><span class="num">1</span><span class="den"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q + 3</span></span></span></span></span> the condition is <span class="m">q &gt; &minus;3</span>, not <span class="m">q &ge; &minus;3</span>.</li>
 </ol>
 <p style="margin:.6em 0 0">If none of the three appears, the <span data-fr="domaine de définition">domain</span> is all of <span class="m">&#8477;</span>. Then, separately, ask whether the <em>context</em> restricts it further: a <span data-fr="quantité">quantity</span> cannot be negative, a factory has a capacity.</p>
 </div>
 
 <div class="der">
-<span class="der-cap">Domain of f(x) = x / (x &minus; 2) &nbsp;· the course's example</span>
+<span class="der-cap">Domain of f(x) = <span class="frac"><span class="num">x</span><span class="den">x &minus; 2</span></span> &nbsp;· the course's example</span>
 <table class="dv"><tbody>
 <tr><td class="step">a denominator is present</td><td class="why">so <span data-fr="règle">rule</span> 1 applies; no <span data-fr="racines">roots</span>, no <span data-fr="logarithmes">logarithms</span></td></tr>
 <tr><td class="step">x &minus; 2 = 0</td><td class="why">find where it vanishes</td></tr>
@@ -1514,7 +1581,7 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 </div>
 
 <div class="der">
-<span class="der-cap">Domain of f(x) = x / (x<sup>2</sup> &minus; x &minus; 2)</span>
+<span class="der-cap">Domain of f(x) = <span class="frac"><span class="num">x</span><span class="den">x<sup>2</sup> &minus; x &minus; 2</span></span></span>
 <table class="dv"><tbody>
 <tr><td class="step">x<sup>2</sup> &minus; x &minus; 2 = 0</td><td class="why">set the <span data-fr="dénominateur">denominator</span> to zero</td></tr>
 <tr><td class="step">(x &minus; 2)(x + 1) = 0</td><td class="why">factor: two numbers with product &minus;2 and <span data-fr="somme">sum</span> &minus;1</td></tr>
@@ -1524,14 +1591,14 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 
 <div class="box warn">
 <span class="lab">The most common domain error</span>
-<p style="margin:0"><span data-fr="Simplification">Simplifying</span> before finding the <span data-fr="domaine de définition">domain</span>. In <span class="m">(x<sup>2</sup> &minus; 4)/(x &minus; 2)</span> the <span data-fr="fraction">fraction</span> reduces to <span class="m">x + 2</span>, which looks defined everywhere. It is not: the original is <span data-fr="non défini">undefined</span> at <span class="m">x = 2</span>, and the <span data-fr="domaine de définition">domain</span> is <span class="m">&#8477;\{2}</span>. <strong>Find the <span data-fr="domaine de définition">domain</span> from the expression you were given, not from the one you produced.</strong></p>
+<p style="margin:0"><span data-fr="Simplification">Simplifying</span> before finding the <span data-fr="domaine de définition">domain</span>. In <span class="m"><span class="frac"><span class="num">x<sup>2</sup> &minus; 4</span><span class="den">x &minus; 2</span></span></span> the <span data-fr="fraction">fraction</span> reduces to <span class="m">x + 2</span>, which looks defined everywhere. It is not: the original is <span data-fr="non défini">undefined</span> at <span class="m">x = 2</span>, and the <span data-fr="domaine de définition">domain</span> is <span class="m">&#8477;\{2}</span>. <strong>Find the <span data-fr="domaine de définition">domain</span> from the expression you were given, not from the one you produced.</strong></p>
 </div>
 
 <div class="box remember">
 <span class="lab">What to remember</span>
 <ul>
 <li><span data-fr="Dénominateurs">Denominators</span> cannot be zero, even <span data-fr="racines">roots</span> cannot take negatives, <span data-fr="logarithmes">logarithms</span> cannot take zero or negatives.</li>
-<li>Write the <span data-fr="domaine de définition">domain</span> as <span class="m">&#8477;\{…}</span> or as an <span data-fr="intervalle">interval</span>.</li>
+<li>Write the <span data-fr="domaine de définition">domain</span> as <span class="m">&#8477;\{…}</span> or as an <span data-fr="intervalle">interval</span>, and practise both. <span class="m">&#8477;\{2}</span> is the same set as <span class="m">]&minus;&infin; ; 2[ &cup; ]2 ; +&infin;[</span>, and <span class="m">&#8477;\{2, &minus;1}</span> is <span class="m">]&minus;&infin; ; &minus;1[ &cup; ]&minus;1 ; 2[ &cup; ]2 ; +&infin;[</span>. Lecturers use both notations interchangeably.</li>
 <li>Always take the <span data-fr="domaine de définition">domain</span> from the original expression.</li>
 <li>Then ask what the business context forbids on top of that.</li>
 </ul>
@@ -1540,9 +1607,9 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 <details class="practice">
 <summary><span class="pl">Practice</span> Four domains</summary>
 <div class="pr-body">
-<p>1. <span class="m">f(x) = 2x/(x + 3)</span><br>
-2. <span class="m">f(x) = 2x/(x<sup>2</sup> &minus; 9x + 14)</span><br>
-3. <span class="m">f(x) = <span class="rt">&radic;<span>x &minus; 5</span></span></span><br>
+<p>1. <span class="m">f(x) = <span class="frac"><span class="num">2x</span><span class="den">x + 3</span></span></span><br>
+2. <span class="m">f(x) = <span class="frac"><span class="num">2x</span><span class="den">x<sup>2</sup> &minus; 9x + 14</span></span></span><br>
+3. <span class="m">f(x) = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x &minus; 5</span></span></span><br>
 4. <span class="m">f(x) = ln(x &minus; 1)</span></p>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
 <p>1. <span class="m">&#8477;\{&minus;3}</span>. Week 1 quiz, question 4.<br>
@@ -1564,14 +1631,31 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 <thead><tr><th>Family</th><th>Form</th><th>Shape and typical business use</th></tr></thead>
 <tbody>
 <tr><td class="lead">Constant</td><td class="m">h(x) = c</td><td>A horizontal line. A <span data-fr="coût fixe">fixed cost</span>, unchanged by volume. <span class="m">h(10) = h(&minus;213) = c</span>.</td></tr>
-<tr><td class="lead">Linear</td><td class="m">f(x) = ax + b</td><td>A <span data-fr="droite">straight line</span>. <span data-fr="Coût">Cost</span> with a fixed and a <span data-fr="variable">variable</span> part.</td></tr>
+<tr><td class="lead">Linear</td><td class="m">f(x) = ax + b, also written y = mx + b</td><td>A <span data-fr="droite">straight line</span>; <span class="m">a</span> (or <span class="m">m</span>) is the <span data-fr="pente">slope</span>, <span class="m">b</span> the value at <span class="m">x = 0</span>. <span data-fr="Coût">Cost</span> with a fixed and a <span data-fr="variable">variable</span> part.</td></tr>
 <tr><td class="lead"><span data-fr="Puissance">Power</span></td><td class="m">f(x) = x<sup>m</sup></td><td>Defined for <span class="m">x &ge; 0</span> in the course's version. Economies of <span data-fr="échelle">scale</span> when <span class="m">m &lt; 1</span>.</td></tr>
 <tr><td class="lead">Parabolic</td><td class="m">f(x) = ax<sup>2</sup> + bx + c</td><td>A <span data-fr="parabole">parabola</span>, with one peak or one trough. <span data-fr="Recette">Revenue</span> when <span data-fr="prix">price</span> affects <span data-fr="demande">demand</span>.</td></tr>
 <tr><td class="lead"><span data-fr="Polynôme">Polynomial</span></td><td class="m">a<sub>n</sub>x<sup>n</sup> + … + a<sub>1</sub>x + a<sub>0</sub></td><td>The general case; <span class="m">n</span> is the degree. Flexible <span data-fr="coût">cost</span> <span data-fr="courbes">curves</span>.</td></tr>
-<tr><td class="lead">Rational</td><td>a <span data-fr="polynôme">polynomial</span> over a <span data-fr="polynôme">polynomial</span></td><td>Has excluded values. <span data-fr="Moyenne">Average</span> <span data-fr="coût">cost</span>, <span data-fr="demande">demand</span> <span data-fr="courbes">curves</span> such as <span class="m">5 000 000/(p + 1)</span>.</td></tr>
+<tr><td class="lead">Rational</td><td>a <span data-fr="polynôme">polynomial</span> over a <span data-fr="polynôme">polynomial</span></td><td>Has excluded values. <span data-fr="Moyenne">Average</span> <span data-fr="coût">cost</span>, <span data-fr="demande">demand</span> <span data-fr="courbes">curves</span> such as <span class="m"><span class="frac"><span class="num">5 000 000</span><span class="den">p + 1</span></span></span>.</td></tr>
 <tr><td class="lead"><span data-fr="Valeur absolue">Absolute value</span></td><td class="m">|x|</td><td>A V shape. Distance from a target, deviation from a <span data-fr="prévision">forecast</span>.</td></tr>
 </tbody>
 </table>
+</div>
+
+<h3>Reading a <span data-fr="parabole">parabola</span></h3>
+<div class="prose">
+<p>The parabolic row deserves more than a line, because week 2 asks you to sketch one and week 8 asks you to optimise one. For <span class="m">f(x) = ax<sup>2</sup> + bx + c</span>, the <span data-fr="signe">sign</span> of <span class="m">a</span> decides the shape. <strong><span class="m">a &gt; 0</span> gives a U</strong>, a trough with a <span data-fr="minimum">minimum</span>. <strong><span class="m">a &lt; 0</span> gives an upside-down U</strong>, a peak with a <span data-fr="maximum">maximum</span>.</p>
+<p>The <span data-fr="point de rebroussement">turning point</span> is called the <span data-fr="sommet">vertex</span>, and it sits at <span class="m">x = &minus;<span class="frac"><span class="num">b</span><span class="den">2a</span></span></span>. Substitute that back to get its height. The <span data-fr="parabole">parabola</span> is symmetric about the vertical line through the <span data-fr="sommet">vertex</span>, so the two <span data-fr="zéros de la fonction">x-intercepts</span>, when they exist, are always the same distance from it.</p>
+</div>
+
+<div class="der">
+<span class="der-cap">Where does revenue peak? &nbsp;· R(m) = 400m &minus; 10m<sup>2</sup></span>
+<table class="dv"><tbody>
+<tr><td class="step">a = &minus;10, b = 400</td><td class="why">read the <span data-fr="coefficients">coefficients</span>, <span data-fr="signes">signs</span> included</td></tr>
+<tr><td class="step">a &lt; 0</td><td class="why">so the <span data-fr="parabole">parabola</span> opens downwards: this is a peak, not a trough</td></tr>
+<tr><td class="step">m = &minus;<span class="frac"><span class="num">400</span><span class="den">2 &times; (&minus;10)</span></span></td><td class="why">the <span data-fr="sommet">vertex</span> formula</td></tr>
+<tr><td class="step">m = 20 employees</td><td class="why">the staffing level that maximises <span data-fr="recette">revenue</span></td></tr>
+<tr class="res"><td class="step">R(20) = 8000 &minus; 4000 = 4000</td><td class="why">week 8 recovers the same point with a <span data-fr="dérivée">derivative</span>; the formula is worth knowing now</td></tr>
+</tbody></table>
 </div>
 
 <h3>Case-defined <span data-fr="fonctions">functions</span></h3>
@@ -1617,6 +1701,17 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 
 <div class="prose">
 <p><span data-fr="Tracé">Plotting</span> a <span data-fr="fonction">function</span> means marking every point <span class="m">(x, f(x))</span>. The course notes that in Excel the two acceptable choices are a scatter of points joined by a smoothed <span data-fr="courbe">curve</span>, or a scatter joined by straight segments, and it gives a <span data-fr="règle">rule</span> worth keeping for every chart you ever produce.</p>
+</div>
+
+<div class="box method">
+<span class="lab">How to sketch a function by hand, in four steps</span>
+<ol class="steps">
+<li><strong>Find the <span data-fr="domaine de définition">domain</span></strong>, so you know how far the <span data-fr="courbe">curve</span> is allowed to go.</li>
+<li><strong>Find the <span data-fr="intersections avec les axes">intercepts</span>.</strong> Set <span class="m">x = 0</span>, then set <span class="m">y = 0</span>.</li>
+<li><strong>Build a small table of values</strong>, five or six points spread across the <span data-fr="domaine de définition">domain</span>, including one on each side of every <span data-fr="intersection avec un axe">intercept</span> and of every excluded value.</li>
+<li><strong>Identify the family</strong> from the <span data-fr="fonction">function</span> library: line, <span data-fr="parabole">parabola</span>, cubic, <span data-fr="racine">root</span>, <span data-fr="exponentielle">exponential</span> or rational. That tells you the shape to join the points with.</li>
+</ol>
+<p style="margin:.6em 0 0">Worked on <span class="m">y = 4x<sup>2</sup> &minus; 16</span>: the <span data-fr="domaine de définition">domain</span> is all of <span class="m">&#8477;</span>; the <span data-fr="intersections avec les axes">intercepts</span> are <span class="m">(0, &minus;16)</span> and <span class="m">(&plusmn;2, 0)</span>; <span class="m">a = 4 &gt; 0</span> so it is a U with its lowest point at <span class="m">(0, &minus;16)</span>; and at <span class="m">x = &plusmn;3</span> the value is 20 on both sides. Six marks on the page and the <span data-fr="courbe">curve</span> draws itself.</p>
 </div>
 
 <div class="box rule">
@@ -1665,13 +1760,13 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 
 <h3>The number e</h3>
 <div class="prose">
-<p>Take <span class="m">(1 + 1/n)<sup>n</sup></span> and let <span class="m">n</span> grow. At <span class="m">n = 1</span> it is 2; at <span class="m">n = 12</span>, about 2.613; at <span class="m">n = 365</span>, about 2.7146. It creeps towards a limit that never stops mattering:</p>
+<p>Take <span class="m"><span class="pr">(</span>1 + <span class="frac"><span class="num">1</span><span class="den">n</span></span><span class="pr">)</span><sup>n</sup></span> and let <span class="m">n</span> grow. At <span class="m">n = 1</span> it is 2; at <span class="m">n = 12</span>, about 2.613; at <span class="m">n = 365</span>, about 2.7146. It creeps towards a limit that never stops mattering:</p>
 </div>
 
 <div class="fx">e &asymp; 2.718281828459…</div>
 
 <div class="prose">
-<p>What it means financially: <span class="m">n</span> is how often you compound. Compounding yearly gives 2, monthly gives 2.613, daily gives 2.7146, and compounding continuously gives exactly <span class="m">e</span>. So <span class="m">e</span> is not an arbitrary constant; it is what 100% <span data-fr="croissance">growth</span> becomes when it is applied continuously rather than in steps. The <span data-fr="fonction exponentielle">natural exponential function</span> is <span class="m">exp(x) = e<sup>x</sup></span>, and it is the one whose <span data-fr="dérivée">derivative</span> is itself, which is why week 5 treats it as the easiest <span data-fr="fonction">function</span> to differentiate.</p>
+<p>What it means financially. Put 1 CHF to work for one year at a rate of <strong>100%</strong>, and let <span class="m">n</span> be the number of times the interest is added during that year. Compounding once gives 2, monthly (<span class="m">n = 12</span>) gives about 2.613, daily (<span class="m">n = 365</span>) gives about 2.7146, and compounding continuously, adding interest at every instant, gives exactly <span class="m">e</span>. So <span class="m">e</span> is not an arbitrary constant. It is what 100% <span data-fr="croissance">growth</span> becomes when it is applied continuously rather than in steps. The <span data-fr="fonction exponentielle">natural exponential function</span> is <span class="m">exp(x) = e<sup>x</sup></span>, and it is the one whose <span data-fr="dérivée">derivative</span> is itself, which is why week 5 treats it as the easiest <span data-fr="fonction">function</span> to differentiate.</p>
 </div>
 
 <div class="box remember">
@@ -1679,7 +1774,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <ul>
 <li>In <span class="m">b<sup>x</sup></span> the <span data-fr="variable">variable</span> is the <span data-fr="exposant">exponent</span>; the <span data-fr="sortie">output</span> is always strictly positive.</li>
 <li><span class="m">S = P(1 + r)<sup>n</sup></span> is compound <span data-fr="croissance">growth</span>.</li>
-<li><span class="m">e &asymp; 2.71828</span> is the limit of <span class="m">(1 + 1/n)<sup>n</sup></span>, and it is continuous compounding.</li>
+<li><span class="m">e &asymp; 2.71828</span> is the limit of <span class="m"><span class="pr">(</span>1 + <span class="frac"><span class="num">1</span><span class="den">n</span></span><span class="pr">)</span><sup>n</sup></span>, and it is continuous compounding.</li>
 <li><span class="m">exp(x) = e<sup>x</sup></span> is "the" <span data-fr="fonction exponentielle">exponential function</span>.</li>
 </ul>
 </div>
@@ -1690,7 +1785,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <p>1. 5 000 CHF at 4% for 10 years. 2. Which is larger at <span class="m">x = 5</span>: <span class="m">x<sup>3</sup></span> or <span class="m">3<sup>x</sup></span>? And at <span class="m">x = 10</span>? 3. Can <span class="m">2<sup>x</sup></span> ever equal <span class="m">&minus;8</span>?</p>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
 <p>1. <span class="m">5000 &times; 1.04<sup>10</sup> &asymp; 7401.2</span>.<br>
-2. At <span class="m">x = 5</span>: <span class="m">125</span> against <span class="m">243</span>, so the <span data-fr="exponentielle">exponential</span>. At <span class="m">x = 10</span>: <span class="m">1000</span> against <span class="m">59 049</span>. Exponentials overtake <span data-fr="puissances">powers</span> and never look back.<br>
+2. At <span class="m">x = 5</span>: <span class="m">125</span> against <span class="m">243</span>, so the <span data-fr="exponentielle">exponential</span>. At <span class="m">x = 10</span>: <span class="m">1000</span> against <span class="m">59 049</span>. Beyond a certain point the <span data-fr="exponentielle">exponential</span> is always ahead, and the gap keeps widening.<br>
 3. No. An <span data-fr="exponentielle">exponential</span> with a positive <span data-fr="base">base</span> is always strictly positive.</p>
 </div></details>
 </div>
@@ -1707,7 +1802,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 </div>
 
 <div class="prose">
-<p>Everything else follows from reading that sentence in both directions. <span class="m">log<sub>5</sub> 25 = 2</span> because <span class="m">5<sup>2</sup> = 25</span>. <span class="m">log<sub>64</sub> 8 = 1/2</span> because <span class="m">64<sup>1/2</sup> = 8</span>. <span class="m">log<sub>2</sub>(1/16) = &minus;4</span> because <span class="m">2<sup>&minus;4</sup> = 1/16</span>.</p>
+<p>Everything else follows from reading that sentence in both directions. <span class="m">log<sub>5</sub> 25 = 2</span> because <span class="m">5<sup>2</sup> = 25</span>. <span class="m">log<sub>64</sub> 8 = <span class="frac"><span class="num">1</span><span class="den">2</span></span></span> because <span class="m">64<sup><span class="frac"><span class="num">1</span><span class="den">2</span></span></sup> = 8</span>. <span class="m">log<sub>2</sub><span class="pr">(</span><span class="frac"><span class="num">1</span><span class="den">16</span></span><span class="pr">)</span> = &minus;4</span> because <span class="m">2<sup>&minus;4</sup> = <span class="frac"><span class="num">1</span><span class="den">16</span></span></span>.</p>
 </div>
 
 <div class="tw">
@@ -1719,8 +1814,8 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <tr><td class="m">3<sup>4</sup> = 81</td><td class="m">log<sub>3</sub> 81 = 4</td></tr>
 <tr><td class="m">10<sup>0</sup> = 1</td><td class="m">log<sub>10</sub> 1 = 0</td></tr>
 <tr><td class="m">10<sup>3</sup> = 1000</td><td class="m">log<sub>10</sub> 1000 = 3</td></tr>
-<tr><td class="m">64<sup>1/2</sup> = 8</td><td class="m">log<sub>64</sub> 8 = 1/2</td></tr>
-<tr><td class="m">2<sup>&minus;4</sup> = 1/16</td><td class="m">log<sub>2</sub>(1/16) = &minus;4</td></tr>
+<tr><td class="m">64<sup><span class="frac"><span class="num">1</span><span class="den">2</span></span></sup> = 8</td><td class="m">log<sub>64</sub> 8 = <span class="frac"><span class="num">1</span><span class="den">2</span></span></td></tr>
+<tr><td class="m">2<sup>&minus;4</sup> = <span class="frac"><span class="num">1</span><span class="den">16</span></span></td><td class="m">log<sub>2</sub><span class="pr">(</span><span class="frac"><span class="num">1</span><span class="den">16</span></span><span class="pr">)</span> = &minus;4</td></tr>
 </tbody>
 </table>
 </div>
@@ -1767,7 +1862,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <p>1. <span class="m">log<sub>6</sub> 36</span> &nbsp; 2. <span class="m">log<sub>16</sub> 4</span> &nbsp; 3. <span class="m">ln(e<sup>4</sup>) + log(0.001)</span> &nbsp; 4. Solve <span class="m">10<sup>x</sup> = 1000</span>.</p>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
 <p>1. <span class="m">2</span>, since <span class="m">6<sup>2</sup> = 36</span>. Week 1 <span data-fr="devoirs">homework</span> 1.8a.<br>
-2. <span class="m">1/2</span>, since <span class="m">16<sup>1/2</sup> = 4</span>. Week 1 <span data-fr="devoirs">homework</span> 1.8b.<br>
+2. <span class="m"><span class="frac"><span class="num">1</span><span class="den">2</span></span></span>, since <span class="m">16<sup><span class="frac"><span class="num">1</span><span class="den">2</span></span></sup> = 4</span>. Week 1 <span data-fr="devoirs">homework</span> 1.8b.<br>
 3. <span class="m">4 + (&minus;3) = 1</span>. Week 1 quiz, question 6.<br>
 4. <span class="m">x = log 1000 = 3</span>. Taking a <span data-fr="logarithme">logarithm</span> is how you free a <span data-fr="variable">variable</span> from an <span data-fr="exposant">exponent</span>.</p>
 </div></details>
@@ -1790,12 +1885,13 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 (f + g)(x) = f(x) + g(x)<br>
 (f &minus; g)(x) = f(x) &minus; g(x)<br>
 (f &middot; g)(x) = f(x) &middot; g(x)<br>
-(f / g)(x) = f(x) / g(x), &nbsp;provided g(x) &ne; 0
+<span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(x) = <span class="frac"><span class="num">f(x)</span><span class="den">g(x)</span></span>, &nbsp;provided g(x) &ne; 0
 </div>
 
 <div class="box rule">
-<span class="lab">The condition the course attaches</span>
-<p>These are defined for two <span data-fr="fonctions">functions</span> on the <strong>same <span data-fr="domaine de définition">domain</span></strong>, and the <span data-fr="quotient">quotient</span> carries the extra condition <span class="m">g(x) &ne; 0</span>. So dividing two <span data-fr="fonctions">functions</span> can shrink the <span data-fr="domaine de définition">domain</span> even when neither original had a problem.</p>
+<span class="lab">Where the combined function is defined</span>
+<p>The <span data-fr="somme">sum</span>, the <span data-fr="différence">difference</span> and the product of <span class="m">f</span> and <span class="m">g</span> are defined at every <span class="m">x</span> that is in the <span data-fr="domaine de définition">domain</span> of <span class="m">f</span> <strong>and</strong> in the <span data-fr="domaine de définition">domain</span> of <span class="m">g</span>. That common part is called the <strong>intersection</strong> of the two <span data-fr="domaines de définition">domains</span>. The <span data-fr="quotient">quotient</span> carries one further condition, <span class="m">g(x) &ne; 0</span>, so dividing two <span data-fr="fonctions">functions</span> can shrink the <span data-fr="domaine de définition">domain</span> even when neither original had a problem.</p>
+<p style="margin-bottom:0">Example: <span class="m">f(x) = x<sup>2</sup> + 4</span> is defined on all of <span class="m">&#8477;</span> and <span class="m">h(x) = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x + 1</span></span></span> only for <span class="m">x &ge; &minus;1</span>, so <span class="m">f + h</span> is defined only for <span class="m">x &ge; &minus;1</span>.</p>
 </div>
 
 <div class="der">
@@ -1804,8 +1900,8 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <tr><td class="step">(f + g)(x) = x<sup>2</sup> + 6x &minus; 1</td><td class="why">(3x &minus; 1) + (x<sup>2</sup> + 3x); collect <span data-fr="termes semblables">like terms</span></td></tr>
 <tr><td class="step">(f &minus; g)(x) = &minus;x<sup>2</sup> &minus; 1</td><td class="why">(3x &minus; 1) &minus; (x<sup>2</sup> + 3x); the <span data-fr="parenthèse">bracket</span> flips both <span data-fr="signes">signs</span>, and the 3x cancels</td></tr>
 <tr><td class="step">(f &middot; g)(x) = 3x<sup>3</sup> + 8x<sup>2</sup> &minus; 3x</td><td class="why">(3x &minus; 1)(x<sup>2</sup> + 3x), expanded</td></tr>
-<tr><td class="step">(f / g)(x) = (3x &minus; 1)/(x<sup>2</sup> + 3x)</td><td class="why">excluded where x<sup>2</sup> + 3x = 0, that is x = 0 and x = &minus;3</td></tr>
-<tr class="res"><td class="step">(&frac12; f)(x) = (3/2)x &minus; &frac12;</td><td class="why">multiplying by a constant multiplies every term</td></tr>
+<tr><td class="step"><span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(x) = <span class="frac"><span class="num">3x &minus; 1</span><span class="den">x<sup>2</sup> + 3x</span></span></td><td class="why">excluded where x<sup>2</sup> + 3x = 0, that is x = 0 and x = &minus;3</td></tr>
+<tr class="res"><td class="step"><span class="pr">(</span><span class="frac"><span class="num">1</span><span class="den">2</span></span> f<span class="pr">)</span>(x) = <span class="pr">(</span><span class="frac"><span class="num">3</span><span class="den">2</span></span><span class="pr">)</span>x &minus; <span class="frac"><span class="num">1</span><span class="den">2</span></span></td><td class="why">multiplying by a constant multiplies every term</td></tr>
 </tbody></table>
 </div>
 
@@ -1826,10 +1922,10 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <details class="practice">
 <summary><span class="pl">Practice</span> Combining</summary>
 <div class="pr-body">
-<p>Let <span class="m">f(x) = x<sup>2</sup> + 4</span>, <span class="m">g(x) = 10x</span>, <span class="m">h(x) = <span class="rt">&radic;<span>x + 1</span></span></span>. Compute <span class="m">(f &minus; g + h)(3)</span>.</p>
+<p>Let <span class="m">f(x) = x<sup>2</sup> + 4</span>, <span class="m">g(x) = 10x</span>, <span class="m">h(x) = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x + 1</span></span></span>. Compute <span class="m">(f &minus; g + h)(3)</span>.</p>
 <details class="rev"><summary>Show the method and the checkpoint</summary><div class="rev-body">
 <p><strong>Method.</strong> Evaluate each <span data-fr="fonction">function</span> at 3 separately, then combine the three numbers. Do not try to build a single formula first; it is slower and invites <span data-fr="signe">sign</span> errors.</p>
-<p><span class="m">f(3) = 9 + 4 = 13</span>, <span class="m">g(3) = 30</span>, <span class="m">h(3) = <span class="rt">&radic;<span>4</span></span> = 2</span>.</p>
+<p><span class="m">f(3) = 9 + 4 = 13</span>, <span class="m">g(3) = 30</span>, <span class="m">h(3) = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>4</span></span> = 2</span>.</p>
 <p><strong>Checkpoint.</strong> <span class="ck">13 &minus; 30 + 2 = &minus;15</span>. Week 2 quiz, question 1.</p>
 </div></details>
 </div>
@@ -1843,7 +1939,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="box method">
 <span class="lab">The method, in full</span>
 <ol class="steps">
-<li><strong><span data-fr="ordonnée à l’origine">y-intercept</span>:</strong> put <span class="m">x = 0</span> into the <span data-fr="équation">equation</span> and solve for <span class="m">y</span>. There is at most one, because a <span data-fr="fonction">function</span> has one <span data-fr="sortie">output</span> per <span data-fr="entrée">input</span>.</li>
+<li><strong><span data-fr="ordonnée à l’origine">y-intercept</span>:</strong> put <span class="m">x = 0</span> into the <span data-fr="équation">equation</span> and solve for <span class="m">y</span>. If the <span data-fr="équation">equation</span> is written as <span class="m">y = f(x)</span>, there is at most one, because a <span data-fr="fonction">function</span> gives one <span data-fr="sortie">output</span> per <span data-fr="entrée">input</span>. If it is <em>not</em> of that form, such as <span class="m">9x<sup>2</sup> + 4y<sup>2</sup> = 25</span>, there may be several, and you must solve the resulting <span data-fr="équation">equation</span> for <span class="m">y</span> in full.</li>
 <li><strong><span data-fr="zéro de la fonction">x-intercept</span>:</strong> put <span class="m">y = 0</span> and solve for <span class="m">x</span>. There may be none, one, or several.</li>
 <li>Report each as a <strong>point</strong>, such as <span class="m">(0, 3)</span>, not as a bare number, unless the question asks only for the value.</li>
 </ol>
@@ -1876,13 +1972,14 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <p class="sec-kicker">Feeding one machine's output into another. The operation that makes chains of business logic computable.</p>
 
 <div class="prose">
-<p>XY Coffee Co knows two things. The number of customers depends on advertising: <span class="m">N(x) = 100<span class="rt">&radic;<span>x</span></span></span>, where <span class="m">x</span> is the advertising spend in thousands. And <span data-fr="recette">revenue</span> depends on the number of customers: <span class="m">R(n) = 70n + n<sup>2</sup>/20</span>. The question Jane actually wants answered is different from both: <em>what does <span data-fr="recette">revenue</span> do when we change the advertising budget?</em></p>
+<p>XY Coffee Co knows two things. The number of customers depends on advertising: <span class="m">N(x) = 100<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span></span>, where <span class="m">x</span> is the advertising spend in thousands. And <span data-fr="recette">revenue</span> depends on the number of customers: <span class="m">R(n) = 70n + <span class="frac"><span class="num">n<sup>2</sup></span><span class="den">20</span></span></span>. The question Jane actually wants answered is different from both: <em>what does <span data-fr="recette">revenue</span> do when we change the advertising budget?</em></p>
 <p>You get there by putting the first <span data-fr="fonction">function</span> inside the second.</p>
 </div>
 
 <div class="box rule">
 <span class="lab">Definition</span>
 <p>For <span class="m">f : X &rarr; Y</span> and <span class="m">g : Y &rarr; Z</span>, the <span data-fr="composition">composition</span> <span class="m">g &#8728; f : X &rarr; Z</span> is defined by <span class="mb">(g &#8728; f)(x) = g(f(x))</span>. Its <span data-fr="domaine de définition">domain</span> is the set of <span class="m">x</span> in the <span data-fr="domaine de définition">domain</span> of <span class="m">f</span> whose <span data-fr="sortie">output</span> <span class="m">f(x)</span> lies in the <span data-fr="domaine de définition">domain</span> of <span class="m">g</span>.</p>
+<p style="margin-bottom:0">In words: <span class="m">x</span> must be legal for the inner <span data-fr="fonction">function</span>, <strong>and</strong> what the inner <span data-fr="fonction">function</span> produces must be legal for the outer one. Take <span class="m">f(x) = x &minus; 4</span> and <span class="m">g(u) = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>u</span></span></span>. Then <span class="m">(g &#8728; f)(x) = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x &minus; 4</span></span></span>. Every <span class="m">x</span> is legal for <span class="m">f</span>, but <span class="m">f(x)</span> only lands in the <span data-fr="domaine de définition">domain</span> of <span class="m">g</span> when <span class="m">x &minus; 4 &ge; 0</span>, so the composite is defined only for <span class="m">x &ge; 4</span>. <span data-fr="Composition">Composing</span> can shrink a <span data-fr="domaine de définition">domain</span> even when the inner <span data-fr="fonction">function</span> had no restriction of its own.</p>
 </div>
 
 <div class="box method">
@@ -1894,9 +1991,9 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <span class="der-cap">Revenue as a function of advertising</span>
 <table class="dv"><tbody>
 <tr><td class="step">R(N(x))</td><td class="why">substitute the customer <span data-fr="fonction">function</span> into the <span data-fr="recette">revenue</span> <span data-fr="fonction">function</span></td></tr>
-<tr><td class="step">70(100<span class="rt">&radic;<span>x</span></span>) + (100<span class="rt">&radic;<span>x</span></span>)<sup>2</sup>/20</td><td class="why">every n becomes 100<span class="rt">&radic;<span>x</span></span>, including inside the square</td></tr>
-<tr><td class="step">7000<span class="rt">&radic;<span>x</span></span> + 10000x/20</td><td class="why">(100<span class="rt">&radic;<span>x</span></span>)<sup>2</sup> = 10 000x, squaring both the 100 and the <span data-fr="racine">root</span></td></tr>
-<tr class="res"><td class="step">7000<span class="rt">&radic;<span>x</span></span> + 500x</td><td class="why"><span data-fr="recette">revenue</span> directly as a <span data-fr="fonction">function</span> of advertising spend</td></tr>
+<tr><td class="step">70(100<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span>) + <span class="frac"><span class="num">(100<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span>)<sup>2</sup></span><span class="den">20</span></span></td><td class="why">every n becomes 100<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span>, including inside the square</td></tr>
+<tr><td class="step">7000<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span> + <span class="frac"><span class="num">10000x</span><span class="den">20</span></span></td><td class="why">(100<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span>)<sup>2</sup> = 10 000x, squaring both the 100 and the <span data-fr="racine">root</span></td></tr>
+<tr class="res"><td class="step">7000<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span> + 500x</td><td class="why"><span data-fr="recette">revenue</span> directly as a <span data-fr="fonction">function</span> of advertising spend</td></tr>
 </tbody></table>
 </div>
 
@@ -1905,7 +2002,8 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <table class="dv"><tbody>
 <tr><td class="step">F(G(p)) = (2p + 1)<sup>2</sup> + 4(2p + 1) &minus; 3</td><td class="why">every p in F becomes the whole of G</td></tr>
 <tr><td class="step">G(F(p)) = 2(p<sup>2</sup> + 4p &minus; 3) + 1</td><td class="why">the p in G becomes the whole of F: a different <span data-fr="fonction">function</span></td></tr>
-<tr class="res"><td class="step">G(F(1)) = 2(1 + 4 &minus; 3) + 1 = 5</td><td class="why">evaluate the inside first, then the outside</td></tr>
+<tr><td class="step">G(F(1)) = 2(1 + 4 &minus; 3) + 1 = 5</td><td class="why">evaluate the inside first: F(1) = 2, then feed 2 into G</td></tr>
+<tr class="res"><td class="step">F(G(1)) = 3<sup>2</sup> + 4(3) &minus; 3 = 18</td><td class="why">18 against 5: same two <span data-fr="fonctions">functions</span>, same <span data-fr="entrée">input</span>, two different <span data-fr="réponses">answers</span>. That is what "not commutative" means</td></tr>
 </tbody></table>
 </div>
 
@@ -1947,7 +2045,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <p class="sec-kicker">Running the machine backwards. In business: turning a demand curve into a price curve.</p>
 
 <div class="prose">
-<p>XY Coffee Co's daily <span data-fr="demande">demand</span> as a <span data-fr="fonction">function</span> of retail <span data-fr="prix">price</span> is <span class="m">Q(p) = 5 000 000/(p + 1) &minus; 500 000</span> for <span class="m">0 &le; p &le; 9</span>, and zero above 9. That <span data-fr="réponses">answers</span> "how much will we sell at this <span data-fr="prix">price</span>?". The <span data-fr="réciproque">inverse</span> <span data-fr="réponses">answers</span> the question management actually asks: <em>"what <span data-fr="prix">price</span> do we need to sell this much?"</em></p>
+<p>XY Coffee Co's daily <span data-fr="demande">demand</span> as a <span data-fr="fonction">function</span> of retail <span data-fr="prix">price</span> is <span class="m">Q(p) = <span class="frac"><span class="num">5 000 000</span><span class="den">p + 1</span></span> &minus; 500 000</span> for <span class="m">0 &le; p &le; 9</span>, and zero above 9. That <span data-fr="réponses">answers</span> "how much will we sell at this <span data-fr="prix">price</span>?". The <span data-fr="réciproque">inverse</span> <span data-fr="réponses">answers</span> the question management actually asks: <em>"what <span data-fr="prix">price</span> do we need to sell this much?"</em></p>
 </div>
 
 <div class="box rule">
@@ -1957,11 +2055,17 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 
 <div class="box warn">
 <span class="lab">A notation warning</span>
-<p style="margin:0"><span class="m">f<sup>&minus;1</sup></span> means the <span data-fr="fonction réciproque">inverse function</span>. It does <strong>not</strong> mean <span class="m">1/f</span>. The same superscript means two different things depending on whether it sits on a <span data-fr="fonction">function</span> or on a number, and the course relies on you keeping them apart.</p>
+<p style="margin:0"><span class="m">f<sup>&minus;1</sup></span> means the <span data-fr="fonction réciproque">inverse function</span>. It does <strong>not</strong> mean <span class="m"><span class="frac"><span class="num">1</span><span class="den">f</span></span></span>. The same superscript means two different things depending on whether it sits on a <span data-fr="fonction">function</span> or on a number, and the course relies on you keeping them apart.</p>
+</div>
+
+<div class="box rule">
+<span class="lab">When does an inverse exist?</span>
+<p>Only when <span class="m">f</span> never sends two different <span data-fr="entrées">inputs</span> to the same <span data-fr="sortie">output</span>. Such a <span data-fr="fonction">function</span> is called <strong><span data-fr="injective">one-to-one</span></strong> (<em>injective</em>). Test it on the <span data-fr="graphique">graph</span>: if any <strong>horizontal</strong> line cuts the <span data-fr="courbe">curve</span> twice, <span class="m">f</span> is not <span data-fr="injective">one-to-one</span> and has no <span data-fr="réciproque">inverse</span> on that <span data-fr="domaine de définition">domain</span>.</p>
+<p style="margin-bottom:0"><span class="m">f(x) = x<sup>2</sup></span> fails, because <span class="m">f(&minus;3)</span> and <span class="m">f(3)</span> are both 9, and running it backwards from 9 cannot decide between <span class="m">&minus;3</span> and <span class="m">+3</span>. Restricting the <span data-fr="domaine de définition">domain</span> repairs it: on <span class="m">x &ge; 0</span> the <span data-fr="fonction">function</span> <span class="m">f(x) = x<sup>2</sup></span> is <span data-fr="injective">one-to-one</span> and its <span data-fr="réciproque">inverse</span> is <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span></span>. Every <span data-fr="fonction">function</span> you are asked to invert in this course is either always <span data-fr="croissante">increasing</span> or always <span data-fr="décroissante">decreasing</span> on its stated <span data-fr="domaine de définition">domain</span>, and that is exactly what makes it <span data-fr="injective">one-to-one</span>.</p>
 </div>
 
 <div class="box method">
-<span class="lab">Method: four steps that always work</span>
+<span class="lab">Method: four steps, once the function is one-to-one</span>
 <ol class="steps">
 <li>Write <span class="m">y = f(x)</span>.</li>
 <li><strong>Solve for x</strong> in terms of <span class="m">y</span>. This is the real work, and it is ordinary <span data-fr="équation">equation</span> <span data-fr="résolution">solving</span> from Part 0.</li>
@@ -1973,10 +2077,10 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="der">
 <span class="der-cap">Invert the demand function &nbsp;· the week 2 slide, step by step</span>
 <table class="dv"><tbody>
-<tr><td class="step">q = 5 000 000/(p + 1) &minus; 500 000</td><td class="why">start from the given relation</td></tr>
-<tr><td class="step">q + 500 000 = 5 000 000/(p + 1)</td><td class="why">move the constant across, isolating the <span data-fr="fraction">fraction</span></td></tr>
-<tr><td class="step">p + 1 = 5 000 000/(q + 500 000)</td><td class="why">the two outer <span data-fr="quantités">quantities</span> swap places, since both are non-zero</td></tr>
-<tr class="res"><td class="step">p = 5 000 000/(q + 500 000) &minus; 1</td><td class="why">this is P(q), the <span data-fr="prix">price</span> needed to sell q units</td></tr>
+<tr><td class="step">q = <span class="frac"><span class="num">5 000 000</span><span class="den">p + 1</span></span> &minus; 500 000</td><td class="why">start from the given relation</td></tr>
+<tr><td class="step">q + 500 000 = <span class="frac"><span class="num">5 000 000</span><span class="den">p + 1</span></span></td><td class="why">move the constant across, isolating the <span data-fr="fraction">fraction</span></td></tr>
+<tr><td class="step">p + 1 = <span class="frac"><span class="num">5 000 000</span><span class="den">q + 500 000</span></span></td><td class="why">the two outer <span data-fr="quantités">quantities</span> swap places, since both are non-zero</td></tr>
+<tr class="res"><td class="step">p = <span class="frac"><span class="num">5 000 000</span><span class="den">q + 500 000</span></span> &minus; 1</td><td class="why">this is P(q), the <span data-fr="prix">price</span> needed to sell q units</td></tr>
 </tbody></table>
 </div>
 
@@ -1987,8 +2091,8 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="der">
 <span class="der-cap">The check: P &#8728; Q must be the identity</span>
 <table class="dv"><tbody>
-<tr><td class="step">P(Q(p)) = 5 000 000 / (Q(p) + 500 000) &minus; 1</td><td class="why">substitute Q into P</td></tr>
-<tr><td class="step">= 5 000 000 / (5 000 000/(p + 1)) &minus; 1</td><td class="why">the &minus;500 000 and +500 000 cancel</td></tr>
+<tr><td class="step">P(Q(p)) = <span class="frac"><span class="num">5 000 000</span><span class="den">Q(p) + 500 000</span></span> &minus; 1</td><td class="why">substitute Q into P</td></tr>
+<tr><td class="step">= <span class="frac"><span class="num">5 000 000</span><span class="den"><span class="frac"><span class="num">5 000 000</span><span class="den">p + 1</span></span></span></span> &minus; 1</td><td class="why">the &minus;500 000 and +500 000 cancel</td></tr>
 <tr><td class="step">= (p + 1) &minus; 1</td><td class="why">dividing by a <span data-fr="fraction">fraction</span>: invert and multiply</td></tr>
 <tr class="res"><td class="step">= p</td><td class="why">confirmed for every p in [0 ; 9]</td></tr>
 </tbody></table>
@@ -1996,14 +2100,14 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 
 <h3>The linear case, in general</h3>
 <div class="prose">
-<p>If <span class="m">f(x) = ax + b</span> multiplies by <span class="m">a</span> then adds <span class="m">b</span>, its <span data-fr="réciproque">inverse</span> must subtract <span class="m">b</span> then divide by <span class="m">a</span>, in that order: <span class="m">f<sup>&minus;1</sup>(x) = (x &minus; b)/a</span>. Undoing a chain of operations means reversing both the operations and their order, exactly as taking off shoes and socks reverses putting them on.</p>
+<p>If <span class="m">f(x) = ax + b</span> multiplies by <span class="m">a</span> then adds <span class="m">b</span>, its <span data-fr="réciproque">inverse</span> must subtract <span class="m">b</span> then divide by <span class="m">a</span>, in that order: <span class="m">f<sup>&minus;1</sup>(x) = <span class="frac"><span class="num">x &minus; b</span><span class="den">a</span></span></span>. Undoing a chain of operations means reversing both the operations and their order, exactly as taking off shoes and socks reverses putting them on.</p>
 </div>
 
 <div class="box remember">
 <span class="lab">What to remember</span>
 <ul>
 <li>An <span data-fr="réciproque">inverse</span> undoes: <span class="m">f<sup>&minus;1</sup>(f(x)) = x</span>.</li>
-<li><span class="m">f<sup>&minus;1</sup></span> is not <span class="m">1/f</span>.</li>
+<li><span class="m">f<sup>&minus;1</sup></span> is not <span class="m"><span class="frac"><span class="num">1</span><span class="den">f</span></span></span>.</li>
 <li>Method: write <span class="m">y = f(x)</span>, solve for <span class="m">x</span>, rename, check by <span data-fr="composition">composing</span>.</li>
 <li><span data-fr="Domaine de définition">Domain</span> and <span data-fr="ensemble image">range</span> trade places.</li>
 <li>Reverse the operations <em>and</em> their order.</li>
@@ -2013,12 +2117,12 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <details class="practice">
 <summary><span class="pl">Practice</span> Two inverses</summary>
 <div class="pr-body">
-<p>1. <span class="m">p(q) = 3/(q &minus; 4) + 5</span>. Find the <span data-fr="réciproque">inverse</span>.<br>
-2. <span class="m">p(q) = 1/<span class="rt">&radic;<span>q + 3</span></span> + 2</span>. Find the <span data-fr="réciproque">inverse</span>.</p>
+<p>1. <span class="m">p(q) = <span class="frac"><span class="num">3</span><span class="den">q &minus; 4</span></span> + 5</span>. Find the <span data-fr="réciproque">inverse</span>.<br>
+2. <span class="m">p(q) = <span class="frac"><span class="num">1</span><span class="den"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q + 3</span></span></span></span> + 2</span>. Find the <span data-fr="réciproque">inverse</span>.</p>
 <details class="rev"><summary>Show the method and the checkpoints</summary><div class="rev-body">
 <p><strong>Method for both.</strong> Peel the outermost operation off first. Subtract the added constant, then deal with the <span data-fr="fraction">fraction</span>, then with the <span data-fr="racine">root</span> if there is one. Take it one layer at a time and never try to do two steps in your head.</p>
-<p><strong>1.</strong> <span class="m">p &minus; 5 = 3/(q &minus; 4)</span>, then <span class="m">q &minus; 4 = 3/(p &minus; 5)</span>. <span class="ck">q(p) = 3/(p &minus; 5) + 4</span>. Week 2 quiz, question 3.</p>
-<p><strong>2.</strong> <span class="m">p &minus; 2 = 1/<span class="rt">&radic;<span>q + 3</span></span></span>, so <span class="m"><span class="rt">&radic;<span>q + 3</span></span> = 1/(p &minus; 2)</span>. Square both sides: <span class="m">q + 3 = 1/(p &minus; 2)<sup>2</sup></span>. <span class="ck">q(p) = 1/(p &minus; 2)<sup>2</sup> &minus; 3</span>. Week 2 quiz, question 4.</p>
+<p><strong>1.</strong> <span class="m">p &minus; 5 = <span class="frac"><span class="num">3</span><span class="den">q &minus; 4</span></span></span>, then <span class="m">q &minus; 4 = <span class="frac"><span class="num">3</span><span class="den">p &minus; 5</span></span></span>. <span class="ck">q(p) = <span class="frac"><span class="num">3</span><span class="den">p &minus; 5</span></span> + 4</span>. Week 2 quiz, question 3.</p>
+<p><strong>2.</strong> <span class="m">p &minus; 2 = <span class="frac"><span class="num">1</span><span class="den"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q + 3</span></span></span></span></span>, so <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q + 3</span></span> = <span class="frac"><span class="num">1</span><span class="den">p &minus; 2</span></span></span>. Square both sides: <span class="m">q + 3 = <span class="frac"><span class="num">1</span><span class="den">(p &minus; 2)<sup>2</sup></span></span></span>. <span class="ck">q(p) = <span class="frac"><span class="num">1</span><span class="den">(p &minus; 2)<sup>2</sup></span></span> &minus; 3, for p &gt; 2</span>. The condition matters and is worth a mark: the <span data-fr="domaine de définition">domain</span> of an <span data-fr="réciproque">inverse</span> is the <span data-fr="ensemble image">range</span> of the original, and since <span class="m"><span class="frac"><span class="num">1</span><span class="den"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q + 3</span></span></span></span></span> is always strictly positive, <span class="m">p(q)</span> never drops to 2 or below. Week 2 quiz, question 4.</p>
 </div></details>
 </div>
 </details>
@@ -2031,11 +2135,11 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="cols">
 <div class="mini">
 <h5>Exponentials</h5>
-<p class="m" style="line-height:2.1">b<sup>x</sup> &middot; b<sup>y</sup> = b<sup>x+y</sup><br>b<sup>x</sup> / b<sup>y</sup> = b<sup>x&minus;y</sup><br>(b<sup>x</sup>)<sup>y</sup> = b<sup>xy</sup><br>(bc)<sup>x</sup> = b<sup>x</sup>c<sup>x</sup><br>(b/c)<sup>x</sup> = b<sup>x</sup>/c<sup>x</sup><br>b<sup>1</sup> = b, &nbsp; b<sup>0</sup> = 1<br>b<sup>&minus;x</sup> = 1/b<sup>x</sup></p>
+<p class="m" style="line-height:2.1">b<sup>x</sup> &middot; b<sup>y</sup> = b<sup>x+y</sup><br><span class="frac"><span class="num">b<sup>x</sup></span><span class="den">b<sup>y</sup></span></span> = b<sup>x&minus;y</sup><br>(b<sup>x</sup>)<sup>y</sup> = b<sup>xy</sup><br>(bc)<sup>x</sup> = b<sup>x</sup>c<sup>x</sup><br><span class="pr">(</span><span class="frac"><span class="num">b</span><span class="den">c</span></span><span class="pr">)</span><sup>x</sup> = <span class="frac"><span class="num">b<sup>x</sup></span><span class="den">c<sup>x</sup></span></span><br>b<sup>1</sup> = b, &nbsp; b<sup>0</sup> = 1<br>b<sup>&minus;x</sup> = <span class="frac"><span class="num">1</span><span class="den">b<sup>x</sup></span></span></p>
 </div>
 <div class="mini">
 <h5><span data-fr="Logarithmes">Logarithms</span></h5>
-<p class="m" style="line-height:2.1">log<sub>b</sub>(mn) = log<sub>b</sub> m + log<sub>b</sub> n<br>log<sub>b</sub>(m/n) = log<sub>b</sub> m &minus; log<sub>b</sub> n<br>log<sub>b</sub>(m<sup>r</sup>) = r &middot; log<sub>b</sub> m<br>log<sub>b</sub>(1/m) = &minus;log<sub>b</sub> m<br>log<sub>b</sub> 1 = 0<br>log<sub>b</sub> b = 1<br>log<sub>b</sub> m = log<sub>a</sub> m / log<sub>a</sub> b</p>
+<p class="m" style="line-height:2.1">log<sub>b</sub>(mn) = log<sub>b</sub> m + log<sub>b</sub> n<br>log<sub>b</sub><span class="pr">(</span><span class="frac"><span class="num">m</span><span class="den">n</span></span><span class="pr">)</span> = log<sub>b</sub> m &minus; log<sub>b</sub> n<br>log<sub>b</sub>(m<sup>r</sup>) = r &middot; log<sub>b</sub> m<br>log<sub>b</sub><span class="pr">(</span><span class="frac"><span class="num">1</span><span class="den">m</span></span><span class="pr">)</span> = &minus;log<sub>b</sub> m<br>log<sub>b</sub> 1 = 0<br>log<sub>b</sub> b = 1<br>log<sub>b</sub> m = <span class="frac"><span class="num">log<sub>a</sub> m</span><span class="den">log<sub>a</sub> b</span></span></p>
 </div>
 </div>
 
@@ -2052,7 +2156,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="der">
 <span class="der-cap">Break a logarithm into simpler pieces</span>
 <table class="dv"><tbody>
-<tr><td class="step">ln( x / (zw) )</td><td class="why">the expression</td></tr>
+<tr><td class="step">ln<span class="pr">(</span> <span class="frac"><span class="num">x</span><span class="den">zw</span></span> <span class="pr">)</span></td><td class="why">the expression</td></tr>
 <tr><td class="step">ln x &minus; ln(zw)</td><td class="why">a <span data-fr="quotient">quotient</span> becomes a <span data-fr="différence">difference</span></td></tr>
 <tr class="res"><td class="step">ln x &minus; ln z &minus; ln w</td><td class="why">a product becomes a <span data-fr="somme">sum</span>, and the minus applies to both</td></tr>
 </tbody></table>
@@ -2063,15 +2167,27 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <table class="dv"><tbody>
 <tr><td class="step">ln(e<sup>3x</sup>) = 3x</td><td class="why">ln undoes exp and reads off the <span data-fr="exposant">exponent</span></td></tr>
 <tr><td class="step">log 1 + log 1000 = 0 + 3 = 3</td><td class="why">log 1 = 0 in every <span data-fr="base">base</span>; 1000 = 10<sup>3</sup></td></tr>
-<tr><td class="step">log<sub>7</sub>(<sup>9</sup><span class="rt">&radic;<span>7<sup>8</sup></span></span>) = log<sub>7</sub>(7<sup>8/9</sup>) = 8/9</td><td class="why">convert the <span data-fr="racine">root</span> to a <span data-fr="puissance">power</span> first</td></tr>
-<tr><td class="step">log<sub>3</sub>(27/81) = log<sub>3</sub>(1/3) = &minus;1</td><td class="why">or as 3<sup>3</sup>/3<sup>4</sup> = 3<sup>&minus;1</sup></td></tr>
-<tr class="res"><td class="step">ln e + log(1/10) = 1 + (&minus;1) = 0</td><td class="why">each term evaluated in its own <span data-fr="base">base</span></td></tr>
+<tr><td class="step">log<sub>7</sub>(<sup>9</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>7<sup>8</sup></span></span>) = log<sub>7</sub><span class="pr">(</span>7<sup><span class="frac"><span class="num">8</span><span class="den">9</span></span></sup><span class="pr">)</span> = <span class="frac"><span class="num">8</span><span class="den">9</span></span></td><td class="why">convert the <span data-fr="racine">root</span> to a <span data-fr="puissance">power</span> first</td></tr>
+<tr><td class="step">log<sub>3</sub><span class="pr">(</span><span class="frac"><span class="num">27</span><span class="den">81</span></span><span class="pr">)</span> = log<sub>3</sub><span class="pr">(</span><span class="frac"><span class="num">1</span><span class="den">3</span></span><span class="pr">)</span> = &minus;1</td><td class="why">or as <span class="frac"><span class="num">3<sup>3</sup></span><span class="den">3<sup>4</sup></span></span> = 3<sup>&minus;1</sup></td></tr>
+<tr class="res"><td class="step">ln e + log<span class="pr">(</span><span class="frac"><span class="num">1</span><span class="den">10</span></span><span class="pr">)</span> = 1 + (&minus;1) = 0</td><td class="why">each term evaluated in its own <span data-fr="base">base</span></td></tr>
+</tbody></table>
+</div>
+
+<div class="der">
+<span class="der-cap">How long until the money doubles? &nbsp;· 10 000 CHF at 2%</span>
+<table class="dv"><tbody>
+<tr><td class="step">10000(1.02)<sup>n</sup> = 20000</td><td class="why">the question, written as an <span data-fr="équation">equation</span></td></tr>
+<tr><td class="step">(1.02)<sup>n</sup> = 2</td><td class="why">divide by the starting capital; the <span data-fr="inconnue">unknown</span> is stuck in the <span data-fr="exposant">exponent</span></td></tr>
+<tr><td class="step">ln((1.02)<sup>n</sup>) = ln 2</td><td class="why">take the <span data-fr="logarithme">logarithm</span> of both sides</td></tr>
+<tr><td class="step">n &middot; ln(1.02) = ln 2</td><td class="why">the <span data-fr="puissance">power</span> <span data-fr="règle">rule</span> brings n down in front: this is the whole point of <span data-fr="logarithmes">logarithms</span></td></tr>
+<tr class="res"><td class="step">n = <span class="frac"><span class="num">ln 2</span><span class="den">ln 1.02</span></span> &asymp; <span class="frac"><span class="num">0.6931</span><span class="den">0.01980</span></span> &asymp; 35 years</td><td class="why">and notice the shape: this is the change-of-base formula, n = log<sub>1.02</sub> 2, which exists because no calculator has a log<sub>1.02</sub> key</td></tr>
 </tbody></table>
 </div>
 
 <div class="box warn">
-<span class="lab">The three false rules</span>
-<p style="margin:0"><span class="m">ln(a + b) &ne; ln a + ln b</span>. <span class="m">ln(a) &middot; ln(b) &ne; ln(ab)</span>. <span class="m">ln(a)/ln(b) &ne; ln(a &minus; b)</span>. <span data-fr="Logarithmes">Logarithms</span> convert <em>multiplication into addition</em>, and there is no <span data-fr="règle">rule</span> at all for the <span data-fr="logarithme">logarithm</span> of a <span data-fr="somme">sum</span>. When you see a <span data-fr="somme">sum</span> inside a <span data-fr="logarithme">logarithm</span>, the only legal move is to factor it first.</p>
+<span class="lab">The false rules</span>
+<p style="margin:0"><span class="m">ln(a + b) &ne; ln a + ln b</span>. <span class="m">ln(a) &middot; ln(b) &ne; ln(ab)</span>. <span class="m"><span class="frac"><span class="num">ln(a)</span><span class="den">ln(b)</span></span> &ne; ln(a &minus; b)</span>. <span data-fr="Logarithmes">Logarithms</span> convert <em>multiplication into addition</em>, and there is no <span data-fr="règle">rule</span> at all for the <span data-fr="logarithme">logarithm</span> of a <span data-fr="somme">sum</span>. When you see a <span data-fr="somme">sum</span> inside a <span data-fr="logarithme">logarithm</span>, the only legal move is to factor it first.</p>
+<p style="margin:.7em 0 0">And a fourth, which is subtler: <span class="m">ln(x<sup>2</sup>)</span> is <strong>not</strong> always <span class="m">2 ln x</span>. The <span data-fr="puissance">power</span> <span data-fr="règle">rule</span> <span class="m">log<sub>b</sub>(m<sup>r</sup>) = r &middot; log<sub>b</sub> m</span> holds only when <span class="m">m &gt; 0</span>. For <span class="m">x &lt; 0</span> the <span data-fr="quantité">quantity</span> <span class="m">x<sup>2</sup></span> is positive but <span class="m">ln x</span> does not exist. Correctly, <span class="m">ln(x<sup>2</sup>) = 2 ln|x|</span>. Before pulling an <span data-fr="exposant">exponent</span> out in front, check that what is inside is strictly positive.</p>
 </div>
 
 <div class="box remember">
@@ -2090,11 +2206,11 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <p>1. Write <span class="m">ln(x<sup>3</sup>y)</span> in terms of <span class="m">ln x</span> and <span class="m">ln y</span>.<br>
 2. Simplify <span class="m">log<sub>2</sub> 8 + log<sub>2</sub> 4</span> in two different ways.<br>
 3. Solve <span class="m">e<sup>2x</sup> = 7</span>.<br>
-4. Compute <span class="m">exp((1/3) &middot; ln(log(10<sup>8</sup>)))</span>.</p>
+4. Compute <span class="m">exp(<span class="pr">(</span><span class="frac"><span class="num">1</span><span class="den">3</span></span><span class="pr">)</span> &middot; ln(log(10<sup>8</sup>)))</span>.</p>
 <details class="rev"><summary>Show answer</summary><div class="rev-body">
 <p>1. <span class="m">3 ln x + ln y</span>.<br>
 2. Either <span class="m">3 + 2 = 5</span>, or <span class="m">log<sub>2</sub>(8 &times; 4) = log<sub>2</sub> 32 = 5</span>. Both routes must agree.<br>
-3. <span class="m">2x = ln 7</span>, so <span class="m">x = (ln 7)/2 &asymp; 0.973</span>.<br>
+3. <span class="m">2x = ln 7</span>, so <span class="m">x = <span class="frac"><span class="num">ln 7</span><span class="den">2</span></span> &asymp; 0.973</span>.<br>
 4. Inside out: <span class="m">log(10<sup>8</sup>) = 8</span>; <span class="m">ln 8 = ln(2<sup>3</sup>) = 3 ln 2</span>; one third of that is <span class="m">ln 2</span>; and <span class="m">exp(ln 2) = 2</span>. This is the shape of week 1 quiz question 7, where the <span data-fr="exposant">exponent</span> is a cube and the three cancels against it. <span class="tag w">check the exponent</span> The printed <span data-fr="exposant">exponent</span> on that slide did not survive extraction cleanly here, so read it from the original; the method is the one shown, and the <span data-fr="réponse">answer</span> is whatever number is being cubed.</p>
 </div></details>
 </div>
@@ -2118,22 +2234,22 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <ul style="margin:.5em 0 0">
 <li><strong>1.5:</strong> the question defines <span class="m">g(x) = |x &minus; 2|</span>; the <span data-fr="réponse">answer</span> sheet solves <span class="m">g(x) = |x &minus; 3|</span>. The two give different numbers. Ask which one is intended.</li>
 <li><strong>1.7:</strong> the <span data-fr="réponse">answer</span> writes the multiplier as <span class="m">(0.085)<sup>t</sup></span>. It should be <span class="m">(0.985)<sup>t</sup></span>; the final figure of 334 485 is computed from 0.985 and is right.</li>
-<li><strong>1.10:</strong> the <span data-fr="offre">supply</span> <span data-fr="équation">equation</span> should be read as <span class="m">p = log(10 + q/2)</span>. With <span class="m">q = 1980</span> that gives <span class="m">log(1000) = 3</span>, which is the printed <span data-fr="réponse">answer</span>.</li>
+<li><strong>1.10:</strong> the <span data-fr="offre">supply</span> <span data-fr="équation">equation</span> should be read as <span class="m">p = log<span class="pr">(</span>10 + <span class="frac"><span class="num">q</span><span class="den">2</span></span><span class="pr">)</span></span>. With <span class="m">q = 1980</span> that gives <span class="m">log(1000) = 3</span>, which is the printed <span data-fr="réponse">answer</span>.</li>
 </ul>
 </div>
 
 <div class="ex-block">
-<div class="ex-head"><span class="num">1.1 · zero profit</span><h3><span data-fr="Recette">Revenue</span> 100<span class="rt">&radic;<span>q</span></span>, <span data-fr="coût variable">variable cost</span> 2 per unit, <span data-fr="coût fixe">fixed cost</span> 1200</h3></div>
+<div class="ex-head"><span class="num">1.1 · zero profit</span><h3><span data-fr="Recette">Revenue</span> 100<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q</span></span>, <span data-fr="coût variable">variable cost</span> 2 per unit, <span data-fr="coût fixe">fixed cost</span> 1200</h3></div>
 <div class="ex-body">
 <p>Find the values of <span class="m">q</span> for which total <span data-fr="recette">revenue</span> equals total <span data-fr="coût">cost</span>.</p>
 <div class="box method"><span class="lab">Method</span>
 <ol class="steps">
-<li>Write both sides: <span data-fr="recette">revenue</span> <span class="m">100<span class="rt">&radic;<span>q</span></span></span>, <span data-fr="coût">cost</span> <span class="m">2q + 1200</span>. Set them equal.</li>
+<li>Write both sides: <span data-fr="recette">revenue</span> <span class="m">100<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q</span></span></span>, <span data-fr="coût">cost</span> <span class="m">2q + 1200</span>. Set them equal.</li>
 <li>Divide through by 2 to make the numbers smaller before squaring. This is optional but halves the arithmetic.</li>
 <li>Square both sides to remove the <span data-fr="racine">root</span>. Squaring can introduce false <span data-fr="solutions">solutions</span>, so check at the end.</li>
-<li>You now have a quadratic. Move everything to one side and factor, looking for two numbers whose product is 360 000 and whose <span data-fr="somme">sum</span> is 1300.</li>
+<li>You now have a quadratic. Move everything to one side and factor. With <span class="m">b = &minus;1300</span> and <span class="m">c = +360 000</span> the two numbers are both negative: <span class="m">&minus;400</span> and <span class="m">&minus;900</span>.</li>
 </ol></div>
-<p><strong>Checkpoint.</strong> <span class="ck">q = 400 or q = 900</span>. Two <span data-fr="seuil de rentabilité">break-even</span> points, which is what a curved <span data-fr="recette">revenue</span> against a straight <span data-fr="coût">cost</span> gives you.</p>
+<p><strong>Checkpoint.</strong> <span class="ck">q = 400 or q = 900</span>. Two <span data-fr="seuil de rentabilité">break-even</span> points. Interpret them: <span data-fr="recette">revenue</span> exceeds <span data-fr="coût">cost</span> only <strong>between</strong> 400 and 900 units. Below 400 the <span data-fr="coût fixe">fixed cost</span> of 1 200 has not been recovered. Above 900 the linear <span data-fr="coût">cost</span> has overtaken the flattening <span data-fr="recette">revenue</span> <span data-fr="courbe">curve</span>, because <span class="m">100<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q</span></span></span> grows more and more slowly while <span class="m">2q</span> does not. A <span data-fr="courbe">curve</span> against a line can cross twice, once, or not at all, so always solve rather than assume.</p>
 </div>
 </div>
 
@@ -2162,7 +2278,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 </div>
 
 <div class="ex-block">
-<div class="ex-head"><span class="num">1.4 · a supply function</span><h3>p = q/48</h3></div>
+<div class="ex-head"><span class="num">1.4 · a supply function</span><h3>p = <span class="frac"><span class="num">q</span><span class="den">48</span></span></h3></div>
 <div class="ex-body">
 <p>How many pounds are supplied at 8.39 per pound, and at 19.49? What happens as the <span data-fr="prix">price</span> rises?</p>
 <div class="box method"><span class="lab">Method</span>
@@ -2206,7 +2322,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="ex-body">
 <div class="box method"><span class="lab">Method</span>
 <p style="margin:0">Ask the definition's question: what <span data-fr="puissance">power</span> of the <span data-fr="base">base</span> gives this number? Write the inside as a <span data-fr="puissance">power</span> of the <span data-fr="base">base</span> and read off the <span data-fr="exposant">exponent</span>. No calculator is needed or wanted.</p></div>
-<p><strong>Checkpoint.</strong> <span class="ck">2 and 1/2</span>.</p>
+<p><strong>Checkpoint.</strong> <span class="ck">2 and <span class="frac"><span class="num">1</span><span class="den">2</span></span></span>.</p>
 </div>
 </div>
 
@@ -2220,11 +2336,11 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 </div>
 
 <div class="ex-block">
-<div class="ex-head"><span class="num">1.10 · a supply equation with a logarithm</span><h3>p = log(10 + q/2), at q = 1980</h3></div>
+<div class="ex-head"><span class="num">1.10 · a supply equation with a logarithm</span><h3>p = log<span class="pr">(</span>10 + <span class="frac"><span class="num">q</span><span class="den">2</span></span><span class="pr">)</span>, at q = 1980</h3></div>
 <div class="ex-body">
 <div class="box method"><span class="lab">Method</span>
 <p style="margin:0">Work inside the <span data-fr="parenthèse">bracket</span> first, then take the base-10 <span data-fr="logarithme">logarithm</span>. The numbers are chosen so that the <span data-fr="parenthèse">bracket</span> lands on a clean <span data-fr="puissance">power</span> of ten, which is a hint that you have read the formula correctly.</p></div>
-<p><strong>Checkpoint.</strong> Inside: <span class="m">10 + 990 = 1000</span>, so <span class="ck">p = 3</span>. If the <span data-fr="parenthèse">bracket</span> gives 995 you have read the formula as <span class="m">(10 + q)/2</span>, and the <span data-fr="logarithme">logarithm</span> will not come out whole, which is the signal to re-read it.</p>
+<p><strong>Checkpoint.</strong> Inside: <span class="m">10 + 990 = 1000</span>, so <span class="ck">p = 3</span>. If the <span data-fr="parenthèse">bracket</span> gives 995 you have read the formula as <span class="m"><span class="frac"><span class="num">10 + q</span><span class="den">2</span></span></span>, and the <span data-fr="logarithme">logarithm</span> will not come out whole, which is the signal to re-read it.</p>
 </div>
 </div>
 </section>
@@ -2241,7 +2357,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="box method">
 <span class="lab">How to work an MCQ in this course</span>
 <ol class="steps">
-<li><strong>Solve it properly first, without looking at the options.</strong> The distractors are built from the usual errors, so a wrong method often lands exactly on a printed option and feels like confirmation.</li>
+<li><strong>Solve it properly first, without looking at the options.</strong> The wrong options, called <strong>distractors</strong>, are built from the usual errors, so a wrong method often lands exactly on a printed option and feels like confirmation.</li>
 <li>Only then match your <span data-fr="réponse">answer</span> to the list.</li>
 <li>If your <span data-fr="réponse">answer</span> is not there, do not force the nearest one. Check whether "none of the above" is the honest <span data-fr="réponse">answer</span>, because in this course it sometimes is.</li>
 <li>Watch the clock: 60 minutes for the <span data-fr="examen intermédiaire">midterm</span> means roughly two minutes a question, so a question that has taken five needs to be abandoned and revisited.</li>
@@ -2253,11 +2369,11 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <caption>The seven questions, the technique each tests, and where it is explained here</caption>
 <thead><tr><th class="n">Q</th><th>Question</th><th>Technique</th><th>Checkpoint</th></tr></thead>
 <tbody>
-<tr><td class="n">1</td><td class="m">(x + 4)/x = 1/5</td><td><span data-fr="Équation fractionnaire">Fractional equation</span>: state <span class="m">x &ne; 0</span>, cross-multiply</td><td class="m">x = &minus;5</td></tr>
-<tr><td class="n">2</td><td class="m">(x + 1)<sup>2</sup> + 4x = x<sup>2</sup> + 3</td><td>Expand the square; the <span class="m">x<sup>2</sup></span> cancels, leaving a <span data-fr="équation du premier degré">linear equation</span></td><td class="m">x = 1/3</td></tr>
+<tr><td class="n">1</td><td class="m"><span class="frac"><span class="num">x + 4</span><span class="den">x</span></span> = <span class="frac"><span class="num">1</span><span class="den">5</span></span></td><td><span data-fr="Équation fractionnaire">Fractional equation</span>: state <span class="m">x &ne; 0</span>, cross-multiply</td><td class="m">x = &minus;5</td></tr>
+<tr><td class="n">2</td><td class="m">(x + 1)<sup>2</sup> + 4x = x<sup>2</sup> + 3</td><td>Expand the square; the <span class="m">x<sup>2</sup></span> cancels, leaving a <span data-fr="équation du premier degré">linear equation</span></td><td class="m">x = <span class="frac"><span class="num">1</span><span class="den">3</span></span></td></tr>
 <tr><td class="n">3</td><td class="m">x<sup>3</sup> &minus; x = 0</td><td>Factor completely: <span class="m">x(x &minus; 1)(x + 1)</span></td><td class="m">x = 0, 1, &minus;1</td></tr>
-<tr><td class="n">4</td><td class="m">f(x) = 2x/(x + 3)</td><td><span data-fr="Domaine de définition">Domain</span>: set the <span data-fr="dénominateur">denominator</span> to zero</td><td class="m">&#8477;\{&minus;3}</td></tr>
-<tr><td class="n">5</td><td class="m">f(x) = 2x/(x<sup>2</sup> &minus; 9x + 14)</td><td><span data-fr="Domaine de définition">Domain</span>: factor the quadratic <span data-fr="dénominateur">denominator</span></td><td class="m">&#8477;\{2, 7}</td></tr>
+<tr><td class="n">4</td><td class="m">f(x) = <span class="frac"><span class="num">2x</span><span class="den">x + 3</span></span></td><td><span data-fr="Domaine de définition">Domain</span>: set the <span data-fr="dénominateur">denominator</span> to zero</td><td class="m">&#8477;\{&minus;3}</td></tr>
+<tr><td class="n">5</td><td class="m">f(x) = <span class="frac"><span class="num">2x</span><span class="den">x<sup>2</sup> &minus; 9x + 14</span></span></td><td><span data-fr="Domaine de définition">Domain</span>: factor the quadratic <span data-fr="dénominateur">denominator</span></td><td class="m">&#8477;\{2, 7}</td></tr>
 <tr><td class="n">6</td><td class="m">ln(e<sup>4</sup>) + log(0.001)</td><td>Each <span data-fr="logarithme">logarithm</span> in its own <span data-fr="base">base</span>; <span class="m">0.001 = 10<sup>&minus;3</sup></span></td><td class="m">1</td></tr>
 <tr><td class="n">7</td><td class="m">exp(&#8531; ln(log(10<sup>…</sup>)))</td><td>Work outward from the innermost <span data-fr="logarithme">logarithm</span> <span class="tag w">read the exponent from the slide</span></td><td>see below</td></tr>
 </tbody>
@@ -2306,7 +2422,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>Parts g and h are compositions. Substitute the entire inner <span data-fr="fonction">function</span> in <span data-fr="parenthèses">brackets</span>.</li>
 <li>Part i asks for a value: evaluate inside first, then outside.</li>
 </ol></div>
-<p><strong>Checkpoints.</strong> <span class="ck">(f+g)(x) = 2x<sup>2</sup> + x &minus; 1</span>; <span class="ck">(f&minus;g)(x) = &minus;x &minus; 1</span>; <span class="ck">(f&minus;g)(&minus;&frac12;) = &minus;&frac12;</span>; <span class="ck">(fg)(x) = x<sup>4</sup> + x<sup>3</sup> &minus; x<sup>2</sup> &minus; x</span>; <span class="ck">(f/g)(x) = (x &minus; 1)/x</span> for <span class="m">x &ne; 0, &minus;1</span>; <span class="ck">(f/g)(&minus;&frac12;) = 3</span>; <span class="ck">(f&#8728;g)(x) = (x<sup>2</sup> + x)<sup>2</sup> &minus; 1</span>; <span class="ck">(g&#8728;f)(x) = (x<sup>2</sup> &minus; 1)<sup>2</sup> + (x<sup>2</sup> &minus; 1)</span>; <span class="ck">(g&#8728;f)(&minus;3) = 72</span>.</p>
+<p><strong>Checkpoints.</strong> <span class="ck">(f+g)(x) = 2x<sup>2</sup> + x &minus; 1</span>; <span class="ck">(f&minus;g)(x) = &minus;x &minus; 1</span>; <span class="ck">(f&minus;g)(&minus;<span class="frac"><span class="num">1</span><span class="den">2</span></span>) = &minus;<span class="frac"><span class="num">1</span><span class="den">2</span></span></span>; <span class="ck">(fg)(x) = x<sup>4</sup> + x<sup>3</sup> &minus; x<sup>2</sup> &minus; x</span>; <span class="ck"><span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(x) = <span class="frac"><span class="num">x &minus; 1</span><span class="den">x</span></span></span> for <span class="m">x &ne; 0, &minus;1</span>; <span class="ck"><span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(&minus;<span class="frac"><span class="num">1</span><span class="den">2</span></span>) = 3</span>; <span class="ck">(f&#8728;g)(x) = (x<sup>2</sup> + x)<sup>2</sup> &minus; 1</span>; <span class="ck">(g&#8728;f)(x) = (x<sup>2</sup> &minus; 1)<sup>2</sup> + (x<sup>2</sup> &minus; 1)</span>; <span class="ck">(g&#8728;f)(&minus;3) = 72</span>.</p>
 </div>
 </div>
 
@@ -2327,7 +2443,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 </div>
 
 <div class="ex-block">
-<div class="ex-head"><span class="num">2.4 · output, employees and revenue</span><h3>q = f(m) = (40m &minus; m<sup>2</sup>)/4 and r = g(q) = 40q</h3></div>
+<div class="ex-head"><span class="num">2.4 · output, employees and revenue</span><h3>q = f(m) = <span class="frac"><span class="num">40m &minus; m<sup>2</sup></span><span class="den">4</span></span> and r = g(q) = 40q</h3></div>
 <div class="ex-body">
 <p>Find <span class="m">(g &#8728; f)(m)</span> and say what it describes.</p>
 <div class="box method"><span class="lab">Method</span><p style="margin:0">Substitute <span class="m">f</span> into <span class="m">g</span>, then simplify by cancelling the 4 into the 40. The second half of the question is worth as much as the first: name the composite in business language, with its units.</p></div>
@@ -2336,7 +2452,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 </div>
 
 <div class="ex-block">
-<div class="ex-head"><span class="num">2.5 · a supply function and its inverse</span><h3>p = q/48 for q &gt; 0</h3></div>
+<div class="ex-head"><span class="num">2.5 · a supply function and its inverse</span><h3>p = <span class="frac"><span class="num">q</span><span class="den">48</span></span> for q &gt; 0</h3></div>
 <div class="ex-body">
 <div class="box method"><span class="lab">Method</span><p style="margin:0">Solve for <span class="m">q</span>, then demonstrate the relationship by <span data-fr="composition">composing</span> in both directions and obtaining the identity.</p></div>
 <p><strong>Checkpoint.</strong> <span class="ck">q = 48p</span>, and both <span class="m">p(q(p)) = p</span> and <span class="m">q(p(q)) = q</span>. This is the same pair as week 1 <span data-fr="devoirs">homework</span> 1.4, now named as an <span data-fr="réciproque">inverse</span>.</p>
@@ -2369,36 +2485,36 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="ex-head"><span class="num">2.9 · intercepts of implicit equations</span><h3>Three <span data-fr="équations">equations</span> that are not written as y = f(x)</h3></div>
 <div class="ex-body">
 <div class="box method"><span class="lab">Method</span><p style="margin:0">The technique does not change just because <span class="m">y</span> is not alone: substitute <span class="m">x = 0</span> and solve for <span class="m">y</span>, then substitute <span class="m">y = 0</span> and solve for <span class="m">x</span>. Some of these have two <span data-fr="zéros de la fonction">x-intercepts</span>, some have one point only.</p></div>
-<p><strong>Checkpoints.</strong> For <span class="m">x<sup>2</sup> + xy + y<sup>2</sup> = 0</span>: both substitutions give <span class="ck">(0, 0)</span> and nothing else. For <span class="m">9x<sup>2</sup> + 4y<sup>2</sup> = 25</span>: <span class="ck">y = &plusmn;5/2</span> and <span class="ck">x = &plusmn;5/3</span>, four <span data-fr="intersections avec les axes">intercepts</span>, because the <span data-fr="courbe">curve</span> is an ellipse. <span class="tag w">check the original</span> The first <span data-fr="équation">equation</span> of the three did not extract legibly into these notes; read it from the <span data-fr="devoirs">homework</span> PDF and apply the same two substitutions.</p>
+<p><strong>Checkpoints.</strong> For <span class="m">x<sup>2</sup> + xy + y<sup>2</sup> = 0</span>: both substitutions give <span class="ck">(0, 0)</span> and nothing else. For <span class="m">9x<sup>2</sup> + 4y<sup>2</sup> = 25</span>: <span class="ck">y = &plusmn;<span class="frac"><span class="num">5</span><span class="den">2</span></span></span> and <span class="ck">x = &plusmn;<span class="frac"><span class="num">5</span><span class="den">3</span></span></span>, four <span data-fr="intersections avec les axes">intercepts</span>, because the <span data-fr="courbe">curve</span> is an ellipse. <span class="tag w">check the original</span> The first <span data-fr="équation">equation</span> of the three did not extract legibly into these notes; read it from the <span data-fr="devoirs">homework</span> PDF and apply the same two substitutions.</p>
 </div>
 </div>
 
 <div class="ex-block">
-<div class="ex-head"><span class="num">2.10 · price, quantity and work hours</span><h3>p = 1/(q<sup>2</sup> + 2) + 1 and q = <span class="rt">&radic;<span>w + 1</span></span></h3></div>
+<div class="ex-head"><span class="num">2.10 · price, quantity and work hours</span><h3>p = <span class="frac"><span class="num">1</span><span class="den">q<sup>2</sup> + 2</span></span> + 1 and q = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>w + 1</span></span></h3></div>
 <div class="ex-body">
 <div class="box method"><span class="lab">Method</span>
 <ol class="steps">
 <li>For part a, compose. The useful observation is that <span class="m">q</span> appears only as <span class="m">q<sup>2</sup></span>, and squaring the <span data-fr="racine">root</span> removes it cleanly: <span class="m">q<sup>2</sup> = w + 1</span>.</li>
 <li>For part b, invert the composite: subtract the 1, take the reciprocal, then subtract the 3.</li>
 </ol></div>
-<p><strong>Checkpoints.</strong> (a) <span class="ck">p(w) = 1/(w + 3) + 1</span>. (b) <span class="ck">w(p) = 1/(p &minus; 1) &minus; 3</span>. If part a gives you something with a <span class="m"><span class="rt">&radic;<span>w</span></span></span> still in it, you have read the second relation as <span class="m"><span class="rt">&radic;<span>w</span></span> + 1</span> rather than <span class="m"><span class="rt">&radic;<span>w + 1</span></span></span>; the clean cancellation is the <span data-fr="signe">sign</span> that the second reading is intended.</p>
+<p><strong>Checkpoints.</strong> (a) <span class="ck">p(w) = <span class="frac"><span class="num">1</span><span class="den">w + 3</span></span> + 1</span>. (b) <span class="ck">w(p) = <span class="frac"><span class="num">1</span><span class="den">p &minus; 1</span></span> &minus; 3</span>. If part a gives you something with a <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>w</span></span></span> still in it, you have read the second relation as <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>w</span></span> + 1</span> rather than <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>w + 1</span></span></span>; the clean cancellation is the <span data-fr="signe">sign</span> that the second reading is intended.</p>
 </div>
 </div>
 
 <div class="ex-block">
-<div class="ex-head"><span class="num">2.11 · a demand function</span><h3>P(q) = 2<span class="rt">&radic;<span>q + 1</span></span> + 3 for q &gt; 0</h3></div>
+<div class="ex-head"><span class="num">2.11 · a demand function</span><h3>P(q) = 2<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q + 1</span></span> + 3 for q &gt; 0</h3></div>
 <div class="ex-body">
 <div class="box method"><span class="lab">Method</span>
 <ol class="steps">
 <li>Peel the layers in reverse: subtract 3, divide by 2, square, subtract 1.</li>
 <li>For part b, substitute <span class="m">Q(p)</span> into <span class="m">P</span> and simplify until only <span class="m">p</span> remains. The <span data-fr="racine carrée">square root</span> and the square must annihilate each other.</li>
 </ol></div>
-<p><strong>Checkpoints.</strong> (a) <span class="ck">Q(p) = (p &minus; 3)<sup>2</sup>/4 &minus; 1</span>. (b) substituting gives <span class="m">2<span class="rt">&radic;<span>(p &minus; 3)<sup>2</sup>/4</span></span> + 3 = 2 &middot; (p &minus; 3)/2 + 3 = p</span>, <span class="ck">the identity</span>.</p>
+<p><strong>Checkpoints.</strong> (a) <span class="ck">Q(p) = <span class="frac"><span class="num">(p &minus; 3)<sup>2</sup></span><span class="den">4</span></span> &minus; 1</span>. (b) substituting gives <span class="m">2<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span><span class="frac"><span class="num">(p &minus; 3)<sup>2</sup></span><span class="den">4</span></span></span></span> + 3 = 2 &middot; <span class="frac"><span class="num">|p &minus; 3|</span><span class="den">2</span></span> + 3</span>, and since <span class="m">P(q) &ge; 3</span> for every <span class="m">q &gt; 0</span> we know <span class="m">p &ge; 3</span>, so <span class="m">|p &minus; 3| = p &minus; 3</span> and the whole thing collapses to <span class="ck">p</span>, <span class="ck">the identity</span>. Writing the <span data-fr="valeur absolue">absolute value</span> is not pedantry: <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>A<sup>2</sup></span></span> = |A|</span> in general, and the exam expects the justification of the <span data-fr="signe">sign</span>.</p>
 </div>
 </div>
 
 <div class="ex-block">
-<div class="ex-head"><span class="num">2.12 · MIC-ADO</span><h3>Meals = 1000/(restaurants + 1) + 100, <span data-fr="Recette">Revenue</span> = Meals<sup>2</sup> &minus; 500</h3></div>
+<div class="ex-head"><span class="num">2.12 · MIC-ADO</span><h3>Meals = <span class="frac"><span class="num">1000</span><span class="den">restaurants + 1</span></span> + 100, <span data-fr="Recette">Revenue</span> = Meals<sup>2</sup> &minus; 500</h3></div>
 <div class="ex-body">
 <p>Express the number of nearby restaurants as a <span data-fr="fonction">function</span> of <span data-fr="recette">revenue</span>, then find it when <span data-fr="recette">revenue</span> is 89 500.</p>
 <div class="box method"><span class="lab">Method</span>
@@ -2407,7 +2523,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>Then undo the inner one: subtract 100, and invert the <span data-fr="fraction">fraction</span> to free the number of restaurants.</li>
 <li>For part b, substitute and keep an eye out for the clean numbers, which confirm the algebra.</li>
 </ol></div>
-<p><strong>Checkpoints.</strong> (a) <span class="ck">R = 1000/(<span class="rt">&radic;<span>Revenue + 500</span></span> &minus; 100) &minus; 1</span>. (b) <span class="m"><span class="rt">&radic;<span>90 000</span></span> = 300</span>, then <span class="m">1000/200 = 5</span>, so <span class="ck">4 restaurants</span>. Verify forwards: 4 restaurants give 300 meals, and <span class="m">300<sup>2</sup> &minus; 500 = 89 500</span>. That round trip is the check to run on every <span data-fr="réciproque">inverse</span> question.</p>
+<p><strong>Checkpoints.</strong> (a) <span class="ck">R = <span class="frac"><span class="num">1000</span><span class="den"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>Revenue + 500</span></span> &minus; 100</span></span> &minus; 1</span>. (b) <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>90 000</span></span> = 300</span>, then <span class="m"><span class="frac"><span class="num">1000</span><span class="den">200</span></span> = 5</span>, so <span class="ck">4 restaurants</span>. Verify forwards: 4 restaurants give 300 meals, and <span class="m">300<sup>2</sup> &minus; 500 = 89 500</span>. That round trip is the check to run on every <span data-fr="réciproque">inverse</span> question.</p>
 </div>
 </div>
 </section>
@@ -2428,8 +2544,8 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <tbody>
 <tr><td class="n">1</td><td class="m">(f &minus; g + h)(3)</td><td>Evaluate each <span data-fr="fonction">function</span> at 3, then combine the numbers</td><td class="m">&minus;15</td></tr>
 <tr><td class="n">2</td><td class="m">(g &#8728; f)(x)</td><td>Substitute the whole of <span class="m">f</span> into <span class="m">g</span>, in <span data-fr="parenthèses">brackets</span></td><td class="m">&minus;5x<sup>2</sup> &minus; 5x + 3</td></tr>
-<tr><td class="n">3</td><td class="m">p(q) = 3/(q &minus; 4) + 5</td><td><span data-fr="Réciproque">Inverse</span>: subtract, then swap the <span data-fr="fraction">fraction</span></td><td class="m">3/(p &minus; 5) + 4</td></tr>
-<tr><td class="n">4</td><td class="m">p(q) = 1/<span class="rt">&radic;<span>q + 3</span></span> + 2</td><td><span data-fr="Réciproque">Inverse</span>: subtract, reciprocal, square, subtract</td><td class="m">1/(p &minus; 2)<sup>2</sup> &minus; 3</td></tr>
+<tr><td class="n">3</td><td class="m">p(q) = <span class="frac"><span class="num">3</span><span class="den">q &minus; 4</span></span> + 5</td><td><span data-fr="Réciproque">Inverse</span>: subtract, then swap the <span data-fr="fraction">fraction</span></td><td class="m"><span class="frac"><span class="num">3</span><span class="den">p &minus; 5</span></span> + 4</td></tr>
+<tr><td class="n">4</td><td class="m">p(q) = <span class="frac"><span class="num">1</span><span class="den"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>q + 3</span></span></span></span> + 2</td><td><span data-fr="Réciproque">Inverse</span>: subtract, reciprocal, square, subtract</td><td class="m"><span class="frac"><span class="num">1</span><span class="den">p &minus; 2</span></span><sup>2</sup> &minus; 3</td></tr>
 </tbody>
 </table>
 </div>
@@ -2459,8 +2575,8 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <table class="data">
 <caption><span data-fr="Résolution">Solving</span> <span data-fr="équations">equations</span></caption>
 <tbody>
-<tr><td class="lead">Linear</td><td class="m">ax + b = 0 &rarr; x = &minus;b/a, for a &ne; 0</td></tr>
-<tr><td class="lead">Quadratic</td><td class="m">&Delta; = b<sup>2</sup> &minus; 4ac; if &Delta; &gt; 0, x = (&minus;b &plusmn; <span class="rt">&radic;<span>&Delta;</span></span>)/2a; if &Delta; = 0, x = &minus;b/2a; if &Delta; &lt; 0, none in &#8477;</td></tr>
+<tr><td class="lead">Linear</td><td class="m">ax + b = 0 &rarr; x = &minus;<span class="frac"><span class="num">b</span><span class="den">a</span></span>, for a &ne; 0</td></tr>
+<tr><td class="lead">Quadratic</td><td class="m">&Delta; = b<sup>2</sup> &minus; 4ac; if &Delta; &gt; 0, x = <span class="frac"><span class="num">&minus;b &plusmn; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span>; if &Delta; = 0, x = &minus;<span class="frac"><span class="num">b</span><span class="den">2a</span></span>; if &Delta; &lt; 0, none in &#8477;</td></tr>
 <tr><td class="lead">Fractional</td><td>state the excluded values, cross-multiply, solve, discard excluded <span data-fr="solutions">solutions</span></td></tr>
 <tr><td class="lead">Systems</td><td><span data-fr="élimination">elimination</span> (make <span data-fr="coefficients">coefficients</span> opposite and add) or <span data-fr="substitution">substitution</span> (isolate and insert)</td></tr>
 <tr><td class="lead"><span data-fr="Inéquations">Inequalities</span></td><td>as for <span data-fr="équations">equations</span>, but reverse the <span data-fr="signe">sign</span> when multiplying or dividing by a negative</td></tr>
@@ -2482,9 +2598,10 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <table class="data">
 <caption><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></caption>
 <tbody>
-<tr><td class="m">x<sup>m</sup>x<sup>n</sup> = x<sup>m+n</sup></td><td class="m">x<sup>m</sup>/x<sup>n</sup> = x<sup>m&minus;n</sup></td><td class="m">(x<sup>m</sup>)<sup>n</sup> = x<sup>mn</sup></td></tr>
-<tr><td class="m">(xy)<sup>m</sup> = x<sup>m</sup>y<sup>m</sup></td><td class="m">x<sup>0</sup> = 1</td><td class="m">x<sup>&minus;m</sup> = 1/x<sup>m</sup></td></tr>
-<tr><td class="m"><span class="rt">&radic;<span>x</span></span> = x<sup>1/2</sup></td><td class="m"><sup>n</sup><span class="rt">&radic;<span>x<sup>m</sup></span></span> = x<sup>m/n</sup></td><td></td></tr>
+<tr><td class="m">x<sup>m</sup>x<sup>n</sup> = x<sup>m+n</sup></td><td class="m"><span class="frac"><span class="num">x<sup>m</sup></span><span class="den">x<sup>n</sup></span></span> = x<sup>m&minus;n</sup></td><td class="m">(x<sup>m</sup>)<sup>n</sup> = x<sup>mn</sup></td></tr>
+<tr><td class="m">(xy)<sup>m</sup> = x<sup>m</sup>y<sup>m</sup></td><td class="m">x<sup>0</sup> = 1, for x &ne; 0</td><td class="m">x<sup>&minus;m</sup> = <span class="frac"><span class="num">1</span><span class="den">x<sup>m</sup></span></span>, for x &ne; 0</td></tr>
+<tr><td class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x<sup>2</sup></span></span> = |x|, not x</td><td class="m">squaring an inequality is not allowed</td><td></td></tr>
+<tr><td class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x</span></span> = x<sup><span class="frac"><span class="num">1</span><span class="den">2</span></span></sup></td><td class="m"><sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x<sup>m</sup></span></span> = x<sup><span class="frac"><span class="num">m</span><span class="den">n</span></span></sup></td><td></td></tr>
 </tbody>
 </table>
 </div>
@@ -2493,12 +2610,15 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <table class="data">
 <caption><span data-fr="Fonctions">Functions</span></caption>
 <tbody>
-<tr><td class="lead"><span data-fr="Domaine de définition">Domain</span></td><td>no zero <span data-fr="dénominateur">denominator</span>, no negative under an even <span data-fr="racine">root</span>, nothing &le; 0 inside a <span data-fr="logarithme">logarithm</span></td></tr>
-<tr><td class="lead">Combining</td><td class="m">(f &plusmn; g)(x) = f(x) &plusmn; g(x); (fg)(x) = f(x)g(x); (f/g)(x) = f(x)/g(x), g(x) &ne; 0</td></tr>
-<tr><td class="lead"><span data-fr="Composition">Composition</span></td><td class="m">(g &#8728; f)(x) = g(f(x))</td>&nbsp;</tr>
-<tr><td class="lead"><span data-fr="Réciproque">Inverse</span></td><td class="m">f(f<sup>&minus;1</sup>(x)) = f<sup>&minus;1</sup>(f(x)) = x</td></tr>
+<tr><td class="lead"><span data-fr="Domaine de définition">Domain</span></td><td>no zero <span data-fr="dénominateur">denominator</span>, no negative under an even <span data-fr="racine">root</span>, nothing &le; 0 inside a <span data-fr="logarithme">logarithm</span>, and a <span data-fr="racine">root</span> in a <span data-fr="dénominateur">denominator</span> must be strictly positive</td></tr>
+<tr><td class="lead">Combining</td><td class="m">(f &plusmn; g)(x) = f(x) &plusmn; g(x); (fg)(x) = f(x)g(x); <span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(x) = <span class="frac"><span class="num">f(x)</span><span class="den">g(x)</span></span>, g(x) &ne; 0</td></tr>
+<tr><td class="lead"><span data-fr="Composition">Composition</span></td><td class="m">(g &#8728; f)(x) = g(f(x)), read "g after f"; the right-hand function acts first; g &#8728; f &ne; f &#8728; g</td></tr>
+<tr><td class="lead"><span data-fr="Réciproque">Inverse</span></td><td class="m">f(f<sup>&minus;1</sup>(x)) = f<sup>&minus;1</sup>(f(x)) = x; exists only if f is one-to-one</td></tr>
 <tr><td class="lead"><span data-fr="Intersections avec les axes">Intercepts</span></td><td class="m">x = 0 for the y-intercept; y = 0 for the x-intercept</td></tr>
-<tr><td class="lead"><span data-fr="Pente">Slope</span></td><td class="m">m = (y<sub>2</sub> &minus; y<sub>1</sub>)/(x<sub>2</sub> &minus; x<sub>1</sub>), and y = mx + b</td></tr>
+<tr><td class="lead"><span data-fr="Pente">Slope</span></td><td class="m">m = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span>, and y = mx + b (also written f(x) = ax + b)</td></tr>
+<tr><td class="lead"><span data-fr="Parabole">Parabola</span></td><td class="m">f(x) = ax<sup>2</sup> + bx + c; a &gt; 0 opens up, a &lt; 0 opens down; vertex at x = &minus;<span class="frac"><span class="num">b</span><span class="den">2a</span></span></td></tr>
+<tr><td class="lead"><span data-fr="Valeur absolue">Absolute value</span></td><td class="m">|x| = x if x &ge; 0, |x| = &minus;x if x &lt; 0; |A| = k means A = &plusmn;k; |A| &lt; k means &minus;k &lt; A &lt; k; |A| &gt; k means A &gt; k or A &lt; &minus;k</td></tr>
+<tr><td class="lead">Case-defined</td><td>pick the branch whose condition the <span data-fr="entrée">input</span> satisfies, then compute; check which branch owns the boundary</td></tr>
 </tbody>
 </table>
 </div>
@@ -2508,10 +2628,10 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <caption>Exponentials and <span data-fr="logarithmes">logarithms</span></caption>
 <tbody>
 <tr><td class="m">log<sub>b</sub> x = y &hArr; b<sup>y</sup> = x</td><td class="m">log = log<sub>10</sub>, ln = log<sub>e</sub></td></tr>
-<tr><td class="m">log<sub>b</sub>(mn) = log<sub>b</sub> m + log<sub>b</sub> n</td><td class="m">log<sub>b</sub>(m/n) = log<sub>b</sub> m &minus; log<sub>b</sub> n</td></tr>
-<tr><td class="m">log<sub>b</sub>(m<sup>r</sup>) = r log<sub>b</sub> m</td><td class="m">log<sub>b</sub> 1 = 0, log<sub>b</sub> b = 1</td></tr>
+<tr><td class="m">log<sub>b</sub>(mn) = log<sub>b</sub> m + log<sub>b</sub> n</td><td class="m">log<sub>b</sub><span class="pr">(</span><span class="frac"><span class="num">m</span><span class="den">n</span></span><span class="pr">)</span> = log<sub>b</sub> m &minus; log<sub>b</sub> n</td></tr>
+<tr><td class="m">log<sub>b</sub>(m<sup>r</sup>) = r log<sub>b</sub> m, for m &gt; 0</td><td class="m">log<sub>b</sub> 1 = 0, log<sub>b</sub> b = 1</td></tr>
 <tr><td class="m">exp(ln u) = u, ln(exp x) = x</td><td class="m">a<sup>x</sup> = exp(x ln a), a &gt; 0</td></tr>
-<tr><td class="m">log<sub>b</sub> m = log<sub>a</sub> m / log<sub>a</sub> b</td><td class="m">e &asymp; 2.71828</td></tr>
+<tr><td class="m">log<sub>b</sub> m = <span class="frac"><span class="num">log<sub>a</sub> m</span><span class="den">log<sub>a</sub> b</span></span></td><td class="m">e &asymp; 2.71828</td></tr>
 </tbody>
 </table>
 </div>
@@ -2523,6 +2643,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <tr><td class="m">Cost = fixed + variable &times; quantity</td><td class="m">Revenue = price &times; quantity</td></tr>
 <tr><td class="m">Profit = revenue &minus; cost</td><td class="m">break-even: revenue = cost</td></tr>
 <tr><td class="m">S = P(1 + r)<sup>n</sup></td><td class="m">decline: P(1 &minus; r)<sup>n</sup></td></tr>
+<tr><td class="m">percentage change = <span class="frac"><span class="num">new &minus; old</span><span class="den">old</span></span></td><td class="m">doubling time: n = <span class="frac"><span class="num">ln 2</span><span class="den">ln(1 + r)</span></span></td></tr>
 </tbody>
 </table>
 </div>
@@ -2530,7 +2651,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 
 <section id="sheets">
 <h2 class="sec">Your two sheets</h2>
-<p class="sec-kicker">Four sides of notes, allowed in every exam of the module. Most students waste them.</p>
+<p class="sec-kicker">Four sides of notes, allowed in every exam of the module. They are worth building deliberately.</p>
 
 <div class="box rule">
 <span class="lab">What the rules actually permit</span>
@@ -2569,7 +2690,7 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <div class="mini"><h5>4 · Forgetting the <span data-fr="domaine de définition">domain</span></h5><p><span data-fr="Simplification">Simplifying</span> hides an excluded value that was there in the original.</p><p style="margin-top:6px"><strong>Habit:</strong> write the exclusions from the given expression, before <span data-fr="simplification">simplifying</span> anything.</p></div>
 <div class="mini"><h5>5 · <span data-fr="Composition">Composition</span> in the wrong order</h5><p><span class="m">g &#8728; f</span> is not <span class="m">f &#8728; g</span>.</p><p style="margin-top:6px"><strong>Habit:</strong> say "g after f" aloud, and substitute the right-hand <span data-fr="fonction">function</span> first.</p></div>
 <div class="mini"><h5>6 · Substituting without <span data-fr="parenthèses">brackets</span></h5><p><span class="m">(2p + 1)<sup>2</sup></span>, never <span class="m">2p<sup>2</sup> + 1</span>.</p><p style="margin-top:6px"><strong>Habit:</strong> write the <span data-fr="parenthèse">bracket</span> before you write anything inside it.</p></div>
-<div class="mini"><h5>7 · Reading f<sup>&minus;1</sup> as 1/f</h5><p>They are different objects.</p><p style="margin-top:6px"><strong>Habit:</strong> check your <span data-fr="réciproque">inverse</span> by <span data-fr="composition">composing</span>; if it does not collapse to <span class="m">x</span>, it is wrong.</p></div>
+<div class="mini"><h5>7 · Reading f<sup>&minus;1</sup> as <span class="frac"><span class="num">1</span><span class="den">f</span></span></h5><p>They are different objects.</p><p style="margin-top:6px"><strong>Habit:</strong> check your <span data-fr="réciproque">inverse</span> by <span data-fr="composition">composing</span>; if it does not collapse to <span class="m">x</span>, it is wrong.</p></div>
 <div class="mini"><h5>8 · The minus in a subtraction of <span data-fr="fonctions">functions</span></h5><p>It applies to every term of the second <span data-fr="fonction">function</span>.</p><p style="margin-top:6px"><strong>Habit:</strong> write <span class="m">f(x) &minus; [g(x)]</span> with the <span data-fr="parenthèse">bracket</span>, then distribute.</p></div>
 <div class="mini"><h5>9 · log instead of ln</h5><p>Two different keys, two different <span data-fr="réponses">answers</span>, no warning.</p><p style="margin-top:6px"><strong>Habit:</strong> circle which one the question uses before reaching for the calculator.</p></div>
 <div class="mini"><h5>10 · <span data-fr="Pourcentages">Percentages</span> added rather than compounded</h5><p>Up 20% then down 20% is a 4% loss.</p><p style="margin-top:6px"><strong>Habit:</strong> convert every <span data-fr="pourcentage">percentage</span> to a multiplier and multiply them.</p></div>

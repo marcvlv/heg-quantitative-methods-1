@@ -20,6 +20,10 @@ Study notes for **Quantitative Methods I** (Haute école de gestion de Genève, 
 - **An exam kit:** a formula sheet, a plan for the two sheets you are allowed to bring, twelve places where marks are lost, an English-French glossary searchable in both languages, and a map of the rest of the fall and spring semesters.
 - A foldable table of contents, a light and dark switch, and practice blocks folded by default. Dotted terms in the text switch to French when clicked.
 
+## How the mathematics is set
+
+Every division is a stacked fraction, numerator above the bar and denominator below, the way it is written by hand and on the board. Square roots carry a radical that stretches over whatever it covers, and the brackets around a fraction grow with it. No mathematics is written with a slash.
+
 ## How solutions work here
 
 The **official answer sheets** and the **"Solving homework" videos** on Cyberlearn are the source of truth. This document deliberately does not reproduce the full worked solutions. It gives the method, so you can find the path yourself, and a checkpoint, so you know whether you arrived. That follows the course's own instruction on using AI: ask for hints and for the path, not for the answer.
