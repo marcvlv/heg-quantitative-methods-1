@@ -18,9 +18,16 @@ Study notes for **Quantitative Methods I** (Haute école de gestion de Genève, 
 - **Weeks 1 and 2 in full.** What a function is, domain and range, the function library, graphs, exponentials and e, logarithms, then combining, intercepts, composition, inverses and the exponential and logarithm rules.
 - **Every homework and quiz question** from weeks 1 and 2, each with a method and a checkpoint your answer must match.
 - **An exam kit:** a formula sheet, a plan for the two sheets you are allowed to bring, how marks are earned in an open-question exam, twelve places where marks are lost, an English-French glossary searchable in both languages, and a week-by-week map of the rest of the year with the real dates.
+- **An interactive exercise after every lesson.** Twenty-three of them, 178 questions in all. One question at a time, multiple choice or a typed answer, marked immediately, with hints on demand and the full working once you have tried. Questions and options are reshuffled on every run, and the contents rail shows a ring for each topic: hollow if untouched, amber under 80 per cent, filled once you pass.
 - **A mock midterm**: twenty multiple-choice questions in the format of the week 9 paper, timed at 60 minutes, with the reasoning for every option.
 - **A mock exam paper**: five open questions worth 100 marks in the format of the 120-minute semester exam, with full solutions and a mark scheme showing where each mark is awarded.
 - A foldable table of contents, a light and dark switch, and practice blocks folded by default. Dotted terms in the text switch to French when clicked.
+
+## How the exercises work
+
+Each topic is a lesson followed by an exercise, the way Khan Academy is built. Work the question on paper, answer it, and you are told at once whether you are right. A wrong answer gets a second attempt before the working appears. Hint one points at the method, hint two does the first step, and neither gives the answer away. The score counts only the questions you got right first time.
+
+Progress is kept in your own browser and nowhere else. Nothing is uploaded, and clearing your browser data clears it.
 
 ## How the mathematics is set
 
