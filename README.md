@@ -17,7 +17,9 @@ Study notes for **Quantitative Methods I** (Haute école de gestion de Genève, 
 - **Part 0, levelling up.** Thirteen sections of pre-university mathematics: notation and sets, fractions, powers and roots, expanding and factoring, linear and quadratic and fractional equations, systems, inequalities and absolute value, the plane and straight lines, percentages and growth, and how to drive the calculator. Each one is the rule, the method, a worked derivation, the usual trap and a practice question.
 - **Weeks 1 and 2 in full.** What a function is, domain and range, the function library, graphs, exponentials and e, logarithms, then combining, intercepts, composition, inverses and the exponential and logarithm rules.
 - **Every homework and quiz question** from weeks 1 and 2, each with a method and a checkpoint your answer must match.
-- **An exam kit:** a formula sheet, a plan for the two sheets you are allowed to bring, twelve places where marks are lost, an English-French glossary searchable in both languages, and a map of the rest of the fall and spring semesters.
+- **An exam kit:** a formula sheet, a plan for the two sheets you are allowed to bring, how marks are earned in an open-question exam, twelve places where marks are lost, an English-French glossary searchable in both languages, and a week-by-week map of the rest of the year with the real dates.
+- **A mock midterm**: twenty multiple-choice questions in the format of the week 9 paper, timed at 60 minutes, with the reasoning for every option.
+- **A mock exam paper**: five open questions worth 100 marks in the format of the 120-minute semester exam, with full solutions and a mark scheme showing where each mark is awarded.
 - A foldable table of contents, a light and dark switch, and practice blocks folded by default. Dotted terms in the text switch to French when clicked.
 
 ## How the mathematics is set
@@ -29,6 +31,10 @@ Every division is a stacked fraction, numerator above the bar and denominator be
 The **official answer sheets** and the **"Solving homework" videos** on Cyberlearn are the source of truth. This document deliberately does not reproduce the full worked solutions. It gives the method, so you can find the path yourself, and a checkpoint, so you know whether you arrived. That follows the course's own instruction on using AI: ask for hints and for the path, not for the answer.
 
 Three discrepancies in the published week 1 answer sheet are flagged where they occur, in questions 1.5, 1.7 and 1.10. Week 2 checkpoints were computed for these notes because the official answers were not yet published; where the two differ, the official version is correct.
+
+## How much of the course this covers
+
+Part 0 and weeks 1 and 2, in full. That is everything the course had released when this was written. Weeks 3 to 15 are locked on Cyberlearn and open one week at a time, at 20:00 the evening before each class. Nothing in this document is invented from the syllabus to fill that gap, because guessing at the lecturers' notation and their choice of method would do more harm than leaving it out. Each week is added at the same depth once it is published.
 
 ## Sources
 

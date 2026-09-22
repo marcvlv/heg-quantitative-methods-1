@@ -353,6 +353,23 @@ details.practice[open] > summary::after{content:"close"}
 .ex-body > :first-child{margin-top:12px}
 .ck{font-family:var(--mono);font-size:12.5px;background:var(--sunken);padding:2px 6px;border-radius:2px}
 
+/* ---- multiple-choice options ---- */
+.opts{margin:.55em 0 0;font-family:var(--mono);font-size:12.5px}
+.opts > span{display:block;padding:3px 0;line-height:1.85}
+.opts b{display:inline-block;width:1.5em;color:var(--accent);font-weight:700}
+.opts .frac{font-size:.88em}
+@media (min-width:760px){
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
+}
+ol.qs{margin:0;padding-left:1.6em}
+ol.qs > li{margin-bottom:1.15em}
+ol.qs > li::marker{color:var(--accent);font-weight:700;font-family:var(--sans);font-size:12px}
+.timed{
+  display:flex;flex-wrap:wrap;gap:10px 22px;margin:14px 0 18px;padding:9px 12px;
+  border:1px solid var(--ink);border-radius:2px;font-family:var(--sans);font-size:12px;
+}
+.timed b{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
 /* ===========================================================
    GLOSSARY SEARCH
    =========================================================== */
@@ -460,7 +477,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
     <details class="navpart" data-part="5"><summary>Part V · Exam kit</summary><ol>
       <li><a href="#formulas">Formula sheet</a></li>
       <li><a href="#sheets">Your two sheets</a></li>
+      <li><a href="#writing">How marks are earned</a></li>
       <li><a href="#traps">Where marks are lost</a></li>
+      <li><a href="#mock-mcq">Mock midterm</a></li>
+      <li><a href="#mock-open">Mock exam paper</a></li>
       <li><a href="#glossary">EN-FR glossary</a></li>
       <li><a href="#ahead">The road ahead</a></li>
     </ol></details>
@@ -1398,6 +1418,8 @@ decline: &nbsp; A &times; (1 &minus; r)<sup>n</sup>
 </tbody>
 </table>
 </div>
+
+<p class="note"><strong class="note-lab">When each week opens.</strong> Every week is locked until <strong>20:00 on the evening before</strong> the class, then the whole folder appears at once. The official <span data-fr="réponses">answers</span> to a <span data-fr="devoirs">homework</span> follow one week after the <span data-fr="devoirs">homework</span> itself. Put both in your calendar: there is no reason to discover on a Monday morning that the material has been sitting there since Sunday night.</p>
 
 <div class="vid">
 <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><polygon points="10 9 15 12 10 15 10 9"/></svg>
@@ -2679,6 +2701,53 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <p class="note"><strong class="note-lab">One thing not to put on them.</strong> Anything you have never used. A formula copied from the slides that you have not applied in an exercise will not become usable during the exam; it will only <span data-fr="coût">cost</span> you the seconds you spend reading it.</p>
 </section>
 
+<section id="writing">
+<h2 class="sec">How marks are earned in an open-question exam</h2>
+<p class="sec-kicker">The two fall and spring exams are 120 minutes of open questions. A correct number with no working is worth less than correct working with an arithmetic slip.</p>
+
+<div class="prose">
+<p>The <span data-fr="examen intermédiaire">midterm</span> is multiple choice, so only the final letter counts there. The two 120-minute exams are different. A marker reads what you wrote and awards marks for the steps, not only for the <span data-fr="réponse">answer</span>. That changes how you should write, and most of the marks students leave on the table are lost to presentation rather than to mathematics.</p>
+</div>
+
+<div class="box method">
+<span class="lab">The shape of a full-mark answer</span>
+<ol class="steps">
+<li><strong>Name what you are about to do.</strong> One short line. "Set <span data-fr="recette">revenue</span> equal to <span data-fr="coût">cost</span>." "Take the <span data-fr="logarithme népérien">natural logarithm</span> of both sides." The marker now knows your plan and can follow a slip without losing you the method marks.</li>
+<li><strong>Define every symbol you introduce.</strong> If you write <span class="m">q</span>, say what <span class="m">q</span> counts and in what unit. An <span data-fr="non défini">undefined</span> symbol is an unreadable <span data-fr="réponse">answer</span>.</li>
+<li><strong>One operation per line.</strong> The same <span data-fr="règle">rule</span> the derivations in this document follow. Two steps in one line is where a marker stops being able to give partial credit.</li>
+<li><strong>State the conditions you are relying on.</strong> "The <span data-fr="dénominateur">denominator</span> is not zero here." "This <span data-fr="racine">root</span> is positive because a <span data-fr="quantité">quantity</span> cannot be negative." "The <span data-fr="fonction">function</span> is <span data-fr="injective">one-to-one</span> on this <span data-fr="domaine de définition">domain</span>, so the <span data-fr="réciproque">inverse</span> exists." These sentences carry marks of their own.</li>
+<li><strong>Check the candidate <span data-fr="solutions">solutions</span>.</strong> Anything that came from squaring or from clearing a <span data-fr="dénominateur">denominator</span> must be tested against the original <span data-fr="équation">equation</span>, in writing.</li>
+<li><strong><span data-fr="Réponse">Answer</span> the question that was asked, in a sentence, with units.</strong> If the question says "advise the manager", the last line is advice, not a number.</li>
+</ol>
+</div>
+
+<div class="box warn">
+<span class="lab">The five presentation habits that cost the most</span>
+<ul>
+<li><strong>No working.</strong> A bare number earns the <span data-fr="réponse">answer</span> mark and nothing else. If it is wrong you get zero for a question you nearly solved.</li>
+<li><strong>Crossing out a whole page.</strong> If you change approach, draw one line through the old attempt and start again below. Heavily crossed work cannot be given credit, and sometimes the abandoned attempt was the correct one.</li>
+<li><strong>Losing the units.</strong> 4 050 is not an <span data-fr="réponse">answer</span>. 4 050 CHF a month is.</li>
+<li><strong><span data-fr="Arrondi">Rounding</span> too early.</strong> Carry the exact value, <span class="m"><span class="frac"><span class="num">ln 2</span><span class="den">ln 1.02</span></span></span> or <span class="m"><span class="frac"><span class="num">110</span><span class="den">3</span></span></span>, through the algebra and round only on the final line. <span data-fr="Arrondi">Rounding</span> at an intermediate step changes the last digits and can turn a correct method into a wrong <span data-fr="réponse">answer</span>.</li>
+<li><strong>Not reading the verb.</strong> "Find" wants a number. "Show that" wants you to arrive at a given result, so you must not start from it. "Interpret" wants a sentence about the business. "Justify" wants a reason, and the reason is the mark.</li>
+</ul>
+</div>
+
+<div class="box rule">
+<span class="lab">How to spend 120 minutes</span>
+<p>Five minutes reading the whole paper and marking the questions you can do immediately. Then those questions first, in any order, because early marks are the cheapest marks. Watch the mark allocation: a part worth 4 marks should not take fifteen minutes, and if it is taking that long you have misread it. Leave ten minutes at the end to go back to anything unfinished and to write the interpretation sentences you skipped. An unfinished question with a clear method statement still scores.</p>
+</div>
+
+<div class="box remember">
+<span class="lab">What to remember</span>
+<ul>
+<li>Method marks are most of the paper. Write the method even when you cannot finish.</li>
+<li>Define your symbols, state your conditions, check your candidates.</li>
+<li>Keep exact values until the final line, then round and give units.</li>
+<li>Read the verb in the question and <span data-fr="réponse">answer</span> that verb.</li>
+</ul>
+</div>
+</section>
+
 <section id="traps">
 <h2 class="sec">Where marks are lost</h2>
 <p class="sec-kicker">Each one paired with the habit that prevents it.</p>
@@ -2702,6 +2771,264 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <span class="lab">When you are stuck in the exam</span>
 <p>Write down what you are looking for and what you have been given, in words, with units. Most blocked questions in this course are blocked at the <span data-fr="modélisation">modelling</span> step, not the algebra step, and naming the <span data-fr="variable">variable</span> usually unblocks them. If it does not, move on and come back: in a 60-minute <span data-fr="QCM">MCQ</span>, five minutes on one question <span data-fr="coûts">costs</span> you two others.</p>
 </div>
+</section>
+
+<section id="mock-mcq">
+<h2 class="sec">Mock <span data-fr="examen intermédiaire">midterm</span></h2>
+<p class="sec-kicker">Twenty multiple-choice questions in the format of the week 9 midterm, on everything this document currently covers. Sit it against a clock.</p>
+
+<div class="vid">
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><polygon points="10 9 15 12 10 15 10 9"/></svg>
+<div><b>What this paper covers, and what it does not.</b> It is built from Part 0 and weeks 1 and 2, which is what has been released so far. The real <span data-fr="examen intermédiaire">midterm</span> on <b>9 November 2026</b> also examines weeks 3 to 8: lines and <span data-fr="paraboles">parabolas</span>, the <span data-fr="dérivée">derivative</span>, the differentiation <span data-fr="règles">rules</span>, applications of <span data-fr="dérivées">derivatives</span> and <span data-fr="optimisation">optimisation</span>. Use this to rehearse the format and the clock now, and expect it to grow as each week is published.</div>
+</div>
+
+<div class="timed">
+<span><b>Format</b><span data-fr="QCM">MCQ</span>, one correct option</span>
+<span><b>Time</b>60 minutes</span>
+<span><b>Allowed</b>Approved calculator, 2 sheets</span>
+<span><b>Pace</b>3 minutes a question</span>
+</div>
+
+<div class="box method">
+<span class="lab">How to sit it</span>
+<ol class="steps">
+<li>Paper, pen, the calculator you will bring to the exam, and a timer at 60 minutes. No phone.</li>
+<li><strong>Work each question out properly before you look at the four options.</strong> The wrong options are built from the usual errors, so a wrong method often lands exactly on one of them and feels like confirmation.</li>
+<li>If a question has taken more than four minutes, mark it and move on. Come back at the end.</li>
+<li>Mark yourself only when the hour is up. Then read the <span data-fr="solution">solution</span> to every question, including the ones you got right, because the reasoning is where the value is.</li>
+</ol>
+</div>
+
+<div class="ex-block">
+<div class="ex-head"><span class="num">Paper &nbsp;· 20 questions &nbsp;· 60 minutes</span><h3><span data-fr="Réponse">Answer</span> every question. There is no negative marking, so never leave a blank.</h3></div>
+<div class="ex-body">
+<ol class="qs">
+<li>The <span data-fr="domaine de définition">domain</span> of <span class="m">f(x) = <span class="frac"><span class="num">x + 1</span><span class="den">x<sup>2</sup> &minus; 4x + 3</span></span></span> is
+<div class="opts"><span><b>A</b><span class="m">&#8477;</span>\{0, 4}</span><span><b>B</b><span class="m">&#8477;</span></span><span><b>C</b><span class="m">&#8477;</span>\{1, 3}</span><span><b>D</b><span class="m">&#8477;</span>\{&minus;1, 3}</span></div></li>
+<li>The <span data-fr="domaine de définition">domain</span> of <span class="m">g(x) = <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>5 &minus; 2x</span></span></span> is
+<div class="opts"><span><b>A</b><span class="m">x &le; <span class="frac"><span class="num">5</span><span class="den">2</span></span></span></span><span><b>B</b><span class="m">x &ge; <span class="frac"><span class="num">5</span><span class="den">2</span></span></span></span><span><b>C</b><span class="m">x &le; &minus;<span class="frac"><span class="num">5</span><span class="den">2</span></span></span></span><span><b>D</b><span class="m">x &ge; <span class="frac"><span class="num">2</span><span class="den">5</span></span></span></span></div></li>
+<li>The <span data-fr="domaine de définition">domain</span> of <span class="m">h(x) = ln(2x &minus; 6)</span> is
+<div class="opts"><span><b>A</b><span class="m">x &ge; 3</span></span><span><b>B</b><span class="m">x &gt; 6</span></span><span><b>C</b><span class="m">x &ne; 3</span></span><span><b>D</b><span class="m">x &gt; 3</span></span></div></li>
+<li><span class="m">f(x) = x<sup>2</sup></span> if <span class="m">x &lt; 2</span>, and <span class="m">f(x) = 3x &minus; 1</span> if <span class="m">x &ge; 2</span>. Then <span class="m">f(2) + f(&minus;1)</span> is
+<div class="opts"><span><b>A</b>9</span><span><b>B</b>6</span><span><b>C</b>5</span><span><b>D</b>0</span></div></li>
+<li>With <span class="m">f(x) = x<sup>2</sup> + 1</span> and <span class="m">g(x) = 2x &minus; 3</span>, the value of <span class="m">(g &#8728; f)(2)</span> is
+<div class="opts"><span><b>A</b>7</span><span><b>B</b>2</span><span><b>C</b>5</span><span><b>D</b>12</span></div></li>
+<li>The <span data-fr="réciproque">inverse</span> of <span class="m">f(x) = <span class="frac"><span class="num">3x &minus; 5</span><span class="den">2</span></span></span> is
+<div class="opts"><span><b>A</b><span class="m">f<sup>&minus;1</sup>(x) = <span class="frac"><span class="num">2x &minus; 5</span><span class="den">3</span></span></span></span><span><b>B</b><span class="m">f<sup>&minus;1</sup>(x) = <span class="frac"><span class="num">2</span><span class="den">3x &minus; 5</span></span></span></span><span><b>C</b><span class="m">f<sup>&minus;1</sup>(x) = <span class="frac"><span class="num">3x + 5</span><span class="den">2</span></span></span></span><span><b>D</b><span class="m">f<sup>&minus;1</sup>(x) = <span class="frac"><span class="num">2x + 5</span><span class="den">3</span></span></span></span></div></li>
+<li>Which of these has <strong>no</strong> <span data-fr="réciproque">inverse</span> on the whole of <span class="m">&#8477;</span>?
+<div class="opts"><span><b>A</b><span class="m">f(x) = e<sup>x</sup></span></span><span><b>B</b><span class="m">f(x) = x<sup>2</sup> &minus; 4</span></span><span><b>C</b><span class="m">f(x) = 2x + 1</span></span><span><b>D</b><span class="m">f(x) = x<sup>3</sup></span></span></div></li>
+<li><span class="m">log<sub>3</sub> 81</span> equals
+<div class="opts"><span><b>A</b>27</span><span><b>B</b>9</span><span><b>C</b>4</span><span><b>D</b>3</span></div></li>
+<li><span class="m">ln(e<sup>5</sup>) &minus; log(100)</span> equals
+<div class="opts"><span><b>A</b>7</span><span><b>B</b>5</span><span><b>C</b>0.5</span><span><b>D</b>3</span></div></li>
+<li><span class="m">log<sub>b</sub> m + log<sub>b</sub> n &minus; log<sub>b</sub> p</span> equals
+<div class="opts"><span><b>A</b><span class="m"><span class="frac"><span class="num">(log<sub>b</sub> m)(log<sub>b</sub> n)</span><span class="den">log<sub>b</sub> p</span></span></span></span><span><b>B</b><span class="m">log<sub>b</sub><span class="pr">(</span><span class="frac"><span class="num">mn</span><span class="den">p</span></span><span class="pr">)</span></span></span><span><b>C</b><span class="m">log<sub>b</sub>(m + n &minus; p)</span></span><span><b>D</b><span class="m">log<sub>b</sub>(mn &minus; p)</span></span></div></li>
+<li>The <span data-fr="solution">solution</span> of <span class="m">5<sup>x</sup> = 20</span>, to three <span data-fr="décimales">decimals</span>, is
+<div class="opts"><span><b>A</b><span class="m">x &asymp; 1.861</span></span><span><b>B</b><span class="m">x = 4</span></span><span><b>C</b><span class="m">x &asymp; 0.537</span></span><span><b>D</b><span class="m">x &asymp; 1.301</span></span></div></li>
+<li>A <span data-fr="prix">price</span> rises by 20%, then falls by 20%. Compared with the start it is
+<div class="opts"><span><b>A</b>down 40%</span><span><b>B</b>up 4%</span><span><b>C</b>down 4%</span><span><b>D</b>unchanged</span></div></li>
+<li>4 000 CHF is invested at 3% compounded annually. After 5 years it is worth
+<div class="opts"><span><b>A</b>5 200.00 CHF</span><span><b>B</b>4 637.10 CHF</span><span><b>C</b>4 600.00 CHF</span><span><b>D</b>4 618.00 CHF</span></div></li>
+<li>The <span data-fr="solutions">solutions</span> of <span class="m">3x<sup>2</sup> &minus; 12 = 0</span> are
+<div class="opts"><span><b>A</b><span class="m">x = &plusmn;4</span></span><span><b>B</b><span class="m">x = &plusmn;<span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>12</span></span></span></span><span><b>C</b><span class="m">x = 2 only</span></span><span><b>D</b><span class="m">x = &plusmn;2</span></span></div></li>
+<li>How many real <span data-fr="solutions">solutions</span> does <span class="m">2x<sup>2</sup> &minus; 4x + 5 = 0</span> have?
+<div class="opts"><span><b>A</b>two</span><span><b>B</b>infinitely many</span><span><b>C</b>none</span><span><b>D</b>one</span></div></li>
+<li>The <span data-fr="solution">solution</span> of <span class="m"><span class="frac"><span class="num">x + 2</span><span class="den">x &minus; 1</span></span> = 3</span> is
+<div class="opts"><span><b>A</b><span class="m">x = 2.5</span></span><span><b>B</b><span class="m">x = 1</span></span><span><b>C</b><span class="m">x = 5</span></span><span><b>D</b><span class="m">x = &minus;2.5</span></span></div></li>
+<li>The <span data-fr="solution">solution</span> of <span class="m">2x + y = 7</span> and <span class="m">x &minus; y = 2</span> is
+<div class="opts"><span><b>A</b><span class="m">(3, &minus;1)</span></span><span><b>B</b><span class="m">(2, 3)</span></span><span><b>C</b><span class="m">(3, 1)</span></span><span><b>D</b><span class="m">(1, 3)</span></span></div></li>
+<li>The <span data-fr="solution">solution</span> set of <span class="m">&minus;3x + 4 &gt; 13</span> is
+<div class="opts"><span><b>A</b><span class="m">x &gt; &minus;9</span></span><span><b>B</b><span class="m">x &lt; &minus;3</span></span><span><b>C</b><span class="m">x &gt; &minus;3</span></span><span><b>D</b><span class="m">x &lt; 3</span></span></div></li>
+<li>The <span data-fr="solutions">solutions</span> of <span class="m">|2x &minus; 6| = 4</span> are
+<div class="opts"><span><b>A</b><span class="m">x = 5 or x = 1</span></span><span><b>B</b><span class="m">x = 5 only</span></span><span><b>C</b><span class="m">x = 1 or x = &minus;1</span></span><span><b>D</b>there are none</span></div></li>
+<li>The <span data-fr="graphique">graph</span> of <span class="m">f(x) = &minus;2x<sup>2</sup> + 12x &minus; 7</span> has
+<div class="opts"><span><b>A</b><span class="m">a minimum at (3, 11)</span></span><span><b>B</b><span class="m">a maximum at (&minus;3, &minus;61)</span></span><span><b>C</b><span class="m">a maximum at (3, 29)</span></span><span><b>D</b><span class="m">a maximum at (3, 11)</span></span></div></li>
+</ol>
+</div>
+</div>
+
+<details class="rev"><summary>Show the answers and the reasoning</summary><div class="rev-body">
+<p class="note"><strong class="note-lab">Mark it honestly.</strong> Below 12 out of 20, go back to the sections the failed questions came from before doing anything else. Between 12 and 16, you know the material and are losing marks to speed and to <span data-fr="signes">signs</span>. Above 16, move on to the open-question paper, which is a different skill.</p>
+<p><strong>1. C.</strong> Factor the <span data-fr="dénominateur">denominator</span>: <span class="m">x<sup>2</sup> &minus; 4x + 3 = (x &minus; 1)(x &minus; 3)</span>, which vanishes at 1 and 3. D comes from a <span data-fr="signe">sign</span> error when <span data-fr="factorisation">factoring</span>. The <span data-fr="numérateur">numerator</span> plays no part in a <span data-fr="domaine de définition">domain</span>.</p>
+<p><strong>2. A.</strong> Require <span class="m">5 &minus; 2x &ge; 0</span>, so <span class="m">5 &ge; 2x</span> and <span class="m">x &le; <span class="frac"><span class="num">5</span><span class="den">2</span></span></span>. B is the <span data-fr="réponse">answer</span> you get if you divide by <span class="m">&minus;2</span> without reversing the <span data-fr="inéquation">inequality</span>.</p>
+<p><strong>3. D.</strong> A <span data-fr="logarithme">logarithm</span> needs a strictly positive argument, so <span class="m">2x &minus; 6 &gt; 0</span> and <span class="m">x &gt; 3</span>. A fails because <span class="m">ln 0</span> does not exist.</p>
+<p><strong>4. B.</strong> At <span class="m">x = 2</span> the condition <span class="m">x &ge; 2</span> holds, so use the second line: <span class="m">3(2) &minus; 1 = 5</span>. At <span class="m">x = &minus;1</span> use the first: <span class="m">(&minus;1)<sup>2</sup> = 1</span>. The <span data-fr="somme">sum</span> is 6. C is what you get by taking the wrong branch at the boundary, which is the whole point of the question.</p>
+<p><strong>5. A.</strong> Inside first: <span class="m">f(2) = 5</span>. Then <span class="m">g(5) = 2(5) &minus; 3 = 7</span>. B is <span class="m">(f &#8728; g)(2)</span>, the other order, which is a different <span data-fr="fonction">function</span>.</p>
+<p><strong>6. D.</strong> Write <span class="m">y = <span class="frac"><span class="num">3x &minus; 5</span><span class="den">2</span></span></span>, multiply by 2 to get <span class="m">2y = 3x &minus; 5</span>, add 5, divide by 3: <span class="m">x = <span class="frac"><span class="num">2y + 5</span><span class="den">3</span></span></span>. Then swap the letters. B is the reciprocal, not the <span data-fr="réciproque">inverse</span>.</p>
+<p><strong>7. B.</strong> <span class="m">f(&minus;3)</span> and <span class="m">f(3)</span> are both 5, so the <span data-fr="fonction">function</span> is not <span data-fr="injective">one-to-one</span> and cannot be run backwards: from an <span data-fr="sortie">output</span> of 5 you cannot tell which <span data-fr="entrée">input</span> produced it. The other three are strictly <span data-fr="croissante">increasing</span> on <span class="m">&#8477;</span>. Restricting the <span data-fr="domaine de définition">domain</span> to <span class="m">x &ge; 0</span> would repair A.</p>
+<p><strong>8. C.</strong> Ask what <span data-fr="puissance">power</span> of 3 gives 81. Since <span class="m">3<sup>4</sup> = 81</span>, the <span data-fr="réponse">answer</span> is 4. A is 81 written as <span class="m">3<sup>3</sup></span> confused with <span class="m">3<sup>4</sup></span>.</p>
+<p><strong>9. D.</strong> <span class="m">ln(e<sup>5</sup>) = 5</span> because <span class="m">ln</span> and <span class="m">exp</span> undo each other, and <span class="m">log(100) = 2</span> because <span class="m">log</span> is <span data-fr="base">base</span> 10. So <span class="m">5 &minus; 2 = 3</span>. A adds instead of subtracting.</p>
+<p><strong>10. B.</strong> A <span data-fr="somme">sum</span> of <span data-fr="logarithmes">logarithms</span> is the <span data-fr="logarithme">logarithm</span> of the product, and a <span data-fr="différence">difference</span> is the <span data-fr="logarithme">logarithm</span> of the <span data-fr="quotient">quotient</span>. C is the false <span data-fr="règle">rule</span> the document warns about: there is no <span data-fr="règle">rule</span> for the <span data-fr="logarithme">logarithm</span> of a <span data-fr="somme">sum</span>.</p>
+<p><strong>11. A.</strong> Take the <span data-fr="logarithme népérien">natural logarithm</span> of both sides: <span class="m">x ln 5 = ln 20</span>, so <span class="m">x = <span class="frac"><span class="num">ln 20</span><span class="den">ln 5</span></span> = <span class="frac"><span class="num">2.9957</span><span class="den">1.6094</span></span> &asymp; 1.861</span>. C is the same <span data-fr="fraction">fraction</span> upside down. Check it: <span class="m">5<sup>1.861</sup> &asymp; 20</span>.</p>
+<p><strong>12. C.</strong> Multipliers compose, they do not cancel: <span class="m">1.2 &times; 0.8 = 0.96</span>, a fall of 4%. The 20% fall is taken on the larger figure, which is why the round trip loses money. D is the intuitive wrong <span data-fr="réponse">answer</span>.</p>
+<p><strong>13. B.</strong> <span class="m">4000 &times; 1.03<sup>5</sup> = 4000 &times; 1.159274 &asymp; 4637.10</span>. D is simple interest, <span class="m">4000 &times; (1 + 0.15)</span>, which ignores that each year earns interest on the previous years.</p>
+<p><strong>14. D.</strong> <span class="m">3x<sup>2</sup> = 12</span>, so <span class="m">x<sup>2</sup> = 4</span> and <span class="m">x = &plusmn;2</span>. B forgets to divide by 3 first. C forgets that a <span data-fr="racine carrée">square root</span> of a positive number has two <span data-fr="signes">signs</span>.</p>
+<p><strong>15. C.</strong> <span class="m">&Delta; = (&minus;4)<sup>2</sup> &minus; 4(2)(5) = 16 &minus; 40 = &minus;24</span>, which is negative, so there is no <span data-fr="solution">solution</span> in <span class="m">&#8477;</span>. Do not force a <span data-fr="racine carrée">square root</span> of a negative number.</p>
+<p><strong>16. A.</strong> Note first that <span class="m">x &ne; 1</span>. Cross-multiply: <span class="m">x + 2 = 3(x &minus; 1) = 3x &minus; 3</span>, so <span class="m">5 = 2x</span> and <span class="m">x = 2.5</span>. That is allowed, since it is not 1. B is the excluded value itself.</p>
+<p><strong>17. C.</strong> Add the two <span data-fr="équations">equations</span> to eliminate <span class="m">y</span>: <span class="m">3x = 9</span>, so <span class="m">x = 3</span>, and then <span class="m">y = 1</span>. D is the pair written in the wrong order, which the exam will mark wrong.</p>
+<p><strong>18. B.</strong> <span class="m">&minus;3x &gt; 9</span>. Dividing by <span class="m">&minus;3</span> reverses the direction: <span class="m">x &lt; &minus;3</span>. C is the <span data-fr="réponse">answer</span> if you forget to flip, and it is the most common error in the topic.</p>
+<p><strong>19. A.</strong> A distance of 4 from zero means <span class="m">2x &minus; 6 = 4</span> or <span class="m">2x &minus; 6 = &minus;4</span>, giving <span class="m">x = 5</span> or <span class="m">x = 1</span>. B keeps only the positive case.</p>
+<p><strong>20. D.</strong> <span class="m">a = &minus;2 &lt; 0</span>, so the <span data-fr="parabole">parabola</span> opens downwards and the <span data-fr="point de rebroussement">turning point</span> is a <span data-fr="maximum">maximum</span>. It sits at <span class="m">x = &minus;<span class="frac"><span class="num">12</span><span class="den">2(&minus;2)</span></span> = 3</span>, and <span class="m">f(3) = &minus;18 + 36 &minus; 7 = 11</span>. A has the right point but the wrong shape; C forgets the <span class="m">&minus;7</span>.</p>
+</div></details>
+
+<div class="box remember">
+<span class="lab">What to remember</span>
+<ul>
+<li>Solve first, look at the options second. The distractors are designed to catch the common error.</li>
+<li>Three minutes a question. A question that has taken five needs to be abandoned and revisited.</li>
+<li>No negative marking, so every box gets an <span data-fr="réponse">answer</span> even if it is a guess.</li>
+<li>When your <span data-fr="réponse">answer</span> is not on the list, suspect a <span data-fr="signe">sign</span> or a <span data-fr="domaine de définition">domain</span> condition before you suspect the paper.</li>
+</ul>
+</div>
+</section>
+
+<section id="mock-open">
+<h2 class="sec">Mock exam paper</h2>
+<p class="sec-kicker">Five open questions with a mark scheme, in the format of the 120-minute semester exam. Write full solutions, then mark yourself against the scheme.</p>
+
+<div class="vid">
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><polygon points="10 9 15 12 10 15 10 9"/></svg>
+<div><b>Scope.</b> This paper covers Part 0 and weeks 1 and 2. The fall exam in <b>weeks 16 and 17</b> covers the whole semester, so it will also contain calculus and statistics questions. A blank test is organised at the end of each semester, taken at home and corrected in class, and that one is the closest thing to the real paper. Sit this one first.</div>
+</div>
+
+<div class="timed">
+<span><b>Format</b>Open questions, closed book</span>
+<span><b>Time</b>120 minutes</span>
+<span><b>Total</b>100 marks</span>
+<span><b>Allowed</b>Approved calculator, 2 sheets</span>
+</div>
+
+<div class="ex-block">
+<div class="ex-head"><span class="num">Question 1 &nbsp;· 20 marks</span><h3><span data-fr="Fonctions">Functions</span>, <span data-fr="domaines de définition">domains</span> and inverses</h3></div>
+<div class="ex-body">
+<p><strong>(a)</strong> Give the <span data-fr="domaine de définition">domain</span> of <span class="m">f(x) = <span class="frac"><span class="num"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x &minus; 2</span></span></span><span class="den">x &minus; 5</span></span></span>, and write it both as a set and as <span data-fr="intervalles">intervals</span>. <em>(5)</em></p>
+<p><strong>(b)</strong> With <span class="m">g(x) = 3x &minus; 1</span> and <span class="m">h(x) = x<sup>2</sup> + 2</span>, find <span class="m">(g &#8728; h)(x)</span> and <span class="m">(h &#8728; g)(x)</span>, and evaluate both at <span class="m">x = 1</span> to show that they are different <span data-fr="fonctions">functions</span>. <em>(6)</em></p>
+<p><strong>(c)</strong> Find <span class="m">g<sup>&minus;1</sup>(x)</span> and justify, in one sentence, why <span class="m">g</span> has an <span data-fr="réciproque">inverse</span> while <span class="m">h</span> does not on <span class="m">&#8477;</span>. <em>(6)</em></p>
+<p><strong>(d)</strong> Give the two <span data-fr="intersections avec les axes">intercepts</span> of <span class="m">y = g(x)</span>. <em>(3)</em></p>
+</div>
+</div>
+
+<div class="ex-block">
+<div class="ex-head"><span class="num">Question 2 &nbsp;· 20 marks</span><h3>Exponentials and <span data-fr="logarithmes">logarithms</span></h3></div>
+<div class="ex-body">
+<p><strong>(a)</strong> Solve <span class="m">3 &middot; 2<sup>x</sup> = 96</span>. <em>(5)</em></p>
+<p><strong>(b)</strong> Solve <span class="m">ln x + ln(x &minus; 3) = ln 10</span>. State clearly which candidate <span data-fr="solutions">solutions</span> you keep and why. <em>(7)</em></p>
+<p><strong>(c)</strong> A roasting machine bought for 80 000 CHF loses 12% of its value every year. Write its value <span class="m">V(t)</span> after <span class="m">t</span> years, and find the first whole year in which it is worth less than 30 000 CHF. <em>(8)</em></p>
+</div>
+</div>
+
+<div class="ex-block">
+<div class="ex-head"><span class="num">Question 3 &nbsp;· 20 marks</span><h3><span data-fr="Coût">Cost</span>, <span data-fr="recette">revenue</span> and <span data-fr="bénéfice">profit</span></h3></div>
+<div class="ex-body">
+<p>XY Coffee Co sells a monthly subscription box. <span data-fr="Coûts fixes">Fixed costs</span> are 9 000 CHF a month, each box <span data-fr="coûts">costs</span> 14 CHF to fill and ship, and the <span data-fr="prix">price</span> is 32 CHF.</p>
+<p><strong>(a)</strong> Write <span class="m">C(q)</span>, <span class="m">R(q)</span> and <span class="m">P(q)</span>, stating what <span class="m">q</span> counts. <em>(5)</em></p>
+<p><strong>(b)</strong> Find the <span data-fr="seuil de rentabilité">break-even</span> <span data-fr="quantité">quantity</span> and the <span data-fr="recette">revenue</span> at that <span data-fr="quantité">quantity</span>. <em>(6)</em></p>
+<p><strong>(c)</strong> Find the <span data-fr="bénéfice">profit</span> at 900 boxes a month. <em>(4)</em></p>
+<p><strong>(d)</strong> Marketing proposes raising the <span data-fr="prix">price</span> to 35 CHF, which they expect will cut sales to 780 boxes. Advise the manager, with the figures. <em>(5)</em></p>
+</div>
+</div>
+
+<div class="ex-block">
+<div class="ex-head"><span class="num">Question 4 &nbsp;· 20 marks</span><h3><span data-fr="Composition">Composition</span> in a business chain</h3></div>
+<div class="ex-body">
+<p>Spending <span class="m">x</span> thousand CHF on advertising produces <span class="m">N(x) = 200x + 1500</span> app users. <span data-fr="Recette">Revenue</span> from <span class="m">n</span> users is <span class="m">R(n) = 12n &minus; 400</span> CHF.</p>
+<p><strong>(a)</strong> Express <span data-fr="recette">revenue</span> directly as a <span data-fr="fonction">function</span> of advertising spend. <em>(6)</em></p>
+<p><strong>(b)</strong> How much must be spent to reach 50 000 CHF of <span data-fr="recette">revenue</span>? <em>(6)</em></p>
+<p><strong>(c)</strong> Find the <span data-fr="réciproque">inverse</span> of the <span data-fr="fonction">function</span> in (a) and say, in one sentence, what a manager would use it for. <em>(5)</em></p>
+<p><strong>(d)</strong> State one restriction the business context puts on the <span data-fr="domaine de définition">domain</span>, and why. <em>(3)</em></p>
+</div>
+</div>
+
+<div class="ex-block">
+<div class="ex-head"><span class="num">Question 5 &nbsp;· 20 marks</span><h3>A <span data-fr="demande">demand</span> <span data-fr="courbe">curve</span> and the <span data-fr="recette">revenue</span> it produces</h3></div>
+<div class="ex-body">
+<p>The <span data-fr="demande">demand</span> for XY Coffee Co's espresso blend is <span class="m">p = 90 &minus; 0.5q</span> CHF, for <span class="m">0 &le; q &le; 180</span> kilograms a week.</p>
+<p><strong>(a)</strong> Interpret the number 90 and the number <span class="m">&minus;0.5</span> in business terms, with units. <em>(4)</em></p>
+<p><strong>(b)</strong> Write weekly <span data-fr="recette">revenue</span> <span class="m">R(q)</span> and find the <span data-fr="quantité">quantity</span> that maximises it, and the <span data-fr="recette">revenue</span> there. <em>(7)</em></p>
+<p><strong>(c)</strong> At which <span data-fr="quantités">quantities</span> is weekly <span data-fr="recette">revenue</span> exactly 4 000 CHF? <em>(6)</em></p>
+<p><strong>(d)</strong> Explain why there are two such <span data-fr="quantités">quantities</span>, and which one the firm should prefer. <em>(3)</em></p>
+</div>
+</div>
+
+<details class="rev"><summary>Show the full solutions and the mark scheme</summary><div class="rev-body">
+
+<h3>Question 1</h3>
+<p><strong>(a)</strong> Two conditions. The <span data-fr="racine">root</span> needs <span class="m">x &minus; 2 &ge; 0</span>, so <span class="m">x &ge; 2</span>. The <span data-fr="dénominateur">denominator</span> needs <span class="m">x &minus; 5 &ne; 0</span>, so <span class="m">x &ne; 5</span>. Both must hold at once, so the <span data-fr="domaine de définition">domain</span> is <span class="ck">[2 ; 5[ &cup; ]5 ; +&infin;[</span>, which is the same set as <span class="m">{x &isin; &#8477; : x &ge; 2 and x &ne; 5}</span>.</p>
+<p><strong>(b)</strong> <span class="m">(g &#8728; h)(x) = g(x<sup>2</sup> + 2) = 3(x<sup>2</sup> + 2) &minus; 1 = 3x<sup>2</sup> + 5</span>. And <span class="m">(h &#8728; g)(x) = h(3x &minus; 1) = (3x &minus; 1)<sup>2</sup> + 2 = 9x<sup>2</sup> &minus; 6x + 3</span>. At <span class="m">x = 1</span>: <span class="ck">(g &#8728; h)(1) = 8</span> and <span class="ck">(h &#8728; g)(1) = 6</span>. Two different numbers from the same pair of <span data-fr="fonctions">functions</span> and the same <span data-fr="entrée">input</span>, so <span data-fr="composition">composition</span> is not commutative.</p>
+<p><strong>(c)</strong> <span class="m">y = 3x &minus; 1</span> gives <span class="m">x = <span class="frac"><span class="num">y + 1</span><span class="den">3</span></span></span>, so <span class="ck">g<sup>&minus;1</sup>(x) = <span class="frac"><span class="num">x + 1</span><span class="den">3</span></span></span>. <span class="m">g</span> is a <span data-fr="droite">straight line</span> with a non-zero <span data-fr="pente">slope</span>, so it is strictly <span data-fr="croissante">increasing</span> and therefore <span data-fr="injective">one-to-one</span>. <span class="m">h</span> is not: <span class="m">h(&minus;1) = h(1) = 3</span>, so from an <span data-fr="sortie">output</span> of 3 you cannot recover the <span data-fr="entrée">input</span>.</p>
+<p><strong>(d)</strong> <span class="m">x = 0</span> gives the <span data-fr="ordonnée à l’origine">y-intercept</span> <span class="ck">(0, &minus;1)</span>. <span class="m">y = 0</span> gives <span class="m">3x = 1</span>, so the <span data-fr="zéro de la fonction">x-intercept</span> is <span class="ck">(<span class="frac"><span class="num">1</span><span class="den">3</span></span>, 0)</span>.</p>
+
+<div class="tw"><table class="data"><caption>Mark scheme, question 1</caption>
+<thead><tr><th>Part</th><th>What earns the marks</th><th class="n">Marks</th></tr></thead><tbody>
+<tr><td class="n">(a)</td><td><span data-fr="Racine">Root</span> condition 1, <span data-fr="dénominateur">denominator</span> condition 1, combining them 1, set form 1, <span data-fr="intervalle">interval</span> form 1</td><td class="n">5</td></tr>
+<tr><td class="n">(b)</td><td>Each composite 2, both evaluations 1, the conclusion that they differ 1</td><td class="n">6</td></tr>
+<tr><td class="n">(c)</td><td>Correct <span data-fr="réciproque">inverse</span> 3, <span data-fr="injective">one-to-one</span> justification for g 2, counterexample for h 1</td><td class="n">6</td></tr>
+<tr><td class="n">(d)</td><td>Each <span data-fr="intersection avec un axe">intercept</span> 1, written as a point 1</td><td class="n">3</td></tr>
+</tbody></table></div>
+
+<h3>Question 2</h3>
+<p><strong>(a)</strong> Divide by 3 first: <span class="m">2<sup>x</sup> = 32</span>. Since <span class="m">32 = 2<sup>5</sup></span>, <span class="ck">x = 5</span>. Taking <span data-fr="logarithmes">logarithms</span> also works and earns the same marks: <span class="m">x = <span class="frac"><span class="num">ln 32</span><span class="den">ln 2</span></span> = 5</span>.</p>
+<p><strong>(b)</strong> The <span data-fr="domaine de définition">domain</span> comes first: <span class="m">x &gt; 0</span> and <span class="m">x &minus; 3 &gt; 0</span>, so <span class="m">x &gt; 3</span>. Combine the left side with the product <span data-fr="règle">rule</span>: <span class="m">ln(x(x &minus; 3)) = ln 10</span>. Both sides are <span data-fr="logarithmes">logarithms</span> in the same <span data-fr="base">base</span>, so <span class="m">x(x &minus; 3) = 10</span>, that is <span class="m">x<sup>2</sup> &minus; 3x &minus; 10 = 0</span>, which factors as <span class="m">(x &minus; 5)(x + 2) = 0</span>. The candidates are 5 and <span class="m">&minus;2</span>. Only <span class="ck">x = 5</span> survives, because <span class="m">&minus;2</span> is not greater than 3 and would ask for the <span data-fr="logarithme">logarithm</span> of a negative number. Saying why you reject it is worth a mark.</p>
+<p><strong>(c)</strong> Losing 12% means multiplying by <span class="m">0.88</span> each year, so <span class="ck">V(t) = 80 000 &times; 0.88<sup>t</sup></span>. Set <span class="m">80 000 &times; 0.88<sup>t</sup> &lt; 30 000</span>, so <span class="m">0.88<sup>t</sup> &lt; 0.375</span>. Take natural <span data-fr="logarithmes">logarithms</span>: <span class="m">t ln 0.88 &lt; ln 0.375</span>. Now <span class="m">ln 0.88</span> is negative, so dividing reverses the <span data-fr="inéquation">inequality</span>: <span class="m">t &gt; <span class="frac"><span class="num">ln 0.375</span><span class="den">ln 0.88</span></span> = <span class="frac"><span class="num">&minus;0.9808</span><span class="den">&minus;0.1278</span></span> &asymp; 7.67</span>. The first whole year is <span class="ck">t = 8</span>. Check it: <span class="m">V(8) &asymp; 28 771</span> and <span class="m">V(7) &asymp; 32 694</span>.</p>
+
+<div class="tw"><table class="data"><caption>Mark scheme, question 2</caption>
+<thead><tr><th>Part</th><th>What earns the marks</th><th class="n">Marks</th></tr></thead><tbody>
+<tr><td class="n">(a)</td><td>Dividing by 3 first 2, recognising 32 as a <span data-fr="puissance">power</span> of 2 or using <span data-fr="logarithmes">logarithms</span> 2, <span data-fr="réponse">answer</span> 1</td><td class="n">5</td></tr>
+<tr><td class="n">(b)</td><td><span data-fr="Domaine de définition">Domain</span> stated 2, product <span data-fr="règle">rule</span> 1, quadratic formed 1, factored 1, correct <span data-fr="racine">root</span> 1, rejection justified 1</td><td class="n">7</td></tr>
+<tr><td class="n">(c)</td><td>Multiplier 0.88 identified 2, <span data-fr="modèle">model</span> written 1, <span data-fr="inéquation">inequality</span> set up 1, <span data-fr="logarithmes">logarithms</span> taken 1, direction reversed 2, <span data-fr="réponse">answer</span> as a whole year 1</td><td class="n">8</td></tr>
+</tbody></table></div>
+
+<h3>Question 3</h3>
+<p><strong>(a)</strong> Let <span class="m">q</span> be the number of boxes sold in a month. <span class="ck">C(q) = 14q + 9 000</span>, <span class="ck">R(q) = 32q</span>, and <span class="ck">P(q) = 32q &minus; (14q + 9 000) = 18q &minus; 9 000</span>, all in CHF a month. The 18 is the contribution margin, what each box adds once its own <span data-fr="coût variable">variable cost</span> is paid.</p>
+<p><strong>(b)</strong> <span data-fr="Seuil de rentabilité">Break-even</span> is <span class="m">P(q) = 0</span>, so <span class="m">18q = 9 000</span> and <span class="ck">q = 500 boxes</span>. <span data-fr="Recette">Revenue</span> there is <span class="m">32 &times; 500</span>, that is <span class="ck">16 000 CHF</span>. The shortcut is worth knowing: <span data-fr="seuil de rentabilité">break-even</span> <span data-fr="quantité">quantity</span> is <span class="m"><span class="frac"><span class="num">fixed cost</span><span class="den">contribution margin</span></span></span>.</p>
+<p><strong>(c)</strong> <span class="m">P(900) = 18(900) &minus; 9 000 = 16 200 &minus; 9 000</span>, so <span class="ck">7 200 CHF a month</span>.</p>
+<p><strong>(d)</strong> The new contribution margin is <span class="m">35 &minus; 14 = 21</span> CHF, so <span data-fr="bénéfice">profit</span> becomes <span class="m">21 &times; 780 &minus; 9 000 = 16 380 &minus; 9 000</span>, that is <span class="ck">7 380 CHF</span>. That is <span class="ck">180 CHF a month better</span>, so on these figures the rise is worth making. Say the condition out loud, because it carries a mark: the conclusion depends entirely on the estimate of 780 boxes, and the proposal breaks even against the old <span data-fr="bénéfice">profit</span> at <span class="m"><span class="frac"><span class="num">7 200 + 9 000</span><span class="den">21</span></span></span>, that is 772 boxes. Below roughly 772 boxes the <span data-fr="prix">price</span> rise loses money.</p>
+
+<div class="tw"><table class="data"><caption>Mark scheme, question 3</caption>
+<thead><tr><th>Part</th><th>What earns the marks</th><th class="n">Marks</th></tr></thead><tbody>
+<tr><td class="n">(a)</td><td>Each <span data-fr="fonction">function</span> 1, q defined with its unit 1, <span data-fr="bénéfice">profit</span> simplified 1</td><td class="n">5</td></tr>
+<tr><td class="n">(b)</td><td>Setting <span data-fr="bénéfice">profit</span> or <span data-fr="recette">revenue</span> equal to <span data-fr="coût">cost</span> 2, <span data-fr="quantité">quantity</span> 2, <span data-fr="recette">revenue</span> 2</td><td class="n">6</td></tr>
+<tr><td class="n">(c)</td><td><span data-fr="Substitution">Substitution</span> 2, arithmetic 1, units 1</td><td class="n">4</td></tr>
+<tr><td class="n">(d)</td><td>New margin 1, new <span data-fr="bénéfice">profit</span> 2, comparison 1, a stated condition or sensitivity remark 1</td><td class="n">5</td></tr>
+</tbody></table></div>
+
+<h3>Question 4</h3>
+<p><strong>(a)</strong> Substitute the whole of <span class="m">N</span> into <span class="m">R</span>: <span class="m">R(N(x)) = 12(200x + 1500) &minus; 400 = 2400x + 18 000 &minus; 400</span>, so <span class="ck">R(N(x)) = 2400x + 17 600</span> CHF, with <span class="m">x</span> in thousands of CHF.</p>
+<p><strong>(b)</strong> <span class="m">2400x + 17 600 = 50 000</span> gives <span class="m">2400x = 32 400</span> and <span class="m">x = 13.5</span>, that is <span class="ck">13 500 CHF of advertising</span>. Watch the unit: the <span data-fr="réponse">answer</span> is 13.5 in the <span data-fr="modèle">model</span>'s own unit, and the sentence must convert it.</p>
+<p><strong>(c)</strong> Solve for <span class="m">x</span>: <span class="ck">x = <span class="frac"><span class="num">R &minus; 17 600</span><span class="den">2400</span></span></span>. A manager uses it backwards, to turn a <span data-fr="recette">revenue</span> target into the advertising budget that reaches it, which is exactly what part (b) did once.</p>
+<p><strong>(d)</strong> <span class="m">x &ge; 0</span>, because you cannot spend a negative amount on advertising. A second acceptable <span data-fr="réponse">answer</span> is an upper bound from the marketing budget, since the linear <span data-fr="modèle">model</span> cannot keep adding 200 users per thousand CHF for ever.</p>
+
+<div class="tw"><table class="data"><caption>Mark scheme, question 4</caption>
+<thead><tr><th>Part</th><th>What earns the marks</th><th class="n">Marks</th></tr></thead><tbody>
+<tr><td class="n">(a)</td><td>Correct order of <span data-fr="substitution">substitution</span> 2, <span data-fr="parenthèses">brackets</span> kept 2, simplified 2</td><td class="n">6</td></tr>
+<tr><td class="n">(b)</td><td><span data-fr="Équation">Equation</span> set up 2, solved 2, converted to CHF in a sentence 2</td><td class="n">6</td></tr>
+<tr><td class="n">(c)</td><td>Correct <span data-fr="réciproque">inverse</span> 3, business reading 2</td><td class="n">5</td></tr>
+<tr><td class="n">(d)</td><td>A restriction 2, the reason 1</td><td class="n">3</td></tr>
+</tbody></table></div>
+
+<h3>Question 5</h3>
+<p><strong>(a)</strong> The 90 is the <span data-fr="prix">price</span> in CHF per kilogram at which <span data-fr="demande">demand</span> falls to zero, the highest <span data-fr="prix">price</span> anyone would pay. The <span class="m">&minus;0.5</span> is the <span data-fr="pente">slope</span>: every extra kilogram the firm wants to sell requires the <span data-fr="prix">price</span> to drop by 0.50 CHF per kilogram. Units are the mark here.</p>
+<p><strong>(b)</strong> <span class="m">R(q) = pq = q(90 &minus; 0.5q)</span>, so <span class="ck">R(q) = 90q &minus; 0.5q<sup>2</sup></span>. That is a <span data-fr="parabole">parabola</span> with <span class="m">a = &minus;0.5 &lt; 0</span>, so it opens downwards and its <span data-fr="sommet">vertex</span> is a <span data-fr="maximum">maximum</span>, at <span class="m">q = &minus;<span class="frac"><span class="num">90</span><span class="den">2(&minus;0.5)</span></span> = 90</span>. Then <span class="m">R(90) = 8 100 &minus; 0.5(8 100) = 8 100 &minus; 4 050</span>, so the <span data-fr="maximum">maximum</span> is <span class="ck">4 050 CHF at q = 90 kg</span>. That <span data-fr="quantité">quantity</span> is inside the stated <span data-fr="ensemble image">range</span>, which you should say.</p>
+<p><strong>(c)</strong> <span class="m">90q &minus; 0.5q<sup>2</sup> = 4 000</span>. Multiply by 2 and rearrange: <span class="m">q<sup>2</sup> &minus; 180q + 8 000 = 0</span>. Then <span class="m">&Delta; = 32 400 &minus; 32 000 = 400</span> and <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span> = 20</span>, so <span class="m">q = <span class="frac"><span class="num">180 &plusmn; 20</span><span class="den">2</span></span></span>, giving <span class="ck">q = 80 kg or q = 100 kg</span>.</p>
+<p><strong>(d)</strong> <span data-fr="Recette">Revenue</span> rises to its peak at 90 kg and falls afterwards, so every <span data-fr="recette">revenue</span> level below the <span data-fr="maximum">maximum</span> is reached twice, once on the way up and once on the way down. The firm should prefer <span class="ck">80 kg</span>: the same <span data-fr="recette">revenue</span> for fewer kilograms produced, so lower <span data-fr="coût">cost</span> and higher <span data-fr="bénéfice">profit</span>. This is the standard follow-up and it is worth all three marks on its own.</p>
+
+<div class="tw"><table class="data"><caption>Mark scheme, question 5</caption>
+<thead><tr><th>Part</th><th>What earns the marks</th><th class="n">Marks</th></tr></thead><tbody>
+<tr><td class="n">(a)</td><td>Each number interpreted 1, each unit 1</td><td class="n">4</td></tr>
+<tr><td class="n">(b)</td><td><span data-fr="Recette">Revenue</span> expanded 2, shape identified from the <span data-fr="signe">sign</span> of a 1, <span data-fr="sommet">vertex</span> formula 2, <span data-fr="maximum">maximum</span> value 1, <span data-fr="ensemble image">range</span> checked 1</td><td class="n">7</td></tr>
+<tr><td class="n">(c)</td><td><span data-fr="Équation">Equation</span> rearranged 2, <span data-fr="discriminant">discriminant</span> 2, both <span data-fr="racines">roots</span> 2</td><td class="n">6</td></tr>
+<tr><td class="n">(d)</td><td>Symmetry of the <span data-fr="parabole">parabola</span> 2, the <span data-fr="coût">cost</span> argument for the smaller <span data-fr="quantité">quantity</span> 1</td><td class="n">3</td></tr>
+</tbody></table></div>
+
+<div class="box remember">
+<span class="lab">After you mark it</span>
+<ul>
+<li>Count separately the marks you lost to <strong>mathematics</strong> and the marks you lost to <strong>presentation</strong>: a missing unit, an unstated <span data-fr="domaine de définition">domain</span>, an unjustified rejection, a missing interpretation sentence. The second pile is the easiest twenty marks you will ever recover.</li>
+<li>Anywhere you wrote the right number with no working, rewrite that part properly. On the day it is worth double.</li>
+<li>Any part you could not start is a section to reread, not a question to remember.</li>
+</ul>
+</div>
+</div></details>
 </section>
 
 <section id="glossary">
@@ -2834,34 +3161,47 @@ f(x) = 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 
 <section id="ahead">
 <h2 class="sec">The road ahead</h2>
-<p class="sec-kicker">What is coming, and which part of weeks 1 and 2 each future week depends on.</p>
+<p class="sec-kicker">Exactly how much of the examined course is in this document, when the rest arrives, and what to do with each week as it lands.</p>
 
-<div class="box">
-<span class="lab">Read this honestly</span>
-<p style="margin:0">These notes cover the material you have: the <span data-fr="plan de cours">syllabus</span>, the week 0 deck, and weeks 1 and 2 with their <span data-fr="devoirs">homework</span>, <span data-fr="réponses">answers</span> and quizzes. That is the foundation, not the semester. The table below is a map of what is coming, built from the <span data-fr="plan de cours">syllabus</span>, not a substitute for the <span data-fr="cours">lectures</span>. Send each week's deck as it is released and these notes can be extended to the same depth.</p>
+<div class="box warn">
+<span class="lab">How much of the exam this document currently covers</span>
+<p>Be clear about this before you rely on it. This document teaches <strong>Part 0 and weeks 1 and 2 in full</strong>, which is everything the course has released. The rest of the semester is locked on Cyberlearn and opens one week at a time.</p>
+<p style="margin-bottom:0">So it will carry you through the first weeks completely, and it will not, on its own, get you through the <span data-fr="examen intermédiaire">midterm</span> on <strong>9 November 2026</strong>, which also examines weeks 3 to 8. Nothing here is invented from the <span data-fr="plan de cours">syllabus</span> to fill that gap, because guessing at the lecturers' notation and their choice of method would do more harm than leaving it out. Each week's deck, <span data-fr="devoirs">homework</span> and quiz can be added to the same depth as soon as it is published.</p>
+</div>
+
+<div class="box method">
+<span class="lab">What to do with each new week, the day it opens</span>
+<ol class="steps">
+<li>The material appears on Cyberlearn at <strong>20:00 the evening before</strong> the class. Week 3 opens on 27 September at 20:00, week 4 on 4 October, and so on through the semester.</li>
+<li>Read the slides once before the <span data-fr="cours">lecture</span>, without trying to understand everything. You are looking for the vocabulary, not the content.</li>
+<li>Attempt the <span data-fr="devoirs">homework</span> before the official <span data-fr="réponses">answers</span> are published one week later. This is the part that cannot be skipped.</li>
+<li>Watch the "<span data-fr="Résolution">Solving</span> <span data-fr="devoirs">homework</span>" video afterwards and compare it with what you wrote, especially the notation.</li>
+<li>Take the review quiz against a clock, because the <span data-fr="examen intermédiaire">midterm</span> is a timed <span data-fr="QCM">MCQ</span> and speed is a separate skill.</li>
+<li>Add one line to your two sheets. One line a week is eleven lines by the <span data-fr="examen intermédiaire">midterm</span>, and they will be the right eleven.</li>
+</ol>
 </div>
 
 <div class="tw">
 <table class="data">
-<caption>Fall semester</caption>
-<thead><tr><th class="n">Week</th><th>Topic</th><th>Builds directly on</th></tr></thead>
+<caption>Fall semester, with the dates from the course page</caption>
+<thead><tr><th class="n">Week</th><th class="n">Starts</th><th>Topic</th><th>Builds directly on</th></tr></thead>
 <tbody>
-<tr><td class="n">1</td><td>Introduction, levelling up, <span data-fr="fonctions">functions</span> and <span data-fr="graphiques">graphs</span> <span class="tag a">covered</span></td><td>Part 0 and Part II</td></tr>
-<tr><td class="n">2</td><td>Operations on <span data-fr="fonctions">functions</span> <span class="tag a">covered</span></td><td>Part III</td></tr>
-<tr><td class="n">3</td><td>Lines, <span data-fr="paraboles">parabolas</span>, systems of <span data-fr="équations du premier degré">linear equations</span></td><td><span data-fr="Pente">Slope</span> and <span data-fr="intersections avec les axes">intercepts</span> (Part 0), systems (Part 0), <span data-fr="paraboles">parabolas</span> (Part II)</td></tr>
-<tr><td class="n">4</td><td><span data-fr="Taux de variation">Rate of change</span> and the <span data-fr="dérivée">derivative</span></td><td><span data-fr="Pente">Slope</span> as a rate; <span data-fr="exponentielle">exponential</span> and logarithmic <span data-fr="équations">equations</span></td></tr>
-<tr><td class="n">5</td><td>Differentiation <span data-fr="règles">rules</span></td><td><span data-fr="Puissances">Powers</span> as fractional <span data-fr="exposants">exponents</span>; <span data-fr="composition">composition</span>, which becomes the chain <span data-fr="règle">rule</span></td></tr>
-<tr><td class="n">6</td><td>Self-study week: business case <span class="tag w">examinable</span></td><td>Everything from weeks 1 to 5</td></tr>
-<tr><td class="n">7</td><td>Applications of <span data-fr="dérivées">derivatives</span>: marginals, <span data-fr="élasticité">elasticity</span>, Newton's method</td><td><span data-fr="Dérivées">Derivatives</span>; <span data-fr="pourcentages">percentages</span> as ratios of change</td></tr>
-<tr><td class="n">8</td><td><span data-fr="Optimisation">Optimization</span> in one <span data-fr="variable">variable</span></td><td><span data-fr="Dérivées">Derivatives</span>; the <span data-fr="sommet">vertex</span> of a <span data-fr="parabole">parabola</span></td></tr>
-<tr><td class="n">9</td><td><strong><span data-fr="Examen intermédiaire">Midterm</span></strong>, then an introduction to <span data-fr="intégration">integration</span></td><td>Everything to week 8</td></tr>
-<tr><td class="n">10</td><td><span data-fr="Intégration">Integration</span> and surpluses</td><td>Antiderivatives; area under a <span data-fr="courbe">curve</span></td></tr>
-<tr><td class="n">11</td><td><span data-fr="Données">Data</span> foundations, collection and <span data-fr="échantillonnage">sampling</span></td><td>A fresh start; no calculus needed</td></tr>
-<tr><td class="n">12</td><td>Describing <span data-fr="données">data</span> with <span data-fr="graphiques">graphs</span>, charts and tables</td><td><span data-fr="Graphique">Graph</span> standards from week 1</td></tr>
-<tr><td class="n">13</td><td>Describing <span data-fr="données">data</span> with numerical measures</td><td>Summation; <span data-fr="moyennes">averages</span></td></tr>
-<tr><td class="n">14</td><td>Bivariate <span data-fr="données">data</span>, independence, concentration</td><td>Contingency tables, Lorenz, Gini, Herfindahl</td></tr>
-<tr><td class="n">15</td><td>Review, no new material</td><td></td></tr>
-<tr><td class="n">16-17</td><td><strong>Fall exam</strong>, 120 minutes, open questions</td><td>The whole semester</td></tr>
+<tr><td class="n">1</td><td class="n">28 Sep</td><td>Introduction, levelling up, <span data-fr="fonctions">functions</span> and <span data-fr="graphiques">graphs</span> <span class="tag a">in this document</span></td><td>Part 0 and Part II</td></tr>
+<tr><td class="n">2</td><td class="n"></td><td>Operations on <span data-fr="fonctions">functions</span> <span class="tag a">in this document</span></td><td>Part III</td></tr>
+<tr><td class="n">3</td><td class="n">28 Sep</td><td>Lines, <span data-fr="paraboles">parabolas</span> and systems of <span data-fr="équations du premier degré">linear equations</span> <span class="tag">not released yet</span></td><td><span data-fr="Pente">Slope</span> and <span data-fr="intersections avec les axes">intercepts</span>, systems, the <span data-fr="parabole">parabola</span> and its <span data-fr="sommet">vertex</span></td></tr>
+<tr><td class="n">4</td><td class="n">5 Oct</td><td><span data-fr="Taux de variation">Rate of change</span> and the <span data-fr="dérivée">derivative</span> <span class="tag">not released yet</span></td><td><span data-fr="Pente">Slope</span> as a rate; <span data-fr="résolution">solving</span> <span data-fr="exponentielle">exponential</span> and logarithmic <span data-fr="équations">equations</span></td></tr>
+<tr><td class="n">5</td><td class="n">12 Oct</td><td>Differentiation <span data-fr="règles">rules</span> <span class="tag">not released yet</span></td><td><span data-fr="Puissances">Powers</span> as fractional <span data-fr="exposants">exponents</span>; <span data-fr="composition">composition</span>, which becomes the chain <span data-fr="règle">rule</span></td></tr>
+<tr><td class="n">6</td><td class="n">19 Oct</td><td>Self-directed week: case study and review <span class="tag w">examinable, no lecture</span></td><td>Everything from weeks 1 to 5</td></tr>
+<tr><td class="n">7</td><td class="n">26 Oct</td><td>Applications of the <span data-fr="dérivées">derivatives</span> <span class="tag">not released yet</span></td><td><span data-fr="Dérivées">Derivatives</span>; <span data-fr="pourcentages">percentages</span> as ratios of change</td></tr>
+<tr><td class="n">8</td><td class="n">2 Nov</td><td><span data-fr="Optimisation">Optimisation</span> in one <span data-fr="variable">variable</span> <span class="tag">not released yet</span></td><td><span data-fr="Dérivées">Derivatives</span>; the <span data-fr="sommet">vertex</span> of a <span data-fr="parabole">parabola</span></td></tr>
+<tr><td class="n">9</td><td class="n">9 Nov</td><td><strong><span data-fr="Examen intermédiaire">Midterm exam</span></strong>, then an introduction to <span data-fr="intégrales">integrals</span> <span class="tag w">weeks 1 to 8</span></td><td>Everything to week 8</td></tr>
+<tr><td class="n">10</td><td class="n">16 Nov</td><td><span data-fr="Intégration">Integration</span> and surpluses <span class="tag">not released yet</span></td><td>Antiderivatives; area under a <span data-fr="courbe">curve</span></td></tr>
+<tr><td class="n">11</td><td class="n">23 Nov</td><td><span data-fr="Données">Data</span> foundations, collection methods and <span data-fr="échantillonnage">sampling</span> <span class="tag">not released yet</span></td><td>A fresh start; no calculus needed</td></tr>
+<tr><td class="n">12</td><td class="n">30 Nov</td><td>Describing <span data-fr="données">data</span> using <span data-fr="graphiques">graphs</span>, charts and tables <span class="tag">not released yet</span></td><td>The <span data-fr="graphique">graph</span> standards from week 1</td></tr>
+<tr><td class="n">13</td><td class="n">7 Dec</td><td>Describing <span data-fr="données">data</span> using numerical measures <span class="tag">not released yet</span></td><td>Summation; <span data-fr="moyennes">averages</span></td></tr>
+<tr><td class="n">14</td><td class="n">14 Dec</td><td>Bivariate <span data-fr="données">data</span>, independence and concentration indicators <span class="tag">not released yet</span></td><td>Contingency tables, Lorenz, Gini, Herfindahl</td></tr>
+<tr><td class="n">15</td><td class="n">11 Jan</td><td>Review session, no new material</td><td></td></tr>
+<tr><td class="n">16-17</td><td class="n"></td><td><strong>Fall semester exam</strong>, 120 minutes, open questions <span class="tag w">the whole semester</span></td><td></td></tr>
 </tbody>
 </table>
 </div>
