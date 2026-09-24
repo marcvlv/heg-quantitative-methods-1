@@ -669,6 +669,22 @@ section h3:first-of-type{margin-top:20px}
 .rb-body{padding:4px 18px 10px;border-top:1px solid var(--rule);background:var(--paper);border-radius:0 0 10px 10px}
 .rb-body section{scroll-margin-top:14px}
 
+/* the table of contents */
+.toc{display:grid;gap:26px 40px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:22px 0 10px}
+.toc-group h4{
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 9px;padding-bottom:7px;border-bottom:1px solid var(--rule);
+}
+.toc-group h4 .u{color:var(--accent);margin-right:8px}
+.toc-group ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+.toc-group li{counter-increment:toc;margin:0 0 5px;font-size:15px;line-height:1.45}
+.toc-group li::before{
+  content:counter(toc);display:inline-block;width:20px;color:var(--muted);
+  font-family:var(--mono);font-size:12px;
+}
+.toc-group a{color:var(--ink);text-decoration:none}
+.toc-group a:hover{color:var(--accent);text-decoration:underline}
+
 /* the week-by-week roadmap */
 table.roadmap td.wk{font-family:var(--mono);font-weight:700;color:var(--ink);white-space:nowrap}
 table.roadmap td.ka-cell a{display:block;color:var(--ka);text-decoration:none;font-size:12.5px;margin:0 0 3px}
@@ -888,10 +904,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   </div>
   <div class="railbody" id="railbody">
     <p class="rail-title">Contents</p>
-    <p class="rail-top"><a href="#progress">Where you are</a></p>
+    <p class="rail-top"><a href="#contents">Table of contents</a></p>
     <!--RAIL-->
       <details class="navpart" open data-part="top"><summary>Start</summary><ol>
-      <li><a href="#progress">Where you are</a></li>
+      <li><a href="#contents">Table of contents</a></li>
       <li><a href="#start">How to use this</a></li>
       <li><a href="#roadmap">The course, week by week</a></li>
       </ol></details>
@@ -920,7 +936,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       <li><a href="#mock-mcq">Mock midterm</a></li>
       <li><a href="#mock-open">Mock exam paper</a></li>
       </ol></details>
-      <details class="navpart" data-part="3"><summary>Week 0 &middot; Levelling up (folded)</summary><ol>
+      <details class="navpart" data-part="3"><summary>Week 0 &middot; Levelling up</summary><ol>
       <li><a href="#f-numbers">Numbers, notation and the order of operations</a></li>
       <li><a href="#f-fractions">Fractions and signs</a></li>
       <li><a href="#f-powers">Powers and roots</a></li>
@@ -946,8 +962,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   <div class="inst">Haute école de gestion de Genève · International Business Management · 2026-2027</div>
   <div class="course">Quantitative Methods I · Fall semester · Weeks 1 and 2</div>
   <h1>Study notes, from pre-university algebra to functions</h1>
-  <p class="kind">A levelling-up part that assumes nothing, then weeks 1 and 2 taught in full: what a function is, the function library, exponentials and logarithms, and the four operations on functions. Every homework question and quiz question is given a method and a checkpoint, with the official answers and the solving videos on Cyberlearn as the source of truth. Dotted terms switch to French when clicked.</p>
-  <dl class="facts">
+    <dl class="facts">
     <div class="fact"><dt>Midterm · W9</dt><dd>20% · MCQ · 60 min</dd></div>
     <div class="fact"><dt>Fall exam · W16-17</dt><dd>40% · open questions · 120 min</dd></div>
     <div class="fact"><dt>Spring exam</dt><dd>40% · open questions · 120 min</dd></div>
@@ -955,11 +970,55 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   </dl>
   <p class="credit"><svg class="mark" role="img" aria-label="MAZEN"><use href="#mazen-mark"/></svg><span class="code">2026-2027 Quantitative Methods I · HEG-Genève / IBM</span><span>Free for HEG students to use and share.</span></p>
 </header>
-<section id="progress">
-<h2 class="sec">Where you are</h2>
-<p class="sec-kicker">Every lesson in the course, and how far through it you are. Click a lesson to open it.</p>
-<div class="map" id="courseMap"></div>
-<p class="note">A lesson turns <b>familiar</b> once you attempt its practice, <b>proficient</b> when you get every question right with a hint or a second try, and <b>mastered</b> when you get them all right first time. This is kept in your own browser and nowhere else.</p>
+<section id="contents">
+<p class="lesson-no">Start &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 3</span></p>
+<h2 class="sec">Table of contents</h2>
+<div class="toc">
+<div class="toc-group"><h4><span class="u">Week 1</span>Introduction, leveling up, functions and graphs</h4>
+<ol>
+<li><a href="#w1-equations"><span data-fr="Résolution">Solving</span> linear equations and systems</a></li>
+<li><a href="#w1-quadratics"><span data-fr="Résolution">Solving</span> quadratic equations and applications</a></li>
+<li><a href="#w1-functions">Functions</a></li>
+<li><a href="#w1-domain"><span data-fr="Domaines de définition">Domains</span></a></li>
+<li><a href="#w1-special">Description of some special functions</a></li>
+<li><a href="#w1-exp">Exponential functions</a></li>
+<li><a href="#w1-log">Logarithmic functions</a></li>
+<li><a href="#w1-quiz">Week 1 review quiz</a></li>
+</ol></div>
+<div class="toc-group"><h4><span class="u">Week 2</span>Operations on functions</h4>
+<ol>
+<li><a href="#w2-ops">Simple operations on functions</a></li>
+<li><a href="#w2-graphs">Graphs</a></li>
+<li><a href="#w2-compose">Composition of functions</a></li>
+<li><a href="#w2-inverse">Properties and inverses</a></li>
+<li><a href="#w2-inverse2">Inverses (continued)</a></li>
+<li><a href="#w2-logrules">Properties of logarithms</a></li>
+<li><a href="#w2-quiz">Week 2 review quiz</a></li>
+</ol></div>
+<div class="toc-group"><h4><span class="u">Reference</span>Formulas, glossary, papers</h4>
+<ol>
+<li><a href="#formulas">Everything on one page</a></li>
+<li><a href="#glossary">English to French glossary</a></li>
+<li><a href="#mock-mcq">Mock <span data-fr="examen intermédiaire">midterm</span></a></li>
+<li><a href="#mock-open">Mock exam paper</a></li>
+</ol></div>
+<div class="toc-group"><h4><span class="u">Week 0</span>Levelling up</h4>
+<ol>
+<li><a href="#f-numbers">Numbers, notation and the order of operations</a></li>
+<li><a href="#f-fractions">Fractions and signs</a></li>
+<li><a href="#f-powers"><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></a></li>
+<li><a href="#f-algebra"><span data-fr="Développement">Expanding</span> and <span data-fr="factorisation">factoring</span></a></li>
+<li><a href="#f-linear">Linear equations</a></li>
+<li><a href="#f-quadratic">Quadratic equations</a></li>
+<li><a href="#f-rational">Equations with the <span data-fr="inconnue">unknown</span> in a denominator</a></li>
+<li><a href="#f-systems">Systems of two equations</a></li>
+<li><a href="#f-inequal">Inequalities and absolute value</a></li>
+<li><a href="#f-plane">The plane and <span data-fr="droites">straight lines</span></a></li>
+<li><a href="#f-percent">Percentages, <span data-fr="croissance">growth</span> and money</a></li>
+<li><a href="#modelling">The modelling cycle</a></li>
+<li><a href="#f-calc">Your calculator</a></li>
+</ol></div>
+</div>
 </section>
 
 <section id="start">
@@ -1486,7 +1545,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-numbers">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 13</span></p>
 <h2 class="sec">Numbers, notation and the order of operations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1513,7 +1572,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-fractions">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 13</span></p>
 <h2 class="sec">Fractions and signs</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1537,7 +1596,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-powers">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 13</span></p>
 <h2 class="sec"><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1559,7 +1618,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-algebra">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 13</span></p>
 <h2 class="sec"><span data-fr="Développement">Expanding</span> and <span data-fr="factorisation">factoring</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1586,7 +1645,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-linear">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 13</span></p>
 <h2 class="sec">Linear equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1611,7 +1670,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-quadratic">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 13</span></p>
 <h2 class="sec">Quadratic equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1639,7 +1698,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-rational">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 13</span></p>
 <h2 class="sec">Equations with the <span data-fr="inconnue">unknown</span> in a denominator</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1663,7 +1722,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-systems">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 8 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 8 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 8 <span class="of">of 13</span></p>
 <h2 class="sec">Systems of two equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1687,7 +1746,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-inequal">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 9 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 9 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 9 <span class="of">of 13</span></p>
 <h2 class="sec">Inequalities and absolute value</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1713,7 +1772,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-plane">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 10 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 10 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 10 <span class="of">of 13</span></p>
 <h2 class="sec">The plane and <span data-fr="droites">straight lines</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1738,7 +1797,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-percent">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 11 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 11 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 11 <span class="of">of 13</span></p>
 <h2 class="sec">Percentages, <span data-fr="croissance">growth</span> and money</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1764,7 +1823,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="modelling">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 12 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 12 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 12 <span class="of">of 13</span></p>
 <h2 class="sec">The modelling cycle</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1792,7 +1851,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="f-calc">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 13 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up (folded) &nbsp;&middot;&nbsp; Lesson 13 <span class="of">of 13</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 13 <span class="of">of 13</span></p>
 <h2 class="sec">Your calculator</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
