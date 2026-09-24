@@ -599,13 +599,15 @@ ol.method > li::before{
 ol.method > li > b{color:var(--ink);font-weight:700}
 
 /* facts: a definition list for things that are not a procedure */
-dl.facts{margin:18px 0 20px;max-width:70ch}
-dl.facts dt{
+dl.keys{display:block;margin:18px 0 20px;max-width:70ch}
+dl.keys dt{
   font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.06em;
   text-transform:uppercase;color:var(--muted);margin:0 0 3px;
 }
-dl.facts dd{margin:0 0 13px;line-height:1.62}
-dl.facts dd:last-child{margin-bottom:0}
+dl.keys dd{display:block;margin:0 0 13px;line-height:1.62}
+dl.keys dd:last-child{margin-bottom:0}
+/* a display formula must never hide itself behind a scrollbar */
+dl.keys .mb,ol.method .mb,ul.traps .mb{overflow-x:visible;white-space:normal;overflow-wrap:anywhere}
 
 /* traps: a short list, not a box */
 ul.traps{
@@ -620,6 +622,14 @@ ul.traps > li.lab{
   letter-spacing:.09em;text-transform:uppercase;color:var(--warn);
 }
 ul.traps > li.lab::before{content:none}
+
+/* the week-by-week roadmap */
+table.roadmap td.wk{font-family:var(--mono);font-weight:700;color:var(--ink);white-space:nowrap}
+table.roadmap td.ka-cell a{display:block;color:var(--ka);text-decoration:none;font-size:12.5px;margin:0 0 3px}
+table.roadmap td.ka-cell a:hover{text-decoration:underline}
+table.roadmap a.here{color:var(--accent);font-weight:700;text-decoration:none;white-space:nowrap}
+table.roadmap a.here:hover{text-decoration:underline}
+table.roadmap .later{color:var(--muted);font-style:italic;white-space:nowrap}
 
 /* the practise pill, so exercises read differently from lessons */
 .learn a.do{background:transparent;color:var(--ka);box-shadow:inset 0 0 0 2px var(--ka)}
@@ -645,6 +655,10 @@ ul.traps > li.lab::before{content:none}
 .learn a{
   display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;
   background:var(--ka);color:var(--paper);text-decoration:none;font-weight:600;font-size:12.5px;
+  max-width:100%;min-width:0;
+}
+@media (max-width:430px){
+  .learn a{white-space:normal;text-align:left;line-height:1.35;padding:7px 12px;border-radius:14px}
 }
 .learn a.ghost{background:transparent;color:var(--ka);box-shadow:inset 0 0 0 1px var(--ka)}
 .learn a:hover{filter:brightness(1.1)}
@@ -818,11 +832,13 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   <div class="railbody" id="railbody">
     <p class="rail-title">Contents</p>
     <p class="rail-top"><a href="#progress">Where you are</a></p>
-    <details class="navpart" open data-part="top"><summary>Start</summary><ol>
+    <!--RAIL-->
+      <details class="navpart" open data-part="top"><summary>Start</summary><ol>
       <li><a href="#progress">Where you are</a></li>
       <li><a href="#start">How to use this</a></li>
+      <li><a href="#roadmap">The course, week by week</a></li>
       </ol></details>
-      <details class="navpart" data-part="0"><summary>Part 0 &middot; Foundations</summary><ol>
+      <details class="navpart" data-part="0"><summary>Week 0 &middot; Levelling up</summary><ol>
       <li><a href="#f-numbers">Numbers, notation and the order of operations</a></li>
       <li><a href="#f-fractions">Fractions and signs</a></li>
       <li><a href="#f-powers">Powers and roots</a></li>
@@ -836,7 +852,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       <li><a href="#f-percent">Percentages, growth and money</a></li>
       <li><a href="#f-calc">Your calculator</a></li>
       </ol></details>
-      <details class="navpart" data-part="1"><summary>Part 1 &middot; Functions</summary><ol>
+      <details class="navpart" data-part="1"><summary>Week 1 &middot; Introduction, functions and graphs</summary><ol>
       <li><a href="#modelling">The modelling cycle</a></li>
       <li><a href="#fn-concept">What a function is</a></li>
       <li><a href="#fn-domain">Domain and range</a></li>
@@ -845,23 +861,23 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       <li><a href="#fn-exp">Exponential functions and the number e</a></li>
       <li><a href="#fn-log">Logarithms</a></li>
       </ol></details>
-      <details class="navpart" data-part="2"><summary>Part 2 &middot; Operations on functions</summary><ol>
+      <details class="navpart" data-part="2"><summary>Week 2 &middot; Operations on functions</summary><ol>
       <li><a href="#op-combine">Combining functions</a></li>
       <li><a href="#op-intercepts">Intercepts</a></li>
       <li><a href="#op-compose">Composition of functions</a></li>
       <li><a href="#op-inverse">Inverse functions</a></li>
       <li><a href="#op-rules">The rules for exponentials and logarithms</a></li>
       </ol></details>
-      <details class="navpart" data-part="3"><summary>Part 3 &middot; Practice papers</summary><ol>
+      <details class="navpart" data-part="3"><summary>Papers &middot; Mock midterm and mock exam</summary><ol>
       <li><a href="#mock-mcq">Mock midterm</a></li>
       <li><a href="#mock-open">Mock exam paper</a></li>
       </ol></details>
-      <details class="navpart" data-part="4"><summary>Part 4 &middot; Reference</summary><ol>
-      <li><a href="#khan">Khan Academy alongside this course</a></li>
+      <details class="navpart" data-part="4"><summary>Reference &middot; Formulas, traps, glossary</summary><ol>
       <li><a href="#formulas">Everything on one page</a></li>
       <li><a href="#traps">Where marks are lost</a></li>
       <li><a href="#glossary">English to French glossary</a></li>
       </ol></details>
+      <!--/RAIL-->
   </div>
 </nav>
 
@@ -889,7 +905,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </section>
 
 <section id="start">
-<p class="lesson-no">Start &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 2</span></p>
+<p class="lesson-no">Start &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 3</span></p>
 <h2 class="sec">How to use this</h2>
 <p class="sec-kicker">Quantitative Methods I, HEG Gen&egrave;ve, IBM 2026-2027.</p>
 <ol class="method">
@@ -900,18 +916,47 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </ol>
 </section>
 
-<div class="partline"><span class="u">Part 0</span><span class="t">Foundations</span></div>
+<section id="roadmap">
+<p class="lesson-no">Start &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 3</span></p>
+<h2 class="sec">The course, week by week</h2>
+<p class="sec-kicker">Every week of Quantitative Methods I, in the order the syllabus sets. Weeks 0 to 2 are written out below. The rest unlock on Cyberlearn as the course reaches them, and this document grows with them. The Khan column is there from the start, so you can work ahead.</p>
+<div class="tw"><table class="data roadmap">
+<thead><tr><th>Week</th><th>What the course covers</th><th>In here</th><th>On Khan Academy</th></tr></thead>
+<tbody>
+<tr><td class="wk">0</td><td>Levelling up</td><td><a class="here" href="#f-numbers">Week 0 below</a></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:foundation-algebra" target="_blank" rel="noopener">Algebra 1, unit 1: Algebra foundations</a> <a href="https://www.khanacademy.org/math/arithmetic/fraction-arithmetic" target="_blank" rel="noopener">Arithmetic, unit 4: Understand fractions</a> <a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations" target="_blank" rel="noopener">Pre-algebra, unit 5: Exponents and order of operations</a> <a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages" target="_blank" rel="noopener">Pre-algebra, unit 4: Percentages</a></td></tr>
+<tr><td class="wk">1</td><td>Introduction, functions and graphs</td><td><a class="here" href="#modelling">Week 1 below</a></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions" target="_blank" rel="noopener">Algebra 1, unit 8: Functions</a> <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank" rel="noopener">Algebra 1, unit 4: Linear equations and graphs</a></td></tr>
+<tr><td class="wk">2</td><td>Operations on functions</td><td><a class="here" href="#op-combine">Week 2 below</a></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite" target="_blank" rel="noopener">Precalculus, unit 1: Composite and <span data-fr="fonctions réciproques">inverse functions</span></a> <a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs" target="_blank" rel="noopener">Algebra 2, unit 8: Logarithms</a></td></tr>
+<tr><td class="wk">3</td><td>Lines, parabolas, systems of linear equations</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations" target="_blank" rel="noopener">Algebra 1, unit 5: Forms of linear equations</a> <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations" target="_blank" rel="noopener">Algebra 1, unit 14: Quadratic functions and equations</a> <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:systems-of-equations" target="_blank" rel="noopener">Algebra 1, unit 6: Systems of equations</a></td></tr>
+<tr><td class="wk">4</td><td><span data-fr="Taux de variation">Rate of change</span> and the derivative</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-limits" target="_blank" rel="noopener">Differential calculus, unit 1: Limits and continuity</a> <a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a></td></tr>
+<tr><td class="wk">5</td><td>Differentiation rules</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a> <a href="https://www.khanacademy.org/math/differential-calculus/dc-chain" target="_blank" rel="noopener">Differential calculus, unit 3: Chain rule and beyond</a></td></tr>
+<tr><td class="wk">6</td><td>Self-study case, review of weeks 1 to 5</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a></td></tr>
+<tr><td class="wk">7</td><td>Applications of the derivatives</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-context-app" target="_blank" rel="noopener">Differential calculus, unit 4: Applications of derivatives</a></td></tr>
+<tr><td class="wk">8</td><td>Optimisation in one variable</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-analytic-app" target="_blank" rel="noopener">Differential calculus, unit 5: Analysing functions</a></td></tr>
+<tr><td class="wk">9</td><td><span data-fr="Examen intermédiaire">Midterm</span>, then an introduction to integrals</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/integral-calculus/ic-integration" target="_blank" rel="noopener">Integral calculus, unit 1: Integrals</a></td></tr>
+<tr><td class="wk">10</td><td>Integration and surpluses</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/integral-calculus/ic-integration" target="_blank" rel="noopener">Integral calculus, unit 1: Integrals</a> <a href="https://www.khanacademy.org/math/integral-calculus/ic-int-app" target="_blank" rel="noopener">Integral calculus, unit 3: Applications of integrals</a></td></tr>
+<tr><td class="wk">11</td><td><span data-fr="Données">Data</span> foundations, collection and <span data-fr="échantillonnage">sampling</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/designing-studies" target="_blank" rel="noopener">Statistics, unit 6: Study design and <span data-fr="échantillonnage">sampling</span></a></td></tr>
+<tr><td class="wk">12</td><td>Describing <span data-fr="données">data</span> with graphs, charts and tables</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/analyzing-categorical-data" target="_blank" rel="noopener">Statistics, unit 1: Analysing categorical <span data-fr="données">data</span></a> <a href="https://www.khanacademy.org/math/statistics-probability/displaying-describing-data" target="_blank" rel="noopener">Statistics, unit 2: Displaying and comparing quantitative <span data-fr="données">data</span></a></td></tr>
+<tr><td class="wk">13</td><td>Describing <span data-fr="données">data</span> with numerical measures</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data" target="_blank" rel="noopener">Statistics, unit 3: Summarising quantitative <span data-fr="données">data</span></a> <a href="https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data" target="_blank" rel="noopener">Statistics, unit 4: Modeling <span data-fr="données">data</span> distributions</a></td></tr>
+<tr><td class="wk">14</td><td>Bivariate <span data-fr="données">data</span>, independence, concentration</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data" target="_blank" rel="noopener">Statistics, unit 5: Exploring bivariate numerical <span data-fr="données">data</span></a> <a href="https://www.khanacademy.org/math/statistics-probability/inference-categorical-data-chi-square-tests" target="_blank" rel="noopener">Statistics, unit 14: Chi-square tests for categorical <span data-fr="données">data</span></a></td></tr>
+<tr><td class="wk">S1-5</td><td>Spring: probability</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/probability-library" target="_blank" rel="noopener">Statistics, unit 7: Probability</a> <a href="https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library" target="_blank" rel="noopener">Statistics, unit 9: Random variables</a></td></tr>
+<tr><td class="wk">S6-9</td><td>Spring: financial mathematics</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/economics-finance-domain/core-finance/interest-tutorial" target="_blank" rel="noopener">Finance, unit 1: Interest and debt</a></td></tr>
+<tr><td class="wk">S10-11</td><td>Spring: linear algebra</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices" target="_blank" rel="noopener">Precalculus, unit 7: Matrices</a> <a href="https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces" target="_blank" rel="noopener">Linear algebra, unit 1: Vectors and spaces</a> <a href="https://www.khanacademy.org/math/linear-algebra/matrix-transformations" target="_blank" rel="noopener">Linear algebra, unit 2: Matrix transformations</a></td></tr>
+<tr><td class="wk">S12</td><td>Spring: linear regression</td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data" target="_blank" rel="noopener">Statistics, unit 5: Exploring bivariate numerical <span data-fr="données">data</span></a></td></tr>
+</tbody></table></div>
+</section>
+
+<div class="partline"><span class="u">Week 0</span><span class="t">Levelling up</span></div>
 
 <section id="f-numbers">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 12</span></p>
 <h2 class="sec">Numbers, notation and the order of operations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">The symbols the lecturer writes without explaining, and the order every calculation follows.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:irrational-numbers/x2f8bb11595b61c86:irrational-numbers-intro/v/introduction-to-rational-and-irrational-numbers" target="_blank" rel="noopener">Watch: Irrational numbers</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:irrational-numbers/x2f8bb11595b61c86:irrational-numbers-intro/v/recognizing-irrational-numbers" target="_blank" rel="noopener">Watch: Classifying numbers: rational & irrational</a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations/xb4832e56:more-on-order-of-operations/a/order-of-operations-review" class="ghost" target="_blank" rel="noopener">Read: Order of operations review</a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations/xb4832e56:more-on-order-of-operations/e/order_of_operations_2" class="do" target="_blank" rel="noopener">Practise: Order of operations</a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations/xb4832e56:more-on-order-of-operations/e/evaluating-numerical-expressions-with-exponents" class="do" target="_blank" rel="noopener">Practise: Order of operations with fractions and exponents</a></div>
-<dl class="facts">
-<dt>The four sets</dt><dd><span class="m">&#8469;</span> whole counting numbers, <span class="m">&#8484;</span> those and their negatives, <span class="m">&#8474;</span> anything writable as a fraction of integers, <span class="m">&#8477;</span> every point on the line. Each contains the one before it: <span class="mb">&#8469; &#8834; &#8484; &#8834; &#8474; &#8834; &#8477;</span></dd>
+<dl class="keys">
+<dt>The four sets</dt><dd><span class="m">&#8469;</span> whole counting numbers, <span class="m">&#8484;</span> those and their negatives, <span class="m">&#8474;</span> anything writable as a fraction of <span data-fr="entiers">integers</span>, <span class="m">&#8477;</span> every point on the line. Each contains the one before it: <span class="mb">&#8469; &#8834; &#8484; &#8834; &#8474; &#8834; &#8477;</span></dd>
 <dt>Reading the symbols</dt><dd><span class="m">x &#8712; &#8477;</span> says x is a real number. <span class="m">&#8834;</span> is included in, <span class="m">&ne;</span> is not equal, <span class="m">&le;</span> at most, <span class="m">&ge;</span> at least, <span class="m">&#8704;</span> for every, <span class="m">&#8707;</span> there exists.</dd>
 <dt>No solution in &#8477;</dt><dd>Means no solution <em>among the real numbers</em>. This course stays in <span class="m">&#8477;</span> all year, so that is the whole answer.</dd>
 </dl>
@@ -939,7 +984,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-fractions">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 12</span></p>
 <h2 class="sec">Fractions and signs</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -969,16 +1014,16 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-powers">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 12</span></p>
 <h2 class="sec"><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">Five rules, one definition of a root, and where fractional exponents appear in the business.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals/x2f8bb11595b61c86:exponent-properties-review/v/multiplying-and-dividing-powers-with-integer-exponents" target="_blank" rel="noopener">Watch: Exponent properties review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals/x2f8bb11595b61c86:simplifying-square-roots/v/simplifying-square-roots-1" target="_blank" rel="noopener">Watch: Simplifying <span data-fr="racines carrées">square roots</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals/x2f8bb11595b61c86:exponent-properties-review/e/properties-of-integer-exponents" class="do" target="_blank" rel="noopener">Practise: Properties of exponents challenge (<span data-fr="entier">integer</span> exponents)</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals/x2f8bb11595b61c86:simplifying-square-roots/e/simplifying_radicals" class="do" target="_blank" rel="noopener">Practise: Simplify <span data-fr="racines carrées">square roots</span></a></div>
-<dl class="facts">
+<dl class="keys">
 <dt>The rules</dt><dd><span class="mb">a<sup>m</sup> &middot; a<sup>n</sup> = a<sup>m+n</sup> &nbsp;&nbsp; <span class="frac"><span class="num">a<sup>m</sup></span><span class="den">a<sup>n</sup></span></span> = a<sup>m&minus;n</sup> &nbsp;&nbsp; (a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></span><span class="mb">(ab)<sup>n</sup> = a<sup>n</sup>b<sup>n</sup> &nbsp;&nbsp; a<sup>0</sup> = 1 &nbsp;&nbsp; a<sup>&minus;n</sup> = <span class="frac"><span class="num">1</span><span class="den">a<sup>n</sup></span></span></span></dd>
-<dt>Roots are powers</dt><dd><span class="mb"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> = a<sup>1/2</sup> &nbsp;&nbsp; <sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> = a<sup>1/n</sup> &nbsp;&nbsp; <sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a<sup>m</sup></span></span> = a<sup>m/n</sup></span>So every root obeys the five rules above. There is nothing extra to learn.</dd>
-<dt>Where it is defined</dt><dd>An even root needs a non-negative inside. <span class="m">0<sup>0</sup></span> and division by zero are undefined.</dd>
+<dt><span data-fr="Racines">Roots</span> are <span data-fr="puissances">powers</span></dt><dd><span class="mb"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> = a<sup>1/2</sup> &nbsp;&nbsp; <sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> = a<sup>1/n</sup> &nbsp;&nbsp; <sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a<sup>m</sup></span></span> = a<sup>m/n</sup></span>So every <span data-fr="racine">root</span> obeys the five rules above. There is nothing extra to learn.</dd>
+<dt>Where it is defined</dt><dd>An even <span data-fr="racine">root</span> needs a non-negative inside. <span class="m">0<sup>0</sup></span> and division by zero are <span data-fr="non défini">undefined</span>.</dd>
 </dl>
 <div class="work">
 <span class="cap">Simplify <span class="frac"><span class="num">(2x<sup>3</sup>)<sup>2</sup> &middot; x</span><span class="den">4x<sup>2</sup></span></span></span>
@@ -998,14 +1043,14 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-algebra">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 12</span></p>
 <h2 class="sec"><span data-fr="Développement">Expanding</span> and <span data-fr="factorisation">factoring</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">The same three identities, read left to right and then right to left.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/v/area-model-for-multiplying-binomials" target="_blank" rel="noopener">Watch: Multiplying binomials</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/v/multiplying-simple-binomials" target="_blank" rel="noopener">Watch: Multiplying binomials intro</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/a/warmup-multiplying-binomials" class="ghost" target="_blank" rel="noopener">Read: Warmup: Multiplying binomials</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/e/multiply-binomials-coefficient" class="do" target="_blank" rel="noopener">Practise: Multiply binomials</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:special-product-binomials/e/multiplying_expressions_1" class="do" target="_blank" rel="noopener">Practise: Multiply difference of squares</a></div>
-<dl class="facts">
-<dt>The three identities</dt><dd><span class="mb">(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></span><span class="mb">(a &minus; b)<sup>2</sup> = a<sup>2</sup> &minus; 2ab + b<sup>2</sup></span><span class="mb">(a + b)(a &minus; b) = a<sup>2</sup> &minus; b<sup>2</sup></span>Expanding reads them left to right. Factoring reads them right to left.</dd>
+<dl class="keys">
+<dt>The three identities</dt><dd><span class="mb">(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></span><span class="mb">(a &minus; b)<sup>2</sup> = a<sup>2</sup> &minus; 2ab + b<sup>2</sup></span><span class="mb">(a + b)(a &minus; b) = a<sup>2</sup> &minus; b<sup>2</sup></span><span data-fr="Développement">Expanding</span> reads them left to right. <span data-fr="Factorisation">Factoring</span> reads them right to left.</dd>
 </dl>
 <ol class="method">
 <li><b><span data-fr="Développement">Expanding</span> two <span data-fr="parenthèses">brackets</span>.</b> Every term in the first meets every term in the second. Four products for two binomials.</li>
@@ -1031,7 +1076,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-linear">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 12</span></p>
 <h2 class="sec">Linear equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1052,7 +1097,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li class="out"><div class="line">x = 13</div><div class="say">Check: <span class="m">3(13 &minus; 2) = 33</span> and <span class="m">2(13) + 7 = 33</span>.</div></li>
 </ol>
 </div>
-<dl class="facts">
+<dl class="keys">
 <dt>When x disappears</dt><dd>If you reach <span class="m">0 = 0</span> every number is a solution. If you reach something false such as <span class="m">0 = 5</span> there is no solution. Neither is a mistake.</dd>
 <dt>Making another letter the subject</dt><dd>Same five steps, treating every other letter as a number. <span class="m">P = R &minus; C</span> gives <span class="m">C = R &minus; P</span>.</dd>
 </dl>
@@ -1065,13 +1110,13 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-quadratic">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 12</span></p>
 <h2 class="sec">Quadratic equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">Anything with an <span class="m">x<sup>2</sup></span> in it. Everything to one side first, always.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratics-solve-factoring/v/example-1-solving-a-quadratic-equation-by-factoring" target="_blank" rel="noopener">Watch: <span data-fr="Résolution">Solving</span> quadratics by <span data-fr="factorisation">factoring</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratics-solve-factoring/v/solving-quadratics-by-dividing-and-factoring" target="_blank" rel="noopener">Watch: <span data-fr="Résolution">Solving</span> quadratics by <span data-fr="factorisation">factoring</span>: leading coefficient ≠ 1</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratics-solve-factoring/a/solving-quadratics-by-factoring-review" class="ghost" target="_blank" rel="noopener">Read: <span data-fr="Résolution">Solving</span> quadratics by <span data-fr="factorisation">factoring</span> review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratics-solve-factoring/e/solving_quadratics_by_factoring_2" class="do" target="_blank" rel="noopener">Practise: Quadratics by <span data-fr="factorisation">factoring</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/e/quadratic_equation" class="do" target="_blank" rel="noopener">Practise: Quadratic formula</a></div>
-<dl class="facts">
+<dl class="keys">
 <dt>The form and the formula</dt><dd><span class="mb">ax<sup>2</sup> + bx + c = 0, &nbsp; a &ne; 0</span><span class="mb">x = <span class="frac"><span class="num">&minus;b &plusmn; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>b<sup>2</sup> &minus; 4ac</span></span></span><span class="den">2a</span></span></span></dd>
 <dt>The discriminant</dt><dd><span class="m">&Delta; = b<sup>2</sup> &minus; 4ac</span> counts the real solutions before you find them: <span class="m">&Delta; &gt; 0</span> two, <span class="m">&Delta; = 0</span> one, <span class="m">&Delta; &lt; 0</span> none in <span class="m">&#8477;</span>.</dd>
 </dl>
@@ -1100,7 +1145,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-rational">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 12</span></p>
 <h2 class="sec">Equations with the <span data-fr="inconnue">unknown</span> in a denominator</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1130,7 +1175,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-systems">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 8 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 8 <span class="of">of 12</span></p>
 <h2 class="sec">Systems of two equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1142,7 +1187,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li><b>Solve, then back-substitute.</b> One equation now has one <span data-fr="inconnue">unknown</span>. Find it, then recover the other.</li>
 <li><b>Check in both.</b> A pair that satisfies only one equation is not a solution.</li>
 </ol>
-<dl class="facts">
+<dl class="keys">
 <dt>The three outcomes</dt><dd>One solution, the usual case. No solution, when the lines are parallel and you reach something false. Infinitely many, when the two equations are the same line and you reach something always true.</dd>
 </dl>
 <div class="work">
@@ -1162,7 +1207,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-inequal">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 9 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 9 <span class="of">of 12</span></p>
 <h2 class="sec">Inequalities and absolute value</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1174,7 +1219,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li><b><span data-fr="Inconnue">Unknown</span> sign means split.</b> If you would divide by <span class="m">a</span> without knowing its sign, do two cases instead.</li>
 <li><b>Write the answer as a set.</b> <span class="m">x &gt; 3</span>, or an interval, or on a number line. All three are accepted.</li>
 </ol>
-<dl class="facts">
+<dl class="keys">
 <dt>Absolute value is a distance</dt><dd><span class="m">|x|</span> is the distance from <span class="m">x</span> to 0, so it is never negative.</dd>
 <dt>The three forms</dt><dd><span class="mb">|x| = k &nbsp; &rarr; &nbsp; x = k or x = &minus;k</span><span class="mb">|x| &lt; k &nbsp; &rarr; &nbsp; &minus;k &lt; x &lt; k</span><span class="mb">|x| &gt; k &nbsp; &rarr; &nbsp; x &lt; &minus;k or x &gt; k</span></dd>
 </dl>
@@ -1195,14 +1240,14 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-plane">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 10 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 10 <span class="of">of 12</span></p>
 <h2 class="sec">The plane and <span data-fr="droites">straight lines</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">Slope is a rate of change. Three forms of the same line.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:intro-to-slope-intercept-form/v/slope-intercept-intro-examples" target="_blank" rel="noopener">Watch: <span data-fr="Exemples résolus">Worked examples</span>: slope-intercept intro</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs/x2f8bb11595b61c86:horizontal-vertical-lines/v/slope-of-a-line-3" target="_blank" rel="noopener">Watch: Horizontal & vertical lines</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:point-slope-form/a/point-slope-form-review" class="ghost" target="_blank" rel="noopener">Read: Point-slope form review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:writing-slope-intercept-equations/e/slope-intercept-equation-from-graph" class="do" target="_blank" rel="noopener">Practise: Slope-intercept equation from graph</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:point-slope-form/e/converting_between_point_slope_and_slope_intercept" class="do" target="_blank" rel="noopener">Practise: Point-slope form</a></div>
-<dl class="facts">
-<dt>Slope</dt><dd><span class="mb">m = <span class="frac"><span class="num">&#916;y</span><span class="den">&#916;x</span></span> = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span></span>It is a rate: how much <span class="m">y</span> changes per one unit of <span class="m">x</span>.</dd>
+<dl class="keys">
+<dt><span data-fr="Pente">Slope</span></dt><dd><span class="mb">m = <span class="frac"><span class="num">&#916;y</span><span class="den">&#916;x</span></span> = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span></span>It is a rate: how much <span class="m">y</span> changes per one unit of <span class="m">x</span>.</dd>
 <dt>The three forms</dt><dd><span class="mb">y = mx + h &nbsp;&nbsp; slope-intercept</span><span class="mb">y &minus; y<sub>1</sub> = m(x &minus; x<sub>1</sub>) &nbsp;&nbsp; point-slope</span><span class="mb">ax + by = c &nbsp;&nbsp; standard</span></dd>
 <dt>Parallel and perpendicular</dt><dd>Parallel means <span class="m">m<sub>1</sub> = m<sub>2</sub></span>. Perpendicular means <span class="m">m<sub>1</sub>m<sub>2</sub> = &minus;1</span>.</dd>
 </dl>
@@ -1227,16 +1272,16 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-percent">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 11 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 11 <span class="of">of 12</span></p>
 <h2 class="sec">Percentages, <span data-fr="croissance">growth</span> and money</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">One idea: a percentage change is a multiplier. Everything else follows.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages/xb4832e56:percent-problems/v/finding-percentages-example" target="_blank" rel="noopener">Watch: Percent problems</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-decay/v/exponential-decay-intro" target="_blank" rel="noopener">Watch: Exponential <span data-fr="croissance">growth</span> & <span data-fr="décroissance">decay</span></a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages/xb4832e56:equivalent-representations-of-percent-problems/a/converting-percents-and-fractions-review" class="ghost" target="_blank" rel="noopener">Read: Converting percents and fractions review</a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages/xb4832e56:percent-word-problems/e/percentage_word_problems_1" class="do" target="_blank" rel="noopener">Practise: Percent word problems</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-expressions/e/exponential-expressions-word-problems" class="do" target="_blank" rel="noopener">Practise: Exponential expressions word problems (numerical)</a></div>
-<dl class="facts">
+<dl class="keys">
 <dt>The multiplier</dt><dd>A rise of <span class="m">r</span> per cent multiplies by <span class="m">1 + <span class="frac"><span class="num">r</span><span class="den">100</span></span></span>. A fall multiplies by <span class="m">1 &minus; <span class="frac"><span class="num">r</span><span class="den">100</span></span></span>. A 20% rise is <span class="m">&times; 1.2</span>; a 20% fall is <span class="m">&times; 0.8</span>.</dd>
 <dt>Repeated change</dt><dd><span class="mb">final = initial &times; <span class="pr">(</span>1 + <span class="frac"><span class="num">r</span><span class="den">100</span></span><span class="pr">)</span><sup>n</sup></span>Changes multiply, they never add. Up 20% then down 20% gives <span class="m">1.2 &times; 0.8 = 0.96</span>, a 4% loss.</dd>
-<dt>Percentage change from two figures</dt><dd><span class="mb"><span class="frac"><span class="num">new &minus; old</span><span class="den">old</span></span> &times; 100</span>Always divided by the <b>old</b> figure.</dd>
+<dt><span data-fr="Variation en pourcentage">Percentage change</span> from two figures</dt><dd><span class="mb"><span class="frac"><span class="num">new &minus; old</span><span class="den">old</span></span> &times; 100</span>Always divided by the <b>old</b> figure.</dd>
 <dt>Points against per cent</dt><dd>From 5% to 7% is a rise of 2 percentage points, and a rise of 40 per cent. Both are true and they are different numbers.</dd>
 </dl>
 <ol class="method">
@@ -1261,15 +1306,15 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="f-calc">
 <div class="sheet-head">
-<p class="lesson-no">Part 0 &middot; Foundations &nbsp;&middot;&nbsp; Lesson 12 <span class="of">of 12</span></p>
+<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 12 <span class="of">of 12</span></p>
 <h2 class="sec">Your calculator</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">The four things that go wrong in an exam.</p>
 <div class="learn"><span class="lab">Khan Academy</span><span class="none">nothing on Khan covers this one</span></div>
-<dl class="facts">
-<dt>Brackets round everything</dt><dd>For <span class="m"><span class="frac"><span class="num">a + b</span><span class="den">c</span></span></span> type <span class="m">(a + b) &divide; c</span>. Without the bracket you have computed <span class="m">a + <span class="frac"><span class="num">b</span><span class="den">c</span></span></span>.</dd>
-<dt>Powers and roots</dt><dd><span class="m">x<sup>y</sup></span> or <span class="m">^</span> for powers. For <span class="m"><sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span></span> use <span class="m">a ^ (1 &divide; n)</span>.</dd>
+<dl class="keys">
+<dt><span data-fr="Parenthèses">Brackets</span> round everything</dt><dd>For <span class="m"><span class="frac"><span class="num">a + b</span><span class="den">c</span></span></span> type <span class="m">(a + b) &divide; c</span>. Without the <span data-fr="parenthèse">bracket</span> you have computed <span class="m">a + <span class="frac"><span class="num">b</span><span class="den">c</span></span></span>.</dd>
+<dt><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></dt><dd><span class="m">x<sup>y</sup></span> or <span class="m">^</span> for <span data-fr="puissances">powers</span>. For <span class="m"><sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span></span> use <span class="m">a ^ (1 &divide; n)</span>.</dd>
 <dt>The two log keys</dt><dd><span class="m">log</span> is base 10 and <span class="m">ln</span> is base e. For any other base use <span class="m">log<sub>b</sub>(x) = <span class="frac"><span class="num">ln x</span><span class="den">ln b</span></span></span>.</dd>
 <dt>The minus keys</dt><dd>The subtraction key and the negative-number key are different buttons. Mixing them gives a syntax error, or worse, a wrong answer.</dd>
 </dl>
@@ -1280,11 +1325,11 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <div class="ex" data-bank="f-calc"></div>
 </section>
 
-<div class="partline"><span class="u">Part 1</span><span class="t">Functions</span></div>
+<div class="partline"><span class="u">Week 1</span><span class="t">Introduction, functions and graphs</span></div>
 
 <section id="modelling">
 <div class="sheet-head">
-<p class="lesson-no">Part 1 &middot; Functions &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 7</span></p>
+<p class="lesson-no">Week 1 &middot; Introduction, functions and graphs &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 7</span></p>
 <h2 class="sec">The modelling cycle</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1297,7 +1342,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li><b>Solve.</b> Ordinary algebra from here.</li>
 <li><b>Interpret.</b> Convert the number back into the language of the question, with its unit. A bare number is not an answer.</li>
 </ol>
-<dl class="facts">
+<dl class="keys">
 <dt>The three relationships to know</dt><dd><span class="mb">revenue = price &times; quantity</span><span class="mb">cost = fixed + variable &times; quantity</span><span class="mb">profit = revenue &minus; cost</span></dd>
 <dt>Units</dt><dd>Units carry through the algebra. If the answer comes out in the wrong unit the model is wrong, which makes units the fastest check you have.</dd>
 </dl>
@@ -1318,15 +1363,15 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="fn-concept">
 <div class="sheet-head">
-<p class="lesson-no">Part 1 &middot; Functions &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 7</span></p>
+<p class="lesson-no">Week 1 &middot; Introduction, functions and graphs &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 7</span></p>
 <h2 class="sec">What a function is</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">A rule that gives each input at most one output.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:evaluating-functions/v/understanding-function-notation-example-1" target="_blank" rel="noopener">Watch: <span data-fr="Exemple résolu">Worked example</span>: Evaluating functions from equation</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:evaluating-functions/v/understanding-function-notation-example-2" target="_blank" rel="noopener">Watch: <span data-fr="Exemple résolu">Worked example</span>: Evaluating functions from graph</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:evaluating-functions/e/functions_1" class="do" target="_blank" rel="noopener">Practise: Evaluate functions</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:interpreting-function-notation/e/function-notation-in-context" class="do" target="_blank" rel="noopener">Practise: Function notation word problems</a></div>
-<dl class="facts">
-<dt>The definition</dt><dd>A function <span class="m">f</span> from a set to a set assigns to each input <b>at most one</b> output. At most one, not exactly one: some inputs may be forbidden, and those form the gap between the set and the domain.</dd>
-<dt>The notation</dt><dd><span class="m">f(x)</span> is the <b>output</b> at <span class="m">x</span>. It is not <span class="m">f</span> multiplied by <span class="m">x</span>. <span class="m">f</span> is the rule; <span class="m">f(x)</span> is one number.</dd>
+<dl class="keys">
+<dt>The definition</dt><dd>A function <span class="m">f</span> from a set to a set assigns to each <span data-fr="entrée">input</span> <b>at most one</b> <span data-fr="sortie">output</span>. At most one, not exactly one: some <span data-fr="entrées">inputs</span> may be forbidden, and those form the gap between the set and the <span data-fr="domaine de définition">domain</span>.</dd>
+<dt>The notation</dt><dd><span class="m">f(x)</span> is the <b><span data-fr="sortie">output</span></b> at <span class="m">x</span>. It is not <span class="m">f</span> multiplied by <span class="m">x</span>. <span class="m">f</span> is the rule; <span class="m">f(x)</span> is one number.</dd>
 <dt>Four ways to hold the same function</dt><dd>A formula, a graph, a table, a sentence. Exam questions move between them, and the function is the same object throughout.</dd>
 </dl>
 <ol class="method">
@@ -1352,7 +1397,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="fn-domain">
 <div class="sheet-head">
-<p class="lesson-no">Part 1 &middot; Functions &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 7</span></p>
+<p class="lesson-no">Week 1 &middot; Introduction, functions and graphs &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 7</span></p>
 <h2 class="sec"><span data-fr="Domaine de définition">Domain</span> and <span data-fr="ensemble image">range</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1366,9 +1411,9 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li><b>Combine.</b> When two conditions apply, the <span data-fr="domaine de définition">domain</span> is where both hold at once, not either.</li>
 <li><b>Context can restrict further.</b> A number of employees cannot be 7.3 or negative, whatever the algebra allows.</li>
 </ol>
-<dl class="facts">
+<dl class="keys">
 <dt>Three ways to write it</dt><dd><span class="m">x &ge; 4</span>, or <span class="m">[4, &infin;[</span>, or a shaded ray on a number line. All three are accepted.</dd>
-<dt>The range</dt><dd>The set of outputs actually reached. Read it off the graph rather than the formula: find the lowest and highest values the curve attains.</dd>
+<dt>The <span data-fr="ensemble image">range</span></dt><dd>The set of <span data-fr="sorties">outputs</span> actually reached. Read it off the graph rather than the formula: find the lowest and highest values the curve attains.</dd>
 </dl>
 <div class="work">
 <span class="cap"><span data-fr="Domaine de définition">Domain</span> of f(x) = <span class="frac"><span class="num"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x &minus; 2</span></span></span><span class="den">x &minus; 5</span></span></span>
@@ -1388,7 +1433,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="fn-library">
 <div class="sheet-head">
-<p class="lesson-no">Part 1 &middot; Functions &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 7</span></p>
+<p class="lesson-no">Week 1 &middot; Introduction, functions and graphs &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 7</span></p>
 <h2 class="sec">The function library</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1410,10 +1455,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </tbody>
 </table>
 </div>
-<dl class="facts">
-<dt>Power against exponential</dt><dd><span class="m">x<sup>2</sup></span> is a power: the variable is the base. <span class="m">2<sup>x</sup></span> is exponential: the variable is the exponent. They behave completely differently, and mixing them up is the commonest error in this topic.</dd>
-<dt>Reading a parabola</dt><dd><span class="m">a</span> decides the opening and the width. The vertex sits at <span class="mb">x = <span class="frac"><span class="num">&minus;b</span><span class="den">2a</span></span></span> and the curve is symmetric about that vertical line, which gives you a second point free for every point you find.</dd>
-<dt>Case-defined</dt><dd>A function may be built from several pieces, each on its own interval. It is still one function.</dd>
+<dl class="keys">
+<dt><span data-fr="Puissance">Power</span> against exponential</dt><dd><span class="m">x<sup>2</sup></span> is a <span data-fr="puissance">power</span>: the variable is the base. <span class="m">2<sup>x</sup></span> is exponential: the variable is the exponent. They behave completely differently, and mixing them up is the commonest error in this topic.</dd>
+<dt>Reading a parabola</dt><dd><span class="m">a</span> decides the opening and the width. The <span data-fr="sommet">vertex</span> sits at <span class="mb">x = <span class="frac"><span class="num">&minus;b</span><span class="den">2a</span></span></span> and the curve is symmetric about that vertical line, which gives you a second point free for every point you find.</dd>
+<dt><span data-fr="Définie par morceaux">Case-defined</span></dt><dd>A function may be built from several pieces, each on its own interval. It is still one function.</dd>
 </dl>
 <ul class="traps"><li class="lab">Traps</li>
 <li><span class="m">2<sup>x</sup></span> at <span class="m">x = 10</span> is 1024; <span class="m">x<sup>2</sup></span> is 100. Exponentials overtake every <span data-fr="puissance">power</span> eventually.</li>
@@ -1424,7 +1469,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="fn-graphs">
 <div class="sheet-head">
-<p class="lesson-no">Part 1 &middot; Functions &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 7</span></p>
+<p class="lesson-no">Week 1 &middot; Introduction, functions and graphs &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 7</span></p>
 <h2 class="sec">Graphs</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1443,9 +1488,9 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <line class="gr" x1="34" y1="276" x2="34" y2="34"/><line class="gr" x1="91.43" y1="276" x2="91.43" y2="34"/><line class="gr" x1="148.86" y1="276" x2="148.86" y2="34"/><line class="gr" x1="206.29" y1="276" x2="206.29" y2="34"/><line class="gr" x1="263.71" y1="276" x2="263.71" y2="34"/><line class="gr" x1="321.14" y1="276" x2="321.14" y2="34"/><line class="gr" x1="378.57" y1="276" x2="378.57" y2="34"/><line class="gr" x1="436" y1="276" x2="436" y2="34"/><line class="gr" x1="34" y1="276" x2="436" y2="276"/><line class="gr" x1="34" y1="251.8" x2="436" y2="251.8"/><line class="gr" x1="34" y1="227.6" x2="436" y2="227.6"/><line class="gr" x1="34" y1="203.4" x2="436" y2="203.4"/><line class="gr" x1="34" y1="179.2" x2="436" y2="179.2"/><line class="gr" x1="34" y1="155" x2="436" y2="155"/><line class="gr" x1="34" y1="130.8" x2="436" y2="130.8"/><line class="gr" x1="34" y1="106.6" x2="436" y2="106.6"/><line class="gr" x1="34" y1="82.4" x2="436" y2="82.4"/><line class="gr" x1="34" y1="58.2" x2="436" y2="58.2"/><line class="gr" x1="34" y1="34" x2="436" y2="34"/><line class="ax" x1="34" y1="203.4" x2="436" y2="203.4"/><line class="ax" x1="91.43" y1="276" x2="91.43" y2="34"/><line class="tk" x1="148.86" y1="199.4" x2="148.86" y2="207.4"/><text class="tl" x="148.86" y="220.4" text-anchor="middle">1</text><line class="tk" x1="206.29" y1="199.4" x2="206.29" y2="207.4"/><text class="tl" x="206.29" y="220.4" text-anchor="middle">2</text><line class="tk" x1="263.71" y1="199.4" x2="263.71" y2="207.4"/><text class="tl" x="263.71" y="220.4" text-anchor="middle">3</text><line class="tk" x1="321.14" y1="199.4" x2="321.14" y2="207.4"/><text class="tl" x="321.14" y="220.4" text-anchor="middle">4</text><line class="tk" x1="378.57" y1="199.4" x2="378.57" y2="207.4"/><text class="tl" x="378.57" y="220.4" text-anchor="middle">5</text><line class="tk" x1="87.43" y1="251.8" x2="95.43" y2="251.8"/><text class="tl" x="82.43" y="255.8" text-anchor="end">-2</text><line class="tk" x1="87.43" y1="155" x2="95.43" y2="155"/><text class="tl" x="82.43" y="159" text-anchor="end">2</text><line class="tk" x1="87.43" y1="106.6" x2="95.43" y2="106.6"/><text class="tl" x="82.43" y="110.6" text-anchor="end">4</text><line class="tk" x1="87.43" y1="58.2" x2="95.43" y2="58.2"/><text class="tl" x="82.43" y="62.2" text-anchor="end">6</text><text class="al" x="448" y="207.4">x</text><text class="al" x="91.43" y="22" text-anchor="middle">y</text><path class="cv" d="M 68.46 88.21 L 69.32 89.94 L 70.18 91.67 L 71.04 93.39 L 71.9 95.09 L 72.76 96.78 L 73.63 98.47 L 74.49 100.14 L 75.35 101.8 L 76.21 103.45 L 77.07 105.09 L 77.93 106.72 L 78.79 108.33 L 79.66 109.94 L 80.52 111.53 L 81.38 113.12 L 82.24 114.69 L 83.1 116.26 L 83.96 117.81 L 84.82 119.35 L 85.69 120.88 L 86.55 122.4 L 87.41 123.91 L 88.27 125.4 L 89.13 126.89 L 89.99 128.36 L 90.85 129.83 L 91.72 131.28 L 92.58 132.73 L 93.44 134.16 L 94.3 135.58 L 95.16 136.99 L 96.02 138.39 L 96.88 139.78 L 97.75 141.16 L 98.61 142.52 L 99.47 143.88 L 100.33 145.22 L 101.19 146.56 L 102.05 147.88 L 102.91 149.19 L 103.78 150.49 L 104.64 151.78 L 105.5 153.06 L 106.36 154.33 L 107.22 155.59 L 108.08 156.84 L 108.94 158.07 L 109.81 159.3 L 110.67 160.51 L 111.53 161.72 L 112.39 162.91 L 113.25 164.09 L 114.11 165.26 L 114.97 166.42 L 115.84 167.57 L 116.7 168.71 L 117.56 169.83 L 118.42 170.95 L 119.28 172.06 L 120.14 173.15 L 121 174.23 L 121.87 175.31 L 122.73 176.37 L 123.59 177.42 L 124.45 178.46 L 125.31 179.49 L 126.17 180.51 L 127.03 181.51 L 127.9 182.51 L 128.76 183.5 L 129.62 184.47 L 130.48 185.43 L 131.34 186.39 L 132.2 187.33 L 133.06 188.26 L 133.93 189.18 L 134.79 190.09 L 135.65 190.99 L 136.51 191.88 L 137.37 192.75 L 138.23 193.62 L 139.09 194.47 L 139.96 195.32 L 140.82 196.15 L 141.68 196.97 L 142.54 197.78 L 143.4 198.58 L 144.26 199.37 L 145.12 200.15 L 145.99 200.92 L 146.85 201.68 L 147.71 202.42 L 148.57 203.16 L 149.43 203.88 L 150.29 204.59 L 151.15 205.3 L 152.02 205.99 L 152.88 206.67 L 153.74 207.34 L 154.6 208 L 155.46 208.65 L 156.32 209.28 L 157.18 209.91 L 158.05 210.52 L 158.91 211.13 L 159.77 211.72 L 160.63 212.3 L 161.49 212.88 L 162.35 213.44 L 163.21 213.99 L 164.08 214.53 L 164.94 215.05 L 165.8 215.57 L 166.66 216.08 L 167.52 216.57 L 168.38 217.06 L 169.24 217.53 L 170.11 218 L 170.97 218.45 L 171.83 218.89 L 172.69 219.32 L 173.55 219.74 L 174.41 220.15 L 175.27 220.54 L 176.14 220.93 L 177 221.31 L 177.86 221.67 L 178.72 222.02 L 179.58 222.37 L 180.44 222.7 L 181.3 223.02 L 182.17 223.33 L 183.03 223.63 L 183.89 223.92 L 184.75 224.2 L 185.61 224.46 L 186.47 224.72 L 187.33 224.96 L 188.2 225.2 L 189.06 225.42 L 189.92 225.63 L 190.78 225.84 L 191.64 226.03 L 192.5 226.21 L 193.36 226.37 L 194.23 226.53 L 195.09 226.68 L 195.95 226.82 L 196.81 226.94 L 197.67 227.06 L 198.53 227.16 L 199.39 227.25 L 200.26 227.33 L 201.12 227.4 L 201.98 227.46 L 202.84 227.51 L 203.7 227.55 L 204.56 227.58 L 205.42 227.59 L 206.29 227.6 L 207.15 227.59 L 208.01 227.58 L 208.87 227.55 L 209.73 227.51 L 210.59 227.46 L 211.45 227.4 L 212.32 227.33 L 213.18 227.25 L 214.04 227.16 L 214.9 227.06 L 215.76 226.94 L 216.62 226.82 L 217.48 226.68 L 218.35 226.53 L 219.21 226.37 L 220.07 226.21 L 220.93 226.03 L 221.79 225.84 L 222.65 225.63 L 223.51 225.42 L 224.38 225.2 L 225.24 224.96 L 226.1 224.72 L 226.96 224.46 L 227.82 224.2 L 228.68 223.92 L 229.54 223.63 L 230.41 223.33 L 231.27 223.02 L 232.13 222.7 L 232.99 222.37 L 233.85 222.02 L 234.71 221.67 L 235.57 221.31 L 236.44 220.93 L 237.3 220.54 L 238.16 220.15 L 239.02 219.74 L 239.88 219.32 L 240.74 218.89 L 241.6 218.45 L 242.47 218 L 243.33 217.53 L 244.19 217.06 L 245.05 216.57 L 245.91 216.08 L 246.77 215.57 L 247.63 215.05 L 248.5 214.53 L 249.36 213.99 L 250.22 213.44 L 251.08 212.88 L 251.94 212.3 L 252.8 211.72 L 253.66 211.13 L 254.53 210.52 L 255.39 209.91 L 256.25 209.28 L 257.11 208.65 L 257.97 208 L 258.83 207.34 L 259.69 206.67 L 260.56 205.99 L 261.42 205.3 L 262.28 204.59 L 263.14 203.88 L 264 203.16 L 264.86 202.42 L 265.72 201.68 L 266.59 200.92 L 267.45 200.15 L 268.31 199.37 L 269.17 198.58 L 270.03 197.78 L 270.89 196.97 L 271.75 196.15 L 272.62 195.32 L 273.48 194.47 L 274.34 193.62 L 275.2 192.75 L 276.06 191.88 L 276.92 190.99 L 277.78 190.09 L 278.65 189.18 L 279.51 188.26 L 280.37 187.33 L 281.23 186.39 L 282.09 185.43 L 282.95 184.47 L 283.81 183.5 L 284.68 182.51 L 285.54 181.51 L 286.4 180.51 L 287.26 179.49 L 288.12 178.46 L 288.98 177.42 L 289.84 176.37 L 290.71 175.31 L 291.57 174.23 L 292.43 173.15 L 293.29 172.06 L 294.15 170.95 L 295.01 169.83 L 295.87 168.71 L 296.74 167.57 L 297.6 166.42 L 298.46 165.26 L 299.32 164.09 L 300.18 162.91 L 301.04 161.72 L 301.9 160.51 L 302.77 159.3 L 303.63 158.07 L 304.49 156.84 L 305.35 155.59 L 306.21 154.33 L 307.07 153.06 L 307.93 151.78 L 308.8 150.49 L 309.66 149.19 L 310.52 147.88 L 311.38 146.56 L 312.24 145.22 L 313.1 143.88 L 313.96 142.52 L 314.83 141.16 L 315.69 139.78 L 316.55 138.39 L 317.41 136.99 L 318.27 135.58 L 319.13 134.16 L 319.99 132.73 L 320.86 131.28 L 321.72 129.83 L 322.58 128.36 L 323.44 126.89 L 324.3 125.4 L 325.16 123.91 L 326.02 122.4 L 326.89 120.88 L 327.75 119.35 L 328.61 117.81 L 329.47 116.26 L 330.33 114.69 L 331.19 113.12 L 332.05 111.53 L 332.92 109.94 L 333.78 108.33 L 334.64 106.72 L 335.5 105.09 L 336.36 103.45 L 337.22 101.8 L 338.08 100.14 L 338.95 98.47 L 339.81 96.78 L 340.67 95.09 L 341.53 93.39 L 342.39 91.67 L 343.25 89.94 L 344.11 88.21"/><circle class="pt" cx="148.86" cy="203.4" r="4.5"/><text class="pl" x="148.86" y="189.4" text-anchor="middle">(1, 0)</text><circle class="pt" cx="263.71" cy="203.4" r="4.5"/><text class="pl" x="263.71" y="189.4" text-anchor="middle">(3, 0)</text><circle class="pt" cx="206.29" cy="227.6" r="4.5"/><text class="pl" x="206.29" y="245.6" text-anchor="middle">(2, &minus;1)</text><line class="asy" x1="206.29" y1="276" x2="206.29" y2="34"/>
 </svg>
 <figcaption>y = x&#178; &minus; 4x + 3. <span data-fr="Racines">Roots</span> at 1 and 3, <span data-fr="sommet">vertex</span> at x = 2, and the curve is symmetric about that line.</figcaption></figure>
-<dl class="facts">
-<dt>Reading back</dt><dd>Where the curve crosses the horizontal axis is where the quantity is zero, which in business is usually break-even. Where two curves cross is where the two quantities are equal.</dd>
-<dt>A truncated axis exaggerates</dt><dd>A vertical axis that starts at 90 rather than 0 makes a 2% change look enormous. Check where the axis starts before believing the shape.</dd>
+<dl class="keys">
+<dt>Reading back</dt><dd>Where the curve crosses the horizontal <span data-fr="axe">axis</span> is where the quantity is zero, which in business is usually <span data-fr="seuil de rentabilité">break-even</span>. Where two curves cross is where the two quantities are equal.</dd>
+<dt>A truncated <span data-fr="axe">axis</span> exaggerates</dt><dd>A vertical <span data-fr="axe">axis</span> that starts at 90 rather than 0 makes a 2% change look enormous. Check where the <span data-fr="axe">axis</span> starts before believing the shape.</dd>
 </dl>
 <ul class="traps"><li class="lab">Traps</li>
 <li>A sketch still needs the <span data-fr="intersections avec les axes">intercepts</span> and the <span data-fr="sommet">vertex</span> marked with their values. A shape alone is not an answer.</li>
@@ -1456,17 +1501,17 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="fn-exp">
 <div class="sheet-head">
-<p class="lesson-no">Part 1 &middot; Functions &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 7</span></p>
+<p class="lesson-no">Week 1 &middot; Introduction, functions and graphs &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 7</span></p>
 <h2 class="sec">Exponential functions and the number e</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">The variable sits in the exponent. That one fact drives everything.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-decay/v/exponential-decay-intro" target="_blank" rel="noopener">Watch: Exponential <span data-fr="croissance">growth</span> & <span data-fr="décroissance">decay</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-decay/v/graphing-basic-exponential-functions" target="_blank" rel="noopener">Watch: Graphing exponential <span data-fr="croissance">growth</span> & <span data-fr="décroissance">decay</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-vs-linear-models/a/exponential-growth-decay-faq" class="ghost" target="_blank" rel="noopener">Read: Exponential <span data-fr="croissance">growth</span> & <span data-fr="décroissance">decay</span>: FAQ</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-expressions/e/exponential-expressions-word-problems" class="do" target="_blank" rel="noopener">Practise: Exponential expressions word problems (numerical)</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-expressions/e/exponential-expressions-word-problems-algebraic" class="do" target="_blank" rel="noopener">Practise: Exponential expressions word problems (algebraic)</a></div>
-<dl class="facts">
+<dl class="keys">
 <dt>The form</dt><dd><span class="mb">f(x) = a &middot; b<sup>x</sup>, &nbsp; b &gt; 0, b &ne; 1</span><span class="m">a</span> is the value at <span class="m">x = 0</span>. <span class="m">b</span> is the multiplier for one step.</dd>
-<dt>The two shapes</dt><dd><span class="m">b &gt; 1</span> grows, <span class="m">0 &lt; b &lt; 1</span> decays. Every exponential passes through <span class="m">(0, a)</span> and never touches the horizontal axis.</dd>
+<dt>The two shapes</dt><dd><span class="m">b &gt; 1</span> grows, <span class="m">0 &lt; b &lt; 1</span> decays. Every exponential passes through <span class="m">(0, a)</span> and never touches the horizontal <span data-fr="axe">axis</span>.</dd>
 <dt>Building b from a percentage</dt><dd>A rise of <span class="m">r</span> per cent per period gives <span class="m">b = 1 + <span class="frac"><span class="num">r</span><span class="den">100</span></span></span>. A fall gives <span class="m">b = 1 &minus; <span class="frac"><span class="num">r</span><span class="den">100</span></span></span>.</dd>
-<dt>The number e</dt><dd><span class="m">e &asymp; 2.71828</span>. It is the limit of <span class="m"><span class="pr">(</span>1 + <span class="frac"><span class="num">1</span><span class="den">n</span></span><span class="pr">)</span><sup>n</sup></span> as <span class="m">n</span> grows, which is what compounding more and more often approaches. Continuous growth is written <span class="m">A = Pe<sup>rt</sup></span>.</dd>
+<dt>The number e</dt><dd><span class="m">e &asymp; 2.71828</span>. It is the limit of <span class="m"><span class="pr">(</span>1 + <span class="frac"><span class="num">1</span><span class="den">n</span></span><span class="pr">)</span><sup>n</sup></span> as <span class="m">n</span> grows, which is what compounding more and more often approaches. Continuous <span data-fr="croissance">growth</span> is written <span class="m">A = Pe<sup>rt</sup></span>.</dd>
 </dl>
 <figure class="fig">
 <svg viewBox="0 0 470 300" role="img" aria-label="Two exponential curves, one growing and one decaying, meeting at (0, 1)">
@@ -1492,17 +1537,17 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="fn-log">
 <div class="sheet-head">
-<p class="lesson-no">Part 1 &middot; Functions &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 7</span></p>
+<p class="lesson-no">Week 1 &middot; Introduction, functions and graphs &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 7</span></p>
 <h2 class="sec">Logarithms</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">A logarithm is an exponent. That sentence answers most questions in this topic.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/v/fancier-logarithm-expressions" target="_blank" rel="noopener">Watch: Evaluating logarithms (advanced)</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms" class="ghost" target="_blank" rel="noopener">Read: Intro to logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/e/logarithms_1" class="do" target="_blank" rel="noopener">Practise: Evaluate logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/e/logarithms_1.5" class="do" target="_blank" rel="noopener">Practise: Evaluate logarithms (advanced)</a></div>
-<dl class="facts">
-<dt>The definition</dt><dd><span class="mb">log<sub>b</sub>(x) = y &nbsp; means &nbsp; b<sup>y</sup> = x</span>Said aloud: what power of <span class="m">b</span> gives <span class="m">x</span>?</dd>
+<dl class="keys">
+<dt>The definition</dt><dd><span class="mb">log<sub>b</sub>(x) = y &nbsp; means &nbsp; b<sup>y</sup> = x</span>Said aloud: what <span data-fr="puissance">power</span> of <span class="m">b</span> gives <span class="m">x</span>?</dd>
 <dt>The two keys</dt><dd><span class="m">log</span> means base 10. <span class="m">ln</span> means base <span class="m">e</span>. Anything else goes through <span class="mb">log<sub>b</sub>(x) = <span class="frac"><span class="num">ln x</span><span class="den">ln b</span></span></span></dd>
 <dt>Undoing each other</dt><dd><span class="m">ln(e<sup>x</sup>) = x</span> and <span class="m">e<sup>ln x</sup> = x</span>. This is how you get a variable out of an exponent.</dd>
-<dt>The domain</dt><dd><span class="m">ln x</span> needs <span class="m">x &gt; 0</span>, strictly. There is no power of <span class="m">e</span> that gives zero or a negative.</dd>
+<dt>The <span data-fr="domaine de définition">domain</span></dt><dd><span class="m">ln x</span> needs <span class="m">x &gt; 0</span>, strictly. There is no <span data-fr="puissance">power</span> of <span class="m">e</span> that gives zero or a negative.</dd>
 </dl>
 <figure class="fig">
 <svg viewBox="0 0 470 270" role="img" aria-label="The natural logarithm curve, crossing at (1, 0)">
@@ -1526,20 +1571,20 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <div class="ex" data-bank="fn-log"></div>
 </section>
 
-<div class="partline"><span class="u">Part 2</span><span class="t">Operations on functions</span></div>
+<div class="partline"><span class="u">Week 2</span><span class="t">Operations on functions</span></div>
 
 <section id="op-combine">
 <div class="sheet-head">
-<p class="lesson-no">Part 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 5</span></p>
+<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 5</span></p>
 <h2 class="sec">Combining functions</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">Five operations on functions you already have. Profit is the one that matters.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:poly-arithmetic/x2ec2f6f830c9fb89:poly-add-sub/a/adding-and-subtracting-polynomials-review" class="ghost" target="_blank" rel="noopener">Read: Adding and subtracting polynomials review</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:rational-functions/x9e81a4f98389efdf:adding-and-subtracting-rational-expressions/e/adding_and_subtracting_rational_expressions_5" class="do" target="_blank" rel="noopener">Practise: Add and subtract rational expressions</a></div>
-<dl class="facts">
+<dl class="keys">
 <dt>The five</dt><dd><span class="mb">(f + g)(x) = f(x) + g(x) &nbsp;&nbsp; (f &minus; g)(x) = f(x) &minus; g(x)</span><span class="mb">(fg)(x) = f(x)g(x) &nbsp;&nbsp; <span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(x) = <span class="frac"><span class="num">f(x)</span><span class="den">g(x)</span></span> &nbsp;&nbsp; (cf)(x) = c &middot; f(x)</span>Each one is done at the same <span class="m">x</span>, term by term.</dd>
 <dt>Where it is defined</dt><dd>The combination is defined where <b>both</b> originals are, and for a quotient also where <span class="m">g(x) &ne; 0</span>.</dd>
-<dt>Profit</dt><dd><span class="mb">P(q) = R(q) &minus; C(q)</span>The single most used combination in this course. Break-even is where <span class="m">P(q) = 0</span>.</dd>
+<dt><span data-fr="Bénéfice">Profit</span></dt><dd><span class="mb">P(q) = R(q) &minus; C(q)</span>The single most used combination in this course. <span data-fr="Seuil de rentabilité">Break-even</span> is where <span class="m">P(q) = 0</span>.</dd>
 </dl>
 <div class="work">
 <span class="cap">R(q) = 12q and C(q) = 400 + 4q. Find P and the <span data-fr="seuil de rentabilité">break-even</span> quantity.</span>
@@ -1558,7 +1603,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="op-intercepts">
 <div class="sheet-head">
-<p class="lesson-no">Part 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 5</span></p>
+<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 5</span></p>
 <h2 class="sec"><span data-fr="Intersections avec les axes">Intercepts</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1579,8 +1624,8 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li class="out"><div class="line">x = 3 and x = &minus;2</div><div class="say">The two <span data-fr="zéros de la fonction">x-intercepts</span>.</div></li>
 </ol>
 </div>
-<dl class="facts">
-<dt>Break-even is an x-intercept</dt><dd><span class="m">P(q) = 0</span> is exactly the question "where does the profit curve cross the axis". Same calculation, different word.</dd>
+<dl class="keys">
+<dt><span data-fr="Seuil de rentabilité">Break-even</span> is an <span data-fr="zéro de la fonction">x-intercept</span></dt><dd><span class="m">P(q) = 0</span> is exactly the question "where does the <span data-fr="bénéfice">profit</span> curve cross the <span data-fr="axe">axis</span>". Same calculation, different word.</dd>
 </dl>
 <ul class="traps"><li class="lab">Traps</li>
 <li>A zero denominator is not an <span data-fr="zéro de la fonction">x-intercept</span>. It is a break in the curve.</li>
@@ -1591,13 +1636,13 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="op-compose">
 <div class="sheet-head">
-<p class="lesson-no">Part 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 5</span></p>
+<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 5</span></p>
 <h2 class="sec">Composition of functions</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">One function’s output becomes the next one’s input.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/v/function-composition" target="_blank" rel="noopener">Watch: Composing functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/v/evaluating-composite-functions" target="_blank" rel="noopener">Watch: Evaluating composite functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/a/introduction-to-function-composition" class="ghost" target="_blank" rel="noopener">Read: Intro to composing functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/e/evaluate-composite-functions-from-formulas" class="do" target="_blank" rel="noopener">Practise: Evaluate composite functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/e/compose-functions" class="do" target="_blank" rel="noopener">Practise: Find composite functions</a></div>
-<dl class="facts">
+<dl class="keys">
 <dt>The notation</dt><dd><span class="mb">(g &#8728; f)(x) = g(f(x))</span>Said "g after f". Point at the <span class="m">x</span>: whichever letter is touching it acts first. That is the opposite of reading order.</dd>
 </dl>
 <figure class="fig">
@@ -1637,17 +1682,17 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="op-inverse">
 <div class="sheet-head">
-<p class="lesson-no">Part 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 5</span></p>
+<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 5</span></p>
 <h2 class="sec"><span data-fr="Fonctions réciproques">Inverse functions</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker"><span class="m">f<sup>&minus;1</sup></span> undoes <span class="m">f</span>. It exists only when nothing is ambiguous.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:verifying-inverse/v/verify-inverse-functions-from-tables" target="_blank" rel="noopener">Watch: Verifying <span data-fr="fonctions réciproques">inverse functions</span> by composition</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:inverse-functions-in-graphs-and-tables/e/inverse-functions-graphs-and-tables" class="do" target="_blank" rel="noopener">Practise: <span data-fr="Fonctions réciproques">Inverse functions</span>: graphs and tables</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:verifying-inverse/e/inverses_of_functions" class="do" target="_blank" rel="noopener">Practise: Verify <span data-fr="fonctions réciproques">inverse functions</span></a></div>
-<dl class="facts">
-<dt>When it exists</dt><dd>Only if <span class="m">f</span> is one-to-one: different inputs give different outputs. On a graph, a horizontal line must never meet the curve twice. <span class="m">x<sup>2</sup></span> fails, unless you restrict it to <span class="m">x &ge; 0</span>.</dd>
+<dl class="keys">
+<dt>When it exists</dt><dd>Only if <span class="m">f</span> is <span data-fr="injective">one-to-one</span>: different <span data-fr="entrées">inputs</span> give different <span data-fr="sorties">outputs</span>. On a graph, a horizontal line must never meet the curve twice. <span class="m">x<sup>2</sup></span> fails, unless you restrict it to <span class="m">x &ge; 0</span>.</dd>
 <dt>The definition</dt><dd><span class="mb">f<sup>&minus;1</sup>(f(x)) = x &nbsp; and &nbsp; f(f<sup>&minus;1</sup>(x)) = x</span><span class="m">f<sup>&minus;1</sup></span> is not <span class="m"><span class="frac"><span class="num">1</span><span class="den">f</span></span></span>.</dd>
-<dt>The graph</dt><dd>The inverse is the mirror image in the line <span class="m">y = x</span>. Every point <span class="m">(a, b)</span> becomes <span class="m">(b, a)</span>.</dd>
-<dt>Domain and range swap</dt><dd>The domain of <span class="m">f<sup>&minus;1</sup></span> is the range of <span class="m">f</span>, and the other way round.</dd>
+<dt>The graph</dt><dd>The <span data-fr="réciproque">inverse</span> is the mirror image in the line <span class="m">y = x</span>. Every point <span class="m">(a, b)</span> becomes <span class="m">(b, a)</span>.</dd>
+<dt><span data-fr="Domaine de définition">Domain</span> and <span data-fr="ensemble image">range</span> swap</dt><dd>The <span data-fr="domaine de définition">domain</span> of <span class="m">f<sup>&minus;1</sup></span> is the <span data-fr="ensemble image">range</span> of <span class="m">f</span>, and the other way round.</dd>
 </dl>
 <ol class="method">
 <li><b>Write y = f(x).</b></li>
@@ -1678,13 +1723,13 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <section id="op-rules">
 <div class="sheet-head">
-<p class="lesson-no">Part 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 5</span></p>
+<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 5</span></p>
 <h2 class="sec">The rules for exponentials and logarithms</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <p class="sec-kicker">Three rules each way, and the three that do not exist.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-prop/v/introduction-to-logarithm-properties-part-2" target="_blank" rel="noopener">Watch: Intro to logarithm properties (2 of 2)</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:change-of-base/v/change-of-base-formula" target="_blank" rel="noopener">Watch: The change of base formula for logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-prop/a/properties-of-logarithms" class="ghost" target="_blank" rel="noopener">Read: Intro to logarithm properties</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-prop/e/logarithms_2" class="do" target="_blank" rel="noopener">Practise: Use the properties of logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:change-of-base/e/evaluate-logarithms-using-the-change-of-base-rule" class="do" target="_blank" rel="noopener">Practise: Evaluate logarithms: change of base rule</a></div>
-<dl class="facts">
+<dl class="keys">
 <dt>The logarithm rules</dt><dd><span class="mb">log(ab) = log a + log b</span><span class="mb">log<span class="pr">(</span><span class="frac"><span class="num">a</span><span class="den">b</span></span><span class="pr">)</span> = log a &minus; log b</span><span class="mb">log(a<sup>n</sup>) = n log a</span>The third one is the one that solves equations: it brings an exponent down to the front.</dd>
 <dt>Change of base</dt><dd><span class="mb">log<sub>b</sub>(x) = <span class="frac"><span class="num">ln x</span><span class="den">ln b</span></span></span>Your calculator has only two log keys, so every other base goes through this.</dd>
 <dt>The rules that do not exist</dt><dd><span class="m">log(a + b)</span> does not break up. <span class="m"><span class="frac"><span class="num">log a</span><span class="den">log b</span></span></span> is not <span class="m">log(a &minus; b)</span>. <span class="m">(log a)<sup>2</sup></span> is not <span class="m">2 log a</span>.</dd>
@@ -1711,10 +1756,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <div class="ex" data-bank="op-rules"></div>
 </section>
 
-<div class="partline"><span class="u">Part 3</span><span class="t">Practice papers</span></div>
+<div class="partline"><span class="u">Papers</span><span class="t">Mock midterm and mock exam</span></div>
 
 <section id="mock-mcq">
-<p class="lesson-no">Part 3 &middot; Practice papers &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 2</span></p>
+<p class="lesson-no">Papers &middot; Mock <span data-fr="examen intermédiaire">midterm</span> and mock exam &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 2</span></p>
 <h2 class="sec">Mock <span data-fr="examen intermédiaire">midterm</span></h2>
 <p class="sec-kicker">Twenty multiple-choice questions in the format of the week 9 midterm, on everything this document currently covers. Sit it against a clock.</p>
 
@@ -1823,7 +1868,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 </section>
 <section id="mock-open">
-<p class="lesson-no">Part 3 &middot; Practice papers &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 2</span></p>
+<p class="lesson-no">Papers &middot; Mock <span data-fr="examen intermédiaire">midterm</span> and mock exam &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 2</span></p>
 <h2 class="sec">Mock exam paper</h2>
 <p class="sec-kicker">Five open questions with a mark scheme, in the format of the 120-minute semester exam. Write full solutions, then mark yourself against the scheme.</p>
 
@@ -1971,78 +2016,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 </div></details>
 </section>
-<div class="partline"><span class="u">Part 4</span><span class="t">Reference</span></div>
+<div class="partline"><span class="u">Reference</span><span class="t">Formulas, traps, glossary</span></div>
 
-<section id="khan">
-<p class="lesson-no">Part 4 &middot; Reference &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 4</span></p>
-<h2 class="sec">Khan Academy alongside this course</h2>
-<p class="sec-kicker">Every topic in this document has a matching unit on Khan Academy. Their videos are short, their exercises are endless, and both are free. Here is the map, week by week.</p>
-<div class="prose">
-<p>This document and Khan Academy do different jobs, and they are better together than either is alone.</p>
-<p>This document is <strong>your course</strong>. It uses the notation your lecturers use, the examples from your slides, the Swiss conventions for intervals and thousands, and it tells you what your exam will ask. Khan Academy is <strong>unlimited practice</strong> with a different voice explaining the same mathematics. When a lesson here has not landed, hearing it said differently is often all it takes.</p>
-</div>
-<div class="cols">
-<div class="mini"><h5>Watch before the lecture</h5><p>Ten minutes of the matching Khan unit the night before turns a lecture from a first encounter into a second one. That single change is worth more than any revision technique.</p></div>
-<div class="mini"><h5>Drill after the lesson</h5><p>Khan gives you as many variations of a question as you want, marked instantly. When the exercise at the end of a lesson here is not enough, that is where to go next.</p></div>
-<div class="mini"><h5>Come back when stuck</h5><p>If a check in this document keeps going wrong, open the Khan unit for that lesson and watch the video on that one skill. A second explanation costs you six minutes.</p></div>
-</div>
-<div class="box warn">
-<span class="lab">Four places where Khan writes it differently</span>
-<p>Khan Academy is American, and a few conventions differ from the ones your exam expects. None of them is a disagreement about the mathematics.</p>
-<p><strong>Intervals.</strong> Khan writes an open end as a round <span data-fr="parenthèse">bracket</span>, <span class="m">(2, 5]</span>. Your course writes it reversed, <span class="m">]2 ; 5]</span>. Both <span data-fr="moyenne">mean</span> the same set.</p>
-<p><strong>Thousands and decimals.</strong> Khan writes <span class="m">10,000.5</span>. Your course writes <span class="m">10 000.5</span>, with a space.</p>
-<p><strong>The order of operations.</strong> Khan says PEMDAS, your course states the rule in words. Same rule.</p>
-<p><strong>Function definition.</strong> Khan usually says a function gives <em>exactly</em> one <span data-fr="sortie">output</span> per <span data-fr="entrée">input</span>. Your course says <em>at most</em> one, which is what lets a <span data-fr="domaine de définition">domain</span> exclude values. Follow your course on this one.</p>
-</div>
-<h3>The map, week by week</h3>
-<div class="prose">
-<p>The left column is your course. The right column is where to find the same material on Khan Academy. Weeks 3 onwards are listed so you can work ahead of the lectures if you want to, which for this module is a good idea.</p>
-</div>
-<div class="tw">
-<table class="data">
-<caption>Quantitative Methods I, mapped to Khan Academy</caption>
-<thead><tr><th>Week</th><th>What the course covers</th><th>Where it is on Khan Academy</th></tr></thead>
-<tbody>
-<tr><td><strong>0</strong></td><td>Levelling up</td><td><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:foundation-algebra" target="_blank" rel="noopener">Algebra 1, unit 1: Algebra foundations</a><br><a href="https://www.khanacademy.org/math/arithmetic/fraction-arithmetic" target="_blank" rel="noopener">Arithmetic, unit 4: Understand fractions</a><br><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations" target="_blank" rel="noopener">Pre-algebra, unit 5: Exponents and order of operations</a><br><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages" target="_blank" rel="noopener">Pre-algebra, unit 4: Percentages</a></td></tr>
-<tr><td><strong>1</strong></td><td>Introduction, functions and graphs</td><td><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions" target="_blank" rel="noopener">Algebra 1, unit 8: Functions</a><br><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank" rel="noopener">Algebra 1, unit 4: Linear equations and graphs</a></td></tr>
-<tr><td><strong>2</strong></td><td>Operations on functions</td><td><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite" target="_blank" rel="noopener">Precalculus, unit 1: Composite and <span data-fr="fonctions réciproques">inverse functions</span></a><br><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs" target="_blank" rel="noopener">Algebra 2, unit 8: Logarithms</a></td></tr>
-<tr><td><strong>3</strong></td><td>Lines, parabolas, systems of linear equations</td><td><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations" target="_blank" rel="noopener">Algebra 1, unit 5: Forms of linear equations</a><br><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations" target="_blank" rel="noopener">Algebra 1, unit 14: Quadratic functions and equations</a><br><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:systems-of-equations" target="_blank" rel="noopener">Algebra 1, unit 6: Systems of equations</a></td></tr>
-<tr><td><strong>4</strong></td><td><span data-fr="Taux de variation">Rate of change</span> and the derivative</td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-limits" target="_blank" rel="noopener">Differential calculus, unit 1: Limits and continuity</a><br><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a></td></tr>
-<tr><td><strong>5</strong></td><td>Differentiation rules</td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a><br><a href="https://www.khanacademy.org/math/differential-calculus/dc-chain" target="_blank" rel="noopener">Differential calculus, unit 3: Chain rule and beyond</a></td></tr>
-<tr><td><strong>6</strong></td><td>Self-study case, review of weeks 1 to 5</td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a></td></tr>
-<tr><td><strong>7</strong></td><td>Applications of the derivatives</td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-context-app" target="_blank" rel="noopener">Differential calculus, unit 4: Applications of derivatives</a></td></tr>
-<tr><td><strong>8</strong></td><td>Optimisation in one variable</td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-analytic-app" target="_blank" rel="noopener">Differential calculus, unit 5: Analysing functions</a></td></tr>
-<tr><td><strong>9</strong></td><td><span data-fr="Examen intermédiaire">Midterm</span>, then an introduction to integrals</td><td><a href="https://www.khanacademy.org/math/integral-calculus/ic-integration" target="_blank" rel="noopener">Integral calculus, unit 1: Integrals</a></td></tr>
-<tr><td><strong>10</strong></td><td>Integration and surpluses</td><td><a href="https://www.khanacademy.org/math/integral-calculus/ic-integration" target="_blank" rel="noopener">Integral calculus, unit 1: Integrals</a><br><a href="https://www.khanacademy.org/math/integral-calculus/ic-int-app" target="_blank" rel="noopener">Integral calculus, unit 3: Applications of integrals</a></td></tr>
-<tr><td><strong>11</strong></td><td><span data-fr="Données">Data</span> foundations, collection and <span data-fr="échantillonnage">sampling</span></td><td><a href="https://www.khanacademy.org/math/statistics-probability/designing-studies" target="_blank" rel="noopener">Statistics, unit 6: Study design and <span data-fr="échantillonnage">sampling</span></a></td></tr>
-<tr><td><strong>12</strong></td><td>Describing <span data-fr="données">data</span> with graphs, charts and tables</td><td><a href="https://www.khanacademy.org/math/statistics-probability/analyzing-categorical-data" target="_blank" rel="noopener">Statistics, unit 1: Analysing categorical <span data-fr="données">data</span></a><br><a href="https://www.khanacademy.org/math/statistics-probability/displaying-describing-data" target="_blank" rel="noopener">Statistics, unit 2: Displaying and comparing quantitative <span data-fr="données">data</span></a></td></tr>
-<tr><td><strong>13</strong></td><td>Describing <span data-fr="données">data</span> with numerical measures</td><td><a href="https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data" target="_blank" rel="noopener">Statistics, unit 3: Summarising quantitative <span data-fr="données">data</span></a><br><a href="https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data" target="_blank" rel="noopener">Statistics, unit 4: Modeling <span data-fr="données">data</span> distributions</a></td></tr>
-<tr><td><strong>14</strong></td><td>Bivariate <span data-fr="données">data</span>, independence, concentration</td><td><a href="https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data" target="_blank" rel="noopener">Statistics, unit 5: Exploring bivariate numerical <span data-fr="données">data</span></a><br><a href="https://www.khanacademy.org/math/statistics-probability/inference-categorical-data-chi-square-tests" target="_blank" rel="noopener">Statistics, unit 14: Chi-square tests for categorical <span data-fr="données">data</span></a></td></tr>
-<tr><td><strong>S1-5</strong></td><td>Spring: probability</td><td><a href="https://www.khanacademy.org/math/statistics-probability/probability-library" target="_blank" rel="noopener">Statistics, unit 7: Probability</a><br><a href="https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library" target="_blank" rel="noopener">Statistics, unit 9: Random variables</a></td></tr>
-<tr><td><strong>S6-9</strong></td><td>Spring: financial mathematics</td><td><a href="https://www.khanacademy.org/economics-finance-domain/core-finance/interest-tutorial" target="_blank" rel="noopener">Finance, unit 1: Interest and debt</a></td></tr>
-<tr><td><strong>S10-11</strong></td><td>Spring: linear algebra</td><td><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices" target="_blank" rel="noopener">Precalculus, unit 7: Matrices</a><br><a href="https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces" target="_blank" rel="noopener">Linear algebra, unit 1: Vectors and spaces</a><br><a href="https://www.khanacademy.org/math/linear-algebra/matrix-transformations" target="_blank" rel="noopener">Linear algebra, unit 2: Matrix transformations</a></td></tr>
-<tr><td><strong>S12</strong></td><td>Spring: linear regression</td><td><a href="https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data" target="_blank" rel="noopener">Statistics, unit 5: Exploring bivariate numerical <span data-fr="données">data</span></a></td></tr>
-</tbody>
-</table>
-</div>
-<div class="box method">
-<span class="lab">If you only do three things</span>
-<p><strong>One.</strong> Before the <span data-fr="examen intermédiaire">midterm</span>, work Khan's <em>Algebra 1</em> units 8, 11, 13 and 14 until they turn green. That is functions, exponents and radicals, <span data-fr="factorisation">factoring</span>, and quadratics, which is most of what a levelling-up gap looks like.</p>
-<p><strong>Two.</strong> Before week 4 arrives, watch Khan's <em>Differential calculus</em> unit 1 on limits. It is the one idea in the autumn that is genuinely new, and meeting it twice makes it ordinary.</p>
-<p><strong>Three.</strong> For the statistics half in weeks 11 to 14, Khan's <em>Statistics and probability</em> units 1 to 6 cover it almost exactly, and they are the friendliest part of their whole library.</p>
-</div>
-<div class="box remember">
-<span class="lab">What to remember</span>
-<ul>
-<li>Every lesson in this document carries a link to its Khan unit, at the top of the lesson.</li>
-<li>Khan for a second explanation and for unlimited drill. This document for your course's notation and your exam.</li>
-<li>Watching the unit the night before a lecture is the cheapest hour in your week.</li>
-<li>Where the two differ in notation, follow your course. The mathematics underneath is the same.</li>
-</ul>
-</div>
-</section>
 <section id="formulas">
-<p class="lesson-no">Part 4 &middot; Reference &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 4</span></p>
+<p class="lesson-no">Reference &middot; Formulas, traps, glossary &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 3</span></p>
 <h2 class="sec">Everything on one page</h2>
 <p class="sec-kicker">Weeks 1 and 2 in full. Rebuild this from memory the night before, then check it.</p>
 
@@ -2124,7 +2101,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 </section>
 <section id="traps">
-<p class="lesson-no">Part 4 &middot; Reference &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 4</span></p>
+<p class="lesson-no">Reference &middot; Formulas, traps, glossary &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 3</span></p>
 <h2 class="sec">Where marks are lost</h2>
 <p class="sec-kicker">Each one paired with the habit that prevents it.</p>
 
@@ -2149,7 +2126,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 </section>
 <section id="glossary">
-<p class="lesson-no">Part 4 &middot; Reference &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 4</span></p>
+<p class="lesson-no">Reference &middot; Formulas, traps, glossary &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 3</span></p>
 <h2 class="sec">English to French glossary</h2>
 <p class="sec-kicker">The course is taught in English. If you learned mathematics in French, this is the bridge.</p>
 
