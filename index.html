@@ -210,6 +210,28 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
 .sc-crumb a{color:var(--muted);text-decoration:underline}
 .sc-crumb a:hover{color:var(--accent)}
 
+/* an item page: what the Khan resource is for, the way in, and a tick */
+.item-kind{
+  font-family:var(--sans);font-size:13px;color:var(--muted);margin:10px 0 22px;
+}
+.item-kind b{color:var(--ink-2)}
+.item-go{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}
+.item-open{
+  display:inline-flex;align-items:center;padding:10px 18px;border-radius:99px;
+  background:var(--ka);color:var(--paper);font-family:var(--sans);font-size:13.5px;
+  font-weight:700;text-decoration:none;
+}
+.item-open:hover{filter:brightness(1.08)}
+.item-done{
+  display:inline-flex;align-items:center;padding:10px 18px;border-radius:99px;cursor:pointer;
+  background:transparent;color:var(--ink-2);border:1px solid var(--rule-mid);
+  font-family:var(--sans);font-size:13.5px;font-weight:700;
+}
+.item-done:hover{border-color:var(--accent);color:var(--accent)}
+.item-done.is-done{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.item-back{font-size:14.5px;color:var(--muted);max-width:60ch}
+.sc-done{margin:9px 0 0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+
 /* the course page: the grid of every lesson, one square each */
 .progress-note{
   display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;
@@ -1016,7 +1038,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 @page{size:A4;margin:18mm 16mm 20mm}
 
 @media print{
-  .rail,.fab,.backdrop,.nav-toggle,.tlink,.page-veil,.dl{display:none!important}
+  .rail,.fab,.backdrop,.nav-toggle,.tlink,.page-veil,.dl,.side,#itemStage,.topbar{display:none!important}
   .page{padding-left:0}
   .shell{max-width:none;padding:0}
   html,body{background:var(--print-paper);color:var(--print-ink);font-size:10.5pt}
@@ -1078,6 +1100,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <div class="layout">
 <aside class="side" id="sideCard" aria-label="Lesson navigation"></aside>
 <main class="shell">
+<div id="itemStage" style="display:none"></div>
 
 <header class="doc-head">
   <div class="inst">Haute &eacute;cole de gestion de Gen&egrave;ve &middot; International Business Management &middot; 2026-2027</div>
@@ -2340,7 +2363,8 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   var root = document.documentElement, body = document.body;
   var store = {
     get: function(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
-    set: function(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
+    set: function(k, v){ try { localStorage.setItem(k, v); } catch(e){} },
+    del: function(k){ try { localStorage.removeItem(k); } catch(e){} }
   };
   var narrow = function(){ return window.matchMedia('(max-width:980px)').matches; };
 
@@ -2875,57 +2899,74 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
     var side  = document.getElementById('sideCard');
     var shell = document.querySelector('main.shell');
     var head  = document.querySelector('header.doc-head');
+    var stage = document.getElementById('itemStage');
 
     function sections(){ return shell.querySelectorAll('section[id]'); }
+    function esc(x){ return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
 
-    function showOnly(id){
-      Array.prototype.forEach.call(sections(), function(sec){
-        sec.style.display = (sec.id === id) ? '' : 'none';
+    /* ---- the items of a lesson: its Khan links, then its own practice ---- */
+    function itemsOf(id){
+      var sec = document.getElementById(id), out = [];
+      if (!sec) return out;
+      Array.prototype.forEach.call(sec.querySelectorAll('.learn a'), function(a){
+        var txt = a.textContent.trim();
+        var kind = /^Watch/.test(txt) ? 'watch' : /^Read/.test(txt) ? 'read' : 'practise';
+        var rest = txt.replace(/^(Watch|Read|Practise):\s*/, '');
+        var bits = rest.split(' · ');
+        out.push({ kind: kind, why: bits.length > 1 ? bits[0] : '',
+                   title: bits.length > 1 ? bits.slice(1).join(' · ') : rest, url: a.href });
       });
-      if (head) head.style.display = (id === 'contents') ? '' : 'none';
+      if (sec.querySelector('.ex[data-bank]')) out.push({ kind: 'own', title: 'Practice' });
+      return out;
     }
 
-    var ICON = { watch: '\u25B6', read: '\u25A4', practise: '\u270E', practice: '\u270E' };
+    var ICON = { watch: '▶', read: '▤', practise: '✎', own: '✎' };
+    var VERB = { watch: 'Video', read: 'Article', practise: 'Exercise', own: 'Practice' };
 
-    function lessonCard(L){
+    function doneKey(id, n){ return 'qm1-i-' + id + '-' + n; }
+    function isDone(id, n){ return store.get(doneKey(id, n)) === '1'; }
+    function setDone(id, n, v){ v ? store.set(doneKey(id, n), '1') : store.del(doneKey(id, n)); }
+    function doneCount(id){
+      return itemsOf(id).filter(function(it, n){ return it.kind !== 'own' && isDone(id, n); }).length;
+    }
+
+    /* ---- the card on the left ---- */
+    function lessonCard(L, activeItem){
       var i = indexOf[L.id];
       var prev = flat[i - 1], next = flat[i + 1];
-      var sec = document.getElementById(L.id);
-      var items = [];
-      Array.prototype.forEach.call(sec.querySelectorAll('.learn a'), function(a){
-        var kind = /^Watch/.test(a.textContent) ? 'watch'
-                 : /^Read/.test(a.textContent)  ? 'read' : 'practise';
-        items.push('<li><a href="' + a.href + '" target="_blank" rel="noopener">' +
-                   '<span class="sc-ico">' + ICON[kind] + '</span><span>' +
-                   a.textContent.replace(/^(Watch|Read|Practise):\s*/, '') +
-                   '<span class="sc-state">on Khan Academy</span></span></a></li>');
-      });
-      if (sec.querySelector('.ex[data-bank]')) {
-        items.push('<li class="on"><a href="#' + L.id + '">' +
-                   '<span class="sc-ico">' + ICON.practice + '</span><span>Practice' +
-                   '<span class="sc-state">' + LEVEL[mGet(L.id)] + '</span></span></a></li>');
-      }
+      var items = itemsOf(L.id);
+      var khanTotal = items.filter(function(it){ return it.kind !== 'own'; }).length;
+      var li = items.map(function(it, n){
+        var on = (activeItem === n) || (activeItem === null && it.kind === 'own' && n === items.length - 1);
+        var state = it.kind === 'own' ? LEVEL[mGet(L.id)]
+                                      : (isDone(L.id, n) ? 'Completed' : 'Not started');
+        var href = it.kind === 'own' ? '#' + L.id : '#' + L.id + '!' + n;
+        return '<li' + (on ? ' class="on"' : '') + '><a href="' + href + '">' +
+               '<span class="sc-ico">' + ICON[it.kind] + '</span><span>' + esc(it.title) +
+               '<span class="sc-state">' + state + '</span></span></a></li>';
+      }).join('');
       var wk = L.week ? ('Week ' + L.week.n) : 'Reference';
       var wt = L.week ? L.week.title : 'Formulas, glossary, papers';
       side.innerHTML =
         '<div class="sc-head">' +
           '<span class="sc-course">' + C.title + ' &nbsp;&rsaquo;&nbsp; ' + wk + '</span>' +
           '<div class="sc-row">' +
-            (prev ? '<a class="sc-arrow" href="#' + prev.id + '" title="' + prev.t + '">&lsaquo;</a>'
+            (prev ? '<a class="sc-arrow" href="#' + prev.id + '" title="' + esc(prev.t) + '">&lsaquo;</a>'
                   : '<span class="sc-arrow" aria-disabled="true">&lsaquo;</span>') +
-            '<span class="sc-now">' + L.t + '</span>' +
-            (next ? '<a class="sc-arrow" href="#' + next.id + '" title="' + next.t + '">&rsaquo;</a>'
+            '<span class="sc-now">' + esc(L.t) + '</span>' +
+            (next ? '<a class="sc-arrow" href="#' + next.id + '" title="' + esc(next.t) + '">&rsaquo;</a>'
                   : '<span class="sc-arrow" aria-disabled="true">&rsaquo;</span>') +
           '</div>' +
+          (khanTotal ? '<p class="sc-done">' + doneCount(L.id) + ' of ' + khanTotal + ' done</p>' : '') +
         '</div>' +
-        (items.length ? '<ul class="sc-list">' + items.join('') + '</ul>' : '') +
-        '<p class="sc-crumb"><a href="#contents">' + C.title + '</a> &rsaquo; ' + wt + '</p>';
+        (items.length ? '<ul class="sc-list">' + li + '</ul>' : '') +
+        '<p class="sc-crumb"><a href="#contents">' + C.title + '</a> &rsaquo; ' + esc(wt) + '</p>';
     }
 
     function contentsCard(){
       var weeks = C.weeks.map(function(w){
         return '<li><a href="#' + w.lessons[0].id + '"><span class="sc-ico">' + w.n +
-               '</span><span>' + w.title +
+               '</span><span>' + esc(w.title) +
                '<span class="sc-state">' + w.lessons.length + ' lessons</span></span></a></li>';
       }).join('');
       side.innerHTML =
@@ -2935,7 +2976,36 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
         '<p class="sc-crumb">The rest of the year unlocks on Cyberlearn.</p>';
     }
 
-    /* the grid on the contents page: a square per lesson, filled as you work */
+    /* ---- an item page of our own: what it is for, the link, and a tick ---- */
+    function itemPage(L, n){
+      var it = itemsOf(L.id)[n];
+      if (!it) { location.hash = '#' + L.id; return; }
+      var done = isDone(L.id, n);
+      stage.innerHTML =
+        '<p class="lesson-tag">Week ' + (L.week ? L.week.n : '&mdash;') +
+          ' &nbsp;&middot;&nbsp; ' + esc(L.t) + '</p>' +
+        '<h2 class="sec">' + esc(it.title) + '</h2>' +
+        '<p class="item-kind">' + VERB[it.kind] + ' on Khan Academy' +
+          (it.why ? ' &nbsp;&middot;&nbsp; <b>' + esc(it.why) + '</b>' : '') + '</p>' +
+        '<div class="item-go">' +
+          '<a class="item-open" href="' + it.url + '" target="_blank" rel="noopener">Open on Khan Academy</a>' +
+          '<button type="button" class="item-done' + (done ? ' is-done' : '') + '" data-l="' + L.id +
+            '" data-n="' + n + '">' + (done ? '✓ Completed' : 'Mark as completed') + '</button>' +
+        '</div>' +
+        '<p class="item-back">It opens in a new tab, so this page stays where it is. ' +
+          'Come back and tick it off, then carry on with <a href="#' + L.id + '">' + esc(L.t) + '</a>.</p>';
+      stage.style.display = '';
+    }
+
+    function showOnly(id){
+      Array.prototype.forEach.call(sections(), function(sec){
+        sec.style.display = (sec.id === id) ? '' : 'none';
+      });
+      if (head) head.style.display = (id === 'contents') ? '' : 'none';
+      stage.style.display = 'none';
+      stage.innerHTML = '';
+    }
+
     function paintGrid(){
       var host = document.getElementById('courseGrid');
       if (!host) return;
@@ -2944,7 +3014,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
         var sq = w.lessons.map(function(L){
           var lvl = mGet(L.id); got += lvl;
           return '<a href="#' + L.id + '" class="' + (LCLASS[lvl] || '') + '" title="' +
-                 L.t.replace(/"/g, '') + ': ' + LEVEL[lvl] + '"></a>';
+                 esc(L.t) + ': ' + LEVEL[lvl] + '"></a>';
         }).join('');
         var pct = Math.round(got / (w.lessons.length * 3) * 100);
         return '<div class="grid-week"><span class="gw-n">Week ' + w.n + '</span>' +
@@ -2954,21 +3024,53 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
     }
 
     function route(){
-      var id = location.hash.slice(1);
-      if (!id || !document.getElementById(id)) id = 'contents';
+      var raw = location.hash.slice(1);
+      var bang = raw.indexOf('!');
+      var id = bang < 0 ? raw : raw.slice(0, bang);
+      var n  = bang < 0 ? null : parseInt(raw.slice(bang + 1), 10);
+      if (!id || !document.getElementById(id)) { id = 'contents'; n = null; }
       showOnly(id);
       if (id === 'contents') { contentsCard(); paintGrid(); }
-      else if (indexOf[id] !== undefined) lessonCard(flat[indexOf[id]]);
-      else contentsCard();
+      else if (indexOf[id] !== undefined) {
+        var L = flat[indexOf[id]];
+        if (n !== null && !isNaN(n)) {
+          Array.prototype.forEach.call(sections(), function(sec){ sec.style.display = 'none'; });
+          itemPage(L, n);
+        }
+        lessonCard(L, n);
+      } else contentsCard();
       window.scrollTo(0, 0);
     }
 
-    /* Reset progress: it lives in this browser, so this is the only way to clear it. */
+    /* a Khan link anywhere opens our page for it, not Khan itself */
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('.learn a');
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      var sec = a.closest('section[id]');
+      if (!sec || indexOf[sec.id] === undefined) return;
+      var list = Array.prototype.slice.call(sec.querySelectorAll('.learn a'));
+      e.preventDefault();
+      location.hash = '#' + sec.id + '!' + list.indexOf(a);
+    });
+
+    /* ticking an item off */
+    document.addEventListener('click', function(e){
+      var b = e.target.closest && e.target.closest('.item-done');
+      if (!b) return;
+      var id = b.getAttribute('data-l'), n = parseInt(b.getAttribute('data-n'), 10);
+      var now = !isDone(id, n);
+      setDone(id, n, now);
+      b.classList.toggle('is-done', now);
+      b.innerHTML = now ? '✓ Completed' : 'Mark as completed';
+      lessonCard(flat[indexOf[id]], n);
+    });
+
     document.addEventListener('click', function(e){
       if (!e.target || e.target.id !== 'resetProgress') return;
       if (!window.confirm('Clear your progress for every lesson? This cannot be undone.')) return;
-      Object.keys(localStorage).filter(function(k){ return k.indexOf('qm1-m-') === 0 || k.indexOf('qm1-ex-') === 0; })
-        .forEach(function(k){ localStorage.removeItem(k); });
+      Object.keys(localStorage).filter(function(k){
+        return k.indexOf('qm1-m-') === 0 || k.indexOf('qm1-ex-') === 0 || k.indexOf('qm1-i-') === 0;
+      }).forEach(function(k){ localStorage.removeItem(k); });
       Array.prototype.forEach.call(document.querySelectorAll('.ex[data-bank]'), function(el){
         paintStep(el.getAttribute('data-bank'));
       });
@@ -2979,68 +3081,18 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
     route();
     window.__routeRefresh = route;
 
-    /* printing wants the whole book, not one lesson */
     window.addEventListener('beforeprint', function(){
+      stage.style.display = 'none';
       Array.prototype.forEach.call(sections(), function(sec){ sec.style.display = ''; });
       if (head) head.style.display = '';
     });
     window.addEventListener('afterprint', route);
   })();
 
-  /* Clicking a lesson jumps to it, then the hash comes back out of the address
-     bar. Refreshing afterwards therefore has no fragment to jump to and the
-     browser simply restores where you were, instead of throwing you back down
-     the document to whatever you last clicked.
-
-     A shared link that arrives with a fragment is left alone: the browser puts
-     the reader on that lesson, which is the point of the link. Nothing here
-     runs on load, so there is no timing to get wrong on a page this tall. */
-  /* Scroll restoration is manual: with it automatic, taking the hash out of
-     the address bar makes the browser re-apply the position it saved for the
-     entry, which undoes the jump we just made. */
+  /* The router owns the fragment now: it says which lesson or item is open, so a
+     refresh or a back button returns to the same place instead of losing it.
+     Scroll restoration stays manual, since the router places the page itself. */
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-
-  /* The veil lifts on its own, in CSS. This only takes it out of the document
-     afterwards so it cannot sit on top of anything. */
-  (function(){
-    var veil = document.getElementById('pageVeil');
-    if (!veil) return;
-    setTimeout(function(){ if (veil.parentNode) veil.parentNode.removeChild(veil); }, 1600);
-  })();
-
-  window.addEventListener('hashchange', function(){
-    var id = location.hash.slice(1);
-    if (!id) return;
-    var el = document.getElementById(id);
-    while (el) {                       // a target inside the folded block needs it open
-      if (el.tagName === 'DETAILS') el.open = true;
-      el = el.parentElement;
-    }
-    var t = document.getElementById(id);
-    if (t) t.scrollIntoView({ block: 'start' });
-    setTimeout(function(){
-      if (!location.hash) return;
-      try { history.replaceState(null, '', location.pathname + location.search); }
-      catch (e) { /* file:// and the like: leave the hash alone */ }
-    }, 250);
-  });
-
-  /* a fragment that arrives with the page still has to open the folded block */
-  (function(){
-    var id = location.hash.slice(1);
-    if (!id) return;
-    var el = document.getElementById(id);
-    while (el) {
-      if (el.tagName === 'DETAILS') el.open = true;
-      el = el.parentElement;
-    }
-  })();
-
-  /* Download is the browser's own print dialog, where Save as PDF lives. */
-  (function(){
-    var btn = document.getElementById('downloadPdf');
-    if (btn) btn.addEventListener('click', function(){ window.print(); });
-  })();
 
   window.addEventListener('beforeprint', function(){
     Array.prototype.forEach.call(document.querySelectorAll('details'), function(d){ d.open = true; });
