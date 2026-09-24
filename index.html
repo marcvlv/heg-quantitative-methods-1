@@ -81,8 +81,14 @@ strong{font-weight:700}
 .m{font-family:var(--mono);font-size:.94em;white-space:nowrap}
 /* the one formula that matters gets its own line, so it can never break in two */
 .mb{
-  display:block;margin:15px 0;padding:2px 0;font-family:var(--mono);font-size:1.04em;font-weight:600;
-  white-space:nowrap;overflow-x:auto;overflow-y:hidden;line-height:2.1;
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 30px;
+  margin:15px 0;padding:2px 0;font-family:var(--mono);font-size:1.04em;font-weight:600;
+  line-height:2.1;overflow:visible;
+}
+.mb > .f{white-space:nowrap;max-width:100%}
+@media (max-width:620px){
+  .mb{gap:2px 18px}
+  .mb > .f{white-space:normal;overflow-wrap:anywhere}
 }
 sup,sub{font-size:.72em;line-height:0}
 /* Stacked fraction. The bar sits on the maths axis, the way it does by hand.
@@ -208,7 +214,7 @@ details.navpart.current > summary{color:var(--ink)}
 @media (max-width:760px){
   /* long inline formulas and URLs must wrap rather than widen the page */
   .m,.ck{white-space:normal;overflow-wrap:anywhere}
-  .mb{white-space:normal;overflow-wrap:anywhere;line-height:2.4}
+  .mb{line-height:2.4}
 }
 
 @media (max-width:980px){
@@ -433,9 +439,9 @@ details.practice[open] > summary::after{content:"close"}
 .ex.mini::before{background:var(--warn)}
 .ex-top .lbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
 .ex-top .nm{font-weight:700;color:var(--ink);font-size:12.5px}
-.ex-dots{display:flex;gap:4px;margin-left:auto}
+.ex-dots{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto;max-width:100%;justify-content:flex-end;row-gap:5px}
 .ex-dots i{
-  width:9px;height:9px;border-radius:50%;border:1px solid var(--rule-mid);
+  width:9px;height:9px;flex:none;border-radius:50%;border:1px solid var(--rule-mid);
   background:transparent;display:block;
 }
 .ex-dots i.ok{background:var(--ok);border-color:var(--ok)}
@@ -533,7 +539,7 @@ details.practice[open] > summary::after{content:"close"}
 /* ===========================================================
    FIGURES. Every drawing is computed, so the curve is the curve.
    =========================================================== */
-.fig{margin:18px 0 20px;text-align:center}
+.fig{margin:18px 0 20px;text-align:center;padding:0 6px;overflow-x:hidden;overflow-x:clip}
 .fig svg{width:100%;max-width:470px;height:auto;overflow:visible}
 .fig figcaption{
   margin-top:8px;font-family:var(--sans);font-size:12px;color:var(--muted);
@@ -606,8 +612,6 @@ dl.keys dt{
 }
 dl.keys dd{display:block;margin:0 0 13px;line-height:1.62}
 dl.keys dd:last-child{margin-bottom:0}
-/* a display formula must never hide itself behind a scrollbar */
-dl.keys .mb,ol.method .mb,ul.traps .mb{overflow-x:visible;white-space:normal;overflow-wrap:anywhere}
 
 /* traps: a short list, not a box */
 ul.traps{
@@ -1016,7 +1020,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <h3>First order equations</h3>
 <div class="prose">
-<p>With <span class="m">a, b &#8712; &#8477;</span> and <span class="m">a &ne; 0</span>, <span data-fr="résolution">solving</span> <span class="m">ax + b = 0</span> gives <span class="mb">x = <span class="frac"><span class="num">&minus;b</span><span class="den">a</span></span></span>Everything else is arithmetic to get the equation into that shape.</p>
+<p>With <span class="m">a, b &#8712; &#8477;</span> and <span class="m">a &ne; 0</span>, <span data-fr="résolution">solving</span> <span class="m">ax + b = 0</span> gives <span class="mb"><span class="f">x = <span class="frac"><span class="num">&minus;b</span><span class="den">a</span></span></span></span>Everything else is arithmetic to get the equation into that shape.</p>
 </div>
 <div class="work">
 <span class="cap">The slide example: 3x + 1 = 5x + 7</span>
@@ -1063,7 +1067,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/v/using-the-quadratic-formula" target="_blank" rel="noopener">Watch: The formula · The quadratic formula</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/v/quadratic-formula-3" target="_blank" rel="noopener">Watch: What the discriminant tells you · Using the quadratic formula: number of solutions</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/a/discriminant-review" class="ghost" target="_blank" rel="noopener">Read: The discriminant · Discriminant review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/e/quadratic_equation" class="do" target="_blank" rel="noopener">Practise: Using the formula · Quadratic formula</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/e/determine-the-number-of-solutions-of-a-quadratic-equation" class="do" target="_blank" rel="noopener">Practise: Reading the discriminant · Number of solutions of quadratic equations</a></div>
 <div class="prose">
 <p>With <span class="m">a, b, c &#8712; &#8477;</span>, <span data-fr="résolution">solving</span> <span class="m">ax<sup>2</sup> + bx + c = 0</span> starts with the discriminant, which the slides write <span class="m">&Delta; = b<sup>2</sup> &minus; 4ac</span>.</p>
-<p><span class="m">&Delta; &gt; 0</span> gives two solutions, <span class="m">&Delta; = 0</span> gives one, and <span class="m">&Delta; &lt; 0</span> gives none in <span class="m">&#8477;</span>. When there are two, they are <span class="mb">x<sub>1</sub> = <span class="frac"><span class="num">&minus;b + <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span> &nbsp;&nbsp;&nbsp; x<sub>2</sub> = <span class="frac"><span class="num">&minus;b &minus; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span></span></p>
+<p><span class="m">&Delta; &gt; 0</span> gives two solutions, <span class="m">&Delta; = 0</span> gives one, and <span class="m">&Delta; &lt; 0</span> gives none in <span class="m">&#8477;</span>. When there are two, they are <span class="mb"><span class="f">x<sub>1</sub> = <span class="frac"><span class="num">&minus;b + <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span></span><span class="f">x<sub>2</sub> = <span class="frac"><span class="num">&minus;b &minus; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span></span></span></p>
 </div>
 <div class="work">
 <span class="cap">The slide example: 3x<sup>2</sup> + 3x &minus; 18 = 0</span>
@@ -1151,7 +1155,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <h3>Lines</h3>
 <div class="prose">
-<p>The <span data-fr="pente">slope</span> is a <span data-fr="taux de variation">rate of change</span>, <span class="mb">m = <span class="frac"><span class="num">&#916;y</span><span class="den">&#916;x</span></span> = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span></span> how much <span class="m">y</span> moves per one unit of <span class="m">x</span>. In <span class="m">C = 5q + 2000</span> the <span data-fr="pente">slope</span> 5 is the cost of one more unit and the <span data-fr="intersection avec un axe">intercept</span> 2000 is the fixed cost.</p>
+<p>The <span data-fr="pente">slope</span> is a <span data-fr="taux de variation">rate of change</span>, <span class="mb"><span class="f">m = <span class="frac"><span class="num">&#916;y</span><span class="den">&#916;x</span></span> = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span></span></span> how much <span class="m">y</span> moves per one unit of <span class="m">x</span>. In <span class="m">C = 5q + 2000</span> the <span data-fr="pente">slope</span> 5 is the cost of one more unit and the <span data-fr="intersection avec un axe">intercept</span> 2000 is the fixed cost.</p>
 <p>Three forms of the same line: <span class="m">y = mx + h</span>, <span class="m">y &minus; y<sub>1</sub> = m(x &minus; x<sub>1</sub>)</span> and <span class="m">ax + by = c</span>. Parallel lines share a <span data-fr="pente">slope</span>; perpendicular ones have <span class="m">m<sub>1</sub>m<sub>2</sub> = &minus;1</span>.</p>
 </div>
 <figure class="fig">
@@ -1250,7 +1254,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <h3>Absolute value</h3>
 <div class="prose">
-<p>The slides define it by cases: <span class="mb">|x| = x if x &ge; 0, &nbsp; &minus;x if x &lt; 0</span> It behaves differently on <span class="m">&#8477;&#8314;</span> and <span class="m">&#8477;&#8315;</span>, which is why it is written in two lines. Read as a distance from zero, it is never negative.</p>
+<p>The slides define it by cases: <span class="mb"><span class="f">|x| = x if x &ge; 0, &nbsp; &minus;x if x &lt; 0</span></span> It behaves differently on <span class="m">&#8477;&#8314;</span> and <span class="m">&#8477;&#8315;</span>, which is why it is written in two lines. Read as a distance from zero, it is never negative.</p>
 </div>
 <figure class="fig">
 <svg viewBox="0 0 470 280" role="img" aria-label="The V shape of the absolute value function">
@@ -1301,7 +1305,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <figcaption><span data-fr="Croissance">Growth</span> and <span data-fr="décroissance">decay</span>. 2&#739; doubles every step, 0.5&#739; halves, and both pass through (0, 1).</figcaption></figure>
 <h3><span data-fr="Intérêts composés">Compound interest</span>, which is where it comes from</h3>
 <div class="prose">
-<p>The slides give the compound amount of a principal <span class="m">P</span> after <span class="m">n</span> years at rate <span class="m">r</span>, compounded annually: <span class="mb">S = P(1 + r)<sup>n</sup></span> This is an exponential in <span class="m">n</span>. Each year multiplies by the same factor, and repeated multiplication by a constant is exactly what an exponential is.</p>
+<p>The slides give the compound amount of a principal <span class="m">P</span> after <span class="m">n</span> years at rate <span class="m">r</span>, compounded annually: <span class="mb"><span class="f">S = P(1 + r)<sup>n</sup></span></span> This is an exponential in <span class="m">n</span>. Each year multiplies by the same factor, and repeated multiplication by a constant is exactly what an exponential is.</p>
 </div>
 <div class="work">
 <span class="cap">The slide example: 10 000 CHF at 2% for three years</span>
@@ -1341,10 +1345,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">The inverse of the exponential, and the two keys on your calculator.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/v/logarithms" target="_blank" rel="noopener">Watch: What a logarithm is · Introduction to logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:transformations/x2ec2f6f830c9fb89:log-graphs/v/comparing-exponential-logarithmic-functions" target="_blank" rel="noopener">Watch: The shape of the graph · Graphs of logarithmic functions</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms" class="ghost" target="_blank" rel="noopener">Read: The definition, written out · Intro to logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/e/understanding-logs-as-inverse-exponentials" class="do" target="_blank" rel="noopener">Practise: Converting between the two forms · Relationship between exponentials & logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/e/logarithms_1" class="do" target="_blank" rel="noopener">Practise: Evaluating without a calculator · Evaluate logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:transformations/x2ec2f6f830c9fb89:log-graphs/e/graphs-of-exponentials-and-logarithms" class="do" target="_blank" rel="noopener">Practise: Graphing · Graphs of logarithmic functions</a></div>
 <div class="prose">
-<p>The definition on the slide is a single line: <span class="mb">y = log<sub>b</sub>x &nbsp; if and only if &nbsp; b<sup>y</sup> = x</span> A logarithm is an exponent. It answers: what <span data-fr="puissance">power</span> of <span class="m">b</span> gives <span class="m">x</span>?</p>
+<p>The definition on the slide is a single line: <span class="mb"><span class="f">y = log<sub>b</sub>x &nbsp; if and only if &nbsp; b<sup>y</sup> = x</span></span> A logarithm is an exponent. It answers: what <span data-fr="puissance">power</span> of <span class="m">b</span> gives <span class="m">x</span>?</p>
 </div>
 <div class="prose">
-<p>The two fundamental equations follow immediately, and the course states them as such: <span class="mb">log<sub>b</sub>(b<sup>x</sup>) = x &nbsp;&nbsp;&nbsp; b<sup>log<sub>b</sub>x</sup> = x</span> They say the logarithm and the exponential undo each other, which is how you get a variable out of an exponent.</p>
+<p>The two fundamental equations follow immediately, and the course states them as such: <span class="mb"><span class="f">log<sub>b</sub>(b<sup>x</sup>) = x</span><span class="f">b<sup>log<sub>b</sub>x</sup> = x</span></span> They say the logarithm and the exponential undo each other, which is how you get a variable out of an exponent.</p>
 </div>
 <h3>Converting between the two forms</h3>
 <div class="prose">
@@ -1422,7 +1426,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <h3>The five operations</h3>
 <div class="prose">
-<p><span class="mb">(f + g)(x) = f(x) + g(x) &nbsp;&nbsp;&nbsp; (f &minus; g)(x) = f(x) &minus; g(x)</span><span class="mb">(fg)(x) = f(x)g(x) &nbsp;&nbsp;&nbsp; <span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(x) = <span class="frac"><span class="num">f(x)</span><span class="den">g(x)</span></span> &nbsp;&nbsp;&nbsp; (cf)(x) = c &middot; f(x)</span>Each is done at the same <span data-fr="entrée">input</span>. The result is defined wherever <b>both</b> originals are, and a quotient additionally needs <span class="m">g(x) &ne; 0</span>.</p>
+<p><span class="mb"><span class="f">(f + g)(x) = f(x) + g(x)</span><span class="f">(f &minus; g)(x) = f(x) &minus; g(x)</span></span><span class="mb"><span class="f">(fg)(x) = f(x)g(x)</span><span class="f"><span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(x) = <span class="frac"><span class="num">f(x)</span><span class="den">g(x)</span></span></span><span class="f">(cf)(x) = c &middot; f(x)</span></span>Each is done at the same <span data-fr="entrée">input</span>. The result is defined wherever <b>both</b> originals are, and a quotient additionally needs <span class="m">g(x) &ne; 0</span>.</p>
 </div>
 <div class="work">
 <span class="cap">The slide examples, with f(x) = 3x &minus; 1 and g(x) = x<sup>2</sup> + 3x</span>
@@ -1436,7 +1440,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <h3>Why it matters: <span data-fr="bénéfice">profit</span></h3>
 <div class="prose">
-<p>The one combination the course uses constantly is <span class="mb">P(q) = R(q) &minus; C(q)</span> <span data-fr="Bénéfice">Profit</span> is a difference of functions, and <span data-fr="seuil de rentabilité">break-even</span> is where that difference is zero.</p>
+<p>The one combination the course uses constantly is <span class="mb"><span class="f">P(q) = R(q) &minus; C(q)</span></span> <span data-fr="Bénéfice">Profit</span> is a difference of functions, and <span data-fr="seuil de rentabilité">break-even</span> is where that difference is zero.</p>
 </div>
 <ul class="traps"><li class="lab">Traps</li>
 <li>Put the second function in <span data-fr="parenthèses">brackets</span> before subtracting, or the signs of its later terms survive when they should not.</li>
@@ -1522,7 +1526,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <h3>The definition</h3>
 <div class="prose">
-<p>For <span class="m">f : X &#8594; Y</span> and <span class="m">g : Y &#8594; Z</span>, the composition of <span class="m">f</span> with <span class="m">g</span> is <span class="m">g &#8728; f : X &#8594; Z</span> defined by <span class="mb">(g &#8728; f)(x) = g(f(x))</span>The <span data-fr="domaine de définition">domain</span> of <span class="m">g &#8728; f</span> is the set of those <span class="m">x</span> in the <span data-fr="domaine de définition">domain</span> of <span class="m">f</span> such that <span class="m">f(x)</span> is in the <span data-fr="domaine de définition">domain</span> of <span class="m">g</span>. Two conditions, and the second is the one people forget.</p>
+<p>For <span class="m">f : X &#8594; Y</span> and <span class="m">g : Y &#8594; Z</span>, the composition of <span class="m">f</span> with <span class="m">g</span> is <span class="m">g &#8728; f : X &#8594; Z</span> defined by <span class="mb"><span class="f">(g &#8728; f)(x) = g(f(x))</span></span>The <span data-fr="domaine de définition">domain</span> of <span class="m">g &#8728; f</span> is the set of those <span class="m">x</span> in the <span data-fr="domaine de définition">domain</span> of <span class="m">f</span> such that <span class="m">f(x)</span> is in the <span data-fr="domaine de définition">domain</span> of <span class="m">g</span>. Two conditions, and the second is the one people forget.</p>
 </div>
 <div class="prose">
 <p>Point at the <span class="m">x</span>: whichever function is touching it acts first. In <span class="m">g(f(x))</span> that is <span class="m">f</span>, which is the opposite of reading order.</p>
@@ -1557,7 +1561,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">What an inverse is, when one exists, and how to recognise it on a graph.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:inverse-functions-intro/v/introduction-to-function-inverses" target="_blank" rel="noopener">Watch: What an <span data-fr="réciproque">inverse</span> is · Intro to <span data-fr="fonctions réciproques">inverse functions</span></a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:invertible/v/determining-if-a-function-is-invertible" target="_blank" rel="noopener">Watch: When one exists · Invertible functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:invertible/a/intro-to-invertible-functions" class="ghost" target="_blank" rel="noopener">Read: <span data-fr="Injective">One-to-one</span>, written out · Intro to invertible functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:invertible/e/inverse-domain-range" class="do" target="_blank" rel="noopener">Practise: Spotting when there is no <span data-fr="réciproque">inverse</span> · Determine if a function is invertible</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:inverse-functions-in-graphs-and-tables/e/inverse-functions-graphs-and-tables" class="do" target="_blank" rel="noopener">Practise: Reading an <span data-fr="réciproque">inverse</span> off a graph · <span data-fr="Fonctions réciproques">Inverse functions</span>: graphs and tables</a></div>
 <div class="prose">
-<p>The slides ask a real question first. The daily demand for coffee doses as a function of the retail price <span class="m">p</span> is <span class="mb">Q(p) = <span class="frac"><span class="num">50 000 000</span><span class="den">p + 1</span></span> &minus; 5 000 000 &nbsp; for 0 &le; p &le; 9</span> and zero above 9. Can we express the price as a function of the demand? That is the <span data-fr="réciproque">inverse</span>.</p>
+<p>The slides ask a real question first. The daily demand for coffee doses as a function of the retail price <span class="m">p</span> is <span class="mb"><span class="f">Q(p) = <span class="frac"><span class="num">50 000 000</span><span class="den">p + 1</span></span> &minus; 5 000 000 &nbsp; for 0 &le; p &le; 9</span></span> and zero above 9. Can we express the price as a function of the demand? That is the <span data-fr="réciproque">inverse</span>.</p>
 </div>
 <div class="work">
 <span class="cap">The slide derivation</span>
@@ -1573,7 +1577,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <h3>The definition and the check</h3>
 <div class="prose">
-<p><span class="mb">f(f<sup>&minus;1</sup>(x)) = f<sup>&minus;1</sup>(f(x)) = x</span>In other words <span class="m">f &#8728; f<sup>&minus;1</sup> = f<sup>&minus;1</sup> &#8728; f = Id</span>. The slides verify it for the coffee example by computing <span class="m">P(Q(p))</span> and getting <span class="m">p</span> back. Composing both ways is how you check an <span data-fr="réciproque">inverse</span>.</p>
+<p><span class="mb"><span class="f">f(f<sup>&minus;1</sup>(x)) = f<sup>&minus;1</sup>(f(x)) = x</span></span>In other words <span class="m">f &#8728; f<sup>&minus;1</sup> = f<sup>&minus;1</sup> &#8728; f = Id</span>. The slides verify it for the coffee example by computing <span class="m">P(Q(p))</span> and getting <span class="m">p</span> back. Composing both ways is how you check an <span data-fr="réciproque">inverse</span>.</p>
 </div>
 <div class="prose">
 <p>Graphically, <span class="m">f<sup>&minus;1</sup></span> is the mirror image of <span class="m">f</span> in the line <span class="m">y = x</span>. Every point <span class="m">(a, b)</span> becomes <span class="m">(b, a)</span>.</p>
@@ -1682,7 +1686,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <h3>The summary slides</h3>
 <div class="prose">
-<p><span class="mb">exp(ln u) = u &nbsp;&nbsp; ln(exp x) = x &nbsp;&nbsp; exp(x) = u &#8660; x = ln u</span><span class="mb">a<sup>x</sup> = exp(x ln a) for a &gt; 0</span>That last one is how any exponential becomes a natural one, which matters from Week 4 onwards when you start differentiating them.</p>
+<p><span class="mb"><span class="f">exp(ln u) = u</span><span class="f">ln(exp x) = x</span><span class="f">exp(x) = u &#8660; x = ln u</span></span><span class="mb"><span class="f">a<sup>x</sup> = exp(x ln a) for a &gt; 0</span></span>That last one is how any exponential becomes a natural one, which matters from Week 4 onwards when you start differentiating them.</p>
 </div>
 <ul class="traps"><li class="lab">Traps</li>
 <li><span class="m">log(a + b)</span> does not break up. There is no rule for the logarithm of a <span data-fr="somme">sum</span>.</li>
@@ -1718,12 +1722,12 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">The symbols the lecturer writes without explaining, and the order every calculation follows.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:irrational-numbers/x2f8bb11595b61c86:irrational-numbers-intro/v/introduction-to-rational-and-irrational-numbers" target="_blank" rel="noopener">Watch: Irrational numbers</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:irrational-numbers/x2f8bb11595b61c86:irrational-numbers-intro/v/recognizing-irrational-numbers" target="_blank" rel="noopener">Watch: Classifying numbers: rational & irrational</a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations/xb4832e56:more-on-order-of-operations/a/order-of-operations-review" class="ghost" target="_blank" rel="noopener">Read: Order of operations review</a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations/xb4832e56:more-on-order-of-operations/e/order_of_operations_2" class="do" target="_blank" rel="noopener">Practise: Order of operations</a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations/xb4832e56:more-on-order-of-operations/e/evaluating-numerical-expressions-with-exponents" class="do" target="_blank" rel="noopener">Practise: Order of operations with fractions and exponents</a></div>
 <dl class="keys">
-<dt>The four sets</dt><dd><span class="m">&#8469;</span> whole counting numbers, <span class="m">&#8484;</span> those and their negatives, <span class="m">&#8474;</span> anything writable as a fraction of <span data-fr="entiers">integers</span>, <span class="m">&#8477;</span> every point on the line. Each contains the one before it: <span class="mb">&#8469; &#8834; &#8484; &#8834; &#8474; &#8834; &#8477;</span></dd>
+<dt>The four sets</dt><dd><span class="m">&#8469;</span> whole counting numbers, <span class="m">&#8484;</span> those and their negatives, <span class="m">&#8474;</span> anything writable as a fraction of <span data-fr="entiers">integers</span>, <span class="m">&#8477;</span> every point on the line. Each contains the one before it: <span class="mb"><span class="f">&#8469; &#8834; &#8484; &#8834; &#8474; &#8834; &#8477;</span></span></dd>
 <dt>Reading the symbols</dt><dd><span class="m">x &#8712; &#8477;</span> says x is a real number. <span class="m">&#8834;</span> is included in, <span class="m">&ne;</span> is not equal, <span class="m">&le;</span> at most, <span class="m">&ge;</span> at least, <span class="m">&#8704;</span> for every, <span class="m">&#8707;</span> there exists.</dd>
 <dt>No solution in &#8477;</dt><dd>Means no solution <em>among the real numbers</em>. This course stays in <span class="m">&#8477;</span> all year, so that is the whole answer.</dd>
 </dl>
 <ol class="method">
-<li><b>Order of operations.</b> <span class="mb">1. Brackets &nbsp;&rsaquo;&nbsp; 2. Powers and roots &nbsp;&rsaquo;&nbsp; 3. &times; and &divide; &nbsp;&rsaquo;&nbsp; 4. + and &minus;</span></li>
+<li><b>Order of operations.</b> <span class="mb"><span class="f">1. Brackets &nbsp;&rsaquo;&nbsp; 2. Powers and roots &nbsp;&rsaquo;&nbsp; 3. &times; and &divide; &nbsp;&rsaquo;&nbsp; 4. + and &minus;</span></span></li>
 <li><b>Same rank, left to right.</b> <span class="m">12 &divide; 3 &times; 2 = 8</span>, not 2.</li>
 <li><b>A minus in front is not part of the base.</b> <span class="m">&minus;3<sup>2</sup> = &minus;9</span> because the square binds first. <span class="m">(&minus;3)<sup>2</sup> = 9</span> because the <span data-fr="parenthèse">bracket</span> binds first.</li>
 <li><b>Round once, at the end.</b> Carry at least four significant figures through the working. <span data-fr="Arrondi">Rounding</span> at each step moves the final answer.</li>
@@ -1753,8 +1757,8 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">One bar, four operations, and the cancellation rule that decides most marks.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/arithmetic/x18ca194a:divide-fractions/x18ca194a:dividing-fractions-by-fractions/v/conceptual-understanding-of-dividing-fractions-by-fractions" target="_blank" rel="noopener">Watch: Dividing fractions by fractions</a><a href="https://www.khanacademy.org/math/arithmetic/x18ca194a:multiply-and-divide-negative-numbers/x18ca194a:understanding-multiplying-and-dividing-negative-fractions/v/negative-signs-in-numerators-and-denominators" target="_blank" rel="noopener">Watch: Understanding multiplying and dividing negative fractions</a><a href="https://www.khanacademy.org/math/arithmetic/x18ca194a:add-and-subtract-fractions-different-denominators/x18ca194a:adding-and-subtracting-fractions-with-unlike-denominators/e/adding-and-subtracting-fractions-with-unlike-denominators" class="do" target="_blank" rel="noopener">Practise: Add and subtract fractions</a><a href="https://www.khanacademy.org/math/arithmetic/x18ca194a:divide-fractions/x18ca194a:dividing-fractions-by-fractions/e/dividing_fractions_1.5" class="do" target="_blank" rel="noopener">Practise: Dividing fractions</a></div>
 <ol class="method">
-<li><b>Multiply.</b> Straight across, no preparation: <span class="mb"><span class="frac"><span class="num">a</span><span class="den">b</span></span> &times; <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">ac</span><span class="den">bd</span></span></span></li>
-<li><b>Divide.</b> Turn the second one over and multiply: <span class="mb"><span class="frac"><span class="num">a</span><span class="den">b</span></span> &divide; <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">a</span><span class="den">b</span></span> &times; <span class="frac"><span class="num">d</span><span class="den">c</span></span> = <span class="frac"><span class="num">ad</span><span class="den">bc</span></span></span></li>
+<li><b>Multiply.</b> Straight across, no preparation: <span class="mb"><span class="f"><span class="frac"><span class="num">a</span><span class="den">b</span></span> &times; <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">ac</span><span class="den">bd</span></span></span></span></li>
+<li><b>Divide.</b> Turn the second one over and multiply: <span class="mb"><span class="f"><span class="frac"><span class="num">a</span><span class="den">b</span></span> &divide; <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">a</span><span class="den">b</span></span> &times; <span class="frac"><span class="num">d</span><span class="den">c</span></span> = <span class="frac"><span class="num">ad</span><span class="den">bc</span></span></span></span></li>
 <li><b>Add or subtract.</b> Only these two need a common denominator, because you can only add halves to halves.</li>
 <li><b>Simplify.</b> Cancel <b>factors</b>, never terms. A factor multiplies the whole numerator or the whole denominator.</li>
 <li><b>The minus sign.</b> <span class="m"><span class="frac"><span class="num">&minus;a</span><span class="den">b</span></span> = <span class="frac"><span class="num">a</span><span class="den">&minus;b</span></span> = &minus;<span class="frac"><span class="num">a</span><span class="den">b</span></span></span>. Put it in front and keep it there.</li>
@@ -1783,8 +1787,8 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">Five rules, one definition of a root, and where fractional exponents appear in the business.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals/x2f8bb11595b61c86:exponent-properties-review/v/multiplying-and-dividing-powers-with-integer-exponents" target="_blank" rel="noopener">Watch: Exponent properties review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals/x2f8bb11595b61c86:simplifying-square-roots/v/simplifying-square-roots-1" target="_blank" rel="noopener">Watch: Simplifying <span data-fr="racines carrées">square roots</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals/x2f8bb11595b61c86:exponent-properties-review/e/properties-of-integer-exponents" class="do" target="_blank" rel="noopener">Practise: Properties of exponents challenge (<span data-fr="entier">integer</span> exponents)</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals/x2f8bb11595b61c86:simplifying-square-roots/e/simplifying_radicals" class="do" target="_blank" rel="noopener">Practise: Simplify <span data-fr="racines carrées">square roots</span></a></div>
 <dl class="keys">
-<dt>The rules</dt><dd><span class="mb">a<sup>m</sup> &middot; a<sup>n</sup> = a<sup>m+n</sup> &nbsp;&nbsp; <span class="frac"><span class="num">a<sup>m</sup></span><span class="den">a<sup>n</sup></span></span> = a<sup>m&minus;n</sup> &nbsp;&nbsp; (a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></span><span class="mb">(ab)<sup>n</sup> = a<sup>n</sup>b<sup>n</sup> &nbsp;&nbsp; a<sup>0</sup> = 1 &nbsp;&nbsp; a<sup>&minus;n</sup> = <span class="frac"><span class="num">1</span><span class="den">a<sup>n</sup></span></span></span></dd>
-<dt><span data-fr="Racines">Roots</span> are <span data-fr="puissances">powers</span></dt><dd><span class="mb"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> = a<sup>1/2</sup> &nbsp;&nbsp; <sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> = a<sup>1/n</sup> &nbsp;&nbsp; <sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a<sup>m</sup></span></span> = a<sup>m/n</sup></span>So every <span data-fr="racine">root</span> obeys the five rules above. There is nothing extra to learn.</dd>
+<dt>The rules</dt><dd><span class="mb"><span class="f">a<sup>m</sup> &middot; a<sup>n</sup> = a<sup>m+n</sup></span><span class="f"><span class="frac"><span class="num">a<sup>m</sup></span><span class="den">a<sup>n</sup></span></span> = a<sup>m&minus;n</sup></span><span class="f">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></span></span><span class="mb"><span class="f">(ab)<sup>n</sup> = a<sup>n</sup>b<sup>n</sup></span><span class="f">a<sup>0</sup> = 1</span><span class="f">a<sup>&minus;n</sup> = <span class="frac"><span class="num">1</span><span class="den">a<sup>n</sup></span></span></span></span></dd>
+<dt><span data-fr="Racines">Roots</span> are <span data-fr="puissances">powers</span></dt><dd><span class="mb"><span class="f"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> = a<sup>1/2</sup></span><span class="f"><sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a</span></span> = a<sup>1/n</sup></span><span class="f"><sup>n</sup><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>a<sup>m</sup></span></span> = a<sup>m/n</sup></span></span>So every <span data-fr="racine">root</span> obeys the five rules above. There is nothing extra to learn.</dd>
 <dt>Where it is defined</dt><dd>An even <span data-fr="racine">root</span> needs a non-negative inside. <span class="m">0<sup>0</sup></span> and division by zero are <span data-fr="non défini">undefined</span>.</dd>
 </dl>
 <div class="work">
@@ -1812,7 +1816,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">The same three identities, read left to right and then right to left.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/v/area-model-for-multiplying-binomials" target="_blank" rel="noopener">Watch: Multiplying binomials</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/v/multiplying-simple-binomials" target="_blank" rel="noopener">Watch: Multiplying binomials intro</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/a/warmup-multiplying-binomials" class="ghost" target="_blank" rel="noopener">Read: Warmup: Multiplying binomials</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/e/multiply-binomials-coefficient" class="do" target="_blank" rel="noopener">Practise: Multiply binomials</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:special-product-binomials/e/multiplying_expressions_1" class="do" target="_blank" rel="noopener">Practise: Multiply difference of squares</a></div>
 <dl class="keys">
-<dt>The three identities</dt><dd><span class="mb">(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></span><span class="mb">(a &minus; b)<sup>2</sup> = a<sup>2</sup> &minus; 2ab + b<sup>2</sup></span><span class="mb">(a + b)(a &minus; b) = a<sup>2</sup> &minus; b<sup>2</sup></span><span data-fr="Développement">Expanding</span> reads them left to right. <span data-fr="Factorisation">Factoring</span> reads them right to left.</dd>
+<dt>The three identities</dt><dd><span class="mb"><span class="f">(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></span></span><span class="mb"><span class="f">(a &minus; b)<sup>2</sup> = a<sup>2</sup> &minus; 2ab + b<sup>2</sup></span></span><span class="mb"><span class="f">(a + b)(a &minus; b) = a<sup>2</sup> &minus; b<sup>2</sup></span></span><span data-fr="Développement">Expanding</span> reads them left to right. <span data-fr="Factorisation">Factoring</span> reads them right to left.</dd>
 </dl>
 <ol class="method">
 <li><b><span data-fr="Développement">Expanding</span> two <span data-fr="parenthèses">brackets</span>.</b> Every term in the first meets every term in the second. Four products for two binomials.</li>
@@ -1879,7 +1883,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">Anything with an <span class="m">x<sup>2</sup></span> in it. Everything to one side first, always.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratics-solve-factoring/v/example-1-solving-a-quadratic-equation-by-factoring" target="_blank" rel="noopener">Watch: <span data-fr="Résolution">Solving</span> quadratics by <span data-fr="factorisation">factoring</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratics-solve-factoring/v/solving-quadratics-by-dividing-and-factoring" target="_blank" rel="noopener">Watch: <span data-fr="Résolution">Solving</span> quadratics by <span data-fr="factorisation">factoring</span>: leading coefficient ≠ 1</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratics-solve-factoring/a/solving-quadratics-by-factoring-review" class="ghost" target="_blank" rel="noopener">Read: <span data-fr="Résolution">Solving</span> quadratics by <span data-fr="factorisation">factoring</span> review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratics-solve-factoring/e/solving_quadratics_by_factoring_2" class="do" target="_blank" rel="noopener">Practise: Quadratics by <span data-fr="factorisation">factoring</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/e/quadratic_equation" class="do" target="_blank" rel="noopener">Practise: Quadratic formula</a></div>
 <dl class="keys">
-<dt>The form and the formula</dt><dd><span class="mb">ax<sup>2</sup> + bx + c = 0, &nbsp; a &ne; 0</span><span class="mb">x = <span class="frac"><span class="num">&minus;b &plusmn; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>b<sup>2</sup> &minus; 4ac</span></span></span><span class="den">2a</span></span></span></dd>
+<dt>The form and the formula</dt><dd><span class="mb"><span class="f">ax<sup>2</sup> + bx + c = 0, &nbsp; a &ne; 0</span></span><span class="mb"><span class="f">x = <span class="frac"><span class="num">&minus;b &plusmn; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>b<sup>2</sup> &minus; 4ac</span></span></span><span class="den">2a</span></span></span></span></dd>
 <dt>The discriminant</dt><dd><span class="m">&Delta; = b<sup>2</sup> &minus; 4ac</span> counts the real solutions before you find them: <span class="m">&Delta; &gt; 0</span> two, <span class="m">&Delta; = 0</span> one, <span class="m">&Delta; &lt; 0</span> none in <span class="m">&#8477;</span>.</dd>
 </dl>
 <ol class="method">
@@ -1983,7 +1987,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </ol>
 <dl class="keys">
 <dt>Absolute value is a distance</dt><dd><span class="m">|x|</span> is the distance from <span class="m">x</span> to 0, so it is never negative.</dd>
-<dt>The three forms</dt><dd><span class="mb">|x| = k &nbsp; &rarr; &nbsp; x = k or x = &minus;k</span><span class="mb">|x| &lt; k &nbsp; &rarr; &nbsp; &minus;k &lt; x &lt; k</span><span class="mb">|x| &gt; k &nbsp; &rarr; &nbsp; x &lt; &minus;k or x &gt; k</span></dd>
+<dt>The three forms</dt><dd><span class="mb"><span class="f">|x| = k &nbsp; &rarr; &nbsp; x = k or x = &minus;k</span></span><span class="mb"><span class="f">|x| &lt; k &nbsp; &rarr; &nbsp; &minus;k &lt; x &lt; k</span></span><span class="mb"><span class="f">|x| &gt; k &nbsp; &rarr; &nbsp; x &lt; &minus;k or x &gt; k</span></span></dd>
 </dl>
 <div class="work">
 <span class="cap">Solve &minus;2x + 1 &le; 7</span>
@@ -2009,8 +2013,8 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sec-kicker">Slope is a rate of change. Three forms of the same line.</p>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:intro-to-slope-intercept-form/v/slope-intercept-intro-examples" target="_blank" rel="noopener">Watch: <span data-fr="Exemples résolus">Worked examples</span>: slope-intercept intro</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs/x2f8bb11595b61c86:horizontal-vertical-lines/v/slope-of-a-line-3" target="_blank" rel="noopener">Watch: Horizontal & vertical lines</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:point-slope-form/a/point-slope-form-review" class="ghost" target="_blank" rel="noopener">Read: Point-slope form review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:writing-slope-intercept-equations/e/slope-intercept-equation-from-graph" class="do" target="_blank" rel="noopener">Practise: Slope-intercept equation from graph</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:point-slope-form/e/converting_between_point_slope_and_slope_intercept" class="do" target="_blank" rel="noopener">Practise: Point-slope form</a></div>
 <dl class="keys">
-<dt><span data-fr="Pente">Slope</span></dt><dd><span class="mb">m = <span class="frac"><span class="num">&#916;y</span><span class="den">&#916;x</span></span> = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span></span>It is a rate: how much <span class="m">y</span> changes per one unit of <span class="m">x</span>.</dd>
-<dt>The three forms</dt><dd><span class="mb">y = mx + h &nbsp;&nbsp; slope-intercept</span><span class="mb">y &minus; y<sub>1</sub> = m(x &minus; x<sub>1</sub>) &nbsp;&nbsp; point-slope</span><span class="mb">ax + by = c &nbsp;&nbsp; standard</span></dd>
+<dt><span data-fr="Pente">Slope</span></dt><dd><span class="mb"><span class="f">m = <span class="frac"><span class="num">&#916;y</span><span class="den">&#916;x</span></span> = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span></span></span>It is a rate: how much <span class="m">y</span> changes per one unit of <span class="m">x</span>.</dd>
+<dt>The three forms</dt><dd><span class="mb"><span class="f">y = mx + h</span><span class="f">slope-intercept</span></span><span class="mb"><span class="f">y &minus; y<sub>1</sub> = m(x &minus; x<sub>1</sub>)</span><span class="f">point-slope</span></span><span class="mb"><span class="f">ax + by = c</span><span class="f">standard</span></span></dd>
 <dt>Parallel and perpendicular</dt><dd>Parallel means <span class="m">m<sub>1</sub> = m<sub>2</sub></span>. Perpendicular means <span class="m">m<sub>1</sub>m<sub>2</sub> = &minus;1</span>.</dd>
 </dl>
 <figure class="fig">
@@ -2042,8 +2046,8 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages/xb4832e56:percent-problems/v/finding-percentages-example" target="_blank" rel="noopener">Watch: Percent problems</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-decay/v/exponential-decay-intro" target="_blank" rel="noopener">Watch: Exponential <span data-fr="croissance">growth</span> & <span data-fr="décroissance">decay</span></a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages/xb4832e56:equivalent-representations-of-percent-problems/a/converting-percents-and-fractions-review" class="ghost" target="_blank" rel="noopener">Read: Converting percents and fractions review</a><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages/xb4832e56:percent-word-problems/e/percentage_word_problems_1" class="do" target="_blank" rel="noopener">Practise: Percent word problems</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-expressions/e/exponential-expressions-word-problems" class="do" target="_blank" rel="noopener">Practise: Exponential expressions word problems (numerical)</a></div>
 <dl class="keys">
 <dt>The multiplier</dt><dd>A rise of <span class="m">r</span> per cent multiplies by <span class="m">1 + <span class="frac"><span class="num">r</span><span class="den">100</span></span></span>. A fall multiplies by <span class="m">1 &minus; <span class="frac"><span class="num">r</span><span class="den">100</span></span></span>. A 20% rise is <span class="m">&times; 1.2</span>; a 20% fall is <span class="m">&times; 0.8</span>.</dd>
-<dt>Repeated change</dt><dd><span class="mb">final = initial &times; <span class="pr">(</span>1 + <span class="frac"><span class="num">r</span><span class="den">100</span></span><span class="pr">)</span><sup>n</sup></span>Changes multiply, they never add. Up 20% then down 20% gives <span class="m">1.2 &times; 0.8 = 0.96</span>, a 4% loss.</dd>
-<dt><span data-fr="Variation en pourcentage">Percentage change</span> from two figures</dt><dd><span class="mb"><span class="frac"><span class="num">new &minus; old</span><span class="den">old</span></span> &times; 100</span>Always divided by the <b>old</b> figure.</dd>
+<dt>Repeated change</dt><dd><span class="mb"><span class="f">final = initial &times; <span class="pr">(</span>1 + <span class="frac"><span class="num">r</span><span class="den">100</span></span><span class="pr">)</span><sup>n</sup></span></span>Changes multiply, they never add. Up 20% then down 20% gives <span class="m">1.2 &times; 0.8 = 0.96</span>, a 4% loss.</dd>
+<dt><span data-fr="Variation en pourcentage">Percentage change</span> from two figures</dt><dd><span class="mb"><span class="f"><span class="frac"><span class="num">new &minus; old</span><span class="den">old</span></span> &times; 100</span></span>Always divided by the <b>old</b> figure.</dd>
 <dt>Points against per cent</dt><dd>From 5% to 7% is a rise of 2 percentage points, and a rise of 40 per cent. Both are true and they are different numbers.</dd>
 </dl>
 <ol class="method">
@@ -2082,7 +2086,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li><b>Interpret.</b> Convert the number back into the language of the question, with its unit. A bare number is not an answer.</li>
 </ol>
 <dl class="keys">
-<dt>The three relationships to know</dt><dd><span class="mb">revenue = price &times; quantity</span><span class="mb">cost = fixed + variable &times; quantity</span><span class="mb">profit = revenue &minus; cost</span></dd>
+<dt>The three relationships to know</dt><dd><span class="mb"><span class="f">revenue = price &times; quantity</span></span><span class="mb"><span class="f">cost = fixed + variable &times; quantity</span></span><span class="mb"><span class="f">profit = revenue &minus; cost</span></span></dd>
 <dt>Units</dt><dd>Units carry through the algebra. If the answer comes out in the wrong unit the model is wrong, which makes units the fastest check you have.</dd>
 </dl>
 <div class="work">
