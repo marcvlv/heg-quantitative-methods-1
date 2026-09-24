@@ -154,15 +154,23 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
    LAYOUT
    =========================================================== */
 .page{padding-left:250px;transition:padding-left .2s ease}
-body.rail-hidden .page{padding-left:64px}
-.shell{max-width:940px;margin:0 auto;padding:26px clamp(16px,4vw,36px) 80px;min-width:0}
+body.rail-hidden .page{padding-left:0}
+.shell{max-width:800px;margin:0 auto;padding:26px clamp(16px,3vw,26px) 80px;min-width:0}
 
-.mark-toggle{
-  position:fixed;top:20px;left:22px;z-index:80;width:24px;height:26.4px;padding:0;
-  border:0;background:none;color:var(--ink);cursor:pointer;display:block;
+/* The contents toggle says what it does. It used to be the logo, which nobody
+   guessed was a button. */
+.nav-toggle{
+  position:fixed;top:14px;left:14px;z-index:80;
+  display:inline-flex;align-items:center;gap:7px;padding:7px 13px 7px 10px;
+  border:1px solid var(--rule-mid);border-radius:99px;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:12px;font-weight:700;cursor:pointer;box-shadow:var(--lift);
 }
-.mark-toggle .mark{width:24px;height:26.4px;display:block}
-.mark-toggle:hover{color:var(--accent)}
+.nav-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.nav-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.nav-toggle svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.nav-toggle .ico-close{display:none}
+body:not(.rail-hidden) .nav-toggle .ico-close{display:block}
+body:not(.rail-hidden) .nav-toggle .ico-burger{display:none}
 
 .rail{
   position:fixed;top:0;left:0;bottom:0;width:250px;overflow-y:auto;z-index:30;
@@ -175,7 +183,7 @@ body.rail-hidden .rail{transform:translateX(-101%)}
 .rail::-webkit-scrollbar{width:6px}
 .rail::-webkit-scrollbar-thumb{background:var(--rule-mid);border-radius:3px}
 .rail-head{padding-bottom:12px;border-bottom:1px solid var(--rule-mid);margin-bottom:12px}
-.rail-head .row{display:flex;align-items:center;justify-content:flex-end;height:28px}
+.rail-head .row{display:flex;align-items:center;justify-content:flex-end;height:34px}
 .rail-head .code{display:block;margin:14px 0 2px;word-break:break-word}
 .rail-head .doc{font-size:12px;font-weight:700;color:var(--ink)}
 .rail-head .prog{margin:8px 0 0;font-size:11px;color:var(--accent);font-weight:700}
@@ -228,7 +236,7 @@ details.navpart.current > summary{color:var(--ink)}
 }
 
 main{min-width:0}
-.prose{max-width:66ch}
+.prose{max-width:none}
 .prose p{margin:0 0 .85em}
 
 /* ===========================================================
@@ -283,7 +291,7 @@ section{scroll-margin-top:16px}
 .rail a.on::before{color:var(--accent)}
 
 h2.sec{font-size:20px;margin:0;padding-bottom:6px;border-bottom:1px solid var(--ink)}
-.sec-kicker{font-family:var(--sans);font-size:12px;color:var(--muted);margin:7px 0 18px;max-width:66ch}
+.sec-kicker{font-family:var(--sans);font-size:12px;color:var(--muted);margin:7px 0 18px}
 h3{font-size:15px;margin:30px 0 8px}
 h4{font-size:12px;margin:22px 0 7px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
 ul,ol.plain{margin:0 0 1em;padding-left:1.2em}
@@ -310,8 +318,8 @@ code{font-family:var(--mono);font-size:.88em;background:var(--sunken);padding:1p
 .box.remember .lab{color:var(--ok)}
 .box.rule .lab{color:var(--ink)}
 .box.method .lab{color:var(--accent)}
-.box p,.box ul{max-width:68ch}
-p.note{max-width:66ch;margin:16px 0 18px}
+.box p,.box ul{max-width:none}
+p.note{margin:16px 0 18px}
 p.note .note-lab{font-family:var(--sans);font-size:13px}
 ol.steps{margin:0;padding-left:1.25em}
 ol.steps li{margin-bottom:.45em}
@@ -590,7 +598,7 @@ details.practice[open] > summary::after{content:"close"}
 .sheet-state .dot.m4{background:var(--m4);border-color:var(--m4)}
 
 /* the method: one instruction a line, numbered */
-ol.method{margin:18px 0 20px;padding:0;list-style:none;counter-reset:mth;max-width:70ch}
+ol.method{margin:18px 0 20px;padding:0;list-style:none;counter-reset:mth}
 ol.method > li{
   position:relative;padding:0 0 0 34px;margin:0 0 13px;counter-increment:mth;
   line-height:1.62;
@@ -605,7 +613,7 @@ ol.method > li::before{
 ol.method > li > b{color:var(--ink);font-weight:700}
 
 /* facts: a definition list for things that are not a procedure */
-dl.keys{display:block;margin:18px 0 20px;max-width:70ch}
+dl.keys{display:block;margin:18px 0 20px}
 dl.keys dt{
   font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.06em;
   text-transform:uppercase;color:var(--muted);margin:0 0 3px;
@@ -615,7 +623,7 @@ dl.keys dd:last-child{margin-bottom:0}
 
 /* traps: a short list, not a box */
 ul.traps{
-  margin:18px 0 20px;padding:12px 16px 13px;list-style:none;max-width:70ch;
+  margin:18px 0 20px;padding:12px 16px 13px;list-style:none;
   border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 5px 5px 0;
 }
 ul.traps > li{margin:0 0 7px;padding-left:15px;position:relative;font-size:15.5px;line-height:1.55}
@@ -657,7 +665,7 @@ section h3:first-of-type{margin-top:20px}
   font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;color:var(--muted);
 }
-.rb-s{display:block;margin-top:6px;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:66ch}
+.rb-s{display:block;margin-top:6px;font-size:14.5px;line-height:1.55;color:var(--muted)}
 .rb-body{padding:4px 18px 10px;border-top:1px solid var(--rule);background:var(--paper);border-radius:0 0 10px 10px}
 .rb-body section{scroll-margin-top:14px}
 
@@ -840,7 +848,7 @@ footer p{max-width:72ch}
 footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;display:block}
 
 @media print{
-  .rail,.fab,.backdrop,.mark-toggle,.tlink{display:none!important}
+  .rail,.fab,.backdrop,.nav-toggle,.tlink{display:none!important}
   .page{padding-left:0}.shell{padding:0}
   details.rev[open],.der,.ex-block,.tw{break-inside:avoid}
   h2.sec{break-after:avoid}
@@ -856,8 +864,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   </symbol>
 </svg>
 
-<button class="mark-toggle" id="markToggle" type="button" aria-label="Show or hide the contents" aria-expanded="true" aria-controls="rail">
-  <svg class="mark" role="img" aria-label="MAZEN"><use href="#mazen-mark"/></svg>
+<button class="nav-toggle" id="markToggle" type="button" aria-label="Show or hide the contents" aria-expanded="true" aria-controls="rail">
+  <svg class="ico-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  <svg class="ico-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  <span class="lbl">Contents</span>
 </button>
 <div class="backdrop" id="backdrop"></div>
 
@@ -1727,7 +1737,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <dt>No solution in &#8477;</dt><dd>Means no solution <em>among the real numbers</em>. This course stays in <span class="m">&#8477;</span> all year, so that is the whole answer.</dd>
 </dl>
 <ol class="method">
-<li><b>Order of operations.</b> <span class="mb"><span class="f">1. Brackets &nbsp;&rsaquo;&nbsp; 2. Powers and roots &nbsp;&rsaquo;&nbsp; 3. &times; and &divide; &nbsp;&rsaquo;&nbsp; 4. + and &minus;</span></span></li>
+<li><b>Order of operations.</b> <span class="mb"><span class="f">1. Brackets &rsaquo;</span><span class="f">2. Powers and roots &rsaquo;</span><span class="f">3. &times; and &divide; &rsaquo;</span><span class="f">4. + and &minus;</span></span></li>
 <li><b>Same rank, left to right.</b> <span class="m">12 &divide; 3 &times; 2 = 8</span>, not 2.</li>
 <li><b>A minus in front is not part of the base.</b> <span class="m">&minus;3<sup>2</sup> = &minus;9</span> because the square binds first. <span class="m">(&minus;3)<sup>2</sup> = 9</span> because the <span data-fr="parenthèse">bracket</span> binds first.</li>
 <li><b>Round once, at the end.</b> Carry at least four significant figures through the working. <span data-fr="Arrondi">Rounding</span> at each step moves the final answer.</li>
