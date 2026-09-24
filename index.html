@@ -142,26 +142,35 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
 /* ---- the mark ---- */
 .mark{fill:currentColor;display:inline-block;vertical-align:middle;width:14.5px;height:16px;flex:none}
 
-/* The page reveal, as on mazen.ch: a veil holding the mark, which lifts away.
-   Same durations and easing, in black and white. It runs on CSS alone, so a
-   failure in the script can never leave the page covered. */
+/* The page reveal, as on mazen.ch. Watched on a real navigation there: the
+   veil is added below the fold and rises to cover (0.48s), holds while the
+   mark is up, then carries on upward and off the top (0.65s). Both moves use
+   the site's own cubic-bezier(.65,0,.35,1). Here it is one animation, since a
+   static page has the whole sequence on a single load. Black and white. */
 .page-veil{
   position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
   background:var(--veil);pointer-events:none;will-change:transform;
-  animation:veil-lift .65s cubic-bezier(.65,0,.35,1) .45s forwards;
+  transform:translateY(100%);
+  animation:veil-pass 1.32s forwards;
 }
 .page-veil .mark{
-  width:52px;height:57px;color:var(--on-veil);opacity:0;
-  animation:veil-logo 1.1s cubic-bezier(.16,1,.3,1) forwards;
+  width:96px;height:105px;color:var(--on-veil);opacity:0;
+  animation:veil-logo 1.32s forwards;
 }
-@keyframes veil-lift{from{transform:translateY(0)}to{transform:translateY(-100%)}}
+@keyframes veil-pass{
+  0%  {transform:translateY(100%);animation-timing-function:cubic-bezier(.65,0,.35,1)}
+  36% {transform:translateY(0);animation-timing-function:linear}
+  55% {transform:translateY(0);animation-timing-function:cubic-bezier(.65,0,.35,1)}
+  100%{transform:translateY(-100%)}
+}
 /* one animation rather than a fade-in plus a fade-out, so there is no
    fill-mode interaction between two rules both driving opacity */
 @keyframes veil-logo{
-  0%{opacity:0;transform:scale(.95)}
-  24%{opacity:1;transform:scale(1)}
-  60%{opacity:1;transform:scale(1)}
-  80%{opacity:0;transform:scale(1)}
+  0%  {opacity:0;transform:scale(.94)}
+  12% {opacity:0;transform:scale(.94)}
+  36% {opacity:1;transform:scale(1)}
+  58% {opacity:1;transform:scale(1)}
+  80% {opacity:0;transform:scale(1)}
   100%{opacity:0;transform:scale(1)}
 }
 @media (prefers-reduced-motion:reduce){.page-veil{display:none}}
@@ -2844,7 +2853,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   (function(){
     var veil = document.getElementById('pageVeil');
     if (!veil) return;
-    setTimeout(function(){ if (veil.parentNode) veil.parentNode.removeChild(veil); }, 1400);
+    setTimeout(function(){ if (veil.parentNode) veil.parentNode.removeChild(veil); }, 1600);
   })();
 
   window.addEventListener('hashchange', function(){
