@@ -26,6 +26,8 @@
   --accent-2:#0E4A93;
   --accent-soft:#EAF1FB;
   --on-accent:#FFFFFF;
+  --ka:#0F7A5F;
+  --ka-soft:#E9F4F1;
   --warn:#9A5314;
   --warn-soft:#FDF4EA;
   --ok:#0E7346;
@@ -43,7 +45,7 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --paper:#0F1216;--raise:#161A20;--sunken:#171B22;--ink:#E7EAEF;--ink-2:#B7BDC8;--muted:#868D9A;
-    --rule:#232833;--rule-mid:#39414F;--accent:#78B0F0;--accent-2:#9CC6F7;--accent-soft:#132338;--on-accent:#0F1216;
+    --rule:#232833;--rule-mid:#39414F;--accent:#78B0F0;--accent-2:#9CC6F7;--accent-soft:#132338;--on-accent:#0F1216;--ka:#63C7AB;--ka-soft:#0F2620;
     --warn:#E0A265;--warn-soft:#2A2017;--ok:#5CCB98;--ok-soft:#0F2A1E;--no:#EE9490;--no-soft:#2B1A19;
     --shade:rgba(0,0,0,.6);
     --lift:0 1px 2px rgba(0,0,0,.4);--lift-2:0 2px 8px rgba(0,0,0,.5);
@@ -51,7 +53,7 @@
 }
 :root[data-theme="dark"]{
     --paper:#0F1216;--raise:#161A20;--sunken:#171B22;--ink:#E7EAEF;--ink-2:#B7BDC8;--muted:#868D9A;
-    --rule:#232833;--rule-mid:#39414F;--accent:#78B0F0;--accent-2:#9CC6F7;--accent-soft:#132338;--on-accent:#0F1216;
+    --rule:#232833;--rule-mid:#39414F;--accent:#78B0F0;--accent-2:#9CC6F7;--accent-soft:#132338;--on-accent:#0F1216;--ka:#63C7AB;--ka-soft:#0F2620;
     --warn:#E0A265;--warn-soft:#2A2017;--ok:#5CCB98;--ok-soft:#0F2A1E;--no:#EE9490;--no-soft:#2B1A19;
     --shade:rgba(0,0,0,.6);
     --lift:0 1px 2px rgba(0,0,0,.4);--lift-2:0 2px 8px rgba(0,0,0,.5);
@@ -520,6 +522,23 @@ details.practice[open] > summary::after{content:"close"}
 .lesson-head a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--rule-mid)}
 .lesson-head a:hover{border-color:var(--accent)}
 
+/* ---- the same topic on Khan Academy ---- */
+.khan{
+  margin:18px 0 24px;padding:11px 14px 12px;border:1px solid var(--rule);border-left:4px solid var(--ka);
+  border-radius:6px;background:var(--ka-soft);box-shadow:var(--lift);
+}
+.khan .k-lab{
+  display:block;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ka);margin-bottom:7px;
+}
+.khan ul{margin:0;padding:0;list-style:none}
+.khan li{margin:0 0 5px;font-size:13.5px;line-height:1.5}
+.khan li:last-child{margin-bottom:0}
+.khan a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-mid)}
+.khan a:hover{color:var(--ka);border-color:var(--ka)}
+.khan a::after{content:" \2197";color:var(--muted);font-size:.85em}
+.khan .note{margin:8px 0 0;font-size:12px;color:var(--muted);font-family:var(--sans)}
+
 /* ---- a check sits inside the lesson, not at the end of it ---- */
 .ex.mini{margin:24px 0;box-shadow:var(--lift)}
 .ex.mini .ex-top{border-bottom-color:var(--rule)}
@@ -664,6 +683,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       <li><a href="#orientation">The course and the grade</a></li>
       <li><a href="#cyberlearn">What is on Cyberlearn</a></li>
       <li><a href="#modelling">The modelling cycle</a></li>
+      <li><a href="#khan">Khan Academy alongside it</a></li>
     </ol></details>
     <details class="navpart" data-part="2"><summary>Part II · Functions · W1</summary><ol>
       <li><a href="#fn-concept">What a function is</a></li>
@@ -762,6 +782,15 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>Why <span class="m">&minus;3<sup>2</sup></span> and <span class="m">(&minus;3)<sup>2</sup></span> are different numbers</li>
 <li><span data-fr="Arrondi">Rounding</span>, and when to round at all</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations" target="_blank" rel="noopener">Pre-algebra, unit 5: <span data-fr="Exposants">Exponents</span> and order of operations</a></li>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:irrational-numbers" target="_blank" rel="noopener">Algebra 1, unit 15: Irrational numbers</a></li>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:foundation-algebra" target="_blank" rel="noopener">Algebra 1, unit 1: Algebra foundations</a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>A sentence you are expected to read</h3>
 <div class="prose">
@@ -996,6 +1025,16 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>When a <span data-fr="fraction">fraction</span> may be split, and when it may not</li>
 <li>Where a minus <span data-fr="signe">sign</span> goes, and what it does to a <span data-fr="numérateur">numerator</span></li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/arithmetic/fraction-arithmetic" target="_blank" rel="noopener">Arithmetic, unit 4: Understand <span data-fr="fractions">fractions</span></a></li>
+<li><a href="https://www.khanacademy.org/math/arithmetic/x18ca194a:add-and-subtract-fractions-different-denominators" target="_blank" rel="noopener">Arithmetic, unit 13: Adding and subtracting <span data-fr="fractions">fractions</span></a></li>
+<li><a href="https://www.khanacademy.org/math/arithmetic/x18ca194a:divide-fractions" target="_blank" rel="noopener">Arithmetic, unit 15: Dividing <span data-fr="fractions">fractions</span></a></li>
+<li><a href="https://www.khanacademy.org/math/arithmetic/x18ca194a:multiply-and-divide-negative-numbers" target="_blank" rel="noopener">Arithmetic, unit 19: Multiplying and dividing negatives</a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>One number, two meanings</h3>
 <div class="prose">
@@ -1252,6 +1291,14 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>Why <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x<sup>2</sup></span></span> = |x|</span>, and where <span data-fr="puissances">powers</span> stop being defined</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:rational-exponents-radicals" target="_blank" rel="noopener">Algebra 1, unit 11: <span data-fr="Exposants">Exponents</span> and radicals</a></li>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:exp" target="_blank" rel="noopener">Algebra 2, unit 6: Rational <span data-fr="exposants">exponents</span> and radicals</a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>A <span data-fr="croissance">growth</span> question that looks like a trick</h3>
 <div class="prose">
 <p>The XY Coffee Co app subscription grew by 6 <span data-fr="pour cent">per cent</span> a month for three months, then by 6 <span data-fr="pour cent">per cent</span> for two more. Jane asks whether that is the same as 6 <span data-fr="pour cent">per cent</span> a month for five months.</p>
@@ -1505,6 +1552,14 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>How to factor a quadratic whose leading <span data-fr="coefficient">coefficient</span> is not 1, and read <span data-fr="seuil de rentabilité">break-even</span> points off the result</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring" target="_blank" rel="noopener">Algebra 1, unit 13: Quadratics, multiplying and <span data-fr="factorisation">factoring</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:poly-factor" target="_blank" rel="noopener">Algebra 2, unit 3: <span data-fr="Polynôme">Polynomial</span> factorisation</a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>Why Jane wants the same expression written two ways</h3>
 <div class="prose">
 <p>XY Coffee Co opens a roasting line. Each week it sells <span class="m">q</span> crates at 90 CHF, and the <span data-fr="coût">cost</span> of roasting <span class="m">q</span> crates is <span class="m">C(q) = q<sup>2</sup> + 1400</span> CHF, the square because beans roasted in a rush <span data-fr="coût">cost</span> more per crate. So weekly <span data-fr="bénéfice">profit</span> is<span class="mb">P(q) = 90q &minus; (q<sup>2</sup> + 1400) = &minus;q<sup>2</sup> + 90q &minus; 1400</span></p>
@@ -1692,6 +1747,14 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>How to make a named <span data-fr="variable">variable</span> the subject of a formula</li>
 <li>How to turn a sentence of business English into an <span data-fr="équation">equation</span></li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:solve-equations-inequalities" target="_blank" rel="noopener">Algebra 1, unit 2: <span data-fr="Résolution">Solving</span> <span data-fr="équations">equations</span> and <span data-fr="inéquations">inequalities</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra-basics/alg-basics-linear-equations-and-inequalities" target="_blank" rel="noopener">Algebra basics, unit 3: <span data-fr="Équations du premier degré">Linear equations</span> and <span data-fr="inéquations">inequalities</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>A question the roastery asks every month</h3>
 <div class="prose">
@@ -1922,6 +1985,13 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>How to decide which <span data-fr="racine">root</span> a business question actually wants</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations" target="_blank" rel="noopener">Algebra 1, unit 14: Quadratic <span data-fr="fonctions">functions</span> and <span data-fr="équations">equations</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>Where a squared term comes from</h3>
 <div class="prose">
 <p>The app subscription <span data-fr="coûts">costs</span> <span class="m">9 CHF</span> a month and has <span class="m">4000</span> subscribers. Marketing has tested the <span data-fr="prix">price</span>, and Jane has the result: every <span class="m">1 CHF</span> added to the <span data-fr="prix">price</span> loses about <span class="m">250</span> subscribers.</p>
@@ -2126,6 +2196,14 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>Why the honest <span data-fr="réponse">answer</span> is sometimes <span class="m">no solution</span>, and how to say so</li>
 <li>How to <span data-fr="réponse">answer</span> a question about <span data-fr="moyenne">average</span> <span data-fr="coût">cost</span> per unit reaching a target</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:eq" target="_blank" rel="noopener">Algebra 2, unit 10: <span data-fr="Équations">Equations</span>, including rational ones</a></li>
+<li><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:rational-functions" target="_blank" rel="noopener">Precalculus, unit 4: <span data-fr="Fonctions rationnelles">Rational functions</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>A question with the <span data-fr="inconnue">unknown</span> underneath</h3>
 <div class="prose">
@@ -2350,6 +2428,13 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>How to handle three <span data-fr="équations">equations</span> in three <span data-fr="inconnues">unknowns</span></li>
 <li>How to set up <span data-fr="seuil de rentabilité">break-even</span> and <span data-fr="équilibre de marché">market equilibrium</span> questions</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:systems-of-equations" target="_blank" rel="noopener">Algebra 1, unit 6: <span data-fr="Systèmes d’équations">Systems of equations</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>Two facts, one order</h3>
 <div class="prose">
@@ -2583,6 +2668,14 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>What <span class="m">|x|</span> means as a distance</li>
 <li>How <span data-fr="résoudre">to solve</span> <span class="m">|A| = k</span>, <span class="m">|A| &lt; k</span> and <span class="m">|A| &gt; k</span></li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:inequalities-systems-graphs" target="_blank" rel="noopener">Algebra 1, unit 7: <span data-fr="Inéquations">Inequalities</span>, systems and <span data-fr="graphiques">graphs</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:absolute-value-piecewise-functions" target="_blank" rel="noopener">Algebra 1, unit 10: <span data-fr="Valeur absolue">Absolute value</span> and piecewise <span data-fr="fonctions">functions</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>Two suppliers, and no single winner</h3>
 <div class="prose">
@@ -2848,6 +2941,15 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <li>How to read <span data-fr="coût">cost</span>, <span data-fr="recette">revenue</span>, <span data-fr="demande">demand</span>, <span data-fr="offre">supply</span> and depreciation off a line</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank" rel="noopener">Algebra 1, unit 4: <span data-fr="Équations du premier degré">Linear equations</span> and <span data-fr="graphiques">graphs</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations" target="_blank" rel="noopener">Algebra 1, unit 5: Forms of <span data-fr="équations du premier degré">linear equations</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra-basics/alg-basics-graphing-lines-and-slope" target="_blank" rel="noopener">Algebra basics, unit 4: Graphing lines and <span data-fr="pente">slope</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>Two numbers from the accounts</h3>
 <div class="prose">
 <p>Jane pulls two months out of the roastery ledger. In a month when XY Coffee Co roasted 20 000 kg, total <span data-fr="coût">cost</span> was CHF 200 000. In a month when it roasted 50 000 kg, total <span data-fr="coût">cost</span> was CHF 380 000.</p>
@@ -3053,6 +3155,14 @@ slope m = <span class="frac"><span class="num">change in y</span><span class="de
 <li><span data-fr="Intérêts composés">Compound interest</span> and decline, and how to find the rate or the number of periods</li>
 <li>How simple and <span data-fr="intérêts composés">compound interest</span> differ on the same money</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages" target="_blank" rel="noopener">Pre-algebra, unit 4: <span data-fr="Pourcentages">Percentages</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay" target="_blank" rel="noopener">Algebra 1, unit 12: <span data-fr="Croissance exponentielle">Exponential growth</span> and <span data-fr="décroissance">decay</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>The question that started the argument</h3>
 <div class="prose">
@@ -3442,10 +3552,10 @@ slope m = <span class="frac"><span class="num">change in y</span><span class="de
 <div class="ex" data-bank="f-calc"></div>
 </section>
 
-<div class="partline"><span class="u">Part I</span><span class="t">Start here</span><span class="n">3 lessons</span></div>
+<div class="partline"><span class="u">Part I</span><span class="t">Start here</span><span class="n">4 lessons</span></div>
 
 <section id="orientation">
-<p class="lesson-no">Part I &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 3</span></p>
+<p class="lesson-no">Part I &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 4</span></p>
 <h2 class="sec">The course, the exams and the grade</h2>
 <p class="sec-kicker">Read once. It tells you what to optimise for.</p>
 
@@ -3522,7 +3632,7 @@ slope m = <span class="frac"><span class="num">change in y</span><span class="de
 </section>
 
 <section id="cyberlearn">
-<p class="lesson-no">Part I &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 3</span></p>
+<p class="lesson-no">Part I &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 4</span></p>
 <h2 class="sec">What is on Cyberlearn, and which part is the source of truth</h2>
 <p class="sec-kicker">Nine kinds of resource are posted every week. Two of them are the official answers.</p>
 
@@ -3548,6 +3658,12 @@ slope m = <span class="frac"><span class="num">change in y</span><span class="de
 </table>
 </div>
 
+<div class="box rule">
+<span class="lab">Week 0, the levelling-up course</span>
+<p>The course page has a <strong>WEEK 0, Leveling Up</strong> folder holding a single link, and the link carries its own password, printed beside it on the page: <span class="ck">levelupQM2026</span>. That course is the official version of Part 0 of this document. It is optional and it is free.</p>
+<p style="margin-bottom:0">Use whichever of the two suits you. Use at least one of them before week 3, because week 3 is where the course stops waiting.</p>
+</div>
+
 <p class="note"><strong class="note-lab">When each week opens.</strong> Every week is locked until <strong>20:00 on the evening before</strong> the class, then the whole folder appears at once. The official <span data-fr="réponses">answers</span> to a <span data-fr="devoirs">homework</span> follow one week after the <span data-fr="devoirs">homework</span> itself. Put both in your calendar: there is no reason to discover on a Monday morning that the material has been sitting there since Sunday night.</p>
 
 <div class="vid">
@@ -3555,6 +3671,48 @@ slope m = <span class="frac"><span class="num">change in y</span><span class="de
 <div><b>How this document treats the exercises.</b> Every <span data-fr="devoirs">homework</span> and quiz question in Part IV gets the <b>method</b> and a <b>checkpoint</b>, the figure your <span data-fr="réponse">answer</span> must match. It does not reproduce the full worked <span data-fr="solution">solution</span>, because the official <span data-fr="réponse">answer</span> sheet and the <span data-fr="résolution">solving</span> videos already do that, and they are the version your lecturers will defend. Use this document to find the path; use the video to watch the path being walked.</div>
 </div>
 
+<h3>The videos, named</h3>
+<div class="prose">
+<p>The theory videos are split by topic, not by slide, and the <span data-fr="résolution">solving</span> videos are split by exercise. That means you can go straight to the six minutes you need instead of scrubbing through an hour.</p>
+</div>
+<div class="tw">
+<table class="data">
+<caption>Week 1, seven theory videos</caption>
+<thead><tr><th>#</th><th>Video</th><th>Which lesson here it matches</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><span data-fr="Résolution">Solving</span> <span data-fr="équations du premier degré">linear equations</span> and systems</td><td><a href="#f-linear"><span data-fr="Équations du premier degré">Linear equations</span></a> and <a href="#f-systems">Systems</a></td></tr>
+<tr><td>2</td><td><span data-fr="Résolution">Solving</span> <span data-fr="équations du second degré">quadratic equations</span> and applications</td><td><a href="#f-quadratic"><span data-fr="Équations du second degré">Quadratic equations</span></a></td></tr>
+<tr><td>3</td><td><span data-fr="Fonctions">Functions</span></td><td><a href="#fn-concept">What a <span data-fr="fonction">function</span> is</a></td></tr>
+<tr><td>4</td><td><span data-fr="Domaines de définition">Domains</span></td><td><a href="#fn-domain"><span data-fr="Domaine de définition">Domain</span> and <span data-fr="ensemble image">range</span></a></td></tr>
+<tr><td>5</td><td>Description of some special <span data-fr="fonctions">functions</span></td><td><a href="#fn-library">The <span data-fr="fonction">function</span> library</a></td></tr>
+<tr><td>6</td><td><span data-fr="Fonctions exponentielles">Exponential functions</span></td><td><a href="#fn-exp">Exponentials and e</a></td></tr>
+<tr><td>7</td><td>Logarithmic <span data-fr="fonctions">functions</span></td><td><a href="#fn-log"><span data-fr="Logarithmes">Logarithms</span></a></td></tr>
+</tbody>
+</table>
+</div>
+<div class="tw">
+<table class="data">
+<caption>Week 2, six theory videos</caption>
+<thead><tr><th>#</th><th>Video</th><th>Which lesson here it matches</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Operations on <span data-fr="fonctions">functions</span></td><td><a href="#op-combine">Combining <span data-fr="fonctions">functions</span></a></td></tr>
+<tr><td>2</td><td><span data-fr="Graphiques">Graphs</span></td><td><a href="#fn-graphs"><span data-fr="Graphiques">Graphs</span></a></td></tr>
+<tr><td>3</td><td><span data-fr="Composition">Composition</span> of <span data-fr="fonctions">functions</span></td><td><a href="#op-compose"><span data-fr="Composition">Composition</span></a></td></tr>
+<tr><td>4</td><td>Properties and inverses</td><td><a href="#op-inverse"><span data-fr="Fonctions réciproques">Inverse functions</span></a></td></tr>
+<tr><td>5</td><td>Inverses (continued)</td><td><a href="#op-inverse"><span data-fr="Fonctions réciproques">Inverse functions</span></a></td></tr>
+<tr><td>6</td><td>Properties of <span data-fr="logarithmes">logarithms</span></td><td><a href="#op-rules">The <span data-fr="exponentielle">exponential</span> and <span data-fr="logarithme">logarithm</span> <span data-fr="règles">rules</span></a></td></tr>
+</tbody>
+</table>
+</div>
+<div class="box warn">
+<span class="lab">The numbering in the videos does not match the slides</span>
+<p style="margin-bottom:0">The course page says this itself, in a disclaimer at the top: in both the theory videos and the <span data-fr="résolution">solving</span> videos, the section and exercise numbers <strong>do not necessarily match</strong> the numbers in the slides and the <span data-fr="devoirs">homework</span>. Where they disagree, <strong>the slides and the <span data-fr="devoirs">homework</span> are the reference</strong>.</p>
+</div>
+<div class="box method">
+<span class="lab">The solving videos, and the one gap in them</span>
+<p>Week 1 has four <span data-fr="résolution">solving</span> videos, covering exercises 1.1 and 1.2, then 1.3 and 1.4, then 1.5 and 1.6, then 1.7, 1.8 and others. Week 2 has five, covering 2.1, then 2.2 to 2.4, then 2.5 and 2.6, then 2.7 and 2.8, then 2.10 to 2.12.</p>
+<p>Read that week 2 list again: there is <strong>no <span data-fr="résolution">solving</span> video for exercise 2.9</strong>. For that one the official <span data-fr="réponse">answer</span> sheet is all you get, so attempt it properly before you open it.</p>
+</div>
 <div class="box rule">
 <span class="lab">Your professors' own instruction on using AI, which this document follows</span>
 <p>The <span data-fr="plan de cours">syllabus</span> is explicit: <em>"do not ask AI for the <span data-fr="réponse">answer</span>, but rather focus on the path to use to find the <span data-fr="réponse">answer</span>. Ask for hints <span data-fr="résoudre">to solve</span> an exercise, but not directly what is the <span data-fr="réponse">answer</span>. Use AI to create additional exercises, review exercises, summaries, or alternative explanations. Insist on the methodology rather than the result."</em> It also requires that any use of generative AI be disclosed, including the prompts, and referenced as a source.</p>
@@ -3563,8 +3721,77 @@ slope m = <span class="frac"><span class="num">change in y</span><span class="de
 <p class="note"><strong class="note-lab">A practical consequence.</strong> If you read a checkpoint here before attempting the question, you get nothing from it. The checkpoint exists so that, after your own attempt, you know in ten seconds whether to move on or to open the video.</p>
 </section>
 
+<section id="khan">
+<p class="lesson-no">Part I &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 4</span></p>
+<h2 class="sec">Khan Academy alongside this course</h2>
+<p class="sec-kicker">Every topic in this document has a matching unit on Khan Academy. Their videos are short, their exercises are endless, and both are free. Here is the map, week by week.</p>
+<div class="prose">
+<p>This document and Khan Academy do different jobs, and they are better together than either is alone.</p>
+<p>This document is <strong>your course</strong>. It uses the notation your lecturers use, the examples from your slides, the Swiss conventions for <span data-fr="intervalles">intervals</span> and thousands, and it tells you what your exam will ask. Khan Academy is <strong>unlimited practice</strong> with a different voice explaining the same mathematics. When a lesson here has not landed, hearing it said differently is often all it takes.</p>
+</div>
+<div class="cols">
+<div class="mini"><h5>Watch before the <span data-fr="cours">lecture</span></h5><p>Ten minutes of the matching Khan unit the night before turns a <span data-fr="cours">lecture</span> from a first encounter into a second one. That single change is worth more than any revision technique.</p></div>
+<div class="mini"><h5>Drill after the lesson</h5><p>Khan gives you as many variations of a question as you want, marked instantly. When the exercise at the end of a lesson here is not enough, that is where to go next.</p></div>
+<div class="mini"><h5>Come back when stuck</h5><p>If a check in this document keeps going wrong, open the Khan unit for that lesson and watch the video on that one skill. A second explanation <span data-fr="coûts">costs</span> you six minutes.</p></div>
+</div>
+<div class="box warn">
+<span class="lab">Four places where Khan writes it differently</span>
+<p>Khan Academy is American, and a few conventions differ from the ones your exam expects. None of them is a disagreement about the mathematics.</p>
+<p><strong><span data-fr="Intervalles">Intervals</span>.</strong> Khan writes an open end as a round <span data-fr="parenthèse">bracket</span>, <span class="m">(2, 5]</span>. Your course writes it reversed, <span class="m">]2 ; 5]</span>. Both mean the same set.</p>
+<p><strong>Thousands and <span data-fr="décimales">decimals</span>.</strong> Khan writes <span class="m">10,000.5</span>. Your course writes <span class="m">10 000.5</span>, with a space.</p>
+<p><strong>The order of operations.</strong> Khan says PEMDAS, your course states the <span data-fr="règle">rule</span> in words. Same <span data-fr="règle">rule</span>.</p>
+<p><strong><span data-fr="Fonction">Function</span> definition.</strong> Khan usually says a <span data-fr="fonction">function</span> gives <em>exactly</em> one <span data-fr="sortie">output</span> per <span data-fr="entrée">input</span>. Your course says <em>at most</em> one, which is what lets a <span data-fr="domaine de définition">domain</span> exclude values. Follow your course on this one.</p>
+</div>
+<h3>The map, week by week</h3>
+<div class="prose">
+<p>The left column is your course. The right column is where to find the same material on Khan Academy. Weeks 3 onwards are listed so you can work ahead of the <span data-fr="cours">lectures</span> if you want to, which for this module is a good idea.</p>
+</div>
+<div class="tw">
+<table class="data">
+<caption>Quantitative Methods I, mapped to Khan Academy</caption>
+<thead><tr><th>Week</th><th>What the course covers</th><th>Where it is on Khan Academy</th></tr></thead>
+<tbody>
+<tr><td><strong>0</strong></td><td>Levelling up</td><td><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:foundation-algebra" target="_blank" rel="noopener">Algebra 1, unit 1: Algebra foundations</a><br><a href="https://www.khanacademy.org/math/arithmetic/fraction-arithmetic" target="_blank" rel="noopener">Arithmetic, unit 4: Understand <span data-fr="fractions">fractions</span></a><br><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations" target="_blank" rel="noopener">Pre-algebra, unit 5: <span data-fr="Exposants">Exponents</span> and order of operations</a><br><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages" target="_blank" rel="noopener">Pre-algebra, unit 4: <span data-fr="Pourcentages">Percentages</span></a></td></tr>
+<tr><td><strong>1</strong></td><td>Introduction, <span data-fr="fonctions">functions</span> and <span data-fr="graphiques">graphs</span></td><td><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions" target="_blank" rel="noopener">Algebra 1, unit 8: <span data-fr="Fonctions">Functions</span></a><br><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank" rel="noopener">Algebra 1, unit 4: <span data-fr="Équations du premier degré">Linear equations</span> and <span data-fr="graphiques">graphs</span></a></td></tr>
+<tr><td><strong>2</strong></td><td>Operations on <span data-fr="fonctions">functions</span></td><td><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite" target="_blank" rel="noopener">Precalculus, unit 1: Composite and <span data-fr="fonctions réciproques">inverse functions</span></a><br><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs" target="_blank" rel="noopener">Algebra 2, unit 8: <span data-fr="Logarithmes">Logarithms</span></a></td></tr>
+<tr><td><strong>3</strong></td><td>Lines, <span data-fr="paraboles">parabolas</span>, systems of <span data-fr="équations du premier degré">linear equations</span></td><td><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations" target="_blank" rel="noopener">Algebra 1, unit 5: Forms of <span data-fr="équations du premier degré">linear equations</span></a><br><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations" target="_blank" rel="noopener">Algebra 1, unit 14: Quadratic <span data-fr="fonctions">functions</span> and <span data-fr="équations">equations</span></a><br><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:systems-of-equations" target="_blank" rel="noopener">Algebra 1, unit 6: <span data-fr="Systèmes d’équations">Systems of equations</span></a></td></tr>
+<tr><td><strong>4</strong></td><td><span data-fr="Taux de variation">Rate of change</span> and the <span data-fr="dérivée">derivative</span></td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-limits" target="_blank" rel="noopener">Differential calculus, unit 1: Limits and continuity</a><br><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: <span data-fr="Dérivées">Derivatives</span>, definition and basic <span data-fr="règles">rules</span></a></td></tr>
+<tr><td><strong>5</strong></td><td>Differentiation <span data-fr="règles">rules</span></td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: <span data-fr="Dérivées">Derivatives</span>, definition and basic <span data-fr="règles">rules</span></a><br><a href="https://www.khanacademy.org/math/differential-calculus/dc-chain" target="_blank" rel="noopener">Differential calculus, unit 3: Chain <span data-fr="règle">rule</span> and beyond</a></td></tr>
+<tr><td><strong>6</strong></td><td>Self-study case, review of weeks 1 to 5</td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: <span data-fr="Dérivées">Derivatives</span>, definition and basic <span data-fr="règles">rules</span></a></td></tr>
+<tr><td><strong>7</strong></td><td>Applications of the <span data-fr="dérivées">derivatives</span></td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-context-app" target="_blank" rel="noopener">Differential calculus, unit 4: Applications of <span data-fr="dérivées">derivatives</span></a></td></tr>
+<tr><td><strong>8</strong></td><td><span data-fr="Optimisation">Optimisation</span> in one <span data-fr="variable">variable</span></td><td><a href="https://www.khanacademy.org/math/differential-calculus/dc-analytic-app" target="_blank" rel="noopener">Differential calculus, unit 5: Analysing <span data-fr="fonctions">functions</span></a></td></tr>
+<tr><td><strong>9</strong></td><td><span data-fr="Examen intermédiaire">Midterm</span>, then an introduction to <span data-fr="intégrales">integrals</span></td><td><a href="https://www.khanacademy.org/math/integral-calculus/ic-integration" target="_blank" rel="noopener"><span data-fr="Intégrale">Integral</span> calculus, unit 1: <span data-fr="Intégrales">Integrals</span></a></td></tr>
+<tr><td><strong>10</strong></td><td><span data-fr="Intégration">Integration</span> and surpluses</td><td><a href="https://www.khanacademy.org/math/integral-calculus/ic-integration" target="_blank" rel="noopener"><span data-fr="Intégrale">Integral</span> calculus, unit 1: <span data-fr="Intégrales">Integrals</span></a><br><a href="https://www.khanacademy.org/math/integral-calculus/ic-int-app" target="_blank" rel="noopener"><span data-fr="Intégrale">Integral</span> calculus, unit 3: Applications of <span data-fr="intégrales">integrals</span></a></td></tr>
+<tr><td><strong>11</strong></td><td><span data-fr="Données">Data</span> foundations, collection and <span data-fr="échantillonnage">sampling</span></td><td><a href="https://www.khanacademy.org/math/statistics-probability/designing-studies" target="_blank" rel="noopener">Statistics, unit 6: Study design and <span data-fr="échantillonnage">sampling</span></a></td></tr>
+<tr><td><strong>12</strong></td><td>Describing <span data-fr="données">data</span> with <span data-fr="graphiques">graphs</span>, charts and tables</td><td><a href="https://www.khanacademy.org/math/statistics-probability/analyzing-categorical-data" target="_blank" rel="noopener">Statistics, unit 1: Analysing categorical <span data-fr="données">data</span></a><br><a href="https://www.khanacademy.org/math/statistics-probability/displaying-describing-data" target="_blank" rel="noopener">Statistics, unit 2: Displaying and comparing quantitative <span data-fr="données">data</span></a></td></tr>
+<tr><td><strong>13</strong></td><td>Describing <span data-fr="données">data</span> with numerical measures</td><td><a href="https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data" target="_blank" rel="noopener">Statistics, unit 3: Summarising quantitative <span data-fr="données">data</span></a><br><a href="https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data" target="_blank" rel="noopener">Statistics, unit 4: <span data-fr="Modélisation">Modeling</span> <span data-fr="données">data</span> distributions</a></td></tr>
+<tr><td><strong>14</strong></td><td>Bivariate <span data-fr="données">data</span>, independence, concentration</td><td><a href="https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data" target="_blank" rel="noopener">Statistics, unit 5: Exploring bivariate numerical <span data-fr="données">data</span></a><br><a href="https://www.khanacademy.org/math/statistics-probability/inference-categorical-data-chi-square-tests" target="_blank" rel="noopener">Statistics, unit 14: Chi-square tests for categorical <span data-fr="données">data</span></a></td></tr>
+<tr><td><strong>S1-5</strong></td><td>Spring: <span data-fr="probabilité">probability</span></td><td><a href="https://www.khanacademy.org/math/statistics-probability/probability-library" target="_blank" rel="noopener">Statistics, unit 7: <span data-fr="Probabilité">Probability</span></a><br><a href="https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library" target="_blank" rel="noopener">Statistics, unit 9: Random <span data-fr="variables">variables</span></a></td></tr>
+<tr><td><strong>S6-9</strong></td><td>Spring: financial mathematics</td><td><a href="https://www.khanacademy.org/economics-finance-domain/core-finance/interest-tutorial" target="_blank" rel="noopener">Finance, unit 1: Interest and debt</a></td></tr>
+<tr><td><strong>S10-11</strong></td><td>Spring: linear algebra</td><td><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices" target="_blank" rel="noopener">Precalculus, unit 7: <span data-fr="Matrices">Matrices</span></a><br><a href="https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces" target="_blank" rel="noopener">Linear algebra, unit 1: Vectors and spaces</a><br><a href="https://www.khanacademy.org/math/linear-algebra/matrix-transformations" target="_blank" rel="noopener">Linear algebra, unit 2: <span data-fr="Matrice">Matrix</span> transformations</a></td></tr>
+<tr><td><strong>S12</strong></td><td>Spring: <span data-fr="régression linéaire">linear regression</span></td><td><a href="https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data" target="_blank" rel="noopener">Statistics, unit 5: Exploring bivariate numerical <span data-fr="données">data</span></a></td></tr>
+</tbody>
+</table>
+</div>
+<div class="box method">
+<span class="lab">If you only do three things</span>
+<p><strong>One.</strong> Before the <span data-fr="examen intermédiaire">midterm</span>, work Khan's <em>Algebra 1</em> units 8, 11, 13 and 14 until they turn green. That is <span data-fr="fonctions">functions</span>, <span data-fr="exposants">exponents</span> and radicals, <span data-fr="factorisation">factoring</span>, and quadratics, which is most of what a levelling-up gap looks like.</p>
+<p><strong>Two.</strong> Before week 4 arrives, watch Khan's <em>Differential calculus</em> unit 1 on limits. It is the one idea in the autumn that is genuinely new, and meeting it twice makes it ordinary.</p>
+<p><strong>Three.</strong> For the statistics half in weeks 11 to 14, Khan's <em>Statistics and <span data-fr="probabilité">probability</span></em> units 1 to 6 cover it almost exactly, and they are the friendliest part of their whole library.</p>
+</div>
+<div class="box remember">
+<span class="lab">What to remember</span>
+<ul>
+<li>Every lesson in this document carries a link to its Khan unit, at the top of the lesson.</li>
+<li>Khan for a second explanation and for unlimited drill. This document for your course's notation and your exam.</li>
+<li>Watching the unit the night before a <span data-fr="cours">lecture</span> is the cheapest hour in your week.</li>
+<li>Where the two differ in notation, follow your course. The mathematics underneath is the same.</li>
+</ul>
+</div>
+</section>
+
 <section id="modelling">
-<p class="lesson-no">Part I &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 3</span></p>
+<p class="lesson-no">Part I &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 4</span></p>
 <h2 class="sec">The <span data-fr="modélisation">modelling</span> cycle</h2>
 <p class="sec-kicker">Week 1&rsquo;s real subject. A business question is not a mathematics question until somebody turns it into one, and turning it back carries half the mark.</p>
 <div class="lesson-head">
@@ -3582,6 +3809,14 @@ slope m = <span class="frac"><span class="num">change in y</span><span class="de
 <li>Two complete passes on XY Coffee Co, from an English sentence to a decision sentence</li>
 <li>Why a number is not an <span data-fr="réponse">answer</span></li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:working-units" target="_blank" rel="noopener">Algebra 1, unit 3: Working with units</a></li>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:modeling" target="_blank" rel="noopener">Algebra 2, unit 12: <span data-fr="Modélisation">Modeling</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>A question nobody can compute</h3>
 <div class="prose">
@@ -3842,6 +4077,13 @@ CHF + CHF = CHF, &nbsp; but &nbsp; CHF + cups is meaningless
 <li>The <span data-fr="test de la droite verticale">vertical line test</span>, and the reason it works</li>
 <li>How to read a <span data-fr="fonction définie par morceaux">case-defined function</span>, and which branch owns a boundary value</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions" target="_blank" rel="noopener">Algebra 1, unit 8: <span data-fr="Fonctions">Functions</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>A question Jane cannot <span data-fr="réponse">answer</span> with a single number</h3>
 <div class="prose">
@@ -4106,6 +4348,14 @@ p(q) = 18&nbsp;&nbsp;if q &ge; 200
 <li>The single most common error in this topic, and how to make it impossible</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions" target="_blank" rel="noopener">Algebra 1, unit 8: <span data-fr="Fonctions">Functions</span></a></li>
+<li><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:rational-functions" target="_blank" rel="noopener">Precalculus, unit 4: <span data-fr="Fonctions rationnelles">Rational functions</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>The day the calculator refuses</h3>
 <div class="prose">
 <p>Jane asks you for XY Coffee Co&rsquo;s <span data-fr="moyenne">average</span> <span data-fr="coût">cost</span> per ton. That is total <span data-fr="coût">cost</span> shared over the tons produced, so <span class="m">A(q) = <span class="frac"><span class="num">C(q)</span><span class="den">q</span></span></span>. You build it in the spreadsheet, drag the formula down, and the first row comes back as an error.</p>
@@ -4345,6 +4595,15 @@ p(q) = 18&nbsp;&nbsp;if q &ge; 200
 <li>Case-defined <span data-fr="fonctions">functions</span> as a family in their own right</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions" target="_blank" rel="noopener">Algebra 1, unit 8: <span data-fr="Fonctions">Functions</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:absolute-value-piecewise-functions" target="_blank" rel="noopener">Algebra 1, unit 10: <span data-fr="Valeur absolue">Absolute value</span> and piecewise <span data-fr="fonctions">functions</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:poly-graphs" target="_blank" rel="noopener">Algebra 2, unit 5: <span data-fr="Polynôme">Polynomial</span> <span data-fr="graphiques">graphs</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>Four formulas in one email</h3>
 <div class="prose">
 <p>Jane forwards you a message from the finance team with four formulas in it and one line of text: &ldquo;can you sanity-check these before Thursday?&rdquo; There is no explanation of what any of them does.</p>
@@ -4559,6 +4818,14 @@ f(x) = 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>The presentation standard this course sets, and why it exists</li>
 <li>How a truncated vertical <span data-fr="axe">axis</span> exaggerates, with the numbers to prove it</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank" rel="noopener">Algebra 1, unit 4: <span data-fr="Équations du premier degré">Linear equations</span> and <span data-fr="graphiques">graphs</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:transformations" target="_blank" rel="noopener">Algebra 2, unit 9: Transformations of <span data-fr="fonctions">functions</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>Two pictures of the same month</h3>
 <div class="prose">
@@ -4784,6 +5051,14 @@ f(x) = 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>Why repeated <span data-fr="pourcentage">percentage</span> change is a <span data-fr="puissance">power</span> and not a multiplication</li>
 <li>Where <span class="m">e</span> comes from, and why week 5 will call <span class="m">e<sup>x</sup></span> the easiest <span data-fr="fonction">function</span> to differentiate</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay" target="_blank" rel="noopener">Algebra 1, unit 12: <span data-fr="Croissance exponentielle">Exponential growth</span> and <span data-fr="décroissance">decay</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:exp-model" target="_blank" rel="noopener">Algebra 2, unit 7: <span data-fr="Exponentielle">Exponential</span> <span data-fr="modèles">models</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>The subscriber number that will not behave</h3>
 <div class="prose">
@@ -5017,6 +5292,13 @@ f(x) = 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>How to <span data-fr="réponse">answer</span> a "how long until" question by taking <span data-fr="logarithmes">logarithms</span> of both sides</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs" target="_blank" rel="noopener">Algebra 2, unit 8: <span data-fr="Logarithmes">Logarithms</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>The question you could not <span data-fr="réponse">answer</span> last lesson</h3>
 <div class="prose">
 <p>XY Coffee Co has 1 200 app subscribers growing 6 <span data-fr="pour cent">per cent</span> a month. Last lesson you answered Jane&rsquo;s first question: after twelve months there will be about 2 415 members, because <span class="m">1 200 &middot; 1.06<sup>12</sup> &asymp; 2 415</span>.</p>
@@ -5239,6 +5521,13 @@ f(x) = 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>The one extra condition a <span data-fr="quotient">quotient</span> carries, and why it can exclude a brand new value</li>
 <li>The <span data-fr="signe">sign</span> discipline that subtraction demands, which is where the marks go</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite" target="_blank" rel="noopener">Precalculus, unit 1: Composite and <span data-fr="fonctions réciproques">inverse functions</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>The <span data-fr="coût">cost</span> nobody has written down</h3>
 <div class="prose">
@@ -5472,6 +5761,14 @@ f(x) = 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>How to say that there is no <span data-fr="zéro de la fonction">x-intercept</span>, and how <span data-fr="seuil de rentabilité">break-even</span> is one</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank" rel="noopener">Algebra 1, unit 4: <span data-fr="Équations du premier degré">Linear equations</span> and <span data-fr="graphiques">graphs</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations" target="_blank" rel="noopener">Algebra 1, unit 14: Quadratic <span data-fr="fonctions">functions</span> and <span data-fr="équations">equations</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>Two numbers Jane asks for by name</h3>
 <div class="prose">
 <p>In the previous section we built XY Coffee Co&rsquo;s <span data-fr="bénéfice">profit</span> <span data-fr="fonction">function</span>: <span class="m">P(q) = &minus;5q<sup>2</sup> + 600q &minus; 10 000</span>, where <span class="m">q</span> is sacks of coffee roasted in a month.</p>
@@ -5673,6 +5970,13 @@ f(x) = 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>How to find the <span data-fr="domaine de définition">domain</span> of a composite, which is the part that carries marks</li>
 <li>How to take a composite apart again, which is what week 5 will need</li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite" target="_blank" rel="noopener">Precalculus, unit 1: Composite and <span data-fr="fonctions réciproques">inverse functions</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>A chain you already think in</h3>
 <div class="prose">
@@ -5914,6 +6218,13 @@ f(x) = 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>Why the <span data-fr="graphique">graph</span> is a mirror image, and why the <span data-fr="domaine de définition">domain</span> of the <span data-fr="réciproque">inverse</span> is the <span data-fr="ensemble image">range</span> of the original</li>
 </ul></div>
 </div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite" target="_blank" rel="noopener">Precalculus, unit 1: Composite and <span data-fr="fonctions réciproques">inverse functions</span></a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
+</div>
 <h3>The question management actually asks</h3>
 <div class="prose">
 <p>XY Coffee Co has estimated how much coffee it sells at any retail <span data-fr="prix">price</span>. Daily <span data-fr="demande">demand</span> is <span class="m">Q(p) = <span class="frac"><span class="num">5 000 000</span><span class="den">p + 1</span></span> &minus; 500 000</span> grams, for a <span data-fr="prix">price</span> <span class="m">p</span> between 0 and 9 CHF, and zero above 9.</p>
@@ -6143,6 +6454,14 @@ f(x) = 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 5 &le; x &lt; 7
 <li>How <span data-fr="développer">to expand</span> a <span data-fr="logarithme">logarithm</span> into pieces, and how to condense pieces back into one</li>
 <li>How <span data-fr="résoudre">to solve</span> an <span data-fr="équation">equation</span> that is quadratic in an <span data-fr="exponentielle">exponential</span>, and when to reject a candidate <span data-fr="solution">solution</span></li>
 </ul></div>
+</div>
+<div class="khan">
+<span class="k-lab">The same topic on Khan Academy</span>
+<ul>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs" target="_blank" rel="noopener">Algebra 2, unit 8: <span data-fr="Logarithmes">Logarithms</span></a></li>
+<li><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:exp" target="_blank" rel="noopener">Algebra 2, unit 6: Rational <span data-fr="exposants">exponents</span> and radicals</a></li>
+</ul>
+<p class="note">Free, no account needed to watch. Their exercises need one.</p>
 </div>
 <h3>How long until the money doubles?</h3>
 <div class="prose">

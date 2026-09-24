@@ -18,11 +18,16 @@ Study notes for **Quantitative Methods I** (Haute école de gestion de Genève, 
 - **Weeks 1 and 2 in full.** What a function is, domain and range, the function library, graphs, exponentials and e, logarithms, then combining, intercepts, composition, inverses and the exponential and logarithm rules.
 - **Every homework and quiz question** from weeks 1 and 2, each with a method and a checkpoint your answer must match.
 - **An exam kit:** a formula sheet, a plan for the two sheets you are allowed to bring, how marks are earned in an open-question exam, twelve places where marks are lost, an English-French glossary searchable in both languages, and a week-by-week map of the rest of the year with the real dates.
+- **Khan Academy alongside every lesson.** Each lesson carries a link to the Khan Academy unit covering the same topic, and a roadmap section maps all nineteen weeks of the module, both semesters, to the Khan units that cover them. Every link was read off Khan's own course pages, not guessed.
 - **Twenty-three full lessons.** Every topic is written out at two to three thousand words: a business hook before any notation, what you need first and what the lesson gives, then a sub-heading per skill with a worked example broken one operation to a line and a check placed right there. 163 worked examples, 131 inline checks.
 - **An interactive exercise after every lesson.** Twenty-four of them, and 438 questions once the inline checks are counted. One question at a time, multiple choice or a typed answer, marked immediately, with hints on demand and the full working once you have tried. Questions and options are reshuffled on every run, and the contents rail shows a ring for each topic: hollow if untouched, amber under 80 per cent, filled once you pass.
 - **A mock midterm**: twenty multiple-choice questions in the format of the week 9 paper, timed at 60 minutes, with the reasoning for every option.
 - **A mock exam paper**: five open questions worth 100 marks in the format of the 120-minute semester exam, with full solutions and a mark scheme showing where each mark is awarded.
 - A foldable table of contents, a light and dark switch, and practice blocks folded by default. Dotted terms in the text switch to French when clicked.
+
+## What is on Cyberlearn
+
+The document now records what the course page actually holds: the week 0 levelling-up course and the password printed beside it, the seven named theory videos for week 1 and the six for week 2 each mapped to the lesson here that matches, which exercises each solving video covers, the one homework exercise that has no solving video, and the course's own disclaimer that the numbering in the videos does not match the slides.
 
 ## How the exercises work
 
