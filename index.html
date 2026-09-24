@@ -38,6 +38,8 @@
   --ka:#0F7A5F;
   --ka-soft:#E9F4F1;
   --shade:rgba(16,18,24,.36);
+  --measure:1040px;
+  --gutter:clamp(16px,3vw,24px);
   --veil:#101216;
   --on-veil:#FFFFFF;
   --print-paper:#FFFFFF;
@@ -147,14 +149,14 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
    a bar across the top, a card on the left holding where you
    are in the week, and the lesson itself on the right.
    =========================================================== */
-.topbar{
-  position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:16px;
-  padding:0 clamp(14px,3vw,26px);height:56px;
-  background:var(--veil);color:var(--on-veil);
+.topbar{position:sticky;top:0;z-index:60;background:var(--veil);color:var(--on-veil)}
+.tb-inner{
+  display:flex;align-items:center;gap:16px;height:56px;
+  max-width:var(--measure);margin:0 auto;padding:0 var(--gutter);
 }
 .tb-home{display:flex;align-items:center;gap:11px;color:inherit;text-decoration:none;margin-right:auto}
 .tb-home .mark{width:19px;height:21px;color:var(--on-veil)}
-.tb-title{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:-.01em}
+.tb-title{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tb-right{display:flex;align-items:center;gap:6px}
 .tb-link,.tb-btn{
   font-family:var(--sans);font-size:12.5px;font-weight:700;color:var(--on-veil);
@@ -164,13 +166,13 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
 .tb-btn.icon-btn{display:grid;place-items:center;width:34px;height:34px;padding:0}
 .tb-btn.icon-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
 
-.layout{display:flex;align-items:flex-start;gap:clamp(16px,2.5vw,32px);max-width:1180px;margin:0 auto;padding:0 clamp(14px,3vw,26px)}
+.layout{display:flex;align-items:flex-start;gap:32px;max-width:var(--measure);margin:0 auto;padding:0 var(--gutter)}
 .side{
-  flex:0 0 268px;position:sticky;top:76px;margin-top:26px;
+  flex:0 0 260px;position:sticky;top:76px;margin-top:26px;
   border:1px solid var(--rule);border-radius:10px;background:var(--paper);
   font-family:var(--sans);overflow:hidden;
 }
-.shell{flex:1 1 auto;min-width:0;max-width:760px;margin:0;padding:26px 0 80px}
+.shell{flex:1 1 auto;min-width:0;max-width:740px;margin:0;padding:26px 0 76px}
 
 /* the card's head: which week, and the arrows that walk the lessons */
 .sc-head{padding:14px 15px 12px;border-bottom:1px solid var(--rule);background:var(--sunken)}
@@ -209,6 +211,15 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
 .sc-crumb a:hover{color:var(--accent)}
 
 /* the course page: the grid of every lesson, one square each */
+.progress-note{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;
+  margin:0 0 18px;font-family:var(--sans);font-size:12px;color:var(--muted);
+}
+.progress-note button{
+  font-family:var(--sans);font-size:12px;font-weight:700;color:var(--ink-2);
+  background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;
+}
+.progress-note button:hover{color:var(--warn)}
 .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin:16px 0 22px;font-family:var(--sans);font-size:12px;color:var(--ink-2)}
 .legend span{display:flex;align-items:center;gap:6px}
 .legend i{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--rule-mid);display:block}
@@ -232,10 +243,22 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
 .grid-sq a.m4{background:var(--m4);border-color:var(--m4)}
 .grid-week .gw-pct{flex:none;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-top:4px}
 
-@media (max-width:900px){
-  .layout{display:block;padding:0 16px}
-  .side{position:static;width:auto;margin:18px 0 0}
-  .shell{max-width:none;padding:18px 0 70px}
+/* Below this the two columns would squeeze the text under 640px, so they stack.
+   Card 260 + gap 32 + text 640 + gutters = 980. */
+@media (max-width:980px){
+  .layout{display:block}
+  .side{position:static;width:auto;margin:18px auto 0;max-width:740px;max-height:none}
+  .shell{max-width:740px;margin:0 auto;padding:18px 0 66px}
+}
+/* a lesson with many Khan items must not outgrow the screen */
+@media (min-width:981px){
+  .side{max-height:calc(100vh - 96px);overflow-y:auto}
+}
+/* the narrowest phones: the bar keeps the mark and the controls, not the title */
+@media (max-width:430px){
+  .tb-title{display:none}
+  .tb-inner{gap:8px}
+  .tb-link,.tb-btn{padding:7px 8px}
 }
 
 /* The page reveal, as on mazen.ch. Watched on a real navigation there: the
@@ -287,18 +310,8 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
 /* ===========================================================
    LAYOUT
    =========================================================== */
-.page{padding-left:250px;transition:padding-left .2s ease}
-body.rail-hidden .page{padding-left:0}
-.shell{max-width:800px;margin:0 auto;padding:26px clamp(16px,3vw,26px) 80px;min-width:0}
+.page{padding:0}
 
-/* The contents toggle says what it does. It used to be the logo, which nobody
-   guessed was a button. */
-.nav-toggle{
-  position:fixed;top:14px;left:14px;z-index:80;
-  display:grid;place-items:center;width:36px;height:36px;padding:0;
-  border:1px solid var(--rule-mid);border-radius:8px;background:var(--paper);color:var(--ink);
-  cursor:pointer;box-shadow:var(--lift);
-}
 .nav-toggle:hover{border-color:var(--accent);color:var(--accent)}
 .nav-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .nav-toggle svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
@@ -360,11 +373,7 @@ details.navpart.current > summary{color:var(--ink)}
 }
 
 @media (max-width:980px){
-  .page,body.rail-hidden .page{padding-left:0}
-  .shell{padding-top:66px}
-  .rail{width:min(320px,86vw);z-index:70;border-right:1px solid var(--rule-mid)}
   section{scroll-margin-top:58px}
-  body.rail-hidden .rail{transform:translateX(-102%)}
   body:not(.rail-hidden) .backdrop{display:block}
   body:not(.rail-hidden){overflow:hidden}
 }
@@ -994,10 +1003,10 @@ table.gloss tr[hidden]{display:none}
 .tw[hidden]{display:none}
 
 footer{
-  max-width:1000px;margin:0 auto;padding:24px clamp(16px,4vw,36px) 50px;
+  max-width:var(--measure);margin:0 auto;padding:22px var(--gutter) 46px;
   border-top:1px solid var(--ink);color:var(--muted);font-size:12.5px;
 }
-footer p{max-width:72ch}
+footer p{max-width:74ch;margin:0}
 footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;display:block}
 
 /* ===========================================================
@@ -1049,6 +1058,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 
 <header class="topbar">
+<div class="tb-inner">
   <a class="tb-home" href="#contents" title="Contents">
     <svg class="mark" role="img" aria-label="MAZEN"><use href="#mazen-mark"/></svg>
     <span class="tb-title">Quantitative Methods I</span>
@@ -1061,6 +1071,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
   </nav>
+</div>
 </header>
 
 <div class="page" id="page">
@@ -1069,19 +1080,18 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <main class="shell">
 
 <header class="doc-head">
-  <div class="inst">Haute école de gestion de Genève · International Business Management · 2026-2027</div>
-  <div class="course">Quantitative Methods I · Fall semester · Weeks 1 and 2</div>
+  <div class="inst">Haute &eacute;cole de gestion de Gen&egrave;ve &middot; International Business Management &middot; 2026-2027</div>
   <h1>Study notes, from pre-university algebra to functions</h1>
-    <dl class="facts">
-    <div class="fact"><dt>Midterm · W9</dt><dd>20% · MCQ · 60 min</dd></div>
-    <div class="fact"><dt>Fall exam · W16-17</dt><dd>40% · open questions · 120 min</dd></div>
-    <div class="fact"><dt>Spring exam</dt><dd>40% · open questions · 120 min</dd></div>
-    <div class="fact"><dt>Allowed</dt><dd>Approved calculator + 2 sheets</dd></div>
+  <dl class="facts">
+    <div class="fact"><dt>Midterm &middot; W9</dt><dd>20% &middot; MCQ &middot; 60 min</dd></div>
+    <div class="fact"><dt>Fall exam &middot; W16-17</dt><dd>40% &middot; open &middot; 120 min</dd></div>
+    <div class="fact"><dt>Spring exam</dt><dd>40% &middot; open &middot; 120 min</dd></div>
+    <div class="fact"><dt>Allowed</dt><dd>Calculator + 2 sheets</dd></div>
   </dl>
-  <p class="credit"><svg class="mark" role="img" aria-label="MAZEN"><use href="#mazen-mark"/></svg><span class="code">2026-2027 Quantitative Methods I · HEG-Genève / IBM</span><span>Free for HEG students to use and share.</span></p>
 </header>
 <section id="contents">
 <h2 class="sec">Contents</h2>
+<p class="progress-note"><span>Your progress is kept in this browser only. It will not follow you to another device, and a private window keeps nothing.</span><button type="button" id="resetProgress">Reset progress</button></p>
 <div class="legend"><span><i></i>Not started</span><span><i class="m1"></i>Familiar</span><span><i class="m3"></i>Proficient</span><span><i class="m4"></i>Mastered</span></div>
 <div id="courseGrid"></div>
 <div class="toc">
@@ -2317,8 +2327,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 <footer>
 <svg class="mark" role="img" aria-label="MAZEN"><use href="#mazen-mark"/></svg>
-<p><strong>Quantitative Methods I, weeks 1 and 2, study notes.</strong> <span class="code">2026-2027 Quantitative Methods I · HEG-Genève / IBM</span>. Built from the course syllabus, the week 0 generic deck, the week 1 and week 2 lecture decks, their homework sheets, the week 1 official answers and both review quizzes. Free for HEG students to use and share.</p>
-<p style="margin-top:10px">The official answer sheets and the "Solving homework" videos on Cyberlearn are the authoritative solutions. This document gives methods and checkpoints so you can find the path yourself, in line with the course's own instruction to focus on methodology rather than results. Week 1 checkpoints are compared against the published answers, and three discrepancies in that sheet are flagged where they occur. Week 2 checkpoints were computed for these notes because the official answers had not yet been published; where the two differ, the official version is correct. The course material belongs to its authors and to HEG Geneva.</p>
+<p><strong>Quantitative Methods I, weeks 1 and 2.</strong> <span class="code">2026-2027 &middot; HEG-Gen&egrave;ve / IBM</span>. Built from the course decks, homework and quizzes on Cyberlearn, where the official answers and solving videos remain the authority. Free for HEG students to use and share.</p>
 </footer>
 </div>
 <button class="fab totop" id="toTop" type="button" aria-label="Back to top">
@@ -2953,6 +2962,18 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       else contentsCard();
       window.scrollTo(0, 0);
     }
+
+    /* Reset progress: it lives in this browser, so this is the only way to clear it. */
+    document.addEventListener('click', function(e){
+      if (!e.target || e.target.id !== 'resetProgress') return;
+      if (!window.confirm('Clear your progress for every lesson? This cannot be undone.')) return;
+      Object.keys(localStorage).filter(function(k){ return k.indexOf('qm1-m-') === 0 || k.indexOf('qm1-ex-') === 0; })
+        .forEach(function(k){ localStorage.removeItem(k); });
+      Array.prototype.forEach.call(document.querySelectorAll('.ex[data-bank]'), function(el){
+        paintStep(el.getAttribute('data-bank'));
+      });
+      route();
+    });
 
     window.addEventListener('hashchange', route);
     route();
