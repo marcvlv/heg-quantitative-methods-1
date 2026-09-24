@@ -142,6 +142,102 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
 /* ---- the mark ---- */
 .mark{fill:currentColor;display:inline-block;vertical-align:middle;width:14.5px;height:16px;flex:none}
 
+/* ===========================================================
+   THE FRAME, laid out the way Khan lays a course out:
+   a bar across the top, a card on the left holding where you
+   are in the week, and the lesson itself on the right.
+   =========================================================== */
+.topbar{
+  position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:16px;
+  padding:0 clamp(14px,3vw,26px);height:56px;
+  background:var(--veil);color:var(--on-veil);
+}
+.tb-home{display:flex;align-items:center;gap:11px;color:inherit;text-decoration:none;margin-right:auto}
+.tb-home .mark{width:19px;height:21px;color:var(--on-veil)}
+.tb-title{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:-.01em}
+.tb-right{display:flex;align-items:center;gap:6px}
+.tb-link,.tb-btn{
+  font-family:var(--sans);font-size:12.5px;font-weight:700;color:var(--on-veil);
+  background:none;border:0;padding:7px 11px;border-radius:6px;cursor:pointer;text-decoration:none;
+}
+.tb-link:hover,.tb-btn:hover{background:rgba(255,255,255,.14)}
+.tb-btn.icon-btn{display:grid;place-items:center;width:34px;height:34px;padding:0}
+.tb-btn.icon-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+
+.layout{display:flex;align-items:flex-start;gap:clamp(16px,2.5vw,32px);max-width:1180px;margin:0 auto;padding:0 clamp(14px,3vw,26px)}
+.side{
+  flex:0 0 268px;position:sticky;top:76px;margin-top:26px;
+  border:1px solid var(--rule);border-radius:10px;background:var(--paper);
+  font-family:var(--sans);overflow:hidden;
+}
+.shell{flex:1 1 auto;min-width:0;max-width:760px;margin:0;padding:26px 0 80px}
+
+/* the card's head: which week, and the arrows that walk the lessons */
+.sc-head{padding:14px 15px 12px;border-bottom:1px solid var(--rule);background:var(--sunken)}
+.sc-course{
+  display:block;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:5px;
+}
+.sc-row{display:flex;align-items:center;gap:8px}
+.sc-arrow{
+  flex:none;width:26px;height:26px;display:grid;place-items:center;border-radius:6px;
+  border:1px solid var(--rule-mid);background:var(--paper);color:var(--ink-2);cursor:pointer;
+  font-size:13px;line-height:1;text-decoration:none;
+}
+.sc-arrow:hover{border-color:var(--accent);color:var(--accent)}
+.sc-arrow[aria-disabled="true"]{opacity:.35;pointer-events:none}
+.sc-now{flex:1 1 auto;text-align:center;font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+
+/* the items of the lesson, as Khan lists a lesson's videos and exercises */
+.sc-list{list-style:none;margin:0;padding:0}
+.sc-list li{border-bottom:1px solid var(--rule)}
+.sc-list li:last-child{border-bottom:0}
+.sc-list a{
+  display:flex;gap:10px;align-items:flex-start;padding:11px 15px;
+  color:var(--ink-2);text-decoration:none;font-size:13px;line-height:1.4;
+}
+.sc-list a:hover{background:var(--sunken)}
+.sc-list li.on{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.sc-list li.on a{color:var(--accent);font-weight:700}
+.sc-ico{
+  flex:none;width:22px;height:22px;display:grid;place-items:center;margin-top:-1px;
+  border:1px solid var(--rule-mid);border-radius:5px;font-size:10px;color:var(--muted);
+}
+.sc-state{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:1px}
+.sc-crumb{padding:11px 15px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--muted);line-height:1.5}
+.sc-crumb a{color:var(--muted);text-decoration:underline}
+.sc-crumb a:hover{color:var(--accent)}
+
+/* the course page: the grid of every lesson, one square each */
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin:16px 0 22px;font-family:var(--sans);font-size:12px;color:var(--ink-2)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--rule-mid);display:block}
+.legend i.m1{background:var(--m1);border-color:var(--m1)}
+.legend i.m2{background:var(--m3);border-color:var(--m3);opacity:.55}
+.legend i.m3{background:var(--m3);border-color:var(--m3)}
+.legend i.m4{background:var(--m4);border-color:var(--m4)}
+.grid-week{display:flex;align-items:flex-start;gap:14px;padding:11px 0;border-top:1px solid var(--rule)}
+.grid-week .gw-n{
+  flex:0 0 74px;font-family:var(--sans);font-size:11px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px;
+}
+.grid-sq{display:flex;flex-wrap:wrap;gap:5px;flex:1 1 auto}
+.grid-sq a{
+  width:22px;height:22px;border-radius:4px;border:1.5px solid var(--rule-mid);
+  display:block;background:transparent;
+}
+.grid-sq a:hover{border-color:var(--accent)}
+.grid-sq a.m1{background:var(--m1);border-color:var(--m1)}
+.grid-sq a.m3{background:var(--m3);border-color:var(--m3)}
+.grid-sq a.m4{background:var(--m4);border-color:var(--m4)}
+.grid-week .gw-pct{flex:none;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-top:4px}
+
+@media (max-width:900px){
+  .layout{display:block;padding:0 16px}
+  .side{position:static;width:auto;margin:18px 0 0}
+  .shell{max-width:none;padding:18px 0 70px}
+}
+
 /* The page reveal, as on mazen.ch. Watched on a real navigation there: the
    veil is added below the fold and rises to cover (0.48s), holds while the
    mark is up, then carries on upward and off the top (0.65s). Both moves use
@@ -952,81 +1048,24 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   <svg class="mark" role="presentation"><use href="#mazen-mark"/></svg>
 </div>
 
-<button class="nav-toggle" id="markToggle" type="button" aria-label="Show or hide the contents" aria-expanded="true" aria-controls="rail">
-  <svg class="ico-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-  <svg class="ico-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-</button>
-<div class="backdrop" id="backdrop"></div>
-
-<nav class="rail" id="rail" aria-label="Contents">
-  <div class="rail-head">
-    <div class="row">
-      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch between light and dark">
-        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      </button>
-    </div>
-    <span class="code">2026-2027 Quantitative Methods I · HEG-Genève / IBM</span>
-    <div class="doc">Fall, weeks 1 to 2 · Study notes</div>
-    <p class="prog" id="exProgress" style="display:none"></p>
-    <div class="links">
-      <button class="tlink" id="downloadPdf" type="button" title="Print the document, or save it as a PDF">Download PDF</button>
-      <button class="tlink" id="openAll" type="button" title="Open every folded answer">Open all</button>
-      <button class="tlink" id="closeAll" type="button" title="Close every folded answer">Close all</button>
-    </div>
-  </div>
-  <div class="railbody" id="railbody">
-    <p class="rail-title">Contents</p>
-    <p class="rail-top"><a href="#contents">Table of contents</a></p>
-    <!--RAIL-->
-      <details class="navpart" open data-part="top"><summary>Start</summary><ol>
-      <li><a href="#contents">Contents</a></li>
-      </ol></details>
-      <details class="navpart" open data-part="0"><summary>Week 1 &middot; Introduction, leveling up, functions and graphs</summary><ol>
-      <li><a href="#w1-equations">Solving linear equations and systems</a></li>
-      <li><a href="#w1-quadratics">Solving quadratic equations and applications</a></li>
-      <li><a href="#w1-functions">Functions</a></li>
-      <li><a href="#w1-domain">Domains</a></li>
-      <li><a href="#w1-special">Description of some special functions</a></li>
-      <li><a href="#w1-exp">Exponential functions</a></li>
-      <li><a href="#w1-log">Logarithmic functions</a></li>
-      <li><a href="#w1-quiz">Week 1 review quiz</a></li>
-      </ol></details>
-      <details class="navpart" open data-part="1"><summary>Week 2 &middot; Operations on functions</summary><ol>
-      <li><a href="#w2-ops">Simple operations on functions</a></li>
-      <li><a href="#w2-graphs">Graphs</a></li>
-      <li><a href="#w2-compose">Composition of functions</a></li>
-      <li><a href="#w2-inverse">Properties and inverses</a></li>
-      <li><a href="#w2-inverse2">Inverses (continued)</a></li>
-      <li><a href="#w2-logrules">Properties of logarithms</a></li>
-      <li><a href="#w2-quiz">Week 2 review quiz</a></li>
-      </ol></details>
-      <details class="navpart" data-part="2"><summary>Reference &middot; Formulas, glossary, papers</summary><ol>
-      <li><a href="#formulas">Everything on one page</a></li>
-      <li><a href="#glossary">English to French glossary</a></li>
-      <li><a href="#mock-mcq">Mock midterm</a></li>
-      <li><a href="#mock-open">Mock exam paper</a></li>
-      </ol></details>
-      <details class="navpart" data-part="3"><summary>Week 0 &middot; Levelling up</summary><ol>
-      <li><a href="#f-numbers">Numbers, notation and the order of operations</a></li>
-      <li><a href="#f-fractions">Fractions and signs</a></li>
-      <li><a href="#f-powers">Powers and roots</a></li>
-      <li><a href="#f-algebra">Expanding and factoring</a></li>
-      <li><a href="#f-linear">Linear equations</a></li>
-      <li><a href="#f-quadratic">Quadratic equations</a></li>
-      <li><a href="#f-rational">Equations with the unknown in a denominator</a></li>
-      <li><a href="#f-systems">Systems of two equations</a></li>
-      <li><a href="#f-inequal">Inequalities and absolute value</a></li>
-      <li><a href="#f-plane">The plane and straight lines</a></li>
-      <li><a href="#f-percent">Percentages, growth and money</a></li>
-      <li><a href="#modelling">The modelling cycle</a></li>
-      <li><a href="#f-calc">Your calculator</a></li>
-      </ol></details>
-      <!--/RAIL-->
-  </div>
-</nav>
+<header class="topbar">
+  <a class="tb-home" href="#contents" title="Contents">
+    <svg class="mark" role="img" aria-label="MAZEN"><use href="#mazen-mark"/></svg>
+    <span class="tb-title">Quantitative Methods I</span>
+  </a>
+  <nav class="tb-right">
+    <a class="tb-link" href="#contents">Contents</a>
+    <button class="tb-btn" id="downloadPdf" type="button" title="Print, or save as a PDF">Download</button>
+    <button class="tb-btn icon-btn" id="themeToggle" type="button" aria-label="Switch between light and dark">
+      <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </nav>
+</header>
 
 <div class="page" id="page">
+<div class="layout">
+<aside class="side" id="sideCard" aria-label="Lesson navigation"></aside>
 <main class="shell">
 
 <header class="doc-head">
@@ -1043,6 +1082,8 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </header>
 <section id="contents">
 <h2 class="sec">Contents</h2>
+<div class="legend"><span><i></i>Not started</span><span><i class="m1"></i>Familiar</span><span><i class="m3"></i>Proficient</span><span><i class="m4"></i>Mastered</span></div>
+<div id="courseGrid"></div>
 <div class="toc">
 <div class="toc-ch-block"><p class="toc-ch"><span class="n">Week 0</span><span class="t">Leveling Up</span></p><ol class="toc-l"><li><a href="#f-numbers"><span class="i">1</span><span class="e">Numbers, notation and the order of operations</span></a></li><li><a href="#f-fractions"><span class="i">2</span><span class="e">Fractions and signs</span></a></li><li><a href="#f-powers"><span class="i">3</span><span class="e"><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></span></a></li><li><a href="#f-algebra"><span class="i">4</span><span class="e"><span data-fr="Développement">Expanding</span> and <span data-fr="factorisation">factoring</span></span></a></li><li><a href="#f-linear"><span class="i">5</span><span class="e">Linear equations</span></a></li><li><a href="#f-quadratic"><span class="i">6</span><span class="e">Quadratic equations</span></a></li><li><a href="#f-rational"><span class="i">7</span><span class="e">Equations with the <span data-fr="inconnue">unknown</span> in a denominator</span></a></li><li><a href="#f-systems"><span class="i">8</span><span class="e">Systems of two equations</span></a></li><li><a href="#f-inequal"><span class="i">9</span><span class="e">Inequalities and absolute value</span></a></li><li><a href="#f-plane"><span class="i">10</span><span class="e">The plane and <span data-fr="droites">straight lines</span></span></a></li><li><a href="#f-percent"><span class="i">11</span><span class="e">Percentages, <span data-fr="croissance">growth</span> and money</span></a></li><li><a href="#modelling"><span class="i">12</span><span class="e">The modelling cycle</span></a></li><li><a href="#f-calc"><span class="i">13</span><span class="e">Your calculator</span></a></li></ol></div>
 <div class="toc-ch-block"><p class="toc-ch"><span class="n">Week 1</span><span class="t">Introduction, leveling up, functions and graphs</span><span class="d">Sep 14, 2026</span></p><ol class="toc-l"><li><a href="#w1-equations"><span class="i">1</span><span class="e"><span data-fr="Résolution">Solving</span> linear equations and systems</span></a></li><li><a href="#w1-quadratics"><span class="i">2</span><span class="e"><span data-fr="Résolution">Solving</span> quadratic equations and applications</span></a></li><li><a href="#w1-functions"><span class="i">3</span><span class="e">Functions</span></a></li><li><a href="#w1-domain"><span class="i">4</span><span class="e"><span data-fr="Domaines de définition">Domains</span></span></a></li><li><a href="#w1-special"><span class="i">5</span><span class="e">Description of some special functions</span></a></li><li><a href="#w1-exp"><span class="i">6</span><span class="e">Exponential functions</span></a></li><li><a href="#w1-log"><span class="i">7</span><span class="e">Logarithmic functions</span></a></li><li><a href="#w1-quiz"><span class="i">8</span><span class="e">Week 1 review quiz</span></a></li></ol></div>
@@ -1068,12 +1109,9 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 </section>
 
-<div class="partline"><span class="u">Week 1</span><span class="t">Introduction, leveling up, functions and graphs</span></div>
-
 <section id="w1-equations">
 <div class="sheet-head">
 <p class="lesson-tag">Week 1 &nbsp;&middot;&nbsp; Lesson 1 <span class="of">&middot; follows course video 1</span></p>
-<p class="lesson-no">Week 1 &middot; Introduction, leveling up, functions and graphs &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 8</span></p>
 <h2 class="sec"><span data-fr="Résolution">Solving</span> linear equations and systems</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1106,7 +1144,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w1-quadratics">
 <div class="sheet-head">
 <p class="lesson-tag">Week 1 &nbsp;&middot;&nbsp; Lesson 2 <span class="of">&middot; follows course video 2</span></p>
-<p class="lesson-no">Week 1 &middot; Introduction, leveling up, functions and graphs &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 8</span></p>
 <h2 class="sec"><span data-fr="Résolution">Solving</span> quadratic equations and applications</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1138,7 +1175,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w1-functions">
 <div class="sheet-head">
 <p class="lesson-tag">Week 1 &nbsp;&middot;&nbsp; Lesson 3 <span class="of">&middot; follows course video 3</span></p>
-<p class="lesson-no">Week 1 &middot; Introduction, leveling up, functions and graphs &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 8</span></p>
 <h2 class="sec">Functions</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1174,7 +1210,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w1-domain">
 <div class="sheet-head">
 <p class="lesson-tag">Week 1 &nbsp;&middot;&nbsp; Lesson 4 <span class="of">&middot; follows course video 4</span></p>
-<p class="lesson-no">Week 1 &middot; Introduction, leveling up, functions and graphs &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 8</span></p>
 <h2 class="sec"><span data-fr="Domaines de définition">Domains</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1201,7 +1236,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w1-special">
 <div class="sheet-head">
 <p class="lesson-tag">Week 1 &nbsp;&middot;&nbsp; Lesson 5 <span class="of">&middot; follows course video 5</span></p>
-<p class="lesson-no">Week 1 &middot; Introduction, leveling up, functions and graphs &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 8</span></p>
 <h2 class="sec">Description of some special functions</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1243,7 +1277,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w1-exp">
 <div class="sheet-head">
 <p class="lesson-tag">Week 1 &nbsp;&middot;&nbsp; Lesson 6 <span class="of">&middot; follows course video 6</span></p>
-<p class="lesson-no">Week 1 &middot; Introduction, leveling up, functions and graphs &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 8</span></p>
 <h2 class="sec">Exponential functions</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1278,7 +1311,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w1-log">
 <div class="sheet-head">
 <p class="lesson-tag">Week 1 &nbsp;&middot;&nbsp; Lesson 7 <span class="of">&middot; follows course video 7</span></p>
-<p class="lesson-no">Week 1 &middot; Introduction, leveling up, functions and graphs &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 8</span></p>
 <h2 class="sec">Logarithmic functions</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1322,19 +1354,15 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w1-quiz">
 <div class="sheet-head">
 <p class="lesson-tag">Week 1 &nbsp;&middot;&nbsp; Review quiz</p>
-<p class="lesson-no">Week 1 &middot; Introduction, leveling up, functions and graphs &nbsp;&middot;&nbsp; Lesson 8 <span class="of">of 8</span></p>
 <h2 class="sec">Week 1 review quiz</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="ex" data-bank="w1-quiz"></div>
 </section>
 
-<div class="partline"><span class="u">Week 2</span><span class="t">Operations on functions</span></div>
-
 <section id="w2-ops">
 <div class="sheet-head">
 <p class="lesson-tag">Week 2 &nbsp;&middot;&nbsp; Lesson 1 <span class="of">&middot; follows course video 1</span></p>
-<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 7</span></p>
 <h2 class="sec">Simple operations on functions</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1359,7 +1387,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w2-graphs">
 <div class="sheet-head">
 <p class="lesson-tag">Week 2 &nbsp;&middot;&nbsp; Lesson 2 <span class="of">&middot; follows course video 2</span></p>
-<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 7</span></p>
 <h2 class="sec">Graphs</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1392,7 +1419,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w2-compose">
 <div class="sheet-head">
 <p class="lesson-tag">Week 2 &nbsp;&middot;&nbsp; Lesson 3 <span class="of">&middot; follows course video 3</span></p>
-<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 7</span></p>
 <h2 class="sec">Composition of functions</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1427,7 +1453,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w2-inverse">
 <div class="sheet-head">
 <p class="lesson-tag">Week 2 &nbsp;&middot;&nbsp; Lesson 4 <span class="of">&middot; follows course video 4</span></p>
-<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 7</span></p>
 <h2 class="sec">Properties and inverses</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1456,7 +1481,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w2-inverse2">
 <div class="sheet-head">
 <p class="lesson-tag">Week 2 &nbsp;&middot;&nbsp; Lesson 5 <span class="of">&middot; follows course video 5</span></p>
-<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 7</span></p>
 <h2 class="sec">Inverses (continued)</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1476,7 +1500,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w2-logrules">
 <div class="sheet-head">
 <p class="lesson-tag">Week 2 &nbsp;&middot;&nbsp; Lesson 6 <span class="of">&middot; follows course video 6</span></p>
-<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 7</span></p>
 <h2 class="sec">Properties of logarithms</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1533,22 +1556,15 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <section id="w2-quiz">
 <div class="sheet-head">
 <p class="lesson-tag">Week 2 &nbsp;&middot;&nbsp; Review quiz</p>
-<p class="lesson-no">Week 2 &middot; Operations on functions &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 7</span></p>
 <h2 class="sec">Week 2 review quiz</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="ex" data-bank="w2-quiz"></div>
 </section>
 
-<div class="partline"><span class="u">Reference</span><span class="t">Levelling up, formulas, papers</span></div>
-
-<details class="ref-block" id="week0">
-<summary><span class="rb-t">Levelling up</span><span class="rb-n">13 lessons</span></summary>
-<div class="rb-body">
 <section id="f-numbers">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 13</span></p>
 <h2 class="sec">Numbers, notation and the order of operations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1572,10 +1588,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-numbers"></div>
 </section>
+
 <section id="f-fractions">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 13</span></p>
 <h2 class="sec">Fractions and signs</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1596,10 +1612,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-fractions"></div>
 </section>
+
 <section id="f-powers">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 13</span></p>
 <h2 class="sec"><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1618,10 +1634,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-powers"></div>
 </section>
+
 <section id="f-algebra">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 13</span></p>
 <h2 class="sec"><span data-fr="Développement">Expanding</span> and <span data-fr="factorisation">factoring</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1645,10 +1661,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-algebra"></div>
 </section>
+
 <section id="f-linear">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 5 <span class="of">of 13</span></p>
 <h2 class="sec">Linear equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1670,10 +1686,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-linear"></div>
 </section>
+
 <section id="f-quadratic">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 6 <span class="of">of 13</span></p>
 <h2 class="sec">Quadratic equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1698,10 +1714,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-quadratic"></div>
 </section>
+
 <section id="f-rational">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 7 <span class="of">of 13</span></p>
 <h2 class="sec">Equations with the <span data-fr="inconnue">unknown</span> in a denominator</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1722,10 +1738,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-rational"></div>
 </section>
+
 <section id="f-systems">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 8 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 8 <span class="of">of 13</span></p>
 <h2 class="sec">Systems of two equations</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1746,10 +1762,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-systems"></div>
 </section>
+
 <section id="f-inequal">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 9 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 9 <span class="of">of 13</span></p>
 <h2 class="sec">Inequalities and absolute value</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1772,10 +1788,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-inequal"></div>
 </section>
+
 <section id="f-plane">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 10 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 10 <span class="of">of 13</span></p>
 <h2 class="sec">The plane and <span data-fr="droites">straight lines</span></h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1797,10 +1813,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </ol>
 <div class="ex" data-bank="f-plane"></div>
 </section>
+
 <section id="f-percent">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 11 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 11 <span class="of">of 13</span></p>
 <h2 class="sec">Percentages, <span data-fr="croissance">growth</span> and money</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1823,10 +1839,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="f-percent"></div>
 </section>
+
 <section id="modelling">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 12 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 12 <span class="of">of 13</span></p>
 <h2 class="sec">The modelling cycle</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
@@ -1851,21 +1867,18 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 <div class="ex" data-bank="modelling"></div>
 </section>
+
 <section id="f-calc">
 <div class="sheet-head">
 <p class="lesson-tag">Week 0 &nbsp;&middot;&nbsp; Lesson 13 <span class="of">of 13</span></p>
-<p class="lesson-no">Week 0 &middot; Levelling up &nbsp;&middot;&nbsp; Lesson 13 <span class="of">of 13</span></p>
 <h2 class="sec">Your calculator</h2>
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><span class="none">nothing on Khan covers this one</span></div>
 <div class="ex" data-bank="f-calc"></div>
 </section>
-</div>
-</details>
 
 <section id="formulas">
-<p class="lesson-no">Reference &middot; Formulas, glossary, papers &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 4</span></p>
 <h2 class="sec">Everything on one page</h2>
 <div class="tw">
 <table class="data">
@@ -1945,7 +1958,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 </section>
 <section id="glossary">
-<p class="lesson-no">Reference &middot; Formulas, glossary, papers &nbsp;&middot;&nbsp; Lesson 2 <span class="of">of 4</span></p>
 <h2 class="sec">English to French glossary</h2>
 <label for="glsearch" class="lab" style="color:var(--ink)">Search in English or French</label>
 <input class="gl-search" id="glsearch" type="search" placeholder="e.g. slope, domain, dérivée, seuil" autocomplete="off">
@@ -2071,7 +2083,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 </div>
 </section>
 <section id="mock-mcq">
-<p class="lesson-no">Reference &middot; Formulas, glossary, papers &nbsp;&middot;&nbsp; Lesson 3 <span class="of">of 4</span></p>
 <h2 class="sec">Mock <span data-fr="examen intermédiaire">midterm</span></h2>
 <div class="vid">
 <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><polygon points="10 9 15 12 10 15 10 9"/></svg>
@@ -2161,7 +2172,6 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 </section>
 <section id="mock-open">
-<p class="lesson-no">Reference &middot; Formulas, glossary, papers &nbsp;&middot;&nbsp; Lesson 4 <span class="of">of 4</span></p>
 <h2 class="sec">Mock exam paper</h2>
 <div class="vid">
 <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><polygon points="10 9 15 12 10 15 10 9"/></svg>
@@ -2300,7 +2310,10 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 
 </div></details>
 </section>
+<script>window.COURSE={"title": "Quantitative Methods I", "weeks": [{"n": "0", "title": "Leveling Up", "date": "", "lessons": [{"id": "f-numbers", "t": "Numbers, notation and the order of operations"}, {"id": "f-fractions", "t": "Fractions and signs"}, {"id": "f-powers", "t": "Powers and roots"}, {"id": "f-algebra", "t": "Expanding and factoring"}, {"id": "f-linear", "t": "Linear equations"}, {"id": "f-quadratic", "t": "Quadratic equations"}, {"id": "f-rational", "t": "Equations with the unknown in a denominator"}, {"id": "f-systems", "t": "Systems of two equations"}, {"id": "f-inequal", "t": "Inequalities and absolute value"}, {"id": "f-plane", "t": "The plane and straight lines"}, {"id": "f-percent", "t": "Percentages, growth and money"}, {"id": "modelling", "t": "The modelling cycle"}, {"id": "f-calc", "t": "Your calculator"}]}, {"n": "1", "title": "Introduction, leveling up, functions and graphs", "date": "Sep 14, 2026", "lessons": [{"id": "w1-equations", "t": "Solving linear equations and systems"}, {"id": "w1-quadratics", "t": "Solving quadratic equations and applications"}, {"id": "w1-functions", "t": "Functions"}, {"id": "w1-domain", "t": "Domains"}, {"id": "w1-special", "t": "Description of some special functions"}, {"id": "w1-exp", "t": "Exponential functions"}, {"id": "w1-log", "t": "Logarithmic functions"}, {"id": "w1-quiz", "t": "Week 1 review quiz"}]}, {"n": "2", "title": "Operations on functions", "date": "Sep 21, 2026", "lessons": [{"id": "w2-ops", "t": "Simple operations on functions"}, {"id": "w2-graphs", "t": "Graphs"}, {"id": "w2-compose", "t": "Composition of functions"}, {"id": "w2-inverse", "t": "Properties and inverses"}, {"id": "w2-inverse2", "t": "Inverses (continued)"}, {"id": "w2-logrules", "t": "Properties of logarithms"}, {"id": "w2-quiz", "t": "Week 2 review quiz"}]}], "later": [{"n": "3", "title": "Lines, parabolas and systems of linear equations", "date": "Sep 28, 2026"}, {"n": "4", "title": "Rate of change and the derivative", "date": "Oct 5, 2026"}, {"n": "5", "title": "Differentiation rules", "date": "Oct 12, 2026"}, {"n": "6", "title": "Self directed learning week: case study and review", "date": "Oct 19, 2026"}, {"n": "7", "title": "Applications of the derivatives", "date": "Oct 26, 2026"}, {"n": "8", "title": "Optimization in one variable", "date": "Nov 2, 2026"}, {"n": "9", "title": "MIDTERM EXAM, then Introduction to Integrals", "date": "Nov 9, 2026"}, {"n": "10", "title": "Integration and Surpluses", "date": "Nov 16, 2026"}, {"n": "11", "title": "Data Foundations, Collection Methods and Sampling", "date": "Nov 23, 2026"}, {"n": "12", "title": "Describing Data using Graphs, Charts, and Tables", "date": "Nov 30, 2026"}, {"n": "13", "title": "Describing Data Using Numerical Measures", "date": "Dec 7, 2026"}, {"n": "14", "title": "Bivariate Data Analysis, Independence and Concentration", "date": "Dec 14, 2026"}, {"n": "15", "title": "Review session, then the fall exam", "date": "Jan 11, 2027"}, {"n": "S1-5", "title": "Spring: probability", "date": "from Feb 22, 2027"}, {"n": "S6-9", "title": "Spring: financial mathematics", "date": "spring"}, {"n": "S10-11", "title": "Spring: linear algebra", "date": "spring"}, {"n": "S12-15", "title": "Spring: regression and forecasting", "date": "to Jun 7, 2027"}], "ref": [{"id": "formulas", "t": "Everything on one page"}, {"id": "glossary", "t": "English to French glossary"}, {"id": "mock-mcq", "t": "Mock midterm"}, {"id": "mock-open", "t": "Mock exam paper"}]};</script>
+
 </main>
+</div>
 
 <footer>
 <svg class="mark" role="img" aria-label="MAZEN"><use href="#mazen-mark"/></svg>
@@ -2834,6 +2847,124 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   Array.prototype.forEach.call(document.querySelectorAll('.ex[data-bank]'), function(e){
     paintStep(e.getAttribute('data-bank'));
   });
+
+  /* ===========================================================
+     THE COURSE, laid out as Khan lays one out. One lesson on
+     screen at a time, a card on the left saying where you are
+     in the week, and a contents page carrying the whole grid.
+     =========================================================== */
+  var C = window.COURSE;
+  if (C) (function(){
+    var flat = [];                                   // every lesson, in course order
+    C.weeks.forEach(function(w){
+      w.lessons.forEach(function(L){ flat.push({ id: L.id, t: L.t, week: w }); });
+    });
+    C.ref.forEach(function(L){ flat.push({ id: L.id, t: L.t, week: null }); });
+    var indexOf = {};
+    flat.forEach(function(L, i){ indexOf[L.id] = i; });
+
+    var side  = document.getElementById('sideCard');
+    var shell = document.querySelector('main.shell');
+    var head  = document.querySelector('header.doc-head');
+
+    function sections(){ return shell.querySelectorAll('section[id]'); }
+
+    function showOnly(id){
+      Array.prototype.forEach.call(sections(), function(sec){
+        sec.style.display = (sec.id === id) ? '' : 'none';
+      });
+      if (head) head.style.display = (id === 'contents') ? '' : 'none';
+    }
+
+    var ICON = { watch: '\u25B6', read: '\u25A4', practise: '\u270E', practice: '\u270E' };
+
+    function lessonCard(L){
+      var i = indexOf[L.id];
+      var prev = flat[i - 1], next = flat[i + 1];
+      var sec = document.getElementById(L.id);
+      var items = [];
+      Array.prototype.forEach.call(sec.querySelectorAll('.learn a'), function(a){
+        var kind = /^Watch/.test(a.textContent) ? 'watch'
+                 : /^Read/.test(a.textContent)  ? 'read' : 'practise';
+        items.push('<li><a href="' + a.href + '" target="_blank" rel="noopener">' +
+                   '<span class="sc-ico">' + ICON[kind] + '</span><span>' +
+                   a.textContent.replace(/^(Watch|Read|Practise):\s*/, '') +
+                   '<span class="sc-state">on Khan Academy</span></span></a></li>');
+      });
+      if (sec.querySelector('.ex[data-bank]')) {
+        items.push('<li class="on"><a href="#' + L.id + '">' +
+                   '<span class="sc-ico">' + ICON.practice + '</span><span>Practice' +
+                   '<span class="sc-state">' + LEVEL[mGet(L.id)] + '</span></span></a></li>');
+      }
+      var wk = L.week ? ('Week ' + L.week.n) : 'Reference';
+      var wt = L.week ? L.week.title : 'Formulas, glossary, papers';
+      side.innerHTML =
+        '<div class="sc-head">' +
+          '<span class="sc-course">' + C.title + ' &nbsp;&rsaquo;&nbsp; ' + wk + '</span>' +
+          '<div class="sc-row">' +
+            (prev ? '<a class="sc-arrow" href="#' + prev.id + '" title="' + prev.t + '">&lsaquo;</a>'
+                  : '<span class="sc-arrow" aria-disabled="true">&lsaquo;</span>') +
+            '<span class="sc-now">' + L.t + '</span>' +
+            (next ? '<a class="sc-arrow" href="#' + next.id + '" title="' + next.t + '">&rsaquo;</a>'
+                  : '<span class="sc-arrow" aria-disabled="true">&rsaquo;</span>') +
+          '</div>' +
+        '</div>' +
+        (items.length ? '<ul class="sc-list">' + items.join('') + '</ul>' : '') +
+        '<p class="sc-crumb"><a href="#contents">' + C.title + '</a> &rsaquo; ' + wt + '</p>';
+    }
+
+    function contentsCard(){
+      var weeks = C.weeks.map(function(w){
+        return '<li><a href="#' + w.lessons[0].id + '"><span class="sc-ico">' + w.n +
+               '</span><span>' + w.title +
+               '<span class="sc-state">' + w.lessons.length + ' lessons</span></span></a></li>';
+      }).join('');
+      side.innerHTML =
+        '<div class="sc-head"><span class="sc-course">' + C.title + '</span>' +
+        '<div class="sc-row"><span class="sc-now">' + C.weeks.length + ' weeks written</span></div></div>' +
+        '<ul class="sc-list">' + weeks + '</ul>' +
+        '<p class="sc-crumb">The rest of the year unlocks on Cyberlearn.</p>';
+    }
+
+    /* the grid on the contents page: a square per lesson, filled as you work */
+    function paintGrid(){
+      var host = document.getElementById('courseGrid');
+      if (!host) return;
+      host.innerHTML = C.weeks.map(function(w){
+        var got = 0;
+        var sq = w.lessons.map(function(L){
+          var lvl = mGet(L.id); got += lvl;
+          return '<a href="#' + L.id + '" class="' + (LCLASS[lvl] || '') + '" title="' +
+                 L.t.replace(/"/g, '') + ': ' + LEVEL[lvl] + '"></a>';
+        }).join('');
+        var pct = Math.round(got / (w.lessons.length * 3) * 100);
+        return '<div class="grid-week"><span class="gw-n">Week ' + w.n + '</span>' +
+               '<span class="grid-sq">' + sq + '</span>' +
+               '<span class="gw-pct">' + pct + '%</span></div>';
+      }).join('');
+    }
+
+    function route(){
+      var id = location.hash.slice(1);
+      if (!id || !document.getElementById(id)) id = 'contents';
+      showOnly(id);
+      if (id === 'contents') { contentsCard(); paintGrid(); }
+      else if (indexOf[id] !== undefined) lessonCard(flat[indexOf[id]]);
+      else contentsCard();
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('hashchange', route);
+    route();
+    window.__routeRefresh = route;
+
+    /* printing wants the whole book, not one lesson */
+    window.addEventListener('beforeprint', function(){
+      Array.prototype.forEach.call(sections(), function(sec){ sec.style.display = ''; });
+      if (head) head.style.display = '';
+    });
+    window.addEventListener('afterprint', route);
+  })();
 
   /* Clicking a lesson jumps to it, then the hash comes back out of the address
      bar. Refreshing afterwards therefore has no fragment to jump to and the
