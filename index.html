@@ -698,20 +698,9 @@ ol.wk-lessons a:hover{text-decoration:underline}
 
 /* the week-by-week roadmap */
 table.roadmap td.wk{font-family:var(--mono);font-weight:700;color:var(--ink);white-space:nowrap}
-table.roadmap td.ka-cell a{display:block;color:var(--ka);text-decoration:none;font-size:12.5px;margin:0 0 3px}
-table.roadmap td.ka-cell a:hover{text-decoration:underline}
-table.roadmap a.here{color:var(--accent);font-weight:700;text-decoration:none;white-space:nowrap}
-table.roadmap a.here:hover{text-decoration:underline}
 table.roadmap .later{color:var(--muted);font-style:italic;white-space:nowrap}
 table.roadmap .exam{color:var(--warn);font-weight:700;white-space:nowrap}
 table.roadmap .wdate{display:block;margin-top:2px;font-family:var(--sans);font-size:11px;color:var(--muted)}
-table.roadmap tr.theme td{background:var(--accent-soft);padding:9px 10px}
-table.roadmap .th-n{
-  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--accent);margin-right:9px;
-}
-table.roadmap .th-t{font-weight:700;color:var(--ink);margin-right:9px}
-table.roadmap .th-q{color:var(--muted);font-size:13px}
 
 /* the practise pill, so exercises read differently from lessons */
 .learn a.do{background:transparent;color:var(--ka);box-shadow:inset 0 0 0 2px var(--ka)}
@@ -983,36 +972,28 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="lesson-no">Start &nbsp;&middot;&nbsp; Lesson 1 <span class="of">of 1</span></p>
 <h2 class="sec">Contents</h2>
 <div class="tw"><table class="data roadmap">
-<thead><tr><th>Week</th><th>What the course covers</th><th>Lessons</th><th>On Khan Academy</th></tr></thead>
+<thead><tr><th>Week</th><th>What the course covers</th><th>Lessons</th></tr></thead>
 <tbody>
-<tr class="theme"><td colspan="4"><span class="th-n">Theme 0</span><span class="th-t">Prerequisites</span><span class="th-q">Let's catch up on some pre-HEG topics</span></td></tr>
-<tr><td class="wk">0</td><td class="wk-t">Leveling Up</td><td><ol class="wk-lessons"><li><a href="#f-numbers">Numbers, notation and the order of operations</a></li><li><a href="#f-fractions">Fractions and signs</a></li><li><a href="#f-powers"><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></a></li><li><a href="#f-algebra"><span data-fr="Développement">Expanding</span> and <span data-fr="factorisation">factoring</span></a></li><li><a href="#f-linear">Linear equations</a></li><li><a href="#f-quadratic">Quadratic equations</a></li><li><a href="#f-rational">Equations with the <span data-fr="inconnue">unknown</span> in a denominator</a></li><li><a href="#f-systems">Systems of two equations</a></li><li><a href="#f-inequal">Inequalities and absolute value</a></li><li><a href="#f-plane">The plane and <span data-fr="droites">straight lines</span></a></li><li><a href="#f-percent">Percentages, <span data-fr="croissance">growth</span> and money</a></li><li><a href="#modelling">The modelling cycle</a></li><li><a href="#f-calc">Your calculator</a></li></ol></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:foundation-algebra" target="_blank" rel="noopener">Algebra 1, unit 1: Algebra foundations</a> <a href="https://www.khanacademy.org/math/arithmetic/fraction-arithmetic" target="_blank" rel="noopener">Arithmetic, unit 4: Understand fractions</a> <a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:exponents-intro-and-order-of-operations" target="_blank" rel="noopener">Pre-algebra, unit 5: Exponents and order of operations</a> <a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages" target="_blank" rel="noopener">Pre-algebra, unit 4: Percentages</a></td></tr>
-<tr class="theme"><td colspan="4"><span class="th-n">Theme 1</span><span class="th-t">Orientation</span><span class="th-q">Why do numbers drive decisions?</span></td></tr>
-<tr><td class="wk">1</td><td class="wk-t">Introduction, leveling up, functions and graphs<span class="wdate">Sep 14, 2026</span></td><td><ol class="wk-lessons"><li><a href="#w1-equations"><span data-fr="Résolution">Solving</span> linear equations and systems</a></li><li><a href="#w1-quadratics"><span data-fr="Résolution">Solving</span> quadratic equations and applications</a></li><li><a href="#w1-functions">Functions</a></li><li><a href="#w1-domain"><span data-fr="Domaines de définition">Domains</span></a></li><li><a href="#w1-special">Description of some special functions</a></li><li><a href="#w1-exp">Exponential functions</a></li><li><a href="#w1-log">Logarithmic functions</a></li><li><a href="#w1-quiz">Week 1 review quiz</a></li></ol></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions" target="_blank" rel="noopener">Algebra 1, unit 8: Functions</a> <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank" rel="noopener">Algebra 1, unit 4: Linear equations and graphs</a></td></tr>
-<tr><td class="wk">2</td><td class="wk-t">Operations on functions<span class="wdate">Sep 21, 2026</span></td><td><ol class="wk-lessons"><li><a href="#w2-ops">Simple operations on functions</a></li><li><a href="#w2-graphs">Graphs</a></li><li><a href="#w2-compose">Composition of functions</a></li><li><a href="#w2-inverse">Properties and inverses</a></li><li><a href="#w2-inverse2">Inverses (continued)</a></li><li><a href="#w2-logrules">Properties of logarithms</a></li><li><a href="#w2-quiz">Week 2 review quiz</a></li></ol></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite" target="_blank" rel="noopener">Precalculus, unit 1: Composite and <span data-fr="fonctions réciproques">inverse functions</span></a> <a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs" target="_blank" rel="noopener">Algebra 2, unit 8: Logarithms</a></td></tr>
-<tr><td class="wk">3</td><td class="wk-t">Lines, parabolas and systems of linear equations<span class="wdate">Sep 28, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations" target="_blank" rel="noopener">Algebra 1, unit 5: Forms of linear equations</a> <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations" target="_blank" rel="noopener">Algebra 1, unit 14: Quadratic functions and equations</a> <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:systems-of-equations" target="_blank" rel="noopener">Algebra 1, unit 6: Systems of equations</a></td></tr>
-<tr class="theme"><td colspan="4"><span class="th-n">Theme 2</span><span class="th-t">Calculus</span><span class="th-q">How does our business behave, and where is it best?</span></td></tr>
-<tr><td class="wk">4</td><td class="wk-t"><span data-fr="Taux de variation">Rate of change</span> and the derivative<span class="wdate">Oct 5, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-limits" target="_blank" rel="noopener">Differential calculus, unit 1: Limits and continuity</a> <a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a></td></tr>
-<tr><td class="wk">5</td><td class="wk-t">Differentiation rules<span class="wdate">Oct 12, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a> <a href="https://www.khanacademy.org/math/differential-calculus/dc-chain" target="_blank" rel="noopener">Differential calculus, unit 3: Chain rule and beyond</a></td></tr>
-<tr><td class="wk">6</td><td class="wk-t">Self directed learning week: case study and review<span class="wdate">Oct 19, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-diff-intro" target="_blank" rel="noopener">Differential calculus, unit 2: Derivatives, definition and basic rules</a></td></tr>
-<tr><td class="wk">7</td><td class="wk-t">Applications of the derivatives<span class="wdate">Oct 26, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-context-app" target="_blank" rel="noopener">Differential calculus, unit 4: Applications of derivatives</a></td></tr>
-<tr><td class="wk">8</td><td class="wk-t">Optimization in one variable<span class="wdate">Nov 2, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/differential-calculus/dc-analytic-app" target="_blank" rel="noopener">Differential calculus, unit 5: Analysing functions</a></td></tr>
-<tr><td class="wk">9</td><td class="wk-t"><span data-fr="Examen intermédiaire">MIDTERM EXAM</span>, then Introduction to Integrals<span class="wdate">Nov 9, 2026</span></td><td><span class="exam">exam</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/integral-calculus/ic-integration" target="_blank" rel="noopener">Integral calculus, unit 1: Integrals</a></td></tr>
-<tr><td class="wk">10</td><td class="wk-t">Integration and Surpluses<span class="wdate">Nov 16, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/integral-calculus/ic-integration" target="_blank" rel="noopener">Integral calculus, unit 1: Integrals</a> <a href="https://www.khanacademy.org/math/integral-calculus/ic-int-app" target="_blank" rel="noopener">Integral calculus, unit 3: Applications of integrals</a></td></tr>
-<tr class="theme"><td colspan="4"><span class="th-n">Theme 3</span><span class="th-t">Descriptive statistics</span><span class="th-q">What is the <span data-fr="données">data</span> telling us?</span></td></tr>
-<tr><td class="wk">11</td><td class="wk-t"><span data-fr="Données">Data</span> Foundations, Collection Methods and <span data-fr="Échantillonnage">Sampling</span><span class="wdate">Nov 23, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/designing-studies" target="_blank" rel="noopener">Statistics, unit 6: Study design and <span data-fr="échantillonnage">sampling</span></a></td></tr>
-<tr><td class="wk">12</td><td class="wk-t">Describing <span data-fr="Données">Data</span> using Graphs, Charts, and Tables<span class="wdate">Nov 30, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/analyzing-categorical-data" target="_blank" rel="noopener">Statistics, unit 1: Analysing categorical <span data-fr="données">data</span></a> <a href="https://www.khanacademy.org/math/statistics-probability/displaying-describing-data" target="_blank" rel="noopener">Statistics, unit 2: Displaying and comparing quantitative <span data-fr="données">data</span></a></td></tr>
-<tr><td class="wk">13</td><td class="wk-t">Describing <span data-fr="Données">Data</span> Using Numerical Measures<span class="wdate">Dec 7, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data" target="_blank" rel="noopener">Statistics, unit 3: Summarising quantitative <span data-fr="données">data</span></a> <a href="https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data" target="_blank" rel="noopener">Statistics, unit 4: Modeling <span data-fr="données">data</span> distributions</a></td></tr>
-<tr><td class="wk">14</td><td class="wk-t">Bivariate <span data-fr="Données">Data</span> Analysis, Independence and Concentration<span class="wdate">Dec 14, 2026</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data" target="_blank" rel="noopener">Statistics, unit 5: Exploring bivariate numerical <span data-fr="données">data</span></a> <a href="https://www.khanacademy.org/math/statistics-probability/inference-categorical-data-chi-square-tests" target="_blank" rel="noopener">Statistics, unit 14: Chi-square tests for categorical <span data-fr="données">data</span></a></td></tr>
-<tr><td class="wk">15</td><td class="wk-t">Review session, then the fall exam<span class="wdate">Jan 11, 2027</span></td><td><span class="exam">exam</span></td><td class="ka-cell"></td></tr>
-<tr class="theme"><td colspan="4"><span class="th-n">Theme 4</span><span class="th-t">Probability</span><span class="th-q">How do we plan under uncertainty?</span></td></tr>
-<tr><td class="wk">S1-5</td><td class="wk-t">Spring: probability<span class="wdate">from Feb 22, 2027</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/probability-library" target="_blank" rel="noopener">Statistics, unit 7: Probability</a> <a href="https://www.khanacademy.org/math/statistics-probability/random-variables-stats-library" target="_blank" rel="noopener">Statistics, unit 9: Random variables</a></td></tr>
-<tr class="theme"><td colspan="4"><span class="th-n">Theme 5</span><span class="th-t">Financial mathematics</span><span class="th-q">Is it worth it, and worth it when?</span></td></tr>
-<tr><td class="wk">S6-9</td><td class="wk-t">Spring: financial mathematics<span class="wdate">spring</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/economics-finance-domain/core-finance/interest-tutorial" target="_blank" rel="noopener">Finance, unit 1: Interest and debt</a></td></tr>
-<tr class="theme"><td colspan="4"><span class="th-n">Theme 6</span><span class="th-t">Linear algebra</span><span class="th-q">How do we handle many things at once?</span></td></tr>
-<tr><td class="wk">S10-11</td><td class="wk-t">Spring: linear algebra<span class="wdate">spring</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices" target="_blank" rel="noopener">Precalculus, unit 7: Matrices</a> <a href="https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces" target="_blank" rel="noopener">Linear algebra, unit 1: Vectors and spaces</a> <a href="https://www.khanacademy.org/math/linear-algebra/matrix-transformations" target="_blank" rel="noopener">Linear algebra, unit 2: Matrix transformations</a></td></tr>
-<tr class="theme"><td colspan="4"><span class="th-n">Theme 7</span><span class="th-t">Introduction to <span data-fr="prévision">forecasting</span></span><span class="th-q">How do we model the activity into the future?</span></td></tr>
-<tr><td class="wk">S12-15</td><td class="wk-t">Spring: regression and <span data-fr="prévision">forecasting</span><span class="wdate">to Jun 7, 2027</span></td><td><span class="later">not released yet</span></td><td class="ka-cell"><a href="https://www.khanacademy.org/math/statistics-probability/describing-relationships-quantitative-data" target="_blank" rel="noopener">Statistics, unit 5: Exploring bivariate numerical <span data-fr="données">data</span></a></td></tr>
+<tr><td class="wk">0</td><td class="wk-t">Leveling Up</td><td><ol class="wk-lessons"><li><a href="#f-numbers">Numbers, notation and the order of operations</a></li><li><a href="#f-fractions">Fractions and signs</a></li><li><a href="#f-powers"><span data-fr="Puissances">Powers</span> and <span data-fr="racines">roots</span></a></li><li><a href="#f-algebra"><span data-fr="Développement">Expanding</span> and <span data-fr="factorisation">factoring</span></a></li><li><a href="#f-linear">Linear equations</a></li><li><a href="#f-quadratic">Quadratic equations</a></li><li><a href="#f-rational">Equations with the <span data-fr="inconnue">unknown</span> in a denominator</a></li><li><a href="#f-systems">Systems of two equations</a></li><li><a href="#f-inequal">Inequalities and absolute value</a></li><li><a href="#f-plane">The plane and <span data-fr="droites">straight lines</span></a></li><li><a href="#f-percent">Percentages, <span data-fr="croissance">growth</span> and money</a></li><li><a href="#modelling">The modelling cycle</a></li><li><a href="#f-calc">Your calculator</a></li></ol></td></tr>
+<tr><td class="wk">1</td><td class="wk-t">Introduction, leveling up, functions and graphs<span class="wdate">Sep 14, 2026</span></td><td><ol class="wk-lessons"><li><a href="#w1-equations"><span data-fr="Résolution">Solving</span> linear equations and systems</a></li><li><a href="#w1-quadratics"><span data-fr="Résolution">Solving</span> quadratic equations and applications</a></li><li><a href="#w1-functions">Functions</a></li><li><a href="#w1-domain"><span data-fr="Domaines de définition">Domains</span></a></li><li><a href="#w1-special">Description of some special functions</a></li><li><a href="#w1-exp">Exponential functions</a></li><li><a href="#w1-log">Logarithmic functions</a></li><li><a href="#w1-quiz">Week 1 review quiz</a></li></ol></td></tr>
+<tr><td class="wk">2</td><td class="wk-t">Operations on functions<span class="wdate">Sep 21, 2026</span></td><td><ol class="wk-lessons"><li><a href="#w2-ops">Simple operations on functions</a></li><li><a href="#w2-graphs">Graphs</a></li><li><a href="#w2-compose">Composition of functions</a></li><li><a href="#w2-inverse">Properties and inverses</a></li><li><a href="#w2-inverse2">Inverses (continued)</a></li><li><a href="#w2-logrules">Properties of logarithms</a></li><li><a href="#w2-quiz">Week 2 review quiz</a></li></ol></td></tr>
+<tr><td class="wk">3</td><td class="wk-t">Lines, parabolas and systems of linear equations<span class="wdate">Sep 28, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">4</td><td class="wk-t"><span data-fr="Taux de variation">Rate of change</span> and the derivative<span class="wdate">Oct 5, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">5</td><td class="wk-t">Differentiation rules<span class="wdate">Oct 12, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">6</td><td class="wk-t">Self directed learning week: case study and review<span class="wdate">Oct 19, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">7</td><td class="wk-t">Applications of the derivatives<span class="wdate">Oct 26, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">8</td><td class="wk-t">Optimization in one variable<span class="wdate">Nov 2, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">9</td><td class="wk-t"><span data-fr="Examen intermédiaire">MIDTERM EXAM</span>, then Introduction to Integrals<span class="wdate">Nov 9, 2026</span></td><td><span class="exam">exam</span></td></tr>
+<tr><td class="wk">10</td><td class="wk-t">Integration and Surpluses<span class="wdate">Nov 16, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">11</td><td class="wk-t"><span data-fr="Données">Data</span> Foundations, Collection Methods and <span data-fr="Échantillonnage">Sampling</span><span class="wdate">Nov 23, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">12</td><td class="wk-t">Describing <span data-fr="Données">Data</span> using Graphs, Charts, and Tables<span class="wdate">Nov 30, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">13</td><td class="wk-t">Describing <span data-fr="Données">Data</span> Using Numerical Measures<span class="wdate">Dec 7, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">14</td><td class="wk-t">Bivariate <span data-fr="Données">Data</span> Analysis, Independence and Concentration<span class="wdate">Dec 14, 2026</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">15</td><td class="wk-t">Review session, then the fall exam<span class="wdate">Jan 11, 2027</span></td><td><span class="exam">exam</span></td></tr>
+<tr><td class="wk">S1-5</td><td class="wk-t">Spring: probability<span class="wdate">from Feb 22, 2027</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">S6-9</td><td class="wk-t">Spring: financial mathematics<span class="wdate">spring</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">S10-11</td><td class="wk-t">Spring: linear algebra<span class="wdate">spring</span></td><td><span class="later">not yet released</span></td></tr>
+<tr><td class="wk">S12-15</td><td class="wk-t">Spring: regression and <span data-fr="prévision">forecasting</span><span class="wdate">to Jun 7, 2027</span></td><td><span class="later">not yet released</span></td></tr>
 </tbody></table></div>
 </section>
 
@@ -2783,20 +2764,47 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
     paintStep(e.getAttribute('data-bank'));
   });
 
-  /* a link into the folded levelling-up block opens it */
-  function openFolded(){
-    var h = location.hash.slice(1);
-    if (!h) return;
-    var el = document.getElementById(h);
+  /* Clicking a lesson jumps to it, then the hash comes back out of the address
+     bar. Refreshing afterwards therefore has no fragment to jump to and the
+     browser simply restores where you were, instead of throwing you back down
+     the document to whatever you last clicked.
+
+     A shared link that arrives with a fragment is left alone: the browser puts
+     the reader on that lesson, which is the point of the link. Nothing here
+     runs on load, so there is no timing to get wrong on a page this tall. */
+  /* Scroll restoration is manual: with it automatic, taking the hash out of
+     the address bar makes the browser re-apply the position it saved for the
+     entry, which undoes the jump we just made. */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  window.addEventListener('hashchange', function(){
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    while (el) {                       // a target inside the folded block needs it open
+      if (el.tagName === 'DETAILS') el.open = true;
+      el = el.parentElement;
+    }
+    var t = document.getElementById(id);
+    if (t) t.scrollIntoView({ block: 'start' });
+    setTimeout(function(){
+      if (!location.hash) return;
+      try { history.replaceState(null, '', location.pathname + location.search); }
+      catch (e) { /* file:// and the like: leave the hash alone */ }
+    }, 250);
+  });
+
+  /* a fragment that arrives with the page still has to open the folded block */
+  (function(){
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
     while (el) {
       if (el.tagName === 'DETAILS') el.open = true;
       el = el.parentElement;
     }
-    var t = document.getElementById(h);
-    if (t) t.scrollIntoView({ block: 'start' });
-  }
-  window.addEventListener('hashchange', openFolded);
-  openFolded();
+  })();
+
   window.addEventListener('beforeprint', function(){
     Array.prototype.forEach.call(document.querySelectorAll('details'), function(d){ d.open = true; });
   });
