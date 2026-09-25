@@ -153,6 +153,12 @@ Three rules that are not negotiable. Text on slate is paper, and text on clay is
 paper. Never clay text on kraft or manilla. Never forest and clay in the same
 sentence, or neither means anything.
 
+**One mode.** There is no light and dark. A document does not have a theme, and
+two of them is two things to keep right for no gain.
+
+**The download is the file.** Top right of the bar, an icon and the word, linking
+to the generated PDF with a download attribute. Not a print dialog.
+
 Tokens only. The build rejects a hard-coded hex outside the token block.
 
 **Shape and motion.** One card radius of 10px and one pill of 999px, nothing
