@@ -879,7 +879,6 @@ table.roadmap .exam{color:var(--warn);font-weight:700;white-space:nowrap}
 table.roadmap .wdate{display:block;margin-top:2px;font-family:var(--sans);font-size:11px;color:var(--muted)}
 
 /* the practise pill, so exercises read differently from lessons */
-.learn a.do{background:transparent;color:var(--ka);box-shadow:inset 0 0 0 2px var(--ka)}
 
 /* the trap. The only box that survives. */
 .trap{
@@ -901,14 +900,15 @@ table.roadmap .wdate{display:block;margin-top:2px;font-family:var(--sans);font-s
   color:var(--muted);
 }
 .learn a{
-  display:flex;align-items:baseline;gap:10px;
-  padding:9px 2px 9px 0;border-top:1px solid var(--rule);
+  display:block;position:relative;
+  padding:9px 2px 9px 25px;border-top:1px solid var(--rule);
   color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;line-height:1.45;
+  overflow-wrap:anywhere;
 }
 .learn a:hover{color:var(--accent)}
 .learn a:hover .kt{text-decoration:underline}
 .learn a::before{
-  content:"";flex:0 0 15px;height:15px;margin-top:1px;border-radius:3px;
+  content:"";position:absolute;left:0;top:12px;width:15px;height:15px;border-radius:3px;
   background:var(--muted);opacity:.5;
   -webkit-mask:var(--ic-watch) center/contain no-repeat;mask:var(--ic-watch) center/contain no-repeat;
 }
@@ -1159,6 +1159,21 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:solve-equations-inequalities/x2f8bb11595b61c86:linear-equations-variables-both-sides/v/why-we-do-the-same-thing-to-both-sides-multi-step-equations" target="_blank" rel="noopener">Watch: First order equations · Why we do the same thing to both sides</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:systems-of-equations/x2f8bb11595b61c86:solving-systems-of-equations-with-substitution/v/solving-systems-with-substitution" target="_blank" rel="noopener">Watch: Systems, by substitution · <span data-fr="Résolution">Solving</span> systems of equations with substitution</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:solve-equations-inequalities/x2f8bb11595b61c86:linear-equations-parentheses/a/multi-step-equations-review" class="ghost" target="_blank" rel="noopener">Read: The method, written out · Multi-step equations review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:solve-equations-inequalities/x2f8bb11595b61c86:linear-equations-variables-both-sides/e/linear_equations_3" class="do" target="_blank" rel="noopener">Practise: First order equations · Equations with variables on both sides</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:systems-of-equations/x2f8bb11595b61c86:solving-systems-elimination/e/systems_of_equations_with_elimination_0.5" class="do" target="_blank" rel="noopener">Practise: Systems, by elimination · Systems of equations with elimination</a></div>
+<dl class="keys">
+<dt>First order</dt><dd>One <span data-fr="inconnue">unknown</span>, first <span data-fr="puissance">power</span>. <span class="m">ax + b = 0</span> with <span class="m">a &ne; 0</span>.</dd>
+<dt>A system</dt><dd>Two equations that have to hold at the same time, for the same pair of values.</dd>
+</dl>
+<ol class="method">
+<li><b>Clear <span data-fr="parenthèses">brackets</span>, then fractions.</b> Multiply every term by the common denominator, the right-hand side included.</li>
+<li><b>Collect the <span data-fr="inconnue">unknown</span> on one side, the numbers on the other.</b></li>
+<li><b>Divide by the coefficient.</b> <span class="mb"><span class="f">ax + b = 0</span><span class="f">&rArr;</span><span class="f">x = <span class="frac"><span class="num">&minus;b</span><span class="den">a</span></span></span></span></li>
+<li><b>For a system, eliminate.</b> Scale one equation so a letter cancels when you add the two.</li>
+<li><b>Or substitute.</b> Make one equation say x = something, and put that into the <em>other</em> one.</li>
+<li><b>Check the pair in both equations.</b> One equation cannot catch an error.</li>
+</ol>
+<dl class="keys">
+<dt>Three outcomes</dt><dd>One solution. None, when you reach something false. Infinitely many, when you reach something always true. None of the three is a mistake.</dd>
+</dl>
 <h3>First order equations</h3>
 <div class="prose"><span class="mb"><span class="f">x = <span class="frac"><span class="num">&minus;b</span><span class="den">a</span></span></span></span></div>
 <div class="work">
@@ -1192,6 +1207,14 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/v/using-the-quadratic-formula" target="_blank" rel="noopener">Watch: The formula · The quadratic formula</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/v/quadratic-formula-3" target="_blank" rel="noopener">Watch: What the discriminant tells you · Using the quadratic formula: number of solutions</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/a/discriminant-review" class="ghost" target="_blank" rel="noopener">Read: The discriminant · Discriminant review</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/e/quadratic_equation" class="do" target="_blank" rel="noopener">Practise: Using the formula · Quadratic formula</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:quadratic-formula-a1/e/determine-the-number-of-solutions-of-a-quadratic-equation" class="do" target="_blank" rel="noopener">Practise: Reading the discriminant · Number of solutions of quadratic equations</a></div>
+<ol class="method">
+<li><b>Everything to one side.</b> <span class="mb"><span class="f">ax<sup>2</sup> + bx + c = 0,</span><span class="f">a &ne; 0</span></span></li>
+<li><b>Read off a, b and c with their signs.</b> The signs are where the marks go.</li>
+<li><b>Work out the discriminant first.</b> <span class="mb"><span class="f">&Delta; = b<sup>2</sup> &minus; 4ac</span><span class="f">&Delta; &gt; 0: two roots</span><span class="f">&Delta; = 0: one</span><span class="f">&Delta; &lt; 0: none in &#8477;</span></span></li>
+<li><b>Factor if it factors, otherwise use the formula.</b> <span class="mb"><span class="f">x = <span class="frac"><span class="num">&minus;b &plusmn; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span></span></span></li>
+<li><b>In a business question, <span data-fr="seuil de rentabilité">break-even</span> is where <span data-fr="chiffre d’affaires">revenue</span> meets cost.</b> <span class="m">R(q) = C(q)</span> rearranges to a quadratic you already know how <span data-fr="résoudre">to solve</span>.</li>
+<li><b>Throw away a <span data-fr="racine">root</span> the situation forbids.</b> A negative quantity or a negative price is not an answer.</li>
+</ol>
 <div class="prose"><span class="mb"><span class="f">x<sub>1</sub> = <span class="frac"><span class="num">&minus;b + <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span></span><span class="f">x<sub>2</sub> = <span class="frac"><span class="num">&minus;b &minus; <span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>&Delta;</span></span></span><span class="den">2a</span></span></span></span></div>
 <div class="work">
 <span class="cap">Worked: 3x<sup>2</sup> + 3x &minus; 18 = 0</span>
@@ -1224,6 +1247,19 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:recognizing-functions/v/graphical-relations-and-functions" target="_blank" rel="noopener">Watch: What counts as a function · Recognizing functions</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:evaluating-functions/v/understanding-function-notation-example-1" target="_blank" rel="noopener">Watch: Evaluating a function · <span data-fr="Exemple résolu">Worked example</span>: Evaluating functions from equation</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:intro-to-slope-intercept-form/v/slope-intercept-intro-examples" target="_blank" rel="noopener">Watch: Lines, <span data-fr="pente">slope</span> and <span data-fr="intersection avec un axe">intercept</span> · <span data-fr="Exemples résolus">Worked examples</span>: slope-intercept intro</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:evaluating-functions/e/functions_1" class="do" target="_blank" rel="noopener">Practise: Evaluating · Evaluate functions</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:recognizing-functions/e/recog-func-2" class="do" target="_blank" rel="noopener">Practise: The vertical line test · Recognize functions from graphs</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations/x2f8bb11595b61c86:writing-slope-intercept-equations/e/slope-intercept-equation-from-graph" class="do" target="_blank" rel="noopener">Practise: Reading a line off a graph · Slope-intercept equation from graph</a></div>
+<dl class="keys">
+<dt>Function</dt><dd>A rule that gives each allowed <span data-fr="entrée">input</span> <b>exactly one</b> <span data-fr="sortie">output</span>. That is the whole definition.</dd>
+<dt>f(x)</dt><dd>The <span data-fr="sortie">output</span> at x. It is not f times x.</dd>
+<dt>Four representations</dt><dd>A formula, a table, a graph, a sentence. The same function, four ways, and you are expected to move between them.</dd>
+<dt>Vertical line test</dt><dd>If a vertical line meets the graph twice, it is not a function: that <span data-fr="entrée">input</span> would have two <span data-fr="sorties">outputs</span>.</dd>
+</dl>
+<ol class="method">
+<li><b>To evaluate, replace every x by the whole <span data-fr="entrée">input</span>.</b> <span data-fr="Parenthèses">Brackets</span> included: <span class="m">f(a + 1)</span> needs <span class="m">(a + 1)</span> everywhere.</li>
+<li><b>Read a table exactly, a graph approximately.</b> A graph gives you the shape and the trend, not the fourth decimal.</li>
+<li><b><span data-fr="Pente">Slope</span> is rise over run, and it is the same wherever you measure it.</b> <span class="mb"><span class="f">m = <span class="frac"><span class="num">&Delta;y</span><span class="den">&Delta;x</span></span> = <span class="frac"><span class="num">y<sub>2</sub> &minus; y<sub>1</sub></span><span class="den">x<sub>2</sub> &minus; x<sub>1</sub></span></span></span></span></li>
+<li><b>To sketch a line, plot two points and join them.</b> The <span data-fr="intersections avec les axes">intercepts</span> are usually the two easiest.</li>
+<li><b>A vertical line has no <span data-fr="pente">slope</span>.</b> <span class="m">x = k</span> is not a function, and its <span data-fr="pente">slope</span> is <span data-fr="non défini">undefined</span> rather than zero.</li>
+</ol>
 <h3>The worked case: Rivella Coffee</h3>
 <figure class="fig">
 <svg viewBox="0 0 470 300" role="img" aria-label="The Rivella Coffee cost points plotted against quantity">
@@ -1262,6 +1298,19 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:introduction-to-the-domain-and-range-of-a-function/v/domain-of-a-function-intro" target="_blank" rel="noopener">Watch: What is the <span data-fr="domaine de définition">domain</span> of a function?</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:introduction-to-the-domain-and-range-of-a-function/v/range-of-a-function" target="_blank" rel="noopener">Watch: What is the <span data-fr="ensemble image">range</span> of a function?</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:determining-the-domain-of-a-function/e/domain-of-algebraic-functions" class="do" target="_blank" rel="noopener">Practise: Finding a <span data-fr="domaine de définition">domain</span> · Determine the <span data-fr="domaine de définition">domain</span> of functions</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:introduction-to-the-domain-and-range-of-a-function/e/domain_and_range_0.5" class="do" target="_blank" rel="noopener">Practise: Reading both off a graph · <span data-fr="Domaine de définition">Domain</span> and <span data-fr="ensemble image">range</span> from graph</a></div>
+<dl class="keys">
+<dt><span data-fr="Domaine de définition">Domain</span></dt><dd>Every <span data-fr="entrée">input</span> the rule accepts.</dd>
+<dt><span data-fr="Ensemble image">Range</span></dt><dd>Every <span data-fr="sortie">output</span> that actually occurs. Usually smaller than you expect.</dd>
+</dl>
+<ol class="method">
+<li><b>Start by assuming every real number is allowed.</b> Then take away what is forbidden.</li>
+<li><b>A denominator may not be zero.</b> Set it to zero, solve, and exclude those values.</li>
+<li><b>An even <span data-fr="racine">root</span> may not have a negative underneath.</b> <span class="m"><span class="rt"><svg viewBox="0 0 24 40" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0.9 23.5 L6 20.2 L12.4 37.6 L23.1 1.1"/></svg><span>x &minus; 3</span></span></span> needs <span class="m">x &ge; 3</span>.</li>
+<li><b>A logarithm needs a strictly positive argument.</b></li>
+<li><b>Solve each condition, then keep everything that survives all of them.</b></li>
+<li><b>Write it whichever way you like.</b> An inequality, a set or an interval. All three are the same answer.</li>
+<li><b>From a graph, read both straight off the <span data-fr="axes">axes</span>.</b> The <span data-fr="domaine de définition">domain</span> is how far the curve reaches left and right, the <span data-fr="ensemble image">range</span> how far it reaches up and down.</li>
+</ol>
 <div class="work">
 <span class="cap">Worked: f(x) = x &divide; (x &minus; 2)</span>
 <ol>
@@ -1290,6 +1339,17 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:intro-parabolas/v/parabolas-intro" target="_blank" rel="noopener">Watch: Parabolic functions · Intro to parabolas</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:absolute-value-piecewise-functions/x2f8bb11595b61c86:graphs-of-absolute-value-functions/v/shifting-absolute-value-graphs" target="_blank" rel="noopener">Watch: Graphs of absolute value functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:rational-functions/x9e81a4f98389efdf:graphs-of-rational-functions/v/finding-asymptotes-example" target="_blank" rel="noopener">Watch: Graphs of rational functions</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:intro-parabolas/e/parabolas-intro" class="do" target="_blank" rel="noopener">Practise: Parabolas intro</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:absolute-value-piecewise-functions/x2f8bb11595b61c86:piecewise-functions/e/evaluating-piecewise-functions" class="do" target="_blank" rel="noopener">Practise: <span data-fr="Définie par morceaux">Case-defined</span> functions · Evaluate <span data-fr="définie par morceaux">piecewise</span> functions</a></div>
+<dl class="keys">
+<dt>The six families</dt><dd>Constant, linear, quadratic, polynomial, rational, absolute value. Recognising the family from the formula tells you the shape before you draw anything.</dd>
+</dl>
+<ol class="method">
+<li><b>Look at the formula, not at the picture.</b> The form is what names the family.</li>
+<li><b>Linear: one x, first <span data-fr="puissance">power</span>.</b> A <span data-fr="droite">straight line</span>.</li>
+<li><b>Quadratic: there is an x&sup2;.</b> A parabola, opening upwards when <span class="m">a &gt; 0</span>.</li>
+<li><b>Rational: an x in a denominator.</b> So find the <span data-fr="domaine de définition">domain</span> before anything else.</li>
+<li><b>Absolute value: distance from zero, so never negative.</b> <span class="mb"><span class="f">|x| = x if x &ge; 0,</span><span class="f">&minus;x if x &lt; 0</span></span></li>
+<li><b><span data-fr="Définie par morceaux">Case-defined</span>: several rules over several intervals.</b> Graph each piece only over its own interval, and check what happens at the joins.</li>
+</ol>
 <div class="tw">
 <table class="data">
 <caption>The six families</caption>
@@ -1332,6 +1392,17 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-vs-linear-growth/v/exponential-growth-functions" target="_blank" rel="noopener">Watch: What makes it exponential · Exponential vs. linear <span data-fr="croissance">growth</span></a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:e/v/e-through-compound-interest" target="_blank" rel="noopener">Watch: Where e comes from · 𝑒 and <span data-fr="intérêts composés">compound interest</span></a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:e/v/e-as-limit" target="_blank" rel="noopener">Watch: e as a limit · 𝑒 as a limit</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:exponential-expressions/e/exponential-expressions-word-problems" class="do" target="_blank" rel="noopener">Practise: <span data-fr="Croissance">Growth</span> and <span data-fr="décroissance">decay</span> in context · Exponential expressions word problems (numerical)</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-growth-decay/x2f8bb11595b61c86:graphs-of-exponential-growth/e/graphing-exponential-growth-intro" class="do" target="_blank" rel="noopener">Practise: The two shapes · Graphs of exponential <span data-fr="croissance">growth</span></a></div>
+<dl class="keys">
+<dt>Exponential function</dt><dd><span class="m">f(x) = b<sup>x</sup></span> with <span class="m">b &gt; 0</span> and <span class="m">b &ne; 1</span>. The variable is in the exponent, and that is what makes it exponential.</dd>
+<dt><span data-fr="Croissance">Growth</span> or <span data-fr="décroissance">decay</span></dt><dd><span data-fr="Croissance">Growth</span> when <span class="m">b &gt; 1</span>, <span data-fr="décroissance">decay</span> when b is between 0 and 1.</dd>
+</dl>
+<ol class="method">
+<li><b>Growing by p% each period multiplies by the same number each period.</b> <span class="mb"><span class="f">&times;<span class="pr">(</span>1 + <span class="frac"><span class="num">p</span><span class="den">100</span></span><span class="pr">)</span> each period</span></span></li>
+<li><b><span data-fr="Intérêts composés">Compound interest</span> is the case you will meet most.</b> <span class="mb"><span class="f">S = P(1 + r)<sup>n</sup></span></span>P the principal, r the rate per period, n the number of periods.</li>
+<li><b>Read the period off the question.</b> 8% a month and 8% a year are not the same number.</li>
+<li><b>e is a limit, roughly 2.718.</b> <span class="m">exp(x)</span> and <span class="m">e<sup>x</sup></span> are the same thing.</li>
+<li><b>A quantity that multiplies by a fixed factor each step is exponential.</b> One that adds a fixed amount each step is linear. That distinction is most of the exam questions.</li>
+</ol>
 <figure class="fig">
 <svg viewBox="0 0 470 290" role="img" aria-label="Two exponential curves, one growing and one decaying">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker></defs>
@@ -1367,6 +1438,17 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/v/logarithms" target="_blank" rel="noopener">Watch: What a logarithm is · Introduction to logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:transformations/x2ec2f6f830c9fb89:log-graphs/v/comparing-exponential-logarithmic-functions" target="_blank" rel="noopener">Watch: The shape of the graph · Graphs of logarithmic functions</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms" class="ghost" target="_blank" rel="noopener">Read: The definition, written out · Intro to logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/e/understanding-logs-as-inverse-exponentials" class="do" target="_blank" rel="noopener">Practise: Converting between the two forms · Relationship between exponentials & logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/e/logarithms_1" class="do" target="_blank" rel="noopener">Practise: Evaluating without a calculator · Evaluate logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:transformations/x2ec2f6f830c9fb89:log-graphs/e/graphs-of-exponentials-and-logarithms" class="do" target="_blank" rel="noopener">Practise: Graphing · Graphs of logarithmic functions</a></div>
+<dl class="keys">
+<dt>Logarithm</dt><dd><span class="mb"><span class="f">y = log<sub>b</sub>x</span><span class="f">if and only if</span><span class="f">b<sup>y</sup> = x</span></span>The logarithm answers: to what <span data-fr="puissance">power</span> do I raise the base to get this number?</dd>
+<dt>The two on your calculator</dt><dd><span class="m">log</span> is base 10. <span class="m">ln</span> is base e.</dd>
+</dl>
+<ol class="method">
+<li><b>To convert, ask what <span data-fr="puissance">power</span> the base is raised to.</b> Reading the statement the other way round is most of the work.</li>
+<li><b>Each undoes the other.</b> <span class="mb"><span class="f">log<sub>b</sub>(b<sup>x</sup>) = x</span><span class="f">b<sup>log<sub>b</sub>x</sup> = x</span></span></li>
+<li><b>Without a calculator, write the argument as a <span data-fr="puissance">power</span> of the base.</b> <span class="m">log<sub>2</sub>32</span>: 32 is <span class="m">2<sup>5</sup></span>, so the answer is 5.</li>
+<li><b>Only a strictly positive argument has a logarithm.</b> Check that before you do anything else.</li>
+<li><b><span data-fr="Résoudre">To solve</span> b to the <span data-fr="puissance">power</span> x equals k, take the log of both sides.</b> The <span data-fr="puissance">power</span> rule then brings the x down where you can reach it.</li>
+</ol>
 <div class="prose"><span class="mb"><span class="f">y = log<sub>b</sub>x &nbsp; if and only if &nbsp; b<sup>y</sup> = x</span></span></div>
 <div class="prose"><span class="mb"><span class="f">log<sub>b</sub>(b<sup>x</sup>) = x</span><span class="f">b<sup>log<sub>b</sub>x</sup> = x</span></span></div>
 <h3>Converting between the two forms</h3>
@@ -1420,6 +1502,16 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:rational-functions/x9e81a4f98389efdf:adding-and-subtracting-rational-expressions/e/adding_and_subtracting_rational_expressions_5" class="do" target="_blank" rel="noopener">Practise: Quotients and sums of fractions · Add & subtract rational expressions</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:multiply-binomial/e/multiply-binomials-coefficient" class="do" target="_blank" rel="noopener">Practise: Products of functions · Multiply binomials</a><span class="gap">Khan has no lesson on f + g, f &minus; g and fg as such. These two are the same algebra on expressions, which is the closest it gets.</span></div>
+<dl class="keys">
+<dt>The five</dt><dd><span class="mb"><span class="f">(f + g)(x) = f(x) + g(x)</span><span class="f">(fg)(x) = f(x)g(x)</span></span>and the same idea for the difference, the quotient, and a constant times a function.</dd>
+</dl>
+<ol class="method">
+<li><b>Do the operation one value at a time.</b> Whatever x is, work out f(x) and g(x), then combine those two numbers.</li>
+<li><b>The result is defined only where both are.</b> Intersect the two <span data-fr="domaines de définition">domains</span>.</li>
+<li><b>A quotient also needs the bottom to be non-zero.</b> <span class="m">(f/g)(x)</span> needs <span class="m">g(x) &ne; 0</span>.</li>
+<li><b>The combination you will use constantly is <span data-fr="bénéfice">profit</span>.</b> <span class="mb"><span class="f">P(q) = R(q) &minus; C(q)</span></span></li>
+<li><b>Cost usually splits into fixed plus variable.</b> The fixed part is what you pay at q = 0, so it is the <span data-fr="ordonnée à l’origine">y-intercept</span>.</li>
+</ol>
 <h3>The five operations</h3>
 <div class="prose"><span class="mb"><span class="f">(f + g)(x) = f(x) + g(x)</span><span class="f">(f &minus; g)(x) = f(x) &minus; g(x)</span></span><span class="mb"><span class="f">(fg)(x) = f(x)g(x)</span><span class="f"><span class="pr">(</span><span class="frac"><span class="num">f</span><span class="den">g</span></span><span class="pr">)</span>(x) = <span class="frac"><span class="num">f(x)</span><span class="den">g(x)</span></span></span><span class="f">(cf)(x) = c &middot; f(x)</span></span></div>
 <div class="work">
@@ -1445,6 +1537,13 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs/x2f8bb11595b61c86:x-intercepts-and-y-intercepts/v/introduction-to-intercepts" target="_blank" rel="noopener">Watch: Both <span data-fr="intersections avec les axes">intercepts</span> · <span data-fr="zéros de la fonction">x-intercepts</span> and y-intercepts</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-equations/x2f8bb11595b61c86:intro-parabolas/v/interpret-a-quadratic-graph" target="_blank" rel="noopener">Watch: <span data-fr="Intersections avec les axes">Intercepts</span> of a parabola · Interpret a quadratic graph</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs/x2f8bb11595b61c86:x-intercepts-and-y-intercepts/a/intercepts-of-lines-review-x-intercepts-and-y-intercepts" class="ghost" target="_blank" rel="noopener">Read: <span data-fr="Intersections avec les axes">Intercepts</span> of lines review (<span data-fr="zéros de la fonction">x-intercepts</span> and y-intercepts)</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs/x2f8bb11595b61c86:x-intercepts-and-y-intercepts/e/solving_for_the_x-intercept" class="do" target="_blank" rel="noopener">Practise: From the formula · <span data-fr="Intersections avec les axes">Intercepts</span> from an equation</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs/x2f8bb11595b61c86:x-intercepts-and-y-intercepts/e/linear-function-intercepts" class="do" target="_blank" rel="noopener">Practise: <span data-fr="Intersections avec les axes">Intercepts</span> from a graph</a></div>
+<ol class="method">
+<li><b>The <span data-fr="ordonnée à l’origine">y-intercept</span> is the value at zero.</b> Put <span class="m">x = 0</span>. There is at most one.</li>
+<li><b>The <span data-fr="zéros de la fonction">x-intercepts</span> are where the function is zero.</b> Solve <span class="m">f(x) = 0</span>. There may be several, or none.</li>
+<li><b>Plot the <span data-fr="intersections avec les axes">intercepts</span> first, then enough points to see the shape.</b></li>
+<li><b>In a business question the <span data-fr="intersections avec les axes">intercepts</span> <span data-fr="moyenne">mean</span> something.</b> The <span data-fr="ordonnée à l’origine">y-intercept</span> is usually a fixed cost. An <span data-fr="zéro de la fonction">x-intercept</span> is usually <span data-fr="seuil de rentabilité">break-even</span>.</li>
+<li><b>A vertical line is not a function.</b> <span class="m">x = 3</span> is a perfectly good line and has no y to be a function of x.</li>
+</ol>
 <h3>The method</h3>
 <div class="work">
 <span class="cap">Worked: y = 2x + 3</span>
@@ -1479,6 +1578,16 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/v/function-composition" target="_blank" rel="noopener">Watch: What a composite is · Composing functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/v/evaluating-composite-functions" target="_blank" rel="noopener">Watch: At a number · Evaluating composite functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/a/introduction-to-function-composition" class="ghost" target="_blank" rel="noopener">Read: The definition · Intro to composing functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/e/evaluate-composite-functions-from-formulas" class="do" target="_blank" rel="noopener">Practise: At a number · Evaluate composite functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:composing/e/compose-functions" class="do" target="_blank" rel="noopener">Practise: Building the formula · Find composite functions</a></div>
+<dl class="keys">
+<dt>Composition</dt><dd><span class="mb"><span class="f">(g &#8728; f)(x) = g(f(x))</span></span>Do f first, then feed its <span data-fr="sortie">output</span> straight into g. The circle is read right to left.</dd>
+</dl>
+<ol class="method">
+<li><b>Work from the inside out.</b> Compute the inner value, then put it into the outer function.</li>
+<li><b>Substitute the whole inner <span data-fr="sortie">output</span>.</b> Every x in the outer function becomes the entire inner expression, <span data-fr="parenthèses">brackets</span> included.</li>
+<li><b>Order matters.</b> <span class="m">f &#8728; g</span> is almost never <span class="m">g &#8728; f</span>. Check with one number if you doubt it.</li>
+<li><b>For it to exist, the middle value has to be allowed.</b> <span class="m">f(x)</span> must be something g accepts.</li>
+<li><b>The quantity in the middle is real, but the question is not about it.</b> Advertising gives customers, customers give <span data-fr="chiffre d’affaires">revenue</span>; the question asks <span data-fr="chiffre d’affaires">revenue</span> from advertising.</li>
+</ol>
 <figure class="fig">
 <svg viewBox="0 0 542 94" role="img" aria-label="The chain. The middle quantity is real, but the question is not about it.">
 <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker></defs>
@@ -1514,6 +1623,18 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:inverse-functions-intro/v/introduction-to-function-inverses" target="_blank" rel="noopener">Watch: What an <span data-fr="réciproque">inverse</span> is · Intro to <span data-fr="fonctions réciproques">inverse functions</span></a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:invertible/v/determining-if-a-function-is-invertible" target="_blank" rel="noopener">Watch: When one exists · Invertible functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:invertible/a/intro-to-invertible-functions" class="ghost" target="_blank" rel="noopener">Read: <span data-fr="Injective">One-to-one</span>, written out · Intro to invertible functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:invertible/e/inverse-domain-range" class="do" target="_blank" rel="noopener">Practise: Spotting when there is no <span data-fr="réciproque">inverse</span> · Determine if a function is invertible</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:inverse-functions-in-graphs-and-tables/e/inverse-functions-graphs-and-tables" class="do" target="_blank" rel="noopener">Practise: Reading an <span data-fr="réciproque">inverse</span> off a graph · <span data-fr="Fonctions réciproques">Inverse functions</span>: graphs and tables</a></div>
+<dl class="keys">
+<dt><span data-fr="Réciproque">Inverse</span></dt><dd>The function that sends each <span data-fr="sortie">output</span> back to the <span data-fr="entrée">input</span> it came from.<span class="mb"><span class="f">f(f<sup>&minus;1</sup>(x)) = f<sup>&minus;1</sup>(f(x)) = x</span></span></dd>
+<dt><span data-fr="Injective">One-to-one</span></dt><dd>Different <span data-fr="entrées">inputs</span> always give different <span data-fr="sorties">outputs</span>. No <span data-fr="sortie">output</span> is ever produced twice.</dd>
+</dl>
+<ol class="method">
+<li><b>A function has an <span data-fr="réciproque">inverse</span> exactly when it is <span data-fr="injective">one-to-one</span>.</b> That is the whole condition.</li>
+<li><b>On a graph, the horizontal line test decides.</b> A horizontal line may meet the graph at most once. Twice means two <span data-fr="entrées">inputs</span> share an <span data-fr="sortie">output</span>, so there is no way back.</li>
+<li><b>Strictly <span data-fr="croissante">increasing</span> or strictly <span data-fr="décroissante">decreasing</span> is enough.</b> A function that only ever rises, or only ever falls, is <span data-fr="injective">one-to-one</span>.</li>
+<li><b>The <span data-fr="domaine de définition">domain</span> and the <span data-fr="ensemble image">range</span> swap.</b> The <span data-fr="réciproque">inverse</span>'s <span data-fr="entrées">inputs</span> are the original's <span data-fr="sorties">outputs</span>.</li>
+<li><b>The graph of the <span data-fr="réciproque">inverse</span> is the reflection in the line y = x.</b></li>
+</ol>
+<ul class="traps"><li class="lab">Watch out</li><li>An <span data-fr="réciproque">inverse</span> is not a reciprocal. <span class="m">f<sup>&minus;1</sup>(x)</span> is not <span class="m"><span class="frac"><span class="num">1</span><span class="den">f(x)</span></span></span>.</li><li>A function that repeats an <span data-fr="sortie">output</span> has no <span data-fr="réciproque">inverse</span>, because there is no way back to which <span data-fr="entrée">input</span> it came from.</li><li>Swapping the <span data-fr="domaine de définition">domain</span> and the <span data-fr="ensemble image">range</span> is part of the answer, not an afterthought.</li></ul>
 <div class="prose"><span class="mb"><span class="f">Q(p) = <span class="frac"><span class="num">50 000 000</span><span class="den">p + 1</span></span> &minus; 5 000 000 &nbsp; for 0 &le; p &le; 9</span></span></div>
 <div class="work">
 <span class="cap">The derivation</span>
@@ -1542,6 +1663,15 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:inverse-functions-intro/v/function-inverse-example-1" target="_blank" rel="noopener">Watch: Finding one, step by step · Finding <span data-fr="fonctions réciproques">inverse functions</span>: linear</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:verifying-inverse/v/verify-inverse-functions-from-tables" target="_blank" rel="noopener">Watch: Checking it · Verifying <span data-fr="fonctions réciproques">inverse functions</span> by composition</a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:inverse-functions-intro/a/intro-to-inverse-functions" class="ghost" target="_blank" rel="noopener">Read: The method, written out · Intro to <span data-fr="fonctions réciproques">inverse functions</span></a><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:inverse-functions-intro/e/algebraically-finding-inverses" class="do" target="_blank" rel="noopener">Practise: Finding one · Find inverses of linear functions</a><a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:composite/x9e81a4f98389efdf:verifying-inverse/e/inverses_of_functions" class="do" target="_blank" rel="noopener">Practise: Checking by composition · Verify <span data-fr="fonctions réciproques">inverse functions</span></a></div>
+<ol class="method">
+<li><b>Write y = f(x).</b></li>
+<li><b>Solve for x in terms of y.</b> This is the only step that is real work.</li>
+<li><b>Swap the names.</b> x goes back to being the <span data-fr="entrée">input</span>, so the answer is written as a function of x.</li>
+<li><b>Check by composing both ways.</b> You should get x back each time. This catches almost every slip.</li>
+<li><b>If it is not <span data-fr="injective">one-to-one</span>, restrict the <span data-fr="domaine de définition">domain</span> until it is.</b> <span class="m">f(x) = (x &minus; 1)<sup>2</sup></span> has no <span data-fr="réciproque">inverse</span> until you keep only <span class="m">x &ge; 1</span>.</li>
+<li><b>The linear case is worth knowing by sight.</b> <span class="mb"><span class="f">f(x) = ax + b</span><span class="f">&rArr;</span><span class="f">f<sup>&minus;1</sup>(x) = <span class="frac"><span class="num">x &minus; b</span><span class="den">a</span></span></span></span></li>
+<li><b><span data-fr="Résoudre">To solve</span> f(x) = k, apply the <span data-fr="réciproque">inverse</span> to both sides.</b> That is what an <span data-fr="réciproque">inverse</span> is for.</li>
+</ol>
 <h3>Finding one, and when it exists</h3>
 <div class="work">
 <span class="cap">The general linear case: f(x) = ax + b</span>
@@ -1563,6 +1693,18 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
 <p class="sheet-state"><span class="dot"></span><span class="state">Not started</span></p>
 </div>
 <div class="learn"><span class="lab">Khan Academy</span><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-prop/v/introduction-to-logarithm-properties" target="_blank" rel="noopener">Watch: The logarithm rules · Intro to logarithm properties (1 of 2)</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-prop/v/logarithm-of-a-power" target="_blank" rel="noopener">Watch: The rule that solves equations · Using the logarithmic <span data-fr="puissance">power</span> rule</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:change-of-base/v/change-of-base-formula" target="_blank" rel="noopener">Watch: The change of base formula for logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-prop/a/properties-of-logarithms" class="ghost" target="_blank" rel="noopener">Read: The rules, written out · Intro to logarithm properties</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-prop/e/logarithms_2" class="do" target="_blank" rel="noopener">Practise: <span data-fr="Développement">Expanding</span> and condensing · Use the properties of logarithms</a><a href="https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:change-of-base/e/evaluate-logarithms-using-the-change-of-base-rule" class="do" target="_blank" rel="noopener">Practise: Evaluate logarithms: change of base rule</a></div>
+<dl class="keys">
+<dt>The three that exist</dt><dd><span class="mb"><span class="f">log(ab) = log a + log b</span><span class="f">log <span class="frac"><span class="num">a</span><span class="den">b</span></span> = log a &minus; log b</span><span class="f">log(a<sup>n</sup>) = n log a</span></span></dd>
+<dt>The one that does not</dt><dd>There is no rule for <span class="m">log(a + b)</span>. It does not simplify. Nothing you do turns a <span data-fr="somme">sum</span> inside a logarithm into anything shorter.</dd>
+</dl>
+<ol class="method">
+<li><b><span data-fr="Développement">Expanding</span>: a product becomes a <span data-fr="somme">sum</span>, a quotient a difference, a <span data-fr="puissance">power</span> a coefficient.</b></li>
+<li><b>Simplifying: the same three rules read right to left.</b></li>
+<li><b>The <span data-fr="puissance">power</span> rule is the one that solves equations.</b> It brings the <span data-fr="inconnue">unknown</span> down out of the exponent where you can reach it.</li>
+<li><b>Change the base when the calculator has not got it.</b> <span class="mb"><span class="f">log<sub>b</sub>x = <span class="frac"><span class="num">ln x</span><span class="den">ln b</span></span></span></span></li>
+<li><b>The exponential and the logarithm undo each other.</b> <span class="mb"><span class="f">exp(ln u) = u</span><span class="f">a<sup>x</sup> = exp(x ln a)</span><span class="f">for a &gt; 0</span></span></li>
+<li><b>Check the argument is positive before applying any of it.</b></li>
+</ol>
 <div class="tw">
 <table class="data">
 <caption>Exponents</caption>
