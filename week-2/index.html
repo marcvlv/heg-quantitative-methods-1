@@ -1530,15 +1530,6 @@ body{background:var(--surround)}
   };
   var narrow = function(){ return window.matchMedia('(max-width:980px)').matches; };
 
-  /* ---------- light / dark, moon shows in light, sun in dark ---------- */
-  var themeBtn = document.getElementById('themeToggle');
-  function applyTheme(dark){ root.setAttribute('data-theme', dark ? 'dark' : 'light'); }
-  applyTheme(store.get('qm1-theme') === 'dark');
-  if (themeBtn) themeBtn.addEventListener('click', function(){
-    var dark = root.getAttribute('data-theme') !== 'dark';
-    applyTheme(dark); store.set('qm1-theme', dark ? 'dark' : 'light');
-  });
-
   /* ---------- open / close everything foldable in the text ---------- */
   function setAll(open){
     Array.prototype.forEach.call(document.querySelectorAll('details.rev, details.practice'), function(d){ d.open = open; });
