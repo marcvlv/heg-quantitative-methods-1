@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Study notes &middot; design sheet</title>
+<meta name="description" content="The locked design for every study document: palette, type, spacing and every component, on one page.">
+<style>
+/* ===========================================================
+   THE LOCKED DESIGN
+
+   Palette B from the MAZEN brand kit: the Anthropic-style
+   ground. Warm ivory paper, near-black warm text, terracotta
+   as the only accent. Tan and kraft are panels, never text.
+
+   Type is a serif for reading and a sans for anything you
+   operate. That pairing is what makes a page read as a
+   document rather than an interface.
+   =========================================================== */
+:root{
+  /* ---- ground and ink ---- */
+  --paper:#F0EEE6;          /* the page */
+  --paper-light:#FAF9F5;    /* a panel that must lift off the page */
+  --cloud:#E8E6DC;          /* a quiet tint block */
+  --manilla:#EBDBBC;        /* a warm panel, for something set apart */
+  --kraft:#D4A27F;          /* secondary warm accent, rules and marks */
+  --clay:#CC785C;           /* THE accent */
+  --clay-deep:#B8543A;      /* the accent under pressure, sparingly */
+  --slate:#191919;          /* primary text */
+  --slate-mid:#3D3D3A;      /* secondary text */
+  --slate-soft:#6B6B63;     /* captions and metadata */
+  --line:rgba(25,25,25,.13);
+  --line-firm:rgba(25,25,25,.26);
+
+  /* ---- type ---- */
+  --serif:'Newsreader','Tiempos Text',Charter,'Bitstream Charter',Georgia,'Times New Roman',serif;
+  --sans:'Inter','Styrene B',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+
+  /* ---- measure and rhythm ---- */
+  --measure:680px;          /* a line of reading */
+  --measure-wide:960px;     /* a page that is operated, not read */
+  --gutter:clamp(18px,4vw,28px);
+  --step:8px;               /* everything vertical is a multiple of this */
+  --radius:10px;
+  --pill:999px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--slate);
+  font-family:var(--serif);font-size:18px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.ui{font-family:var(--sans)}
+a{color:var(--clay-deep)}
+
+.sheet{max-width:var(--measure-wide);margin:0 auto;padding:56px var(--gutter) 120px}
+.sheet > section{padding:48px 0;border-top:1px solid var(--line)}
+.sheet > section:first-of-type{border-top:none;padding-top:0}
+
+.kicker{
+  margin:0 0 8px;font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--slate-soft);
+}
+h1{font-size:clamp(34px,5vw,46px);line-height:1.08;letter-spacing:-.025em;margin:0 0 14px;font-weight:600}
+h2{font-size:15px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-soft);margin:0 0 28px}
+h3{font-size:22px;line-height:1.24;letter-spacing:-.012em;margin:36px 0 10px;font-weight:600}
+p{margin:0 0 16px;max-width:var(--measure)}
+.lead{font-size:20px;line-height:1.55;color:var(--slate-mid);max-width:var(--measure)}
+.note{font-family:var(--sans);font-size:14px;color:var(--slate-soft);max-width:var(--measure)}
+
+/* ---- palette ---- */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px;margin:0}
+.sw{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper-light)}
+.sw .chip{height:74px}
+.sw .meta{padding:10px 12px 12px;font-family:var(--sans)}
+.sw b{display:block;font-size:13px;font-weight:600;letter-spacing:.01em}
+.sw code{display:block;font-family:var(--mono);font-size:11.5px;color:var(--slate-soft);margin-top:2px}
+.sw span{display:block;font-size:11.5px;color:var(--slate-soft);margin-top:5px;line-height:1.45}
+
+/* ---- type scale ---- */
+.scale > div{padding:14px 0;border-bottom:1px solid var(--line)}
+.scale > div:last-child{border-bottom:none}
+.scale .lbl{font-family:var(--mono);font-size:11px;color:var(--slate-soft);display:block;margin-bottom:5px}
+.s-display{font-family:var(--sans);font-size:40px;line-height:1.1;letter-spacing:-.025em;font-weight:600}
+.s-title{font-family:var(--sans);font-size:22px;line-height:1.25;letter-spacing:-.012em;font-weight:600}
+.s-body{font-size:18px;line-height:1.62}
+.s-small{font-size:15.5px;line-height:1.55;color:var(--slate-mid)}
+.s-ui{font-family:var(--sans);font-size:14px;line-height:1.5}
+.s-label{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--slate-soft)}
+.s-math{font-family:var(--mono);font-size:16px}
+
+/* =========================================================
+   THE COMPONENTS every study document is built from
+   ========================================================= */
+
+/* the page head */
+.doc-head{padding-bottom:26px;border-bottom:1px solid var(--line-firm)}
+
+/* the week contents */
+.wk-toc{margin:26px 0;padding:0;list-style:none;counter-reset:wk}
+.wk-toc li{counter-increment:wk;margin:0 0 6px}
+.wk-toc a{
+  display:inline-flex;gap:12px;align-items:baseline;
+  font-family:var(--sans);font-size:16px;color:var(--slate);text-decoration:none;
+}
+.wk-toc a::before{
+  content:counter(wk);flex:none;width:20px;text-align:right;
+  font-family:var(--mono);font-size:12.5px;color:var(--slate-soft);
+}
+.wk-toc a:hover{color:var(--clay-deep);text-decoration:underline}
+
+/* definitions */
+dl.keys{margin:22px 0}
+dl.keys dt{
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--clay-deep);margin:0 0 3px;
+}
+dl.keys dd{margin:0 0 16px;max-width:var(--measure)}
+
+/* the method */
+ol.method{list-style:none;margin:22px 0;padding:0;counter-reset:mth}
+ol.method > li{position:relative;padding-left:34px;margin:0 0 14px;counter-increment:mth;max-width:var(--measure)}
+ol.method > li::before{
+  content:counter(mth);position:absolute;left:0;top:3px;
+  width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  background:var(--cloud);color:var(--slate-mid);
+  font-family:var(--sans);font-size:11px;font-weight:600;
+}
+ol.method > li > b{font-weight:600}
+
+/* a worked example */
+.work{margin:24px 0;padding:2px 0 2px 18px;border-left:2px solid var(--kraft)}
+.work .cap{
+  display:block;margin:0 0 10px;font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--slate-soft);
+}
+.work ol{list-style:none;margin:0;padding:0}
+.work li{margin:0 0 12px}
+.work .line{font-family:var(--mono);font-size:16px}
+.work .say{font-family:var(--sans);font-size:13.5px;color:var(--slate-soft);margin-top:2px}
+.work li.out .line{font-weight:600}
+
+/* what goes wrong */
+.traps{margin:24px 0;padding:16px 20px 18px;list-style:none;background:var(--manilla);border-radius:var(--radius)}
+.traps > li{position:relative;padding-left:16px;margin:0 0 8px;font-size:16.5px;line-height:1.5}
+.traps > li:last-child{margin:0}
+.traps > li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--clay-deep)}
+.traps > li.lab{
+  padding:0;margin:0 0 10px;font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--clay-deep);
+}
+.traps > li.lab::before{display:none}
+
+/* somewhere to go and learn it properly */
+.learn{margin:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.learn .lab{
+  display:block;padding:12px 0 8px;font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--slate-soft);
+}
+.learn a{
+  display:block;position:relative;padding:10px 2px 10px 26px;border-top:1px solid var(--line);
+  font-family:var(--sans);font-size:15px;font-weight:500;color:var(--slate);text-decoration:none;
+}
+.learn a:hover{color:var(--clay-deep)}
+.learn a .k{color:var(--clay-deep);font-weight:600}
+.learn a::before{
+  content:"";position:absolute;left:0;top:14px;width:14px;height:14px;border-radius:3px;
+  background:var(--kraft);
+}
+
+/* the practice */
+.ex{margin:26px 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-light);overflow:hidden}
+.ex-top{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 18px;background:var(--cloud);font-family:var(--sans);font-size:11px;
+  font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--slate-soft);
+}
+.ex-dots{display:flex;gap:5px}
+.ex-dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--line-firm)}
+.ex-dots i.on{background:var(--clay);border-color:var(--clay)}
+.ex-body{padding:20px 18px}
+.ex-q{margin:0 0 16px;font-size:17px}
+.ex-opts{display:grid;gap:8px;margin:0 0 18px}
+.ex-opts button{
+  text-align:left;padding:12px 14px;border:1px solid var(--line-firm);border-radius:var(--radius);
+  background:var(--paper);font-family:var(--serif);font-size:16px;color:var(--slate);cursor:pointer;
+  transition:border-color .2s ease,background .2s ease;
+}
+.ex-opts button:hover{border-color:var(--clay);background:var(--paper-light)}
+.ex-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ex-bar .sp{flex:1}
+button.btn{
+  font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 18px;border-radius:var(--pill);
+  border:1px solid transparent;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease;
+  min-height:44px;
+}
+@media (pointer:fine){button.btn{min-height:0}}
+button.primary{background:var(--clay);color:var(--paper);border-color:var(--clay)}
+button.primary:hover{background:var(--clay-deep);border-color:var(--clay-deep)}
+button.ghost{background:transparent;color:var(--slate-mid);border-color:var(--line-firm)}
+button.ghost:hover{border-color:var(--slate-soft);color:var(--slate)}
+
+/* the mark */
+.mark{fill:currentColor;display:inline-block;vertical-align:middle;width:14.5px;height:16px;flex:none}
+.bar{
+  display:flex;align-items:center;gap:14px;padding:14px 20px;border-radius:var(--radius);
+  background:var(--slate);color:var(--paper);font-family:var(--sans);font-size:14px;font-weight:500;
+}
+.bar .mark{width:18px;height:20px}
+.bar .sp{flex:1}
+.bar a{color:var(--paper);text-decoration:none;opacity:.82}
+.bar a:hover{opacity:1}
+
+footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--sans)}
+footer p{font-size:13.5px;color:var(--slate-soft);max-width:var(--measure)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mazen-mark" viewBox="0 0 100 110">
+    <path d="M6 8 L18 8 L50 56 L82 8 L94 8 L94 60 L84 60 L84 26 L56 68 L44 68 L16 26 L16 60 L6 60 Z"/>
+    <path d="M16 60 L50 104 L84 60 L72 60 L50 88 L28 60 Z"/>
+  </symbol>
+</svg>
+
+<div class="sheet">
+
+<section>
+  <p class="kicker">Study notes &middot; design sheet</p>
+  <h1>One design, every subject</h1>
+  <p class="lead">Everything below is what a week of any subject is built from. Approve this once
+  and Quantitative Methods, Accounting, Marketing and the rest are the same document with different
+  words in it.</p>
+  <p class="note">Ground and ink are Palette B from the brand kit, the Anthropic-style set. Terracotta
+  is the only accent. Tan and kraft are panels and rules, never text. The serif carries the reading,
+  the sans carries anything you operate.</p>
+</section>
+
+<section>
+  <h2>Palette</h2>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#F0EEE6;border-bottom:1px solid rgba(25,25,25,.13)"></div><div class="meta"><b>Paper</b><code>#F0EEE6</code><span>The page. Everything sits on this.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#FAF9F5;border-bottom:1px solid rgba(25,25,25,.13)"></div><div class="meta"><b>Paper light</b><code>#FAF9F5</code><span>A panel that has to lift off the page.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#E8E6DC"></div><div class="meta"><b>Cloud</b><code>#E8E6DC</code><span>A quiet tint. Table heads, step numbers.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#EBDBBC"></div><div class="meta"><b>Manilla</b><code>#EBDBBC</code><span>A warm panel for something set apart.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#D4A27F"></div><div class="meta"><b>Kraft</b><code>#D4A27F</code><span>Rules and marks. Not text.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#CC785C"></div><div class="meta"><b>Clay</b><code>#CC785C</code><span>The accent. Buttons, the live state.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#B8543A"></div><div class="meta"><b>Clay deep</b><code>#B8543A</code><span>Accent as text, and hover. Sparingly.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#191919"></div><div class="meta"><b>Slate</b><code>#191919</code><span>Primary text, and the bar.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#3D3D3A"></div><div class="meta"><b>Slate mid</b><code>#3D3D3A</code><span>Secondary text.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#6B6B63"></div><div class="meta"><b>Slate soft</b><code>#6B6B63</code><span>Captions, labels, metadata.</span></div></div>
+  </div>
+  <p class="note" style="margin-top:20px"><b>Two rules that are not negotiable.</b> Text on slate is paper;
+  text on clay is paper. Never clay text on kraft or manilla: there is not enough contrast between them.</p>
+</section>
+
+<section>
+  <h2>Type</h2>
+  <div class="scale">
+    <div><span class="lbl">display &middot; sans 600 &middot; 40/1.1 &middot; &minus;.025em</span><div class="s-display">Operations on functions</div></div>
+    <div><span class="lbl">title &middot; sans 600 &middot; 22/1.25</span><div class="s-title">Composition of functions</div></div>
+    <div><span class="lbl">body &middot; serif 400 &middot; 18/1.62 &middot; 680px measure</span><div class="s-body">An inverse undoes the function: it sends each output back to the input it came from. A function has one exactly when it is one to one.</div></div>
+    <div><span class="lbl">small &middot; serif 400 &middot; 15.5/1.55</span><div class="s-small">The reason on a worked line, and anything secondary to the argument.</div></div>
+    <div><span class="lbl">ui &middot; sans 400 &middot; 14/1.5</span><div class="s-ui">Buttons, links, states, counts: anything you operate rather than read.</div></div>
+    <div><span class="lbl">label &middot; sans 600 &middot; 11 &middot; .14em &middot; caps</span><div class="s-label">Week 2 &middot; Lesson 3</div></div>
+    <div><span class="lbl">maths &middot; mono &middot; 16</span><div class="s-math">x = (&minus;b &plusmn; &radic;(b&sup2; &minus; 4ac)) / 2a</div></div>
+  </div>
+  <p class="note" style="margin-top:22px">Newsreader for reading and Inter for the interface are the
+  substitutes the brand kit names for Tiempos and Styrene. They are not embedded yet, so this page is
+  showing Georgia and the system sans. The shapes will change; the sizes, weights and spacing will not.</p>
+</section>
+
+<section>
+  <h2>The bar</h2>
+  <div class="bar">
+    <svg class="mark" aria-hidden="true"><use href="#mazen-mark"/></svg>
+    <span>Quantitative Methods I</span>
+    <span class="sp"></span>
+    <a href="#">All weeks</a>
+    <a href="#">Download</a>
+  </div>
+  <p class="note" style="margin-top:14px">Slate, the full width, one line. The mark, the subject, and the
+  only two things anyone needs: the other weeks, and the file.</p>
+</section>
+
+<section>
+  <h2>A week opens</h2>
+  <div class="doc-head">
+    <p class="kicker">Quantitative Methods I &nbsp;&middot;&nbsp; Week 2</p>
+    <h1 style="font-size:38px">Operations on functions</h1>
+    <p class="lead" style="margin:0">Building new functions out of old ones, reading a graph, and the
+    rules of logarithms.</p>
+  </div>
+  <ol class="wk-toc">
+    <li><a href="#">Adding and multiplying functions</a></li>
+    <li><a href="#">Reading a graph</a></li>
+    <li><a href="#">Composition of functions</a></li>
+    <li><a href="#">Inverses, and when one exists</a></li>
+    <li><a href="#">Finding an inverse</a></li>
+    <li><a href="#">The rules of logarithms</a></li>
+  </ol>
+</section>
+
+<section>
+  <h2>A lesson</h2>
+  <p class="kicker">Week 2 &nbsp;&middot;&nbsp; Lesson 3</p>
+  <h3 style="margin-top:4px;font-size:30px">Composition of functions</h3>
+
+  <div class="learn">
+    <span class="lab">Learn it properly</span>
+    <a href="#"><span class="k">Watch:</span> Introduction to composing functions</a>
+    <a href="#"><span class="k">Practise:</span> Evaluate composite functions</a>
+  </div>
+  <p class="note" style="margin:-8px 0 22px">Present where a subject has good outside material.
+  Absent everywhere else, and nothing looks broken when it is.</p>
+
+  <dl class="keys">
+    <dt>Composition</dt>
+    <dd>Do <i>f</i> first, then feed its output straight into <i>g</i>. The circle is read right to left.</dd>
+  </dl>
+
+  <ol class="method">
+    <li><b>Work from the inside out.</b> Compute the inner value, then put it into the outer function.</li>
+    <li><b>Substitute the whole inner output.</b> Every x in the outer function becomes the entire inner expression, brackets included.</li>
+    <li><b>Order matters.</b> f &#8728; g is almost never g &#8728; f. Check with one number if you doubt it.</li>
+  </ol>
+
+  <div class="work">
+    <span class="cap">Worked: f(x) = 2x + 1 and g(x) = x&sup2; &minus; 3, find (g &#8728; f)(4)</span>
+    <ol>
+      <li><div class="line">f(4) = 9</div><div class="say">The inner function first.</div></li>
+      <li><div class="line">g(9) = 81 &minus; 3</div><div class="say">Its output goes into the outer one.</div></li>
+      <li class="out"><div class="line">78</div><div class="say">The middle value was real, but the question was never about it.</div></li>
+    </ol>
+  </div>
+
+  <ul class="traps">
+    <li class="lab">Watch out</li>
+    <li>f &#8728; g is not g &#8728; f. Test it with a single number before assuming.</li>
+    <li>The inner output has to be something the outer function accepts.</li>
+  </ul>
+
+  <div class="ex">
+    <div class="ex-top">
+      <span>Practice</span>
+      <span class="ex-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <span>0 of 8 right</span>
+    </div>
+    <div class="ex-body">
+      <p class="ex-q"><b>Question 1 of 8.</b> With f(x) = 3x &minus; 1 and g(x) = x&sup2;, what is (f &#8728; g)(2)?</p>
+      <div class="ex-opts">
+        <button type="button">11</button>
+        <button type="button">25</button>
+        <button type="button">35</button>
+        <button type="button">None of the above</button>
+      </div>
+      <div class="ex-bar">
+        <button class="btn ghost" type="button">Hint</button>
+        <button class="btn ghost" type="button">Show the answer</button>
+        <button class="btn ghost" type="button">Start over</button>
+        <span class="sp"></span>
+        <button class="btn primary" type="button">Check</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>On paper</h2>
+  <div class="two">
+    <div>
+      <h3 style="margin-top:0">What changes</h3>
+      <p>The bar goes. Each lesson starts a page. The interactive practice is replaced by six questions
+      laid out in full, and an answer key closes the document.</p>
+      <p class="note">The screen version samples eight questions and marks them as you go. That is right
+      on screen and useless on paper, so the two are built differently on purpose.</p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">What does not</h3>
+      <p>The palette, the type, the measure, the spacing. A printed week and the page it came from are
+      recognisably the same document, which is the whole point of fixing this once.</p>
+      <p class="note">A4, 18mm margins, the mark and the disclaimer in the footer of the last page.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg class="mark" aria-hidden="true"><use href="#mazen-mark"/></svg>
+  <p style="margin-top:10px"><strong>Student notes, not official course material.</strong> Nobody teaching
+  the subject has written or checked them. Use them alongside your own notes and whatever your course
+  gives you, not instead of it. Where this page and your class disagree, your class is right.</p>
+</footer>
+
+</div>
+</body>
+</html>
