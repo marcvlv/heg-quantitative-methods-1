@@ -126,11 +126,30 @@ whole-document tree. The card lists the lessons of the current week or module
 with each one's state, and the resources of the current lesson with each one's
 state and a count.
 
-**Type.** One sans for everything, and the maths set apart. Three typefaces in
-one lesson is the most common thing to get wrong.
+**Type.** Hanken Grotesk, weights 400, 600 and 700, embedded as base64 woff2 so
+the page still opens with no connection. It is the MAZEN face and it is what the
+deck and the dashboard use. One sans for everything, with the maths set apart.
+Three typefaces in one lesson is the most common thing to get wrong.
 
-**Colour.** Tokens only. The build rejects a hard-coded hex value. Both themes
-defined, and the page declares its own background.
+**Colour.** The MAZEN document palette, not a palette of your own:
+
+```
+--paper  #FAFAF8   --ink    #28302B   --muted  #5F6B63
+--rule   #DDE2DD   --accent #1A4D2E   --accent-2 #2D7A47
+--sunken #EEF2EC
+```
+
+Dark is the dashboard's neutral field: `#0D0E10` page, `#16181C` card,
+`#1D1F24` raised, `#F5F5F7` text, `#262830` rule, `#4D9A6F` accent. Green is an
+accent and never a background.
+
+Tokens only. The build rejects a hard-coded hex outside the token block. Both
+themes defined, and the page declares its own background.
+
+**Shape and motion.** One card radius of 12px and one pill of 999px, nothing
+else. Transitions at 200ms. A control is at least 44px where the pointer is
+coarse, and only there, so nothing moves on a laptop: the question is the
+pointer, not the width.
 
 **Rhythm.** One measure, one gutter, one vertical spacing scale shared by the
 contents, the lesson and the resource pages. They should look like one document.
