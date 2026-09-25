@@ -295,12 +295,12 @@ sup .frac > span,sub .frac > span{padding:0 .2em}
   position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
   background:var(--veil);pointer-events:none;will-change:transform;
   transform:translateY(100%);
-  animation:veil-pass 1.32s forwards;
 }
-.page-veil .mark{
-  width:96px;height:105px;color:var(--on-veil);opacity:0;
-  animation:veil-logo 1.32s forwards;
-}
+/* the animation hangs off a class so it can be restarted on every page change,
+   which is what a transition is for; the load is simply the first one */
+.page-veil.run{animation:veil-pass 1.32s forwards}
+.page-veil .mark{width:96px;height:105px;color:var(--on-veil);opacity:0}
+.page-veil.run .mark{animation:veil-logo 1.32s forwards}
 @keyframes veil-pass{
   0%  {transform:translateY(100%);animation-timing-function:cubic-bezier(.65,0,.35,1)}
   36% {transform:translateY(0);animation-timing-function:linear}
@@ -1110,7 +1110,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
   </symbol>
 </svg>
 
-<div class="page-veil" id="pageVeil" aria-hidden="true">
+<div class="page-veil run" id="pageVeil" aria-hidden="true">
   <svg class="mark" role="presentation"><use href="#mazen-mark"/></svg>
 </div>
 
@@ -3150,6 +3150,22 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       }).join('');
     }
 
+
+    /* ---- the veil, on every page change ----------------------------------
+       The mark rises to cover, the page is swapped behind it, then it carries
+       on off the top. Timings come from the animation: it covers at 36% of
+       1.32s. Anyone who has asked for less motion gets the swap with no veil. */
+    var veilEl = document.getElementById('pageVeil');
+    var VEIL_COVER = 480;
+    function withVeil(fn){
+      var still = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+      if (!veilEl || still) { fn(); return; }
+      veilEl.classList.remove('run');
+      void veilEl.offsetWidth;                 /* let the removal take effect */
+      veilEl.classList.add('run');
+      setTimeout(fn, VEIL_COVER);
+    }
+
     function route(){
       var raw = location.hash.slice(1);
       var bang = raw.indexOf('!');
@@ -3190,9 +3206,9 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       if (!id || !document.getElementById(id.split('!')[0])) return;
       e.preventDefault();
       if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
-      route();
+      withVeil(route);
     });
-    window.addEventListener('popstate', route);
+    window.addEventListener('popstate', function(){ withVeil(route); });
 
     /* a Khan link anywhere opens our page for it, not Khan itself */
     document.addEventListener('click', function(e){
@@ -3229,7 +3245,7 @@ footer .mark{color:var(--ink);width:18px;height:19.8px;margin-bottom:10px;displa
       route();
     });
 
-    window.addEventListener('hashchange', route);
+    window.addEventListener('hashchange', function(){ withVeil(route); });
     route();
     window.__routeRefresh = route;
 
