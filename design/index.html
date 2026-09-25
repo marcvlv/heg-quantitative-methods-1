@@ -9,9 +9,12 @@
 /* ===========================================================
    THE LOCKED DESIGN
 
-   Palette B from the MAZEN brand kit: the Anthropic-style
-   ground. Warm ivory paper, near-black warm text, terracotta
-   as the only accent. Tan and kraft are panels, never text.
+   Palette B from the MAZEN brand kit, the Anthropic-style
+   ground, with the MAZEN green put back into it. Warm ivory
+   paper, near-black warm text, and two accents that belong
+   together: terracotta for anything you act on, forest green
+   for structure and for the mark. Tan, kraft and sage are
+   panels, never text.
 
    Type is a serif for reading and a sans for anything you
    operate. That pairing is what makes a page read as a
@@ -29,12 +32,21 @@
   --slate:#191919;          /* primary text */
   --slate-mid:#3D3D3A;      /* secondary text */
   --slate-soft:#6B6B63;     /* captions and metadata */
+
+  /* ---- the MAZEN green, muted to sit with the warm ground ---- */
+  --forest:#1A4D2E;         /* the signature. The bar, the mark, structure */
+  --moss:#3E6B4A;           /* green as text on paper, where forest is too heavy */
+  --sage:#E2E8DD;           /* a green tint panel, the counterpart to manilla */
   --line:rgba(25,25,25,.13);
   --line-firm:rgba(25,25,25,.26);
 
   /* ---- type ---- */
-  --serif:'Newsreader','Tiempos Text',Charter,'Bitstream Charter',Georgia,'Times New Roman',serif;
-  --sans:'Inter','Styrene B',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  /* Nothing is downloaded and nothing is embedded. Georgia ships on macOS and
+     on Windows and was drawn for screens; the sans resolves to San Francisco on
+     a Mac and Segoe UI on Windows, so every reader gets their own system's best
+     face at no cost and with nothing to fail. */
+  --serif:Georgia,'Iowan Old Style',Charter,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,'Helvetica Neue',Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
 
   /* ---- measure and rhythm ---- */
@@ -110,13 +122,13 @@ p{margin:0 0 16px;max-width:var(--measure)}
   content:counter(wk);flex:none;width:20px;text-align:right;
   font-family:var(--mono);font-size:12.5px;color:var(--slate-soft);
 }
-.wk-toc a:hover{color:var(--clay-deep);text-decoration:underline}
+.wk-toc a:hover{color:var(--moss);text-decoration:underline}
 
 /* definitions */
 dl.keys{margin:22px 0}
 dl.keys dt{
   font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--clay-deep);margin:0 0 3px;
+  text-transform:uppercase;color:var(--forest);margin:0 0 3px;
 }
 dl.keys dd{margin:0 0 16px;max-width:var(--measure)}
 
@@ -126,7 +138,7 @@ ol.method > li{position:relative;padding-left:34px;margin:0 0 14px;counter-incre
 ol.method > li::before{
   content:counter(mth);position:absolute;left:0;top:3px;
   width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
-  background:var(--cloud);color:var(--slate-mid);
+  background:var(--sage);color:var(--forest);
   font-family:var(--sans);font-size:11px;font-weight:600;
 }
 ol.method > li > b{font-weight:600}
@@ -164,11 +176,11 @@ ol.method > li > b{font-weight:600}
   display:block;position:relative;padding:10px 2px 10px 26px;border-top:1px solid var(--line);
   font-family:var(--sans);font-size:15px;font-weight:500;color:var(--slate);text-decoration:none;
 }
-.learn a:hover{color:var(--clay-deep)}
-.learn a .k{color:var(--clay-deep);font-weight:600}
+.learn a:hover{color:var(--moss)}
+.learn a .k{color:var(--moss);font-weight:600}
 .learn a::before{
   content:"";position:absolute;left:0;top:14px;width:14px;height:14px;border-radius:3px;
-  background:var(--kraft);
+  background:var(--moss);
 }
 
 /* the practice */
@@ -181,6 +193,7 @@ ol.method > li > b{font-weight:600}
 .ex-dots{display:flex;gap:5px}
 .ex-dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--line-firm)}
 .ex-dots i.on{background:var(--clay);border-color:var(--clay)}
+.ex-dots i.right{background:var(--forest);border-color:var(--forest)}
 .ex-body{padding:20px 18px}
 .ex-q{margin:0 0 16px;font-size:17px}
 .ex-opts{display:grid;gap:8px;margin:0 0 18px}
@@ -207,7 +220,7 @@ button.ghost:hover{border-color:var(--slate-soft);color:var(--slate)}
 .mark{fill:currentColor;display:inline-block;vertical-align:middle;width:14.5px;height:16px;flex:none}
 .bar{
   display:flex;align-items:center;gap:14px;padding:14px 20px;border-radius:var(--radius);
-  background:var(--slate);color:var(--paper);font-family:var(--sans);font-size:14px;font-weight:500;
+  background:var(--forest);color:var(--paper);font-family:var(--sans);font-size:14px;font-weight:500;
 }
 .bar .mark{width:18px;height:20px}
 .bar .sp{flex:1}
@@ -256,9 +269,17 @@ footer p{font-size:13.5px;color:var(--slate-soft);max-width:var(--measure)}
     <div class="sw"><div class="chip" style="background:#191919"></div><div class="meta"><b>Slate</b><code>#191919</code><span>Primary text, and the bar.</span></div></div>
     <div class="sw"><div class="chip" style="background:#3D3D3A"></div><div class="meta"><b>Slate mid</b><code>#3D3D3A</code><span>Secondary text.</span></div></div>
     <div class="sw"><div class="chip" style="background:#6B6B63"></div><div class="meta"><b>Slate soft</b><code>#6B6B63</code><span>Captions, labels, metadata.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1A4D2E"></div><div class="meta"><b>Forest</b><code>#1A4D2E</code><span>The MAZEN green. The bar, the mark, structure.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#3E6B4A"></div><div class="meta"><b>Moss</b><code>#3E6B4A</code><span>Green as text on paper, where forest is too heavy.</span></div></div>
+    <div class="sw"><div class="chip" style="background:#E2E8DD"></div><div class="meta"><b>Sage</b><code>#E2E8DD</code><span>A green tint panel, the counterpart to manilla.</span></div></div>
   </div>
-  <p class="note" style="margin-top:20px"><b>Two rules that are not negotiable.</b> Text on slate is paper;
-  text on clay is paper. Never clay text on kraft or manilla: there is not enough contrast between them.</p>
+  <p class="note" style="margin-top:20px"><b>Two accents, and they do not overlap.</b> Terracotta is for
+  anything you act on: the button you press, the question you are on, the thing that is live. Forest is for
+  structure: the bar, the mark, a definition heading, a resource you can go and learn from. If a colour is
+  telling you what to do, it is clay; if it is telling you where you are, it is green.</p>
+  <p class="note"><b>Three rules that are not negotiable.</b> Text on slate is paper, and text on clay is
+  paper. Never clay text on kraft or manilla: there is not enough contrast between them. Never forest and
+  clay in the same sentence, because then neither of them means anything.</p>
 </section>
 
 <section>
@@ -272,9 +293,11 @@ footer p{font-size:13.5px;color:var(--slate-soft);max-width:var(--measure)}
     <div><span class="lbl">label &middot; sans 600 &middot; 11 &middot; .14em &middot; caps</span><div class="s-label">Week 2 &middot; Lesson 3</div></div>
     <div><span class="lbl">maths &middot; mono &middot; 16</span><div class="s-math">x = (&minus;b &plusmn; &radic;(b&sup2; &minus; 4ac)) / 2a</div></div>
   </div>
-  <p class="note" style="margin-top:22px">Newsreader for reading and Inter for the interface are the
-  substitutes the brand kit names for Tiempos and Styrene. They are not embedded yet, so this page is
-  showing Georgia and the system sans. The shapes will change; the sizes, weights and spacing will not.</p>
+  <p class="note" style="margin-top:22px"><b>Nothing is downloaded and nothing is embedded.</b> Georgia
+  ships with macOS and with Windows and was drawn for screens, so it is the same face for everyone.
+  The sans is whatever the reader's own system uses for its interface: San Francisco on a Mac, Segoe UI
+  on Windows. That is a face people already read all day, it weighs nothing, and there is no file that
+  can fail to load, on a slow connection or none at all.</p>
 </section>
 
 <section>
@@ -286,8 +309,9 @@ footer p{font-size:13.5px;color:var(--slate-soft);max-width:var(--measure)}
     <a href="#">All weeks</a>
     <a href="#">Download</a>
   </div>
-  <p class="note" style="margin-top:14px">Slate, the full width, one line. The mark, the subject, and the
-  only two things anyone needs: the other weeks, and the file.</p>
+  <p class="note" style="margin-top:14px">Forest, the full width, one line. The mark, the subject, and the
+  only two things anyone needs: the other weeks, and the file. It is the one place the green is allowed to
+  carry a whole surface.</p>
 </section>
 
 <section>

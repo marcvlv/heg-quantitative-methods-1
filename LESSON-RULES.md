@@ -126,30 +126,38 @@ whole-document tree. The card lists the lessons of the current week or module
 with each one's state, and the resources of the current lesson with each one's
 state and a count.
 
-**Type.** Hanken Grotesk, weights 400, 600 and 700, embedded as base64 woff2 so
-the page still opens with no connection. It is the MAZEN face and it is what the
-deck and the dashboard use. One sans for everything, with the maths set apart.
-Three typefaces in one lesson is the most common thing to get wrong.
+**Type.** Nothing is downloaded and nothing is embedded. Georgia ships with
+macOS and with Windows and was drawn for screens, so the reading face is the same
+for everyone. The interface face is whatever the reader's own system uses: San
+Francisco on a Mac, Segoe UI on Windows. A serif for reading and a sans for
+anything you operate is what makes a page read as a document rather than an
+interface. Maths is set in the system mono.
 
-**Colour.** The MAZEN document palette, not a palette of your own:
+**Colour.** Palette B from the brand kit, the Anthropic-style ground, with the
+MAZEN green in it:
 
 ```
---paper  #FAFAF8   --ink    #28302B   --muted  #5F6B63
---rule   #DDE2DD   --accent #1A4D2E   --accent-2 #2D7A47
---sunken #EEF2EC
+--paper #F0EEE6   --paper-light #FAF9F5   --cloud   #E8E6DC
+--manilla #EBDBBC --kraft       #D4A27F   --sage    #E2E8DD
+--clay  #CC785C   --clay-deep   #B8543A
+--forest #1A4D2E  --moss        #3E6B4A
+--slate #191919   --slate-mid   #3D3D3A   --slate-soft #6B6B63
 ```
 
-Dark is the dashboard's neutral field: `#0D0E10` page, `#16181C` card,
-`#1D1F24` raised, `#F5F5F7` text, `#262830` rule, `#4D9A6F` accent. Green is an
-accent and never a background.
+Two accents that do not overlap. **Terracotta is for anything you act on**: the
+button, the question you are on, the live state. **Forest is for structure**: the
+bar, the mark, a definition heading, a resource to go and learn from. If a colour
+says what to do it is clay; if it says where you are it is green.
 
-Tokens only. The build rejects a hard-coded hex outside the token block. Both
-themes defined, and the page declares its own background.
+Three rules that are not negotiable. Text on slate is paper, and text on clay is
+paper. Never clay text on kraft or manilla. Never forest and clay in the same
+sentence, or neither means anything.
 
-**Shape and motion.** One card radius of 12px and one pill of 999px, nothing
-else. Transitions at 200ms. A control is at least 44px where the pointer is
-coarse, and only there, so nothing moves on a laptop: the question is the
-pointer, not the width.
+Tokens only. The build rejects a hard-coded hex outside the token block.
+
+**Shape and motion.** One card radius of 10px and one pill of 999px, nothing
+else. Transitions at 200ms. A control is at least 44px unless the pointer is
+fine, so nothing moves on a laptop: the question is the pointer, not the width.
 
 **Rhythm.** One measure, one gutter, one vertical spacing scale shared by the
 contents, the lesson and the resource pages. They should look like one document.
