@@ -83,8 +83,8 @@ bottom. Same wording across subjects:
 - About 200 to 250 words a lesson, worked examples included. A lesson that runs
   past 350 is doing two lessons' work.
 - Every division is a stacked fraction. Never a slash.
-- A French translation appears on a term only where the French is not obvious
-  from the English. Per word, not per sentence.
+- No inline translations. A reader on a browser can translate a word themselves,
+  and a page speckled with dotted underlines reads as cluttered.
 
 ## 6. The anatomy of a lesson
 
