@@ -44,6 +44,7 @@
   --no:#A3372F;--no-soft:#F4E6E2;
   --ka:#3E6B4A;--ka-soft:#E2E8DD;
   --shade:rgba(25,25,25,.36);
+  --surround:#34342F;          /* the ground the sheet sits on, warm and dark */
   --ic-watch:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 2l11 6-11 6z'/%3E%3C/svg%3E");
   --ic-read:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 2h12v2H2zm0 4h12v2H2zm0 4h8v2H2z'/%3E%3C/svg%3E");
   --ic-do:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M11.6 1.6l2.8 2.8-8 8H3.6V9.6zM2 14h12v1.6H2z'/%3E%3C/svg%3E");
@@ -53,7 +54,7 @@
   --pill:999px;
   --veil:#1A4D2E;
   --on-veil:#F0EEE6;
-  --print-paper:#FFFFFF;
+  --print-paper:#F0EEE6;
   --print-ink:#191919;
   --print-mute:#5A5A54;
   --lift:0 1px 2px rgba(25,25,25,.05);
@@ -1195,6 +1196,26 @@ ul.traps > li::before{color:var(--clay-deep)}
 .doc .week-toc a{color:var(--ink);text-decoration:none}
 .doc .week-toc a:hover{color:var(--moss)}
 .doc .week-toc a:hover .e{text-decoration:underline}
+
+
+/* ===========================================================
+   The sheet. A document is a page on a ground, not a colour
+   poured over the window. The surround is warm and dark so
+   the ivory reads as paper rather than as the background.
+   =========================================================== */
+body{background:var(--surround)}
+.doc{
+  background:var(--paper);
+  max-width:840px;margin:26px auto 40px;padding:54px 64px 72px;
+  border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.28),0 12px 32px rgba(0,0,0,.22);
+}
+@media (max-width:900px){
+  .doc{margin:0 auto;padding:34px var(--gutter) 56px;border-radius:0;box-shadow:none;max-width:none}
+}
+@media print{
+  body{background:var(--print-paper)}
+  .doc{margin:0;padding:0;border-radius:0;box-shadow:none;max-width:none;background:transparent}
+}
 </style>
 </head>
 <body>
