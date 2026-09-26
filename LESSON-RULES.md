@@ -165,8 +165,18 @@ Tokens only. The build rejects a hard-coded hex outside the token block.
 else. Transitions at 200ms. A control is at least 44px unless the pointer is
 fine, so nothing moves on a laptop: the question is the pointer, not the width.
 
-**Rhythm.** One measure, one gutter, one vertical spacing scale shared by the
-contents, the lesson and the resource pages. They should look like one document.
+**Rhythm.** One vertical unit, 6pt. A paragraph is 6pt from the next, a block
+12pt, a lesson 18pt. Nothing is a value of its own.
+
+**One label.** A small-caps letterspaced label heads a block and nothing else.
+A definition is a bold run-in on the same line as its sentence, and a worked
+example announces itself in the same voice as the text around it. Five label
+styles doing four jobs is what makes a page look busy.
+
+**Blocks may break, steps may not.** Keeping whole blocks together leaves half
+a page empty whenever the next one does not fit. A worked example, a watch-out
+or a resource list may run over a page; a single step, a single worked line or
+a single row may not.
 
 **Formulas** wrap between terms, never scroll. A line the reader has to drag
 sideways is a bug.
