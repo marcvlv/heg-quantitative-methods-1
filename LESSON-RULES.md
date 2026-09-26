@@ -14,9 +14,14 @@ week's post in the class Discord, opened on an iPad, and written on. There is no
 website. The build renders an HTML page and prints it through headless Chrome,
 so the HTML is an intermediate, never something anyone opens.
 
-It is a roadmap, not a replacement for the course. For a subject with good
-outside material it points at it. For a subject without any, it carries the
-teaching itself.
+**A reader should never need to open the course's own slides.** Everything
+taught there is taught here, section for section, in our words and with our
+numbers. What stays with the course is the homework and its answers, because
+those are the test.
+
+Keep an audit that maps every section of every deck to the lesson that carries
+it, and a closing section that names anything deliberately left out. When the
+audit is complete the closing section prints nothing, and that is the target.
 
 ## 2. Structure
 
