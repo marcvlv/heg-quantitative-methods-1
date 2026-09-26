@@ -9,14 +9,14 @@ Written 25 September 2026, from the Quantitative Methods I build.
 
 ## 1. What a document is
 
-One subject, one self-contained HTML file, published twice: as a GitHub Pages
-site and as a Claude artifact. It carries its own CSS, its own fonts and its own
-icons. **Zero external resources.** It must open from a file on a plane.
+One subject, one PDF per week. The PDF is the deliverable: it is attached to the
+week's post in the class Discord, opened on an iPad, and written on. There is no
+website. The build renders an HTML page and prints it through headless Chrome,
+so the HTML is an intermediate, never something anyone opens.
 
-It is a set of notes with links out to Khan Academy, a worked method and a
-practice engine. It is not a replacement for the course and never claims to be.
-
----
+It is a roadmap, not a replacement for the course. For a subject with good
+outside material it points at it. For a subject without any, it carries the
+teaching itself.
 
 ## 2. Structure
 
@@ -174,11 +174,14 @@ sideways is a bug.
 **Width.** Works at 320px. No horizontal page scroll at any width. Check 1440,
 1150, 1000, 768, 375 and 320.
 
-**Print.** A4, one lesson per sheet, no navigation, no top bar, no resource
-pages.
+**Print.** A4, the school's own geometry: 20mm left and right, 25mm top and
+bottom, a 170mm text block. A lesson starts a page. Chrome does not print
+background colours, so anything that reads as a block on screen must read as a
+rule on paper.
 
-**Progress** is stored per reader in the browser, with a reset. Say plainly that
-it does not follow them to another device.
+**Links stay live.** Chrome keeps anchors as PDF link annotations, so every Khan
+link is tappable and the contents page jumps to its lesson. Verify the count
+after every build; it is the one thing a silent CSS change can break.
 
 ## 9. Verification, before anything is published
 
