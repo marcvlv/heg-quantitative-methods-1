@@ -179,6 +179,14 @@ bottom, a 170mm text block. A lesson starts a page. Chrome does not print
 background colours, so anything that reads as a block on screen must read as a
 rule on paper.
 
+**Header and footer, on every page.** A running header with the subject and
+week on the left and the week's title on the right, a hairline under it, and a
+centred footer reading "Page x of y". Chrome's `--print-to-pdf` flag cannot do
+either, and its own default footer prints the file path and the date. It takes
+`Page.printToPDF` over the DevTools protocol, which Node can drive with no
+dependencies. The mark sits at the top of page one, where the school's logo
+sits on theirs.
+
 **Links stay live.** Chrome keeps anchors as PDF link annotations, so every Khan
 link is tappable and the contents page jumps to its lesson. Verify the count
 after every build; it is the one thing a silent CSS change can break.
